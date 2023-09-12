@@ -94,7 +94,7 @@
                 <!-- Default configuration for running -->
                 <!-- Usage: mvn javafx:run -->
                 <configuration>
-                    <mainClass>app/app.App</mainClass>
+                    <mainClass>app.MainApp</mainClass>
                 </configuration>
             </plugin>
         </plugins>
