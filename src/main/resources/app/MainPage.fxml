@@ -14,5 +14,6 @@
       <Button layoutX="60.0" layoutY="188.0" mnemonicParsing="false" text="My recepies" />
       <Button layoutX="467.0" layoutY="188.0" mnemonicParsing="false" text="Button" />
       <Button layoutX="237.0" layoutY="188.0" mnemonicParsing="false" text="Random recepie" />
+      <Button fx:id="logOutButton" layoutX="494.0" layoutY="23.0" mnemonicParsing="false" text="Log Out" onAction="#handelAction"/>
    </children>
 </AnchorPane>
