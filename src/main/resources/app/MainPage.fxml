@@ -11,8 +11,8 @@
          <font>
             <Font name="HanziPen SC Regular" size="39.0" />
          </font></Text>
-      <Button fx:id="myRecepiesButton" layoutX="60.0" layoutY="188.0" mnemonicParsing="false" text="My recepies" />
+      <Button layoutX="60.0" layoutY="188.0" mnemonicParsing="false" text="My recepies" />
       <Button layoutX="467.0" layoutY="188.0" mnemonicParsing="false" text="Button" />
-      <Button fx:id="randomeRecepieButton" layoutX="237.0" layoutY="188.0" mnemonicParsing="false" text="Random recepie" />
+      <Button layoutX="237.0" layoutY="188.0" mnemonicParsing="false" text="Random recepie" />
    </children>
 </AnchorPane>
