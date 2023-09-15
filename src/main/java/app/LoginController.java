@@ -46,13 +46,14 @@ public class LoginController {
 
     }
 
-    public void handelAction(ActionEvent e){
+    public void handleAction(ActionEvent e){
       Login login = new Login(); 
       
       if(e.getSource() == loginButton){
-        if(!login.validateUsername(username.getText())){
-          login.setOutput();
-          outputMessage.setText(login.getOutput());
+        if(!login.validateUsername(username.getText())||!login.validatePassword(password.getText())){
+          outputMessage.setText(Login.output);
+          // login.setOutput();
+          // outputMessage.setText(login.getOutput());
         }
         else{
           
