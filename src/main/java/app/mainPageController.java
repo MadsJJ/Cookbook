@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class mainPageController {
+public class MainPageController {
 
     @FXML
     private ResourceBundle resources;

@@ -65,7 +65,7 @@ public class LoginController {
             stage.setScene(scene);
             stage.show();
 
-            mainPageController mainPageController = loader.getController();
+            MainPageController mainPageController = loader.getController();
             mainPageController.setheadertext(username.getText()); 
             
 
