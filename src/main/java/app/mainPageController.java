@@ -42,7 +42,7 @@ public class MainPageController {
 
     
 
-    public void handelAction(ActionEvent e){
+    public void handleAction(ActionEvent e){
         
         if(e.getSource() == logOutButton){
             
