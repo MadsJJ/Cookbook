@@ -1,19 +1,18 @@
 package app;
 
-public class Login {
-  
+public class User {
   private String username;
   private String password; 
   static final String output="Invalid Username or password, both needs at least 9 characters";
 
   
 
-  public Login(String username, String password) {
+  public User(String username, String password) {
     this.username = username;
     this.password = password;
   }
 
-  public Login(){}
+  public User(){}
 
   public void setPassword(String password){
     this.password=password;
@@ -28,6 +27,11 @@ public class Login {
     return username; 
   }
   
+  
+  public String getPassword() {
+    return password;
+  }
+
   public boolean validateUsername(String username){
     return (((username != null))&&(username.length() > 8));
   }
