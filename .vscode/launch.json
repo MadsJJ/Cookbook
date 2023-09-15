@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "cookBookApp",
+            "request": "launch",
+            "mainClass": "app/app.cookBookApp",
+            "projectName": "javafx-template"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -17,7 +24,6 @@
             "mainClass": "app/app.App",
             "vmArgs": "--add-opens app/app=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED",
             "projectName": "javafx-template"
-            
         }
     ]
 }

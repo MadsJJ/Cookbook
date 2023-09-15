@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.mainPageController">
+   <children>
+      <Text fx:id="headerText" fill="#2786eb" layoutX="216.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font name="HanziPen SC Regular" size="39.0" />
+         </font></Text>
+      <Button layoutX="60.0" layoutY="188.0" mnemonicParsing="false" text="My recepies" />
+      <Button layoutX="467.0" layoutY="188.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="237.0" layoutY="188.0" mnemonicParsing="false" text="Random recepie" />
+      <Button fx:id="logOutButton" layoutX="494.0" layoutY="23.0" mnemonicParsing="false" text="Log Out" onAction="#handelAction"/>
+   </children>
+</AnchorPane>
