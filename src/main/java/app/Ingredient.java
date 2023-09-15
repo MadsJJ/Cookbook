@@ -23,6 +23,9 @@ public class Ingredient {
 
 
   public void setName(String name) {
+    if(name.equals("")){
+      throw new IllegalArgumentException("Must fill out an ingredient");
+    }
     this.name = name;
   }
 
@@ -35,6 +38,9 @@ public class Ingredient {
 
 
   public void setAmount(double amount) {
+    if(amount <= 0){
+      throw new IllegalArgumentException("Must have more than 0 of the ingredient");
+    }
     this.amount = amount;
   }
 
@@ -47,6 +53,7 @@ public class Ingredient {
 
 
   public void setGrams(Boolean grams) {
+    
     this.grams = grams;
   }
 
