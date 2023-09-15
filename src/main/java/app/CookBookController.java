@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class MainPageController {
+public class CookBookController {
 
     @FXML
     private ResourceBundle resources;
@@ -31,23 +31,14 @@ public class MainPageController {
 
     @FXML
     private Button logOutButton;
-
-    @FXML
-    void initialize() {
-        assert headerText != null : "fx:id=\"headerText\" was not injected: check your FXML file 'MainPage.fxml'.";
-        assert myRecepiesButton != null : "fx:id=\"myRecepiesButton\" was not injected: check your FXML file 'MainPage.fxml'.";
-        assert randomeRecepieButton != null : "fx:id=\"randomeRecepieButton\" was not injected: check your FXML file 'MainPage.fxml'.";
-
-    }
-
-    
+  
 
     public void handleAction(ActionEvent e){
         
         if(e.getSource() == logOutButton){
             
             try {
-              FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/Login.fxml"));
+              FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/User.fxml"));
               Parent root = loader.load();
               Scene scene = new Scene(root);
               Stage stage = (Stage) logOutButton.getScene().getWindow();

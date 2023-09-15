@@ -1,6 +1,5 @@
 package app;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -13,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class LoginController {
+public class UserController {
 
     @FXML
     private ResourceBundle resources;
@@ -37,38 +36,25 @@ public class LoginController {
     private Text outputMessage;
     
 
-    @FXML
-    void initialize() {
-        assert loginButton != null : "fx:id=\"loginButton\" was not injected: check your FXML file 'Login.fxml'.";
-        assert password != null : "fx:id=\"password\" was not injected: check your FXML file 'Login.fxml'.";
-        assert signupButton != null : "fx:id=\"signupButton\" was not injected: check your FXML file 'Login.fxml'.";
-        assert username != null : "fx:id=\"username\" was not injected: check your FXML file 'Login.fxml'.";
-
-    }
-
     public void handleAction(ActionEvent e){
-      Login login = new Login(); 
+      User user = new User(); 
       
       if(e.getSource() == loginButton){
-        if(!login.validateUsername(username.getText())||!login.validatePassword(password.getText())){
-          outputMessage.setText(Login.output);
-          // login.setOutput();
-          // outputMessage.setText(login.getOutput());
+        if(!user.validateUsername(username.getText())||!user.validatePassword(password.getText())){
+          outputMessage.setText(User.output);
         }
         else{
           
           try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/MainPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/CookBook.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
 
-            MainPageController mainPageController = loader.getController();
-            mainPageController.setheadertext(username.getText()); 
-            
-
+            CookBookController CookBookController = loader.getController();
+            CookBookController.setheadertext(username.getText()); 
             
           } catch (Exception a) {
             a.printStackTrace(); 

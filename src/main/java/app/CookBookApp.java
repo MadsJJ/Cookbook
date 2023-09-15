@@ -16,7 +16,7 @@ public class CookBookApp extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Cookbook");
         try {
-            AnchorPane root = FXMLLoader.load(getClass().getResource("/app/Login.fxml"));
+            AnchorPane root = FXMLLoader.load(getClass().getResource("/app/User.fxml"));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
         } catch (IOException e) {
