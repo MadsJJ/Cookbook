@@ -33,29 +33,29 @@ public class UserTest {
   @Test
   public void testValidatePassword(){
     assertTrue(user.validatePassword("PasswordValid"));
-    assertFalse(user.validatePassword("tooShort"));
+    assertFalse(user.validatePassword("TooShort"));
     assertFalse(user.validatePassword(null)); 
   }
 
   @Test
   public void testValidateUsername(){
     assertTrue(user.validateUsername("UsernameValid"));
-    assertFalse(user.validateUsername("tooShort"));
+    assertFalse(user.validateUsername("TooShort"));
     assertFalse(user.validateUsername(null)); 
 
   }
 
   @Test
   public void testInvalidUsername(){
-    assertThrows(IllegalArgumentException.class, () -> user.setUsername("toShort"));
+    assertThrows(IllegalArgumentException.class, () -> user.setUsername("TooShort"));
     assertThrows(IllegalArgumentException.class, () -> user.setUsername(null));
   }
 
   @Test
   public void testInvalidPassword(){
-    assertThrows(IllegalArgumentException.class, () -> user.setPassword("toShort"));
+    assertThrows(IllegalArgumentException.class, () -> user.setPassword("TooShort"));
     assertThrows(IllegalArgumentException.class, () -> user.setPassword(null));
   }
 
-  
+
 }
