@@ -15,6 +15,7 @@ public class User {
   public User(){}
 
   public void setPassword(String password){
+    if(!validatePassword(username)) throw new IllegalArgumentException(output);
     this.password=password;
   }
 
