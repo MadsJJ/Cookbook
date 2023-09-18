@@ -40,7 +40,6 @@ public class User {
 
   public boolean validatePassword(String password){
     return (((password != null))&&(password.length() > 8));
-<<<<<<< HEAD
   }
 
   public CookBook getCookBook() {
@@ -52,8 +51,5 @@ public class User {
   }
   
   
-=======
-  }  
->>>>>>> origin/userclass
   
 }
