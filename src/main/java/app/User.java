@@ -15,7 +15,7 @@ public class User {
   public User(){}
 
   public void setPassword(String password){
-    if(!validatePassword(username)) throw new IllegalArgumentException(output);
+    if(!validatePassword(password)) throw new IllegalArgumentException(output);
     this.password=password;
   }
 
@@ -28,7 +28,6 @@ public class User {
     return username; 
   }
   
-  
   public String getPassword() {
     return password;
   }
@@ -39,7 +38,6 @@ public class User {
 
   public boolean validatePassword(String password){
     return (((password != null))&&(password.length() > 8));
-  }
-  
+  }  
   
 }
