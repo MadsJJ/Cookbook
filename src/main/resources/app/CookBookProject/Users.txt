@@ -1,2 +1,2 @@
-jørgen,fjermedal
+jorgen,fjermedal
 siri,wik

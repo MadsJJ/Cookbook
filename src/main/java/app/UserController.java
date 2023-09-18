@@ -40,8 +40,8 @@ public class UserController {
       User user = new User(); 
       
       if(e.getSource() == loginButton){
-        if(!user.validateUsername(username.getText())||!user.validatePassword(password.getText())){
-          outputMessage.setText(User.output);
+        if(!User.login(username.getText(), password.getText())){
+          outputMessage.setText(User.outputLogin);
         }
         else{
           
@@ -67,6 +67,33 @@ public class UserController {
       
 
     }
+    else if(e.getSource()==signupButton){
+      if(!User.validateUsername(username.getText())||!User.validatePassword(password.getText())) outputMessage.setText(User.outputSignup);
+
+      else{
+          
+          try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/CookBook.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+
+            CookBookController CookBookController = loader.getController();
+            CookBookController.setheadertext(username.getText()); 
+            
+          } catch (Exception a) {
+            a.printStackTrace(); 
+            // TODO: handle exception
+          }
+
+      }
+
+
+
+    }
+    
 
     
 
