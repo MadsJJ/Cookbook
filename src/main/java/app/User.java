@@ -3,7 +3,7 @@ package app;
 public class User {
   private String username;
   private String password; 
-  static final String output="Invalid Username or password, both needs at least 9 characters";
+  static final String output = "Invalid Username or password, both needs at least 9 characters";
 
   
 
