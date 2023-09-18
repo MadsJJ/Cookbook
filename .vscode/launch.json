@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Recipe",
+            "request": "launch",
+            "mainClass": "app/app.Recipe",
+            "projectName": "javafx-template"
+        },
+        {
+            "type": "java",
             "name": "CookBookApp",
             "request": "launch",
             "mainClass": "app/app.CookBookApp",

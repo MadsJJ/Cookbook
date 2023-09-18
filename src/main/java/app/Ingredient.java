@@ -4,14 +4,21 @@ public class Ingredient {
 
   private String name;
   private double amount;
-  private Boolean grams;
+  private String unit;
+  public final static String GRAMS ="g", DL="dl", PIECES="pieces";
 
 
 
-  public Ingredient(String name, double amount, Boolean grams) {
-    this.name = name;
-    this.amount = amount;
-    this.grams=grams;
+  public Ingredient(String name, double amount, String unit) {
+    setName(name);
+    setAmount(amount);
+    if(isValidUnit(unit)){
+      this.unit=unit;
+    }
+    else{
+      throw new IllegalArgumentException("Not a valid unit of measurement! Legal ones are g, dl and pieces");
+    }
+    
   }
 
 
@@ -20,11 +27,16 @@ public class Ingredient {
     return name;
   }
 
+  private boolean isValidUnit(String unit) {
+    return unit.equals(GRAMS) || unit.equals(DL) || unit.equals(PIECES);
+}
+
 
 
   public void setName(String name) {
+    if(name==null) throw new IllegalArgumentException("Ingredient needs a name");
     if(name.equals("")){
-      throw new IllegalArgumentException("Must fill out an ingredient");
+      throw new IllegalArgumentException("Ingredient needs a name");
     }
     this.name = name;
   }
@@ -46,22 +58,29 @@ public class Ingredient {
 
 
 
-  public Boolean getGrams() {
-    return grams;
+  public String getUnit() {
+    return unit;
+  }
+
+  public void setUnit(String unit){
+    if(isValidUnit(unit)){
+      this.unit=unit;
+    }
+    else{
+      throw new IllegalArgumentException("Not a valid unit of measurement! Legal ones are g, dl and pieces");
+    }
+
   }
 
 
 
-  public void setGrams(Boolean grams) {
-    
-    this.grams = grams;
+  @Override
+  public String toString() {
+    return "Ingredient [name=" + name + ", amount=" + amount + ", unit=" + unit + "]";
   }
-
-
-
-  
-
   
   
+
+
   
 }

@@ -20,6 +20,27 @@ public class CookBook {
     this.recipes = recipes;
   }
 
+  public void addRecipe(Recipe recipe){
+    recipes.add(recipe);
+
+  }
+
+  public void removeRecipe(Recipe recipe){
+    if(recipes.contains(recipe)) recipes.remove(recipe);
+    else{
+      throw new IllegalArgumentException("Recipe not in cookbook");
+    }
+  }
+
+  
+
+  @Override
+  public String toString() {
+    return "CookBook [recipes=" + recipes + "]";
+  }
+
+  
+
   
   
   
