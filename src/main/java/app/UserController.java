@@ -36,16 +36,38 @@ public class UserController {
     private Text outputMessage;
     
 
-    public void handleAction(ActionEvent e){
-      User user = new User(); 
-      
-      if(e.getSource() == loginButton){
-        if(!User.login(username.getText(), password.getText())){
-          outputMessage.setText(User.outputLogin);
+    public void handleAction(java.awt.event.ActionEvent e){
+      // User user = new User(); 
+      Object button = e.getSource();
+
+      // login or signup
+      if (button == loginButton || button == signupButton) {
+        String username = username.getText();
+        String password = password.getText();
+        // login check
+        if (button == loginButton) {
+          // "Incorrect username or password"
+          if(!User.login(username, password)){
+            outputMessage.setText(User.outputLogin);
+            return;
+          }
         }
-        else{
-          
-          try {
+        // signup check
+        else {
+          // "Username and password needs to contain 2 or more characters"
+          if(!User.validateUsername(username)||!User.validatePassword(password)) {
+            outputMessage.setText(User.outputSignup);
+            return;
+          }
+        }
+        User user = new User(username, password, User.getCookbook(username));
+        startApp(user);
+      }    
+}
+
+
+    public void startApp(User user) {
+      try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/CookBook.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -54,47 +76,12 @@ public class UserController {
             stage.show();
 
             CookBookController CookBookController = loader.getController();
-            CookBookController.setheadertext(username.getText()); 
+            CookBookController.setheadertext(user.getUsername());
+            CookBookController.setUser(user);
             
           } catch (Exception a) {
             a.printStackTrace(); 
             // TODO: handle exception
           }
-
-      }
-
-      
-      
-
     }
-    else if(e.getSource()==signupButton){
-      if(!User.validateUsername(username.getText())||!User.validatePassword(password.getText())) outputMessage.setText(User.outputSignup);
-
-      else{
-          
-          try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/CookBook.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-
-            CookBookController CookBookController = loader.getController();
-            CookBookController.setheadertext(username.getText()); 
-            
-          } catch (Exception a) {
-            a.printStackTrace(); 
-            // TODO: handle exception
-          }
-
-      }
-
-
-
-    }
-    
-
-    
-
-}}
+}

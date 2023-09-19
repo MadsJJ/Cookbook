@@ -31,6 +31,8 @@ public class CookBookController {
 
     @FXML
     private Button logOutButton;
+
+    private User user;
   
 
     public void handleAction(ActionEvent e){
@@ -52,6 +54,10 @@ public class CookBookController {
   
         }
   
+      }
+
+      public void setUser(User user) {
+        this.user = user;
       }
   
 
