@@ -16,8 +16,8 @@
          <font>
             <Font name="HanziPen SC Regular" size="39.0" />
          </font></Text>
-      <Button layoutX="391.0" layoutY="233.0" mnemonicParsing="false" onAction="#addRecipe" text="Add recipe" />
-      <Button layoutX="390.0" layoutY="174.0" mnemonicParsing="false" onAction="#randomRecipe" text="Random recipe" />
+      <Button fx:id="addRecepieButton" layoutX="391.0" layoutY="233.0" mnemonicParsing="false" onAction="#addRecipe" text="Add recipe" />
+      <Button fx:id="randomRecipeButton" layoutX="390.0" layoutY="174.0" mnemonicParsing="false" onAction="#randomRecipe" text="Random recipe" />
       <Button fx:id="logOutButton" layoutX="494.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleAction" text="Log Out" />
       <Button layoutX="391.0" layoutY="291.0" mnemonicParsing="false" onAction="#removeRecipe" text="Remove recipe" />
       <ListView fx:id="listView" layoutX="31.0" layoutY="169.0" prefHeight="200.0" prefWidth="200.0" />
@@ -51,7 +51,7 @@
             <Button fx:id="randomAppetizerButton" layoutX="65.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleCategory" text="Appetizer" />
             <Button fx:id="randomDessertButton" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleCategory" text="Dessert" />
             <TextArea fx:id="randomRecipeTextArea" layoutY="74.0" prefHeight="124.0" prefWidth="200.0" />
-            <Button fx:id="cancelNewRecipeButton1" layoutX="138.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+            <Button fx:id="cancelRandomRecepieButton" layoutX="138.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
          </children>
       </Pane>
    </children>
