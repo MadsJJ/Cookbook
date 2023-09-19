@@ -60,6 +60,7 @@ public class UserController {
             return;
           }
         }
+        // start app
         User user = new User(username, password, User.getCookbook(username));
         startApp(user);
       }    
