@@ -35,6 +35,39 @@ public class CookBookController {
     private User user;
   
 
+    public void removeRecipe(ActionEvent e){
+
+    }
+
+    public void addRecipe(ActionEvent e){
+
+    }
+
+    public void handleNewRecipe(ActionEvent e){
+      
+    }
+
+
+    public void handleCategory(ActionEvent e){
+
+      //Randome and choose category from all recipes
+
+    }
+
+    public void handleCancel(ActionEvent e){
+
+
+    }
+
+    public void handleIngredient(ActionEvent e){
+
+    }
+
+    public void handleSetCategory(ActionEvent e){
+
+    }
+
+
     public void handleAction(ActionEvent e){
         
         if(e.getSource() == logOutButton){
