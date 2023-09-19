@@ -15,6 +15,7 @@ public class User {
   private String password; 
   static final String outputLogin="Incorrect username or password";
   static final String outputSignup="Username and password needs to contain 2 or more characters";
+  static final String existingUser="User with username already exists";
   private CookBook cookBook;
 
   
@@ -55,12 +56,15 @@ public class User {
     return (((password != null))&&(password.length() > 1));
   }
 
-  public static Boolean validateUser(String username,String  password){
-    return validateUsername(username)&&validatePassword(password);
+  public static boolean validateUser(String username,String password){
+      return validatePassword(password)&&validateUsername(username);
   }
 
-  public CookBook getCookBook() {
-    return cookBook;
+
+
+  public static CookBook getCookBook(String username) {
+    CookBook bok = new CookBook(null);
+    return bok;
   }
 
   public void setCookBook(CookBook cookBook) {
@@ -68,8 +72,15 @@ public class User {
   }
   
 
+
   public static Boolean login(String username, String password){
-    String file = "src/main/resources/app/CookBookProject/Users.txt";
+    if(validateLogin(username,password,User.findUsers())) return true;
+    return false;    
+    
+}
+
+ public static List<String> findUsers(){
+  String file = "src/main/resources/app/CookBookProject/Users.txt";
     FileReader fileReader;
     List<String> lines = new ArrayList<>();
     try {
@@ -94,12 +105,10 @@ public class User {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    if(validateLogin(username,password,lines)) return true;
-    return false;
+    return lines;
+ }
 
-    
-    
-}
+
 
 
   public static Boolean validateLogin(String username, String password,List<String> lines){
@@ -107,6 +116,12 @@ public class User {
     anyMatch(a->a.substring(0, a.indexOf(",")).equals(username)&&a.substring(a.indexOf(",")+1,a.length()).equals(password));
     
   }
+
+  public static Boolean validateNoExistingUser(String username){
+    return (!User.findUsers().stream().filter(a->a!=null).anyMatch(a->a.substring(0, a.indexOf(",")).equals(username)));
+  }
+
+
 
  public static void Signup(String Username, String password) {
     String file = "src/main/resources/app/CookBookProject/Users.txt";
@@ -123,6 +138,8 @@ public class User {
         e.printStackTrace();
       }
 }
+
+
     
 
 @Override

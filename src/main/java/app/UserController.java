@@ -36,18 +36,18 @@ public class UserController {
     private Text outputMessage;
     
 
-    public void handleAction(java.awt.event.ActionEvent e){
+    public void handleAction(ActionEvent e){
       // User user = new User(); 
       Object button = e.getSource();
 
       // login or signup
+      String username1 = username.getText();
+      String password1 = password.getText();
       if (button == loginButton || button == signupButton) {
-        String username = username.getText();
-        String password = password.getText();
         // login check
         if (button == loginButton) {
           // "Incorrect username or password"
-          if(!User.login(username, password)){
+          if(!User.login(username1, password1)){
             outputMessage.setText(User.outputLogin);
             return;
           }
@@ -55,16 +55,22 @@ public class UserController {
         // signup check
         else {
           // "Username and password needs to contain 2 or more characters"
-          if(!User.validateUsername(username)||!User.validatePassword(password)) {
-            outputMessage.setText(User.outputSignup);
+          if(!User.validateNoExistingUser(username1)){ 
+            outputMessage.setText(User.existingUser);
             return;
           }
+          else if(!User.validateUser(username1, password1)){ 
+          outputMessage.setText(User.outputSignup);
+          return;
+          }
+          User.Signup(username1, password1);
+            
+          }
         }
-        // start app
-        User user = new User(username, password, User.getCookbook(username));
+        User user = new User(username1, password1, User.getCookBook(username1));
         startApp(user);
       }    
-}
+
 
 
     public void startApp(User user) {
