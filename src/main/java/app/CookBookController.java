@@ -49,7 +49,13 @@ public class CookBookController {
     private Button cancelNewRecipeButton;
 
     @FXML
-    private Button cancelNewRecipeButton1;
+    private Button cancelRandomRecepieButton;
+
+    @FXML
+    private Button randomRecipeButton;
+
+    @FXML
+    private Button addRecepieButton;
 
    @FXML
     private ComboBox<?> categoryCombobox;
@@ -103,12 +109,30 @@ public class CookBookController {
 
     @FXML
     void addRecipe(ActionEvent event) {
+      if(event.getSource() == addRecepieButton){
+        addNewRecipePane.setVisible(true);
+        addRecepieButton.setVisible(false);
+        randomRecipeButton.setVisible(false); 
+      }
       
     }
 
 
     @FXML
     void handleCancel(ActionEvent event) {
+      if(event.getSource() == cancelNewRecipeButton){
+        addNewRecipePane.setVisible(false);
+        addRecepieButton.setVisible(true);
+        randomRecipeButton.setVisible(true); 
+
+
+      }
+      else if (event.getSource() == cancelRandomRecepieButton){
+        randomRecipePane.setVisible(false); 
+        addRecepieButton.setVisible(true);
+        randomRecipeButton.setVisible(true); 
+
+      }
 
 
     }
@@ -138,10 +162,6 @@ public class CookBookController {
 
     }
 
-    @FXML
-    void removeRecipe(ActionEvent event) {
-
-    }
 
 
     public void handleAction(ActionEvent e){
