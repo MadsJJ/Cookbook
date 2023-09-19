@@ -34,13 +34,20 @@
             <Button fx:id="addIngredientButton" layoutX="137.0" layoutY="37.0" mnemonicParsing="false" onAction="#handleIngredient" text="Add Ingr." />
             <Button fx:id="cancelNewRecipeButton" layoutX="143.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
             <ListView fx:id="ingredientListView" layoutY="90.0" prefHeight="69.0" prefWidth="200.0" />
-            <Text layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete ingredient: " wrappingWidth="105.6630859375" />
+            <Text layoutX="2.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete ingredient: " wrappingWidth="147.6630859375" />
             <TextField fx:id="deleteIngredientTextField" layoutY="175.0" prefHeight="26.0" prefWidth="106.0" promptText="Ingr. name" />
             <Button fx:id="removeIngredientButton" layoutX="110.0" layoutY="176.0" mnemonicParsing="false" onAction="#handleIngredient" prefHeight="26.0" prefWidth="90.0" text="Remove ingr" />
             <Button fx:id="addNewRecipeButton" layoutX="92.0" layoutY="204.0" mnemonicParsing="false" onAction="#handleNewRecipe" text="Add new recipe" />
+            <DropdownButton fx:id="categoryDropdownButton" layoutX="15.0" layoutY="206.0">
+                <items>
+                    <MenuItem fx:id="dinnerDropdownButton" onAction="#handleSetCategory" text="Dinner" />
+                    <MenuItem fx:id="appetizerDropdownButton" onAction="#handleSetCategory" text="Appetizer" />
+                    <MenuItem fx:id="dessertDropdownButton" onAction="#handleSetCategory" text="Dessert" />
+                </items>
+            </DropdownButton>
          </children>
       </Pane>
-      <Pane fx:id="randomRecipePane" layoutX="158.0" layoutY="29.0" prefHeight="261.0" prefWidth="200.0">
+      <Pane fx:id="randomRecipePane" layoutX="370.0" layoutY="84.0" prefHeight="261.0" prefWidth="200.0">
          <children>
             <Text layoutX="8.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a category to get a random recipe: " wrappingWidth="122.68310546875" />
             <Button fx:id="randomDinnerButton" layoutX="8.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleCategory" text="Dinner" />
@@ -50,12 +57,5 @@
             <Button fx:id="cancelNewRecipeButton1" layoutX="138.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
          </children>
       </Pane>
-      <DropdownButton fx:id="categoryDropdownButton" layoutX="265.0" layoutY="303.0">
-          <items>
-              <MenuItem fx:id="dinnerDropdownButton" onAction="#handleSetCategory" text="Dinner" />
-              <MenuItem fx:id="appetizerDropdownButton" onAction="#handleSetCategory" text="Appetizer" />
-              <MenuItem fx:id="dessertDropdownButton" onAction="#handleSetCategory" text="Dessert" />
-          </items>
-      </DropdownButton>
    </children>
 </AnchorPane>
