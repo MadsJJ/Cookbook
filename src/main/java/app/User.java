@@ -3,7 +3,9 @@ package app;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +55,10 @@ public class User {
     return (((password != null))&&(password.length() > 1));
   }
 
+  public static Boolean validateUser(String username,String  password){
+    return validateUsername(username)&&validatePassword(password);
+  }
+
   public CookBook getCookBook() {
     return cookBook;
   }
@@ -94,13 +100,35 @@ public class User {
     
     
 }
+
+
   public static Boolean validateLogin(String username, String password,List<String> lines){
     return lines.stream().filter(a->a!=null).
     anyMatch(a->a.substring(0, a.indexOf(",")).equals(username)&&a.substring(a.indexOf(",")+1,a.length()).equals(password));
     
   }
 
+ public static void Signup(String Username, String password) {
+    String file = "src/main/resources/app/CookBookProject/Users.txt";
+    try {
+   
+        FileWriter fileWriter = new FileWriter(file, true);
+        PrintWriter writer = new PrintWriter(fileWriter);
 
+
+        writer.println(Username + "," + password);
+
+        writer.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+      }
+}
+    
+
+@Override
+public String toString() {
+  return "User [username=" + username + ", password=" + password + ", cookBook=" + cookBook + "]";
+}
 
 public static void main(String[] args) {
     User.login("jorgen", "fjermedal");

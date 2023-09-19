@@ -1,2 +1,2 @@
-jorgen,fjermedal
-siri,wik
+mads,borte
+jorgen,jorgen
