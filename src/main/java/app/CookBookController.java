@@ -2,15 +2,21 @@ package app;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+
 
 public class CookBookController {
 
@@ -21,49 +27,117 @@ public class CookBookController {
     private URL location;
 
     @FXML
+    private Button addIngredientButton;
+
+    @FXML
+    private TextField addIngredientTextField;
+
+    @FXML
+    private Button addNewRecipeButton;
+
+    @FXML
+    private Pane addNewRecipePane;
+
+    @FXML
+    private TextField amountTextField;
+
+    @FXML
+    private MenuItem appetizerDropdownButton;
+
+    @FXML
+    private Button cancelNewRecipeButton;
+
+    @FXML
+    private Button cancelNewRecipeButton1;
+
+    @FXML
+    private DropdownButton categoryDropdownButton;
+
+    @FXML
+    private TextField deleteIngredientTextField;
+
+    @FXML
+    private MenuItem dessertDropdownButton;
+
+    @FXML
+    private MenuItem dinnerDropdownButton;
+
+    @FXML
     private Text headerText;
 
     @FXML
-    private Button myRecepiesButton;
+    private ListView<?> ingredientListView;
 
     @FXML
-    private Button randomeRecepieButton;
+    private ListView<?> listView;
 
     @FXML
     private Button logOutButton;
 
+    @FXML
+    private Button randomAppetizerButton;
+
+    @FXML
+    private Button randomDessertButton;
+
+    @FXML
+    private Button randomDinnerButton;
+
+    @FXML
+    private Pane randomRecipePane;
+
+    @FXML
+    private TextArea randomRecipeTextArea;
+
+    @FXML
+    private Button removeIngredientButton;
+
+    @FXML
+    private TextField titleTextField;
+
+    @FXML
+    private TextField unitTextField;
+
     private User user;
-  
 
-    public void removeRecipe(ActionEvent e){
-
-    }
-
-    public void addRecipe(ActionEvent e){
+    @FXML
+    void addRecipe(ActionEvent event) {
 
     }
 
-    public void handleNewRecipe(ActionEvent e){
-      
-    }
 
-
-    public void handleCategory(ActionEvent e){
-
-      //Randome and choose category from all recipes
+    @FXML
+    void handleCancel(ActionEvent event) {
 
     }
 
-    public void handleCancel(ActionEvent e){
-
-
-    }
-
-    public void handleIngredient(ActionEvent e){
+    @FXML
+    void handleCategory(ActionEvent event) {
 
     }
 
-    public void handleSetCategory(ActionEvent e){
+    @FXML
+    void handleIngredient(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleNewRecipe(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleSetCategory(ActionEvent event) {
+
+    }
+
+    @FXML
+    void randomRecipe(ActionEvent event) {
+
+    }
+
+    @FXML
+    void removeRecipe(ActionEvent event) {
 
     }
 
