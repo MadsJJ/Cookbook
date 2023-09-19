@@ -37,15 +37,44 @@ public class UserController {
     
 
     public void handleAction(ActionEvent e){
-      User user = new User(); 
-      
-      if(e.getSource() == loginButton){
-        if(!user.validateUsername(username.getText())||!user.validatePassword(password.getText())){
-          outputMessage.setText(User.output);
+      // User user = new User(); 
+      Object button = e.getSource();
+
+      // login or signup
+      String username1 = username.getText();
+      String password1 = password.getText();
+      if (button == loginButton || button == signupButton) {
+        // login check
+        if (button == loginButton) {
+          // "Incorrect username or password"
+          if(!User.login(username1, password1)){
+            outputMessage.setText(User.outputLogin);
+            return;
+          }
         }
-        else{
-          
-          try {
+        // signup check
+        else {
+          // "Username and password needs to contain 2 or more characters"
+          if(!User.validateNoExistingUser(username1)){ 
+            outputMessage.setText(User.existingUser);
+            return;
+          }
+          else if(!User.validateUser(username1, password1)){ 
+          outputMessage.setText(User.outputSignup);
+          return;
+          }
+          User.Signup(username1, password1);
+            
+          }
+        }
+        User user = new User(username1, password1, User.getCookBook(username1));
+        startApp(user);
+      }    
+
+
+
+    public void startApp(User user) {
+      try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/CookBook.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -54,20 +83,12 @@ public class UserController {
             stage.show();
 
             CookBookController CookBookController = loader.getController();
-            CookBookController.setheadertext(username.getText()); 
+            CookBookController.setheadertext(user.getUsername());
+            CookBookController.setUser(user);
             
           } catch (Exception a) {
             a.printStackTrace(); 
             // TODO: handle exception
           }
-
-      }
-
-      
-      
-
     }
-
-    
-
-}}
+}
