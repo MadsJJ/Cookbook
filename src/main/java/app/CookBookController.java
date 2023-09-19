@@ -137,6 +137,11 @@ public class CookBookController {
 
     }
 
+        @FXML
+    void removeRecipe(ActionEvent event) {
+
+    }
+
     @FXML
     void handleCategory(ActionEvent event) {
 
@@ -162,6 +167,10 @@ public class CookBookController {
 
     }
 
+    public void initialize(){
+      randomRecipePane.setVisible(false);
+      addNewRecipePane.setVisible(false);
+    }
 
 
     public void handleAction(ActionEvent e){
