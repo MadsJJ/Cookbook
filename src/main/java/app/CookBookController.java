@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -50,8 +51,8 @@ public class CookBookController {
     @FXML
     private Button cancelNewRecipeButton1;
 
-    @FXML
-    private DropdownButton categoryDropdownButton;
+   @FXML
+    private ComboBox<?> categoryCombobox;
 
     @FXML
     private TextField deleteIngredientTextField;
