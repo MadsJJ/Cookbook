@@ -103,12 +103,13 @@ public class CookBookController {
 
     @FXML
     void addRecipe(ActionEvent event) {
-
+      
     }
 
 
     @FXML
     void handleCancel(ActionEvent event) {
+
 
     }
 
