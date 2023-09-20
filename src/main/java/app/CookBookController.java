@@ -108,13 +108,11 @@ public class CookBookController {
     private User user;
 
     @FXML
-    void addRecipe(ActionEvent event) {
-      if(event.getSource() == addRecepieButton){
+    void addRecipe() {
         addNewRecipePane.setVisible(true);
         addRecepieButton.setVisible(false);
-        randomRecipeButton.setVisible(false); 
-      }
-      
+        randomRecipeButton.setVisible(false);
+        randomRecipeButton.setVisible(false);  
     }
 
 
@@ -124,8 +122,6 @@ public class CookBookController {
         addNewRecipePane.setVisible(false);
         addRecepieButton.setVisible(true);
         randomRecipeButton.setVisible(true); 
-
-
       }
       else if (event.getSource() == cancelRandomRecepieButton){
         randomRecipePane.setVisible(false); 
@@ -133,8 +129,6 @@ public class CookBookController {
         randomRecipeButton.setVisible(true); 
 
       }
-
-
     }
 
         @FXML
@@ -163,8 +157,11 @@ public class CookBookController {
     }
 
     @FXML
-    void randomRecipe(ActionEvent event) {
-
+    void randomRecipe() {
+        randomRecipePane.setVisible(true);
+        addRecepieButton.setVisible(false);
+        randomRecipeButton.setVisible(false);
+        randomRecipeButton.setVisible(false);
     }
 
     public void initialize(){
