@@ -20,7 +20,7 @@
       <Button fx:id="randomRecipeButton" layoutX="390.0" layoutY="174.0" mnemonicParsing="false" onAction="#randomRecipe" text="Random recipe" />
       <Button fx:id="logOutButton" layoutX="494.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleAction" text="Log Out" />
       <Button layoutX="391.0" layoutY="291.0" mnemonicParsing="false" onAction="#removeRecipe" text="Remove recipe" />
-      <ListView fx:id="listView" layoutX="31.0" layoutY="169.0" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="recipeListView" layoutX="31.0" layoutY="169.0" prefHeight="200.0" prefWidth="200.0" />
       <Button layoutX="31.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleCategory" text="Appetizer" />
       <Button layoutX="105.0" layoutY="133.0" mnemonicParsing="false" onAction="#handleCategory" text="Dinner" />
       <Button layoutX="171.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleCategory" text="Dessert" />
@@ -44,7 +44,7 @@
             <ComboBox fx:id="categoryCombobox" layoutY="208.0" onAction="#handleSetCategory" prefHeight="26.0" prefWidth="99.0" promptText="Category" />
          </children>
       </Pane>
-      <Pane fx:id="randomRecipePane" layoutX="368.0" layoutY="107.0" prefHeight="261.0" prefWidth="200.0">
+      <Pane fx:id="randomRecipePane" layoutX="131.0" layoutY="39.0" prefHeight="261.0" prefWidth="200.0">
          <children>
             <Text layoutX="8.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a category to get a random recipe: " wrappingWidth="122.68310546875" />
             <Button fx:id="randomDinnerButton" layoutX="8.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleCategory" text="Dinner" />

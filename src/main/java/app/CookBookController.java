@@ -1,7 +1,14 @@
 package app;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,7 +65,7 @@ public class CookBookController {
     private Button addRecepieButton;
 
    @FXML
-    private ComboBox<?> categoryCombobox;
+    private ComboBox<String> categoryCombobox;
 
     @FXML
     private TextField deleteIngredientTextField;
@@ -73,10 +80,10 @@ public class CookBookController {
     private Text headerText;
 
     @FXML
-    private ListView<?> ingredientListView;
+    private ListView<Ingredient> ingredientListView;
 
     @FXML
-    private ListView<?> listView;
+    private ListView<Recipe> recipeListView;
 
     @FXML
     private Button logOutButton;
@@ -112,10 +119,15 @@ public class CookBookController {
       if(event.getSource() == addRecepieButton){
         addNewRecipePane.setVisible(true);
         addRecepieButton.setVisible(false);
-        randomRecipeButton.setVisible(false); 
+        randomRecipeButton.setVisible(false);
+        ObservableList<String> categories = FXCollections.observableList(Recipe.getCategories());
+        categoryCombobox.setItems(categories); 
+          
+        };
+        
       }
       
-    }
+    
 
 
     @FXML
@@ -149,16 +161,27 @@ public class CookBookController {
 
     @FXML
     void handleIngredient(ActionEvent event) {
+      if(event.getSource() == addIngredientButton){
+      Ingredient ing = new Ingredient(addIngredientTextField.getText(), Double.parseDouble(amountTextField.getText()), unitTextField.getText());
+      ingredientListView.getItems().add(ing);
+      }
+      else if(event.getSource() == removeIngredientButton){
+        Ingredient ingredientToRemove = ingredientListView.getItems().stream().filter(a->a.getName().equals(deleteIngredientTextField.getText())).findFirst().orElseThrow();
+        ingredientListView.getItems().remove(ingredientToRemove);
+      }
 
     }
 
     @FXML
     void handleNewRecipe(ActionEvent event) {
+      Recipe recipe = new Recipe(titleTextField.getText(), ingredientListView.getItems(), categoryCombobox.getSelectionModel().getSelectedItem());
+      recipeListView.getItems().add(recipe);
 
     }
 
     @FXML
     void handleSetCategory(ActionEvent event) {
+      
 
     }
 

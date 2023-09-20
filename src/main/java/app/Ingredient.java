@@ -9,6 +9,10 @@ public class Ingredient {
 
 
 
+public Ingredient(){
+
+}
+
   public Ingredient(String name, double amount, String unit) {
     setName(name);
     setAmount(amount);
@@ -76,7 +80,7 @@ public class Ingredient {
 
   @Override
   public String toString() {
-    return "Ingredient [name=" + name + ", amount=" + amount + ", unit=" + unit + "]";
+    return name + ","+ amount +","+ unit;
   }
   
   
