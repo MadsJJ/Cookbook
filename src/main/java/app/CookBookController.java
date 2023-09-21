@@ -201,8 +201,11 @@ public class CookBookController {
       Recipe recipe = new Recipe(titleTextField.getText(), ingredientListView.getItems(), categoryCombobox.getSelectionModel().getSelectedItem());
       user.getCookBook().addRecipe(recipe);
       recipeListView.getItems().add(recipe);
-      ingredientListView.getItems().removeAll(ingredientListView.getItems()); 
-
+      ingredientListView.getItems().removeAll(ingredientListView.getItems());
+      titleTextField.setText("");
+      amountTextField.setText("");
+      unitTextField.setText("");
+      addIngredientTextField.setText("");
     }
 
     @FXML
