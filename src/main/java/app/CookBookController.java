@@ -62,6 +62,9 @@ public class CookBookController {
     private Button randomRecipeButton;
 
     @FXML
+    private Button removeRecipeButton;
+
+    @FXML
     private Button addRecepieButton;
 
    @FXML
@@ -119,12 +122,12 @@ public class CookBookController {
         addNewRecipePane.setVisible(true);
         addRecepieButton.setVisible(false);
         randomRecipeButton.setVisible(false);
+        removeRecipeButton.setVisible(false);
         ObservableList<String> categories = FXCollections.observableList(Recipe.getCategories());
         categoryCombobox.setItems(categories); 
           
         };
-        
-      }
+      
       
     
 
@@ -185,7 +188,8 @@ public class CookBookController {
         randomRecipePane.setVisible(true);
         addRecepieButton.setVisible(false);
         randomRecipeButton.setVisible(false);
-        randomRecipeButton.setVisible(false);
+        removeRecipeButton.setVisible(false);
+        
     }
 
     public void initialize(){
