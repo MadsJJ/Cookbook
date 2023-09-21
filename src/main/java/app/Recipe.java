@@ -13,6 +13,8 @@ public class Recipe {
   public static final String APPETIZER = "Appetizer";
   public static final String DINNER = "Dinner";
   public static final String DESSERT = "Dessert";
+  
+  
 
   public Recipe(String title, List<Ingredient> ingredients, String category) {
       this.title = title;
@@ -89,11 +91,29 @@ public class Recipe {
       }
   }
 
+  public static List<String> getCategories(){
+    List<String> categories = new ArrayList<>();
+    categories.add(APPETIZER);
+    categories.add(DINNER);
+    categories.add(DESSERT);
+    return categories;
+  }
+
+  // public static List<Ingredient> getIngredientsFromString(List<String> ingredients){
+  //   List<Ingredient> list = new ArrayList<>();
+  //   for (String ingredient : ingredients) {
+  //     String[] ingredientDetails =ingredient.split(",");
+  //     Ingredient newIngredient= new Ingredient(ingredientDetails[0],Double.parseDouble(ingredientDetails[1]),ingredientDetails[2]);
+  //     list.add(newIngredient);
+  //   }
+  //   return list;
+  // }
+
   
 
   @Override
   public String toString() {
-    return "Recipe [title=" + title + ", ingredients=" + ingredients + ", category=" + category + "]";
+    return title +","+ ingredients + "," + category;
   }
 
 
