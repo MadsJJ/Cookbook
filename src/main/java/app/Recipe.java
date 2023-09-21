@@ -18,7 +18,6 @@ public class Recipe {
 
   public Recipe(String title, List<Ingredient> ingredients, String category) {
       this.title = title;
-      setIngredients(ingredients);
       this.ingredients=Recipe.sortIngredients(ingredients);
       if (isValidCategory(category)) {
           this.category = category;
@@ -56,11 +55,6 @@ public class Recipe {
   public List<Ingredient> getIngredients() {
       List<Ingredient> copy = new ArrayList<>(ingredients);
       return copy;
-  }
-
-
-  public void setIngredients(List<Ingredient> ingredients) {
-    this.ingredients = sortIngredients(ingredients);
   }
 
   public void addIngredient(Ingredient ingredient){

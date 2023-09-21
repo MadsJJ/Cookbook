@@ -22,7 +22,6 @@ public class CookBook {
 
   public void addRecipe(Recipe recipe){
     recipes.add(recipe);
-
   }
 
   public void removeRecipe(Recipe recipe){
@@ -38,10 +37,5 @@ public class CookBook {
   public String toString() {
     return "CookBook [recipes=" + recipes + "]";
   }
-
-  
-
-  
-  
   
 }

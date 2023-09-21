@@ -6,6 +6,11 @@ public class Ingredient {
   private double amount;
   private String unit;
   public final static String GRAMS ="g", DL="dl", PIECES="pieces";
+  // private CookBookController controller;
+
+  // public void setController(CookBookController c) {
+  //   this.controller = c;
+  // }
 
 
 

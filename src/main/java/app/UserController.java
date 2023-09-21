@@ -83,9 +83,7 @@ public class UserController {
             stage.show();
 
             CookBookController CookBookController = loader.getController();
-            CookBookController.setUser(user);
-            CookBookController.setheadertext(user.getUsername());
-            
+            CookBookController.startCookBook(user);            
           } catch (Exception a) {
             a.printStackTrace(); 
             // TODO: handle exception
