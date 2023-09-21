@@ -156,6 +156,15 @@ public class CookBookController {
 
     @FXML
     void handleCategory(ActionEvent event) {
+      String category;
+      if(event.getSource()==randomAppetizerButton) category=Recipe.APPETIZER;
+      else if(event.getSource()==randomDinnerButton) category=Recipe.DINNER;
+      else{ category=Recipe.DESSERT;
+      }
+      List<Recipe> recipes=user.getCookBook().getRecipes().stream().filter(a->a.getCategory().equals(category)).toList();
+      int random = (int) ((Math.random() * (recipes.size() - 0)) + 0);
+      randomRecipeTextArea.setText(recipes.get(random).toString());
+
 
     }
 
@@ -175,6 +184,7 @@ public class CookBookController {
     @FXML
     void handleNewRecipe(ActionEvent event) {
       Recipe recipe = new Recipe(titleTextField.getText(), ingredientListView.getItems(), categoryCombobox.getSelectionModel().getSelectedItem());
+      user.getCookBook().addRecipe(recipe);
       recipeListView.getItems().add(recipe);
 
     }

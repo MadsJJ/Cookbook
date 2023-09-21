@@ -67,7 +67,7 @@ public class UserController {
             
           }
         }
-        User user = new User(username1, password1, User.getCookBook(username1));
+        User user = new User(username1, password1, User.createCookBook(username1));
         startApp(user);
       }    
 

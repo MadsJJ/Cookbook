@@ -62,9 +62,14 @@ public class User {
 
 
 
-  public static CookBook getCookBook(String username) {
-    CookBook bok = new CookBook(null);
+  public static CookBook createCookBook(String username) {
+    List<Recipe> recipes = new ArrayList<>();
+    CookBook bok = new CookBook(recipes);
     return bok;
+  }
+
+  public CookBook getCookBook(){
+    return cookBook;
   }
 
   public void setCookBook(CookBook cookBook) {
