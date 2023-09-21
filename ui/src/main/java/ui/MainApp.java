@@ -16,7 +16,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Cookbook");
         try {
-            AnchorPane root = FXMLLoader.load(getClass().getResource("ui\\src\\main\\resources\\ui\\User.fxml"));
+            AnchorPane root = FXMLLoader.load(getClass().getResource("User.fxml"));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
         } catch (IOException e) {

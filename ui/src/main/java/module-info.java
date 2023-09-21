@@ -1,5 +1,5 @@
-module calc.ui {
-    requires calc.core;
+module user.ui {
+    requires user.core;
     requires javafx.controls;
     requires javafx.fxml;
 
