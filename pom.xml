@@ -65,6 +65,14 @@
             <scope>test</scope>
         </dependency>
 
+        
+        <dependency>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.10</version>
+        <scope>test</scope>
+    </dependency>
+
     </dependencies>
 
     <build>
@@ -82,10 +90,12 @@
 		        <version>3.1.2</version>
                 <configuration>
                     <argLine>
+                    @{jaCoCoArgLine}
                     --add-opens app/app=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
                     </argLine>
                 </configuration>
 	        </plugin>
+
 
             <plugin>
                 <groupId>org.openjfx</groupId>
@@ -97,6 +107,31 @@
                     <mainClass>app.MainApp</mainClass>
                 </configuration>
             </plugin>
+
+           <plugin>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <configuration>
+         <propertyName>jaCoCoArgLine</propertyName>
+    </configuration>
+    <version>0.8.10</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>prepare-agent</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+                <goal>report</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+
+            
         </plugins>
     </build>
 </project>
