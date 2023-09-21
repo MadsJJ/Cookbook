@@ -137,12 +137,14 @@ public class CookBookController {
       if(event.getSource() == cancelNewRecipeButton){
         addNewRecipePane.setVisible(false);
         addRecepieButton.setVisible(true);
-        randomRecipeButton.setVisible(true); 
+        randomRecipeButton.setVisible(true);
+        removeRecipeButton.setVisible(true);
       }
       else if (event.getSource() == cancelRandomRecepieButton){
         randomRecipePane.setVisible(false); 
         addRecepieButton.setVisible(true);
         randomRecipeButton.setVisible(true); 
+        removeRecipeButton.setVisible(true);
 
       }
     }
