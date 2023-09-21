@@ -8,29 +8,15 @@
             "type": "java",
             "name": "MainApp",
             "request": "launch",
-            "mainClass": "app/app.MainApp",
-            "projectName": "javafx-template"
-        },
-        {
-            "type": "java",
-            "name": "Recipe",
-            "request": "launch",
-            "mainClass": "app/app.Recipe",
-            "projectName": "javafx-template"
+            "mainClass": "calc.ui/ui.MainApp",
+            "projectName": "modules-ui"
         },
         {
             "type": "java",
             "name": "CookBookApp",
             "request": "launch",
-            "mainClass": "app/app.CookBookApp",
-            "projectName": "javafx-template"
-        },
-        {
-            "type": "java",
-            "name": "cookBookApp",
-            "request": "launch",
-            "mainClass": "app/app.cookBookApp",
-            "projectName": "javafx-template"
+            "mainClass": "calc.ui/ui.CookBookApp",
+            "projectName": "modules-ui"
         },
         {
             "type": "java",
@@ -40,12 +26,16 @@
         },
         {
             "type": "java",
-            "name": "Launch javafx-template - single module, single package",
+            "name": "Launch modules-template - multi-module, multi-package ",
             "request": "launch",
-            "mainClass": "app/app.App",
-            "vmArgs": "--add-opens app/app=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED",
-            "projectName": "javafx-template"
+            "mainClass": "calc.ui/ui.App",
+            "projectName": "modules-ui",
+            "vmArgs": [
+                "--add-opens",
+                "calc.ui/ui=ALL-UNNAMED",
+                "--add-exports",
+                "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"
+            ]
         }
     ]
 }
-
