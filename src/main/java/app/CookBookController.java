@@ -132,7 +132,7 @@ public class CookBookController {
         ObservableList<String> categories = FXCollections.observableList(Recipe.getCategories());
         categoryCombobox.setItems(categories); 
         deleteRecipeText.setVisible(false);
-        deleteIngredientTextField.setVisible(false);
+        deleteRecipeTextfield.setVisible(false);
           
         };
       
@@ -148,7 +148,7 @@ public class CookBookController {
         randomRecipeButton.setVisible(true);
         removeRecipeButton.setVisible(true);
         deleteRecipeText.setVisible(true);
-        deleteIngredientTextField.setVisible(true);
+        deleteRecipeTextfield.setVisible(true);
       }
       else if (event.getSource() == cancelRandomRecepieButton){
         randomRecipePane.setVisible(false); 
@@ -156,7 +156,7 @@ public class CookBookController {
         randomRecipeButton.setVisible(true); 
         removeRecipeButton.setVisible(true);
         deleteRecipeText.setVisible(true);
-        deleteIngredientTextField.setVisible(true);
+        deleteRecipeTextfield.setVisible(true);
 
       }
     }
@@ -166,7 +166,6 @@ public class CookBookController {
       Recipe recipeToRemove = recipeListView.getItems().stream().filter(a->a.getTitle().equals(deleteRecipeTextfield.getText())).findFirst().orElseThrow();
       user.getCookBook().removeRecipe(recipeToRemove); 
       recipeListView.getItems().remove(recipeToRemove);
-
     }
 
     @FXML

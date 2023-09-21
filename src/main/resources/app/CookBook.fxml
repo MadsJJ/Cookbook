@@ -12,6 +12,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.CookBookController">
    <children>
+      <TextField fx:id="deleteRecipeTextfield" layoutX="345.0" layoutY="307.0" prefHeight="26.0" prefWidth="99.0" promptText="Recipe" />
+      <Text fx:id="deleteRecipeText" layoutX="348.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete a recepie:" />
       <Text fx:id="headerText" fill="#2786eb" layoutX="36.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">
          <font>
             <Font name="HanziPen SC Regular" size="39.0" />
@@ -24,7 +26,7 @@
       <Button layoutX="31.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleCategory" text="Appetizer" />
       <Button layoutX="109.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleCategory" text="Dinner" />
       <Button layoutX="171.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleCategory" text="Dessert" />
-      <Pane fx:id="addNewRecipePane" layoutX="302.0" layoutY="116.0" prefHeight="261.0" prefWidth="285.0">
+      <Pane fx:id="addNewRecipePane" layoutX="306.0" layoutY="116.0" prefHeight="261.0" prefWidth="285.0">
          <children>
             <TextField fx:id="titleTextField" layoutX="60.0" layoutY="43.0" prefHeight="26.0" prefWidth="137.0" promptText="Title:" />
             <TextField fx:id="addIngredientTextField" layoutY="76.0" prefHeight="26.0" prefWidth="76.0" promptText="Ingr. name" />
@@ -44,7 +46,7 @@
             <ComboBox fx:id="categoryCombobox" layoutX="38.0" layoutY="221.0" onAction="#handleSetCategory" prefHeight="26.0" prefWidth="99.0" promptText="Category" />
          </children>
       </Pane>
-      <Pane fx:id="randomRecipePane" layoutX="326.0" layoutY="105.0" prefHeight="278.0" prefWidth="254.0">
+      <Pane fx:id="randomRecipePane" layoutX="321.0" layoutY="102.0" prefHeight="278.0" prefWidth="254.0">
          <children>
             <Text layoutX="8.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a category to get a random recipe: " wrappingWidth="122.68310546875" />
             <Button fx:id="randomDinnerButton" layoutX="8.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleCategory" text="Dinner" />
@@ -54,7 +56,5 @@
             <Button fx:id="cancelRandomRecepieButton" layoutX="195.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
          </children>
       </Pane>
-      <Text fx:id="deleteRecipeText" layoutX="348.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete a recepie:" />
-      <TextField fx:id="deleteRecipeTextfield" layoutX="345.0" layoutY="307.0" prefHeight="26.0" prefWidth="99.0" promptText="Recipe" />
    </children>
 </AnchorPane>
