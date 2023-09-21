@@ -142,6 +142,12 @@ public class CookBookController {
 
     @FXML
     void handleCancel(ActionEvent event) {
+      ingredientListView.getItems().removeAll(ingredientListView.getItems());
+      titleTextField.setText("");
+      amountTextField.setText("");
+      unitTextField.setText("");
+      addIngredientTextField.setText("");
+
       if(event.getSource() == cancelNewRecipeButton){
         addNewRecipePane.setVisible(false);
         addRecepieButton.setVisible(true);
