@@ -147,6 +147,7 @@ public class CookBookController {
       amountTextField.setText("");
       unitTextField.setText("");
       addIngredientTextField.setText("");
+      deleteIngredientTextField.setText("");
 
       if(event.getSource() == cancelNewRecipeButton){
         addNewRecipePane.setVisible(false);
@@ -211,6 +212,7 @@ public class CookBookController {
       amountTextField.setText("");
       unitTextField.setText("");
       addIngredientTextField.setText("");
+      deleteIngredientTextField.setText("");
     }
 
     @FXML
