@@ -43,7 +43,7 @@
                   <Font size="12.0" />
                </font>
             </Button>
-            <ComboBox fx:id="categoryCombobox" layoutX="38.0" layoutY="221.0" onAction="#handleSetCategory" prefHeight="26.0" prefWidth="99.0" promptText="Category" />
+            <ComboBox fx:id="categoryCombobox" layoutX="38.0" layoutY="221.0" prefHeight="26.0" prefWidth="99.0" promptText="Category" />
          </children>
       </Pane>
       <Pane fx:id="randomRecipePane" layoutX="321.0" layoutY="102.0" prefHeight="278.0" prefWidth="254.0">

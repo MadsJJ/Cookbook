@@ -1,12 +1,8 @@
 package app;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -215,11 +211,7 @@ public class CookBookController {
       deleteIngredientTextField.setText("");
     }
 
-    @FXML
-    void handleSetCategory(ActionEvent event) {
-      
 
-    }
 
     @FXML
     void randomRecipe() {
