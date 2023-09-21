@@ -113,6 +113,12 @@ public class CookBookController {
     private TextField titleTextField;
 
     @FXML
+    private Text deleteRecipeText;
+
+    @FXML
+    private TextField deleteRecipeTextfield;
+
+    @FXML
     private TextField unitTextField;
 
     private User user;
@@ -125,6 +131,8 @@ public class CookBookController {
         removeRecipeButton.setVisible(false);
         ObservableList<String> categories = FXCollections.observableList(Recipe.getCategories());
         categoryCombobox.setItems(categories); 
+        deleteRecipeText.setVisible(false);
+        deleteIngredientTextField.setVisible(false);
           
         };
       
@@ -139,18 +147,25 @@ public class CookBookController {
         addRecepieButton.setVisible(true);
         randomRecipeButton.setVisible(true);
         removeRecipeButton.setVisible(true);
+        deleteRecipeText.setVisible(true);
+        deleteIngredientTextField.setVisible(true);
       }
       else if (event.getSource() == cancelRandomRecepieButton){
         randomRecipePane.setVisible(false); 
         addRecepieButton.setVisible(true);
         randomRecipeButton.setVisible(true); 
         removeRecipeButton.setVisible(true);
+        deleteRecipeText.setVisible(true);
+        deleteIngredientTextField.setVisible(true);
 
       }
     }
 
         @FXML
     void removeRecipe(ActionEvent event) {
+      Recipe recipeToRemove = recipeListView.getItems().stream().filter(a->a.getTitle().equals(deleteRecipeTextfield.getText())).findFirst().orElseThrow();
+      user.getCookBook().removeRecipe(recipeToRemove); 
+      recipeListView.getItems().remove(recipeToRemove);
 
     }
 
@@ -186,6 +201,7 @@ public class CookBookController {
       Recipe recipe = new Recipe(titleTextField.getText(), ingredientListView.getItems(), categoryCombobox.getSelectionModel().getSelectedItem());
       user.getCookBook().addRecipe(recipe);
       recipeListView.getItems().add(recipe);
+      ingredientListView.getItems().removeAll(ingredientListView.getItems()); 
 
     }
 
@@ -201,6 +217,8 @@ public class CookBookController {
         addRecepieButton.setVisible(false);
         randomRecipeButton.setVisible(false);
         removeRecipeButton.setVisible(false);
+        deleteRecipeText.setVisible(false);
+        deleteIngredientTextField.setVisible(false);
         
     }
 
