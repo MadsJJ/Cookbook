@@ -85,7 +85,7 @@ public class User {
 }
 
  public static List<String> findUsers(){
-  String file = "src/main/resources/app/CookBookProject/Users.txt";
+  String file =  "ui/src/main/resources/ui/UserInfo.txt/Users.txt";
     FileReader fileReader;
     List<String> lines = new ArrayList<>();
     try {
