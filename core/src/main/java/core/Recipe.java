@@ -39,7 +39,11 @@ public class Recipe {
 }
 
   private boolean isValidCategory(String category) {
+    try{
       return category.equals(APPETIZER) || category.equals(DINNER) || category.equals(DESSERT);
+    }catch (Exception e){
+      throw new IllegalArgumentException("Must fill out a category");
+    }
   }
 
   public String getTitle() {
@@ -48,7 +52,7 @@ public class Recipe {
 
 
   public void setTitle(String title) {
-    if(title==null || title.length()<1) throw new IllegalArgumentException("not a valid title");
+    if(title==null || title.length()<1) throw new IllegalArgumentException("Not a valid title");
     this.title = title;
   }
 
@@ -73,7 +77,7 @@ public class Recipe {
     Ingredient toBeRemoved= ingredients.stream().filter(a->a.getName().equals(ingredient.getName())).findFirst().orElse(null);
     if(toBeRemoved!=null) ingredients.remove(toBeRemoved);
     else{
-      throw new IllegalArgumentException("ingredient not in recipe");
+      throw new IllegalArgumentException("Ingredient not in recipe");
     }
   }
 

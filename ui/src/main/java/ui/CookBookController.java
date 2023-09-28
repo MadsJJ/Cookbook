@@ -1,6 +1,7 @@
 package ui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -16,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -121,7 +123,13 @@ public class CookBookController {
     @FXML
     private TextField unitTextField;
 
+    @FXML
+    private Label popupLabel;
+
     private User user;
+
+    private List<Ingredient> tempIng = new ArrayList<>();
+    private Recipe temp = new Recipe("temp", tempIng, "Dinner" );
 
     @FXML
     void addRecipe() {
@@ -170,9 +178,14 @@ public class CookBookController {
 
         @FXML
     void removeRecipe(ActionEvent event) {
+      try{
       Recipe recipeToRemove = recipeListView.getItems().stream().filter(a->a.getTitle().equals(deleteRecipeTextfield.getText())).findFirst().orElseThrow();
       user.getCookBook().removeRecipe(recipeToRemove); 
       recipeListView.getItems().remove(recipeToRemove);
+      }
+      catch (Exception e){
+        displayErrorMessage(e);
+      }
     }
 
     @FXML
@@ -191,19 +204,27 @@ public class CookBookController {
 
     @FXML
     void handleIngredient(ActionEvent event) {
+      try{
       if(event.getSource() == addIngredientButton){
       Ingredient ing = new Ingredient(addIngredientTextField.getText(), Double.parseDouble(amountTextField.getText()), unitTextField.getText());
+      temp.addIngredient(ing);
       ingredientListView.getItems().add(ing);
       }
       else if(event.getSource() == removeIngredientButton){
         Ingredient ingredientToRemove = ingredientListView.getItems().stream().filter(a->a.getName().equals(deleteIngredientTextField.getText())).findFirst().orElseThrow();
+        temp.removeIngredient(ingredientToRemove);
         ingredientListView.getItems().remove(ingredientToRemove);
       }
+    }
+    catch (Exception e){
+      displayErrorMessage(e);
+    }
 
     }
 
     @FXML
     void handleNewRecipe(ActionEvent event) {
+      try{
       Recipe recipe = new Recipe(titleTextField.getText(), ingredientListView.getItems(), categoryCombobox.getSelectionModel().getSelectedItem());
       user.getCookBook().addRecipe(recipe);
       recipeListView.getItems().add(recipe);
@@ -213,6 +234,9 @@ public class CookBookController {
       unitTextField.setText("");
       addIngredientTextField.setText("");
       deleteIngredientTextField.setText("");
+      }catch (Exception e){
+        displayErrorMessage(e);
+      }
     }
 
 
@@ -231,7 +255,21 @@ public class CookBookController {
     public void initialize(){
       randomRecipePane.setVisible(false);
       addNewRecipePane.setVisible(false);
+      popupLabel.setVisible(false);
     }
+
+    @FXML
+    void displayErrorMessage(Exception e){
+      String errorMessage = e.getMessage();
+      popupMessage(errorMessage);
+    }
+
+    public void popupMessage(String message) {
+      System.out.println("Popup message: " + message);
+      popupLabel.setText(message);
+      popupLabel.setVisible(true);
+    }
+
 
 
     public void handleAction(ActionEvent e){
