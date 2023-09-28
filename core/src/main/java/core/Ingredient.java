@@ -32,14 +32,17 @@ public Ingredient(){
   }
 
   private boolean isValidUnit(String unit) {
-    return unit.equals(GRAMS) || unit.equals(DL) || unit.equals(PIECES);
+    try{
+      return unit.equals(GRAMS) || unit.equals(DL) || unit.equals(PIECES);
+    } catch(Exception e){
+        throw new IllegalArgumentException("Must fill out a unit");
+    }
 }
 
 
 
   public void setName(String name) {
-    if(name==null) throw new IllegalArgumentException("Ingredient needs a name");
-    if(name.equals("")){
+    if(name==null || name.equals("")){
       throw new IllegalArgumentException("Ingredient needs a name");
     }
     this.name = name;
