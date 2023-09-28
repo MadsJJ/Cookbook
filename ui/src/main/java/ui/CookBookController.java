@@ -209,6 +209,9 @@ public class CookBookController {
       Ingredient ing = new Ingredient(addIngredientTextField.getText(), Double.parseDouble(amountTextField.getText()), unitTextField.getText());
       temp.addIngredient(ing);
       ingredientListView.getItems().add(ing);
+      addIngredientTextField.setText("");
+      unitTextField.setText("");
+      amountTextField.setText("");
       }
       else if(event.getSource() == removeIngredientButton){
         Ingredient ingredientToRemove = ingredientListView.getItems().stream().filter(a->a.getName().equals(deleteIngredientTextField.getText())).findFirst().orElseThrow();
