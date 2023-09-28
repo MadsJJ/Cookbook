@@ -17,14 +17,10 @@ public class Recipe {
   
 
   public Recipe(String title, List<Ingredient> ingredients, String category) {
-      this.title = title;
+      setTitle(title);
       setIngredients(ingredients);
       this.ingredients=Recipe.sortIngredients(ingredients);
-      if (isValidCategory(category)) {
-          this.category = category;
-      } else {
-          throw new IllegalArgumentException("Invalid category! Legal categories are Appetizer, Dinner and Dessert:");
-      }
+      setCategory(category);
   }
 
 
@@ -64,7 +60,19 @@ public class Recipe {
 
 
   public void setIngredients(List<Ingredient> ingredients) {
-    this.ingredients = sortIngredients(ingredients);
+    if(validateIngredients(ingredients)){
+      this.ingredients = sortIngredients(ingredients);
+    }else{
+      throw new IllegalArgumentException("Must fill out ingredients");
+    }
+    
+  }
+
+  public boolean validateIngredients(List<Ingredient> ingredients){
+    if(ingredients.isEmpty() || ingredients.size() == 0){
+      return false; 
+    }
+      return true;
   }
 
   public void addIngredient(Ingredient ingredient){

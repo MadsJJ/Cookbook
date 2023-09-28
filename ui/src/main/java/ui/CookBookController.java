@@ -2,6 +2,7 @@ package ui;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -128,8 +129,11 @@ public class CookBookController {
 
     private User user;
 
-    private List<Ingredient> tempIng = new ArrayList<>();
-    private Recipe temp = new Recipe("temp", tempIng, "Dinner" );
+    private Ingredient tempIng; 
+    private List<Ingredient> tempIngList;
+    private Recipe temp;
+
+   
 
     @FXML
     void addRecipe() {
@@ -204,7 +208,12 @@ public class CookBookController {
 
     @FXML
     void handleIngredient(ActionEvent event) {
+    
       try{
+        Ingredient tempIng = new Ingredient("temp", 10, "g");
+       this.tempIngList = new ArrayList<>();
+       this.tempIngList.add(tempIng);
+     this.temp = new Recipe("temp", tempIngList, "Dinner" ); 
       if(event.getSource() == addIngredientButton){
       Ingredient ing = new Ingredient(addIngredientTextField.getText(), Double.parseDouble(amountTextField.getText()), unitTextField.getText());
       temp.addIngredient(ing);
@@ -227,6 +236,7 @@ public class CookBookController {
 
     @FXML
     void handleNewRecipe(ActionEvent event) {
+      
       try{
       Recipe recipe = new Recipe(titleTextField.getText(), ingredientListView.getItems(), categoryCombobox.getSelectionModel().getSelectedItem());
       user.getCookBook().addRecipe(recipe);

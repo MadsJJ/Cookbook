@@ -11,6 +11,9 @@ public class CookBook {
     this.recipes = recipes;
   }
 
+  public CookBook(){
+  }
+
   public List<Recipe> getRecipes() {
   List<Recipe> copy = new ArrayList<>(recipes);
       return copy;
@@ -21,7 +24,7 @@ public class CookBook {
   }
 
   public void addRecipe(Recipe recipe){
-    if(!(recipe.getIngredients().isEmpty()) || !(recipe.getTitle().equals("temp"))){
+    if(!(recipe.getIngredients().size() == 0)  || !recipe.getTitle().equals("") || !recipe.getTitle().equals(null)){
           recipes.add(recipe);
     }else{
       throw new IllegalArgumentException("Must fill out title and ingredients");
