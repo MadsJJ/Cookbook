@@ -85,7 +85,7 @@ public class User {
 }
 
  public static List<String> findUsers(){
-  String file = "src/main/resources/app/CookBookProject/Users.txt";
+  String file = "ui/src/main/resources/ui/Users.txt";
     FileReader fileReader;
     List<String> lines = new ArrayList<>();
     try {
@@ -129,7 +129,7 @@ public class User {
 
 
  public static void Signup(String Username, String password) {
-    String file = "src/main/resources/app/CookBookProject/Users.txt";
+    String file = "ui/src/main/resources/ui/Users.txt";
     try {
    
         FileWriter fileWriter = new FileWriter(file, true);

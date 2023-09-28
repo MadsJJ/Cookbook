@@ -77,7 +77,7 @@ public class UserController {
 
     public void startApp(User user) {
       try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ui/src/main/resources/ui/CookBook.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CookBook.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = (Stage) loginButton.getScene().getWindow();

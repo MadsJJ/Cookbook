@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "User",
+            "request": "launch",
+            "mainClass": "user.core/core.User",
+            "projectName": "modules-core"
+        },
+        {
+            "type": "java",
+            "name": "CookBookApp",
+            "request": "launch",
+            "mainClass": "user.ui/ui.CookBookApp",
+            "projectName": "modules-ui"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "user.ui/ui.App",
+            "projectName": "modules-ui"
+        },
+        {
+            "type": "java",
             "name": "MainApp",
             "request": "launch",
             "mainClass": "user.ui/ui.MainApp",
