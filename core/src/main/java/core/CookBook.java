@@ -21,7 +21,11 @@ public class CookBook {
   }
 
   public void addRecipe(Recipe recipe){
-    recipes.add(recipe);
+    if(!(recipe.getIngredients().isEmpty()) || !(recipe.getTitle().equals("temp"))){
+          recipes.add(recipe);
+    }else{
+      throw new IllegalArgumentException("Must fill out title and ingredients");
+    }
 
   }
 
