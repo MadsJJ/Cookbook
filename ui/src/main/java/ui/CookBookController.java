@@ -239,7 +239,7 @@ public class CookBookController {
         if(e.getSource() == logOutButton){
             
             try {
-              FXMLLoader loader = new FXMLLoader(getClass().getResource("ui\\src\\main\\resources\\ui\\User.fxml"));
+              FXMLLoader loader = new FXMLLoader(getClass().getResource("User.fxml"));
               Parent root = loader.load();
               Scene scene = new Scene(root);
               Stage stage = (Stage) logOutButton.getScene().getWindow();
