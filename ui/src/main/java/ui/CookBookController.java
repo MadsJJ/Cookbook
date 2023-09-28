@@ -251,7 +251,7 @@ public class CookBookController {
         randomRecipeButton.setVisible(false);
         removeRecipeButton.setVisible(false);
         deleteRecipeText.setVisible(false);
-        deleteIngredientTextField.setVisible(false);
+        deleteRecipeTextfield.setVisible(false);
         
     }
 

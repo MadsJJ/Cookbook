@@ -47,7 +47,7 @@
             <ComboBox fx:id="categoryCombobox" layoutX="38.0" layoutY="221.0" prefHeight="26.0" prefWidth="99.0" promptText="Category" />
          </children>
       </Pane>
-      <Pane fx:id="randomRecipePane" layoutX="321.0" layoutY="102.0" prefHeight="278.0" prefWidth="254.0">
+      <Pane fx:id="randomRecipePane" layoutX="322.0" layoutY="124.0" prefHeight="278.0" prefWidth="254.0">
          <children>
             <Text layoutX="8.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a category to get a random recipe: " wrappingWidth="122.68310546875" />
             <Button fx:id="randomDinnerButton" layoutX="8.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleCategory" text="Dinner" />
