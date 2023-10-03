@@ -64,8 +64,7 @@ public class User {
   }
 
   public static CookBook createCookBook(String username) {
-    List<Recipe> recipes = new ArrayList<>();
-    CookBook bok = new CookBook(recipes);
+    CookBook bok = new CookBook();
     return bok;
   }
 

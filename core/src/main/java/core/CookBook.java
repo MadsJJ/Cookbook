@@ -11,6 +11,9 @@ public class CookBook {
     this.recipes = recipes;
   }
 
+  public CookBook(){
+  }
+
   public List<Recipe> getRecipes() {
   List<Recipe> copy = new ArrayList<>(recipes);
       return copy;

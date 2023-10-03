@@ -47,7 +47,7 @@
             <ComboBox fx:id="categoryCombobox" layoutX="38.0" layoutY="221.0" prefHeight="26.0" prefWidth="99.0" promptText="Category" />
          </children>
       </Pane>
-      <Pane fx:id="randomRecipePane" layoutX="321.0" layoutY="102.0" prefHeight="278.0" prefWidth="254.0">
+      <Pane fx:id="randomRecipePane" layoutX="322.0" layoutY="124.0" prefHeight="278.0" prefWidth="254.0">
          <children>
             <Text layoutX="8.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a category to get a random recipe: " wrappingWidth="122.68310546875" />
             <Button fx:id="randomDinnerButton" layoutX="8.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleCategory" text="Dinner" />
@@ -57,9 +57,9 @@
             <Button fx:id="cancelRandomRecepieButton" layoutX="195.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
          </children>
       </Pane>
-      <Label fx:id="popupLabel" contentDisplay="CENTER" layoutX="125.0" layoutY="80.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="350.0" style="-fx-background-color: white;" textAlignment="CENTER">
+      <Label fx:id="popupLabel" contentDisplay="CENTER" layoutX="29.0" layoutY="80.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="484.0" style="-fx-background-color: white;" textAlignment="CENTER" textFill="#a42828">
          <font>
-            <Font size="16.0" />
+            <Font size="14.0" />
          </font>
       </Label>
    </children>

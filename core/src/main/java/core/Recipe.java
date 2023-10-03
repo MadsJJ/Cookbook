@@ -17,13 +17,10 @@ public class Recipe {
   
 
   public Recipe(String title, List<Ingredient> ingredients, String category) {
-      this.title = title;
+      setTitle(title);
+      setIngredients(ingredients);
       this.ingredients=Recipe.sortIngredients(ingredients);
-      if (isValidCategory(category)) {
-          this.category = category;
-      } else {
-          throw new IllegalArgumentException("Invalid category! Legal categories are Appetizer, Dinner and Dessert:");
-      }
+      setCategory(category);
   }
 
 
@@ -38,7 +35,11 @@ public class Recipe {
 }
 
   private boolean isValidCategory(String category) {
+    try{
       return category.equals(APPETIZER) || category.equals(DINNER) || category.equals(DESSERT);
+    }catch (Exception e){
+      throw new IllegalArgumentException("Must fill out a category");
+    }
   }
 
   public String getTitle() {
@@ -47,7 +48,7 @@ public class Recipe {
 
 
   public void setTitle(String title) {
-    if(title==null || title.length()<1) throw new IllegalArgumentException("not a valid title");
+    if(title==null || title.length()<1) throw new IllegalArgumentException("Not a valid title");
     this.title = title;
   }
 
@@ -55,6 +56,23 @@ public class Recipe {
   public List<Ingredient> getIngredients() {
       List<Ingredient> copy = new ArrayList<>(ingredients);
       return copy;
+  }
+
+
+  public void setIngredients(List<Ingredient> ingredients) {
+    if(validateIngredients(ingredients)){
+      this.ingredients = sortIngredients(ingredients);
+    }else{
+      throw new IllegalArgumentException("Must fill out ingredients");
+    }
+    
+  }
+
+  public boolean validateIngredients(List<Ingredient> ingredients){
+    if(ingredients.isEmpty() || ingredients.size() == 0){
+      return false; 
+    }
+      return true;
   }
 
   public void addIngredient(Ingredient ingredient){
@@ -67,7 +85,7 @@ public class Recipe {
     Ingredient toBeRemoved= ingredients.stream().filter(a->a.getName().equals(ingredient.getName())).findFirst().orElse(null);
     if(toBeRemoved!=null) ingredients.remove(toBeRemoved);
     else{
-      throw new IllegalArgumentException("ingredient not in recipe");
+      throw new IllegalArgumentException("Ingredient not in recipe");
     }
   }
 
