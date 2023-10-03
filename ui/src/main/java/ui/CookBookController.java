@@ -250,8 +250,12 @@ public class CookBookController {
       unitTextField.setText("");
       addIngredientTextField.setText("");
       deleteIngredientTextField.setText("");
-      user.updateFile(user);
+      user.updateFile(user); 
     }
+    catch (Exception e){
+      displayErrorMessage(e);
+    }
+  }
 
 
 
