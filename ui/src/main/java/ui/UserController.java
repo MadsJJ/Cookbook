@@ -2,15 +2,16 @@ package ui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import core.User;
-import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -26,55 +27,51 @@ public class UserController {
     private Button loginButton;
 
     @FXML
-    private TextField password;
+    private TextField passwordField;
 
     @FXML
     private Button signupButton;
 
     @FXML
-    private TextField username;
+    private TextField usernameField;
     
     @FXML
     private Text outputMessage;
+
+    @FXML
+    private Label popupLabel;
+ 
+
     
-
-    public void handleAction(ActionEvent e){
-      // User user = new User(); 
-      Object button = e.getSource();
-
-      // login or signup
-      String username1 = username.getText();
-      String password1 = password.getText();
-      if (button == loginButton || button == signupButton) {
-        // login check
-        if (button == loginButton) {
-          // "Incorrect username or password"
-          if(!User.login(username1, password1)){
-            outputMessage.setText(User.outputLogin);
-            return;
+    
+    @FXML
+    void login(){
+      try {
+        startApp(User.getUser(usernameField.getText(), passwordField.getText()));
+        
+      } catch (Exception e) {
+        displayErrorMessage(e);
+      }
+    }
+    
+    @FXML
+    void signup(){
+      try {
+        startApp(User.Signup(usernameField.getText(), passwordField.getText()));
+      } catch (Exception e) {
+        displayErrorMessage(e);
+      }
+    }
+    
+    public void setStage(Stage stage){
+        // Add an event handler to the Label when the application starts
+        popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+            if (popupLabel.isVisible()) popupLabel.setVisible(false);
           }
-        }
-        // signup check
-        else {
-          // "Username and password needs to contain 2 or more characters"
-          if(!User.validateNoExistingUser(username1)){ 
-            outputMessage.setText(User.existingUser);
-            return;
-          }
-          else if(!User.validateUser(username1, password1)){ 
-          outputMessage.setText(User.outputSignup);
-          return;
-          }
-
-          User.Signup(username1, password1);
-            
-          }
-        }
-        User user = User.findUsers().stream().filter(a->a!=null).filter(a->a.getUsername().equals(username1)).findAny().get();
-        // User user = new User(username1, password1, User.createCookBook(username1));
-        startApp(user);
-      }    
-
+        });
+    }
 
 
     public void startApp(User user) {
@@ -98,4 +95,11 @@ public class UserController {
 
           
     }
+
+    @FXML
+    void displayErrorMessage(Exception e){
+      popupLabel.setText(e.getMessage());
+      popupLabel.setVisible(true);
+    }
+
 }

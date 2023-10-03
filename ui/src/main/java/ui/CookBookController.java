@@ -278,12 +278,10 @@ public class CookBookController {
 
     @FXML
     void displayErrorMessage(Exception e){
-      String errorMessage = e.getMessage();
-      popupMessage(errorMessage);
+      popupMessage(e.getMessage());
     }
 
     public void popupMessage(String message) {
-      System.out.println("Popup message: " + message);
       popupLabel.setText(message);
       popupLabel.setVisible(true);
     }
