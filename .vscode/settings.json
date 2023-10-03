@@ -5,11 +5,15 @@
     },
     "java.test.config": [
         {
-            "name": "javafx-template testing",
-            "vmArgs": ["--add-opens", "app/app=ALL-UNNAMED", "--add-exports", "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"]
+            "name": "coreTesting",
+            "vmArgs": []
+        },
+        {
+            "name": "modules-template testing",
+            "vmArgs": ["--add-opens", "user.ui/ui=ALL-UNNAMED", "--add-exports", "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"]
         }
     ],
-    "java.test.defaultConfig": "javafx-template testing",
+    "java.test.defaultConfig": "modules-template testing",
     "java.compile.nullAnalysis.mode": "automatic",
     "java.debug.settings.onBuildFailureProceed": true
 }

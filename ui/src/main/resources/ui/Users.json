@@ -1,0 +1,37 @@
+[
+  {
+    "username": "mads",
+    "password": "tilstede",
+    "cookBook": {
+      "recipes": [
+        {
+          "title": "EggDinner",
+          "ingredients": [
+            {
+              "name": "Egg",
+              "amount": 20.0,
+              "unit": "g"
+            }
+          ],
+          "category": "Dinner"
+        },
+        {
+          "title": "Pastabolognese",
+          "ingredients": [],
+          "category": "Appetizer"
+        },
+        {
+          "title": "fiskekake",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "amount": 200.0,
+              "unit": "g"
+            }
+          ],
+          "category": "Dessert"
+        }
+      ]
+    }
+  }
+]
