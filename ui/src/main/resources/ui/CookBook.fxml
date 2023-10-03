@@ -32,8 +32,8 @@
             <TextField fx:id="titleTextField" layoutX="60.0" layoutY="43.0" prefHeight="26.0" prefWidth="137.0" promptText="Title:" />
             <TextField fx:id="addIngredientTextField" layoutY="76.0" prefHeight="26.0" prefWidth="76.0" promptText="Ingr. name" />
             <TextField fx:id="amountTextField" layoutX="76.0" layoutY="76.0" prefHeight="26.0" prefWidth="70.0" promptText="Amount" />
-            <TextField fx:id="unitTextField" layoutX="144.0" layoutY="76.0" prefHeight="26.0" prefWidth="53.0" promptText="Unit" />
-            <Button fx:id="addIngredientButton" layoutX="198.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleIngredient" text="Add Ingr." />
+            <ComboBox fx:id="unitComboBox" layoutX="144.0" layoutY="76.0" prefHeight="26.0" prefWidth="65.0" promptText="Unit" />
+            <Button fx:id="addIngredientButton" layoutX="208.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleIngredient" prefHeight="26.0" prefWidth="65.0" text="Add Ingr." />
             <Button fx:id="cancelNewRecipeButton" layoutX="215.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
             <ListView fx:id="ingredientListView" layoutX="37.0" layoutY="102.0" prefHeight="69.0" prefWidth="200.0" />
             <Text layoutX="35.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete ingredient: " wrappingWidth="106.0" />
@@ -47,7 +47,7 @@
             <ComboBox fx:id="categoryCombobox" layoutX="38.0" layoutY="221.0" prefHeight="26.0" prefWidth="99.0" promptText="Category" />
          </children>
       </Pane>
-      <Pane fx:id="randomRecipePane" layoutX="322.0" layoutY="124.0" prefHeight="278.0" prefWidth="254.0">
+      <Pane fx:id="randomRecipePane" layoutX="300.0" layoutY="94.0" prefHeight="278.0" prefWidth="254.0">
          <children>
             <Text layoutX="8.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a category to get a random recipe: " wrappingWidth="122.68310546875" />
             <Button fx:id="randomDinnerButton" layoutX="8.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleCategory" text="Dinner" />

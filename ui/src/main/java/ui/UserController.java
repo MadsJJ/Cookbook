@@ -41,8 +41,6 @@ public class UserController {
     @FXML
     private Label popupLabel;
  
-
-    
     
     @FXML
     void login(){
@@ -74,7 +72,7 @@ public class UserController {
     }
 
 
-    public void startApp(User user) {
+    public void startApp(User user) {  
       try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CookBook.fxml"));
             Parent root = loader.load();

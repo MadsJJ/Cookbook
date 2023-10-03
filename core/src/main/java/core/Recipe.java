@@ -10,16 +10,14 @@ public class Recipe {
   private String title;
   private List<Ingredient> ingredients;
   private String category;
-  public static final String APPETIZER = "Appetizer";
-  public static final String DINNER = "Dinner";
-  public static final String DESSERT = "Dessert";
+  public static final List<String> validCategories = List.of("Appetizer","Dinner","Dessert");
+  
   
   
 
   public Recipe(String title, List<Ingredient> ingredients, String category) {
       setTitle(title);
       setIngredients(ingredients);
-      this.ingredients=Recipe.sortIngredients(ingredients);
       setCategory(category);
   }
 
@@ -34,13 +32,6 @@ public class Recipe {
     return sortedIngredients;
 }
 
-  private boolean isValidCategory(String category) {
-    try{
-      return category.equals(APPETIZER) || category.equals(DINNER) || category.equals(DESSERT);
-    }catch (Exception e){
-      throw new IllegalArgumentException("Must fill out a category");
-    }
-  }
 
   public String getTitle() {
     return title;
@@ -54,39 +45,26 @@ public class Recipe {
 
 
   public List<Ingredient> getIngredients() {
-      List<Ingredient> copy = new ArrayList<>(ingredients);
-      return copy;
+      return new ArrayList<>(ingredients);
   }
 
 
   public void setIngredients(List<Ingredient> ingredients) {
-    if(validateIngredients(ingredients)){
-      this.ingredients = sortIngredients(ingredients);
-    }else{
-      throw new IllegalArgumentException("Must fill out ingredients");
+        if(ingredients.isEmpty() || ingredients.size() == 0) throw new IllegalArgumentException("No ingredients");
+      this.ingredients = Recipe.sortIngredients(ingredients);
     }
     
-  }
-
-  public boolean validateIngredients(List<Ingredient> ingredients){
-    if(ingredients.isEmpty() || ingredients.size() == 0){
-      return false; 
-    }
-      return true;
-  }
-
   public void addIngredient(Ingredient ingredient){
+    if(ingredients.stream().filter(a->a!=null).anyMatch(a->a.getName().equals(ingredient.getName()))) throw new IllegalArgumentException("ingredient already in recipe");
     ingredients.add(ingredient);
     this.ingredients=sortIngredients(ingredients);
 
   } 
 
   public void removeIngredient(Ingredient ingredient){
-    Ingredient toBeRemoved= ingredients.stream().filter(a->a.getName().equals(ingredient.getName())).findFirst().orElse(null);
-    if(toBeRemoved!=null) ingredients.remove(toBeRemoved);
-    else{
-      throw new IllegalArgumentException("Ingredient not in recipe");
-    }
+    if(!ingredients.stream().filter(a->a!=null).anyMatch(a->a.getName().equals(ingredient.getName()))) throw new IllegalArgumentException("ingredient not in recipe");
+    ingredients.remove(ingredient);
+    this.ingredients=sortIngredients(ingredients);    
   }
 
 
@@ -96,54 +74,19 @@ public class Recipe {
 
 
   public void setCategory(String category) {
-     if (isValidCategory(category)) {
-          this.category = category;
-      } else {
-          throw new IllegalArgumentException("Invalid category! Legal categories are Appetizer, Dinner and Dessert:");
-      }
+     if(!validCategories.contains(category)) throw new IllegalArgumentException("Invalid category! Legal categories are Appetizer, Dinner and Dessert:");
+     this.category=category;
   }
 
-  public static List<String> getCategories(){
-    List<String> categories = new ArrayList<>();
-    categories.add(APPETIZER);
-    categories.add(DINNER);
-    categories.add(DESSERT);
-    return categories;
-  }
-
-  // public static List<Ingredient> getIngredientsFromString(List<String> ingredients){
-  //   List<Ingredient> list = new ArrayList<>();
-  //   for (String ingredient : ingredients) {
-  //     String[] ingredientDetails =ingredient.split(",");
-  //     Ingredient newIngredient= new Ingredient(ingredientDetails[0],Double.parseDouble(ingredientDetails[1]),ingredientDetails[2]);
-  //     list.add(newIngredient);
-  //   }
-  //   return list;
-  // }
 
   
 
   @Override
   public String toString() {
-    return title +","+ ingredients + "," + category;
+    return title +", "+ ingredients + ", " + category;
   }
 
 
-  public static void main(String[] args) {
-    List<Ingredient> ingredients = new ArrayList<>();
-    ingredients.add(new Ingredient("Bacon", 100.0, Ingredient.GRAMS));
-        ingredients.add(new Ingredient("Pasta", 200.0, Ingredient.GRAMS));
-
-        Recipe recipe = new Recipe("Spaghetti Carbonara", ingredients, Recipe.DINNER);
-
-        System.out.println(recipe);
-    
-  }
-  
-  
-  
-
-  
 
   
   

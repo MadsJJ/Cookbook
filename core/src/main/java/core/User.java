@@ -47,11 +47,6 @@ public class User {
 
   }
 
-  public static CookBook createCookBook(String username) {
-    CookBook bok = new CookBook();
-    return bok;
-  }
-
   public CookBook getCookBook() {
     return cookBook;
   }

@@ -2,7 +2,6 @@ package ui;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -122,14 +121,13 @@ public class CookBookController {
     private TextField deleteRecipeTextfield;
 
     @FXML
-    private TextField unitTextField;
+    private ComboBox<String> unitComboBox;
 
     @FXML
     private Label popupLabel;
 
     private User user;
-
-    private Ingredient tempIng; 
+ 
     private List<Ingredient> tempIngList;
     private Recipe temp;
 
@@ -141,8 +139,8 @@ public class CookBookController {
         addRecepieButton.setVisible(false);
         randomRecipeButton.setVisible(false);
         removeRecipeButton.setVisible(false);
-        ObservableList<String> categories = FXCollections.observableList(Recipe.getCategories());
-        categoryCombobox.setItems(categories); 
+        unitComboBox.setItems(FXCollections.observableArrayList(Ingredient.validUnits));
+        categoryCombobox.setItems(FXCollections.observableArrayList(Recipe.validCategories)); 
         deleteRecipeText.setVisible(false);
         deleteRecipeTextfield.setVisible(false);
           
@@ -157,7 +155,7 @@ public class CookBookController {
       ingredientListView.getItems().removeAll(ingredientListView.getItems());
       titleTextField.setText("");
       amountTextField.setText("");
-      unitTextField.setText("");
+      unitComboBox.getSelectionModel().clearSelection();
       addIngredientTextField.setText("");
       deleteIngredientTextField.setText("");
 
@@ -197,12 +195,7 @@ public class CookBookController {
 
     @FXML
     void handleCategory(ActionEvent event) {
-      String category;
-      if(event.getSource()==randomAppetizerButton) category=Recipe.APPETIZER;
-      else if(event.getSource()==randomDinnerButton) category=Recipe.DINNER;
-      else{ category=Recipe.DESSERT;
-      }
-      List<Recipe> recipes=user.getCookBook().getRecipes().stream().filter(a->a.getCategory().equals(category)).toList();
+      List<Recipe> recipes=user.getCookBook().getRecipes().stream().filter(a->a.getCategory().equals(((Button) event.getSource()).getText())).toList();
       int random = (int) ((Math.random() * (recipes.size() - 0)) + 0);
       randomRecipeTextArea.setText(recipes.get(random).toString());
 
@@ -218,11 +211,11 @@ public class CookBookController {
        this.tempIngList.add(tempIng);
      this.temp = new Recipe("temp", tempIngList, "Dinner" ); 
       if(event.getSource() == addIngredientButton){
-      Ingredient ing = new Ingredient(addIngredientTextField.getText(), Double.parseDouble(amountTextField.getText()), unitTextField.getText());
+      Ingredient ing = new Ingredient(addIngredientTextField.getText(), Double.parseDouble(amountTextField.getText()), unitComboBox.getSelectionModel().getSelectedItem());
       temp.addIngredient(ing);
       ingredientListView.getItems().add(ing);
       addIngredientTextField.setText("");
-      unitTextField.setText("");
+      unitComboBox.valueProperty().set("Unit");
       amountTextField.setText("");
       }
       else if(event.getSource() == removeIngredientButton){
@@ -247,7 +240,7 @@ public class CookBookController {
       ingredientListView.getItems().removeAll(ingredientListView.getItems());
       titleTextField.setText("");
       amountTextField.setText("");
-      unitTextField.setText("");
+      unitComboBox.getSelectionModel().clearSelection();
       addIngredientTextField.setText("");
       deleteIngredientTextField.setText("");
       user.updateFile(user); 

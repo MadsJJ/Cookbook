@@ -15,25 +15,25 @@ public class CookBook {
   }
 
   public List<Recipe> getRecipes() {
-  List<Recipe> copy = new ArrayList<>(recipes);
-      return copy;
+    return new ArrayList<>(recipes);
   }
 
   public void setRecipes(List<Recipe> recipes) {
+    if(recipes==null||recipes.size()==0) throw new IllegalArgumentException("Cookbook must contain recipes");
     this.recipes = recipes;
   }
 
   public void addRecipe(Recipe recipe){
+    if(recipe==null) throw new IllegalArgumentException("Recipe to add can't be null");
     recipes.add(recipe);
+
   }
 
   public void removeRecipe(Recipe recipe){
-    if(recipes.contains(recipe)) recipes.remove(recipe);
-    else{
-      throw new IllegalArgumentException("Recipe not in cookbook");
-    }
+    if(!recipes.contains(recipe)) throw new IllegalArgumentException("Recipe not in cookbook");
+    recipes.remove(recipe);
+  
   }
-
   
 
   @Override
