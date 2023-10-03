@@ -65,11 +65,13 @@ public class UserController {
           outputMessage.setText(User.outputSignup);
           return;
           }
+
           User.Signup(username1, password1);
             
           }
         }
-        User user = new User(username1, password1, User.createCookBook(username1));
+        User user = User.findUsers().stream().filter(a->a!=null).filter(a->a.getUsername().equals(username1)).findAny().get();
+        // User user = new User(username1, password1, User.createCookBook(username1));
         startApp(user);
       }    
 
@@ -87,6 +89,7 @@ public class UserController {
             CookBookController CookBookController = loader.getController();
             CookBookController.setheadertext(user.getUsername());
             CookBookController.setUser(user);
+            CookBookController.updateRecipeListView();
             
           } catch (Exception a) {
             a.printStackTrace(); 

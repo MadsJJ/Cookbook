@@ -168,11 +168,19 @@ public class CookBookController {
       }
     }
 
+      @FXML
+      void updateRecipeListView(){
+        recipeListView.getItems().clear();
+        recipeListView.getItems().addAll(user.getCookBook().getRecipes());
+      }
+
         @FXML
     void removeRecipe(ActionEvent event) {
+      
       Recipe recipeToRemove = recipeListView.getItems().stream().filter(a->a.getTitle().equals(deleteRecipeTextfield.getText())).findFirst().orElseThrow();
       user.getCookBook().removeRecipe(recipeToRemove); 
-      recipeListView.getItems().remove(recipeToRemove);
+      user.updateFile(user);
+      updateRecipeListView();
     }
 
     @FXML
@@ -213,6 +221,7 @@ public class CookBookController {
       unitTextField.setText("");
       addIngredientTextField.setText("");
       deleteIngredientTextField.setText("");
+      user.updateFile(user);
     }
 
 
