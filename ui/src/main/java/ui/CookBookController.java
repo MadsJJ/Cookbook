@@ -1,16 +1,13 @@
 package ui;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-
 import core.Ingredient;
 import core.Recipe;
 import core.User;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,6 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -40,7 +38,7 @@ public class CookBookController {
     private Button addIngredientButton;
 
     @FXML
-    private TextField addIngredientTextField;
+    private TextField addIngredientNameTextField;
 
     @FXML
     private Button addNewRecipeButton;
@@ -126,123 +124,160 @@ public class CookBookController {
     @FXML
     private Label popupLabel;
 
-    private User user;
- 
-    private List<Ingredient> tempIngList;
-    private Recipe temp;
-
-   
+    @FXML 
+    private Button appetizerButton;
 
     @FXML
-    void addRecipe() {
+    private Button dinnerButton;
+
+    @FXML
+    private Button dessertButton;
+
+    @FXML
+    private Pane mainPagePane;
+
+  
+    private User user;
+
+    
+    
+    public void initialize(User user){
+      this.user=user;
+      randomRecipePane.setVisible(false);
+      addNewRecipePane.setVisible(false);
+      popupLabel.setVisible(false);
+      headerText.setText(user.getUsername() + "´s cookbook.");
+      updateRecipeListView();
+      // popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+      //   @Override
+      //   public void handle(MouseEvent mouseEvent){
+      //     if (popupLabel.isVisible()) popupLabel.setVisible(false);
+      //   }
+        
+      // });
+    }
+    @FXML
+    void randomRecipePage() {
+        randomRecipePane.setVisible(true);
+        mainPagePane.setVisible(false);
+        
+    }
+
+    @FXML
+    void addRecipePage() {
         addNewRecipePane.setVisible(true);
-        addRecepieButton.setVisible(false);
-        randomRecipeButton.setVisible(false);
-        removeRecipeButton.setVisible(false);
+        mainPagePane.setVisible(false);
+        ingredientListView.getItems().clear();
+        titleTextField.setText("");
+        amountTextField.setText("");
+        addIngredientNameTextField.setText("");
+        deleteIngredientTextField.setText("");
         unitComboBox.setItems(FXCollections.observableArrayList(Ingredient.validUnits));
         categoryCombobox.setItems(FXCollections.observableArrayList(Recipe.validCategories)); 
-        deleteRecipeText.setVisible(false);
-        deleteRecipeTextfield.setVisible(false);
-          
         };
       
       
     
-
-
     @FXML
     void handleCancel(ActionEvent event) {
-      ingredientListView.getItems().removeAll(ingredientListView.getItems());
-      titleTextField.setText("");
-      amountTextField.setText("");
-      unitComboBox.getSelectionModel().clearSelection();
-      addIngredientTextField.setText("");
-      deleteIngredientTextField.setText("");
-
-      if(event.getSource() == cancelNewRecipeButton){
-        addNewRecipePane.setVisible(false);
-        addRecepieButton.setVisible(true);
-        randomRecipeButton.setVisible(true);
-        removeRecipeButton.setVisible(true);
-        deleteRecipeText.setVisible(true);
-        deleteRecipeTextfield.setVisible(true);
-      }
-      else if (event.getSource() == cancelRandomRecepieButton){
-        randomRecipePane.setVisible(false); 
-        addRecepieButton.setVisible(true);
-        randomRecipeButton.setVisible(true); 
-        removeRecipeButton.setVisible(true);
-        deleteRecipeText.setVisible(true);
-        deleteRecipeTextfield.setVisible(true);
-
-      }
+      addNewRecipePane.setVisible(false);
+      randomRecipePane.setVisible(false); 
+      mainPagePane.setVisible(true);
     }
 
       @FXML
       void updateRecipeListView(){
-        recipeListView.getItems().clear();
-        recipeListView.getItems().addAll(user.getCookBook().getRecipes());
+        try {
+          recipeListView.getItems().clear();
+          recipeListView.getItems().addAll(user.getCookBook().getRecipes());
+          
+        } catch (Exception e) {
+          displayErrorMessage(e);
+        }
       }
 
         @FXML
     void removeRecipe(ActionEvent event) {
-      
-      Recipe recipeToRemove = recipeListView.getItems().stream().filter(a->a.getTitle().equals(deleteRecipeTextfield.getText())).findFirst().orElseThrow();
-      user.getCookBook().removeRecipe(recipeToRemove); 
+    try {
+      user.getCookBook().removeRecipe(deleteRecipeTextfield.getText());
       user.updateFile(user);
       updateRecipeListView();
-    }
-
-    @FXML
-    void handleCategory(ActionEvent event) {
-      List<Recipe> recipes=user.getCookBook().getRecipes().stream().filter(a->a.getCategory().equals(((Button) event.getSource()).getText())).toList();
-      int random = (int) ((Math.random() * (recipes.size() - 0)) + 0);
-      randomRecipeTextArea.setText(recipes.get(random).toString());
-
-
-    }
-
-    @FXML
-    void handleIngredient(ActionEvent event) {
-    
-      try{
-        Ingredient tempIng = new Ingredient("temp", 10, "g");
-       this.tempIngList = new ArrayList<>();
-       this.tempIngList.add(tempIng);
-     this.temp = new Recipe("temp", tempIngList, "Dinner" ); 
-      if(event.getSource() == addIngredientButton){
-      Ingredient ing = new Ingredient(addIngredientTextField.getText(), Double.parseDouble(amountTextField.getText()), unitComboBox.getSelectionModel().getSelectedItem());
-      temp.addIngredient(ing);
-      ingredientListView.getItems().add(ing);
-      addIngredientTextField.setText("");
-      unitComboBox.valueProperty().set("Unit");
-      amountTextField.setText("");
-      }
-      else if(event.getSource() == removeIngredientButton){
-        Ingredient ingredientToRemove = ingredientListView.getItems().stream().filter(a->a.getName().equals(deleteIngredientTextField.getText())).findFirst().orElseThrow();
-        temp.removeIngredient(ingredientToRemove);
-        ingredientListView.getItems().remove(ingredientToRemove);
-      }
-    }
-    catch (Exception e){
+      
+    } catch (Exception e) {
       displayErrorMessage(e);
     }
+    }
 
+    
+    @FXML
+    void getRecipesByCategory(ActionEvent event){
+      try {
+        recipeListView.getItems().clear();
+        recipeListView.getItems().addAll(user.getCookBook().getRecipesByCategory(((Button) event.getSource()).getText()));
+        
+      } catch (Exception e) {
+        displayErrorMessage(e);
+      }
     }
 
     @FXML
-    void handleNewRecipe(ActionEvent event) {
+    void getRandomRecipeByCategory(ActionEvent event) {
+      try {
+        randomRecipeTextArea.setText(user.getCookBook().getRandomRecipe(((Button) event.getSource()).getText()).toString());
+        
+      } catch (Exception e) {
+        displayErrorMessage(e);
+        randomRecipeTextArea.setText("");
+      }
+      
+    
+
+    }
+
+  
+    @FXML
+    void addIngredient() {
+    
+      try{
+      Ingredient ing = new Ingredient(addIngredientNameTextField.getText(), Double.parseDouble(amountTextField.getText()), unitComboBox.getSelectionModel().getSelectedItem());
+      if (ingredientListView.getItems().stream().filter(a->a!=null).anyMatch(a->a.getName().equals(ing.getName()))) throw new IllegalArgumentException("Ingredient with name already exists");
+      ingredientListView.getItems().add(ing);
+      addIngredientNameTextField.setText("");
+      amountTextField.setText("");
+      }
+
+      catch (Exception e){
+        displayErrorMessage(e);
+      }
+  
+      }
+
+    @FXML
+    void removeIngredient(){
+      try {
+      
+          Ingredient ingredientToRemove = ingredientListView.getItems().stream().filter(a->a.getName().equals(deleteIngredientTextField.getText())).findFirst().orElseThrow(() -> new IllegalArgumentException("Ingredient not in list"));
+          ingredientListView.getItems().remove(ingredientToRemove);
+          deleteIngredientTextField.setText("");
+      
+        
+      } catch (Exception e) {
+        displayErrorMessage(e);
+      }
+    }
+
+
+
+
+    @FXML
+    void addRecipe(ActionEvent event) {
       
       try{
+
       Recipe recipe = new Recipe(titleTextField.getText(), ingredientListView.getItems(), categoryCombobox.getSelectionModel().getSelectedItem());
       user.getCookBook().addRecipe(recipe);
-      recipeListView.getItems().add(recipe);
-      ingredientListView.getItems().removeAll(ingredientListView.getItems());
-      titleTextField.setText("");
-      amountTextField.setText("");
-      unitComboBox.getSelectionModel().clearSelection();
-      addIngredientTextField.setText("");
-      deleteIngredientTextField.setText("");
+      updateRecipeListView();
+      addRecipePage();
       user.updateFile(user); 
     }
     catch (Exception e){
@@ -253,39 +288,22 @@ public class CookBookController {
 
 
     @FXML
-    void randomRecipe() {
-        randomRecipePane.setVisible(true);
-        addRecepieButton.setVisible(false);
-        randomRecipeButton.setVisible(false);
-        removeRecipeButton.setVisible(false);
-        deleteRecipeText.setVisible(false);
-        deleteRecipeTextfield.setVisible(false);
-        
-    }
-
-    public void initialize(){
-      randomRecipePane.setVisible(false);
-      addNewRecipePane.setVisible(false);
-      popupLabel.setVisible(false);
-    }
-
-    @FXML
     void displayErrorMessage(Exception e){
-      popupMessage(e.getMessage());
-    }
-
-    public void popupMessage(String message) {
-      popupLabel.setText(message);
+      // if(popupLabel.getScene().getWindow().getEventHandler()==null)    "implement later"
+      popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent mouseEvent){
+          if (popupLabel.isVisible()) popupLabel.setVisible(false);
+        }
+        
+      });
+      popupLabel.setText(e.getMessage());
       popupLabel.setVisible(true);
     }
 
-
-
-    public void handleAction(ActionEvent e){
-        
-        if(e.getSource() == logOutButton){
-            
-            try {
+    @FXML
+    void logout(){
+       try {
               FXMLLoader loader = new FXMLLoader(getClass().getResource("User.fxml"));
               Parent root = loader.load();
               Scene scene = new Scene(root);
@@ -297,20 +315,6 @@ public class CookBookController {
               a.printStackTrace(); 
               // TODO: handle exception
             }
-  
-        }
-  
-      }
-
-      
-
-      public void setUser(User user) {
-        this.user = user;
-      }
-  
-
-    public void setheadertext(String username){
-        headerText.setText(username + "´s cookbook.");
     }
-
+  
 }

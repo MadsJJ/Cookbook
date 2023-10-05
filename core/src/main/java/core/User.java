@@ -28,7 +28,7 @@ public class User {
   }
 
   public void setUsername(String username) {
-    if (signupValidation(username))
+    if (!signupValidation(username))
       throw new IllegalArgumentException(outputSignup);
     this.username = username;
   }
@@ -42,8 +42,8 @@ public class User {
   }
 
 
-  public static boolean signupValidation(String username) {
-    return username.matches("^[a-zA-Z0-9]+$")&&username.length()>2&&username.length()<16;
+  public static boolean signupValidation(String string) {
+    return string.matches("^[a-zA-Z0-9]+$")&&string.length()>2&&string.length()<16;
 
   }
 
@@ -86,10 +86,13 @@ public class User {
 
   public static User Signup(String Username, String password) {
     validateNoExistingUser(Username);
-    User user = new User(Username, password, null);
+    CookBook book = new CookBook(new ArrayList<Recipe>());
+    User user = new User(Username, password, book);
+    List<User> users = findUsers();
+    users.add(user);
     try (FileWriter writer = new FileWriter(UserFile)) {
       Gson gson = new GsonBuilder().setPrettyPrinting().create();
-      gson.toJson(findUsers().add(user), writer); // Serialize and write the updated user list
+      gson.toJson(users, writer); // Serialize and write the updated user list
     } catch (IOException e) {
       e.printStackTrace();
     }
