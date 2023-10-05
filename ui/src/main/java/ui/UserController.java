@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -27,7 +28,7 @@ public class UserController {
     private Button loginButton;
 
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
 
     @FXML
     private Button signupButton;
@@ -41,8 +42,6 @@ public class UserController {
     @FXML
     private Label popupLabel;
  
-
-    
     
     @FXML
     void login(){
@@ -72,9 +71,10 @@ public class UserController {
           }
         });
     }
+  
 
 
-    public void startApp(User user) {
+    public void startApp(User user) {  
       try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CookBook.fxml"));
             Parent root = loader.load();
@@ -84,9 +84,8 @@ public class UserController {
             stage.show();
 
             CookBookController CookBookController = loader.getController();
-            CookBookController.setheadertext(user.getUsername());
-            CookBookController.setUser(user);
-            CookBookController.updateRecipeListView();
+            CookBookController.initialize(user);
+    
             
           } catch (Exception a) {
             a.printStackTrace(); 

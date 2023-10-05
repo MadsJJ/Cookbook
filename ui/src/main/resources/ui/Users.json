@@ -1,37 +1,58 @@
 [
   {
     "username": "mads",
-    "password": "tilstede",
+    "password": "borte",
     "cookBook": {
       "recipes": [
         {
-          "title": "EggDinner",
+          "title": "Eggs",
           "ingredients": [
             {
-              "name": "Egg",
-              "amount": 20.0,
-              "unit": "g"
+              "name": "egg",
+              "amount": 2.0,
+              "unit": "pieces"
             }
           ],
-          "category": "Dinner"
-        },
-        {
-          "title": "Pastabolognese",
-          "ingredients": [],
           "category": "Appetizer"
         },
         {
-          "title": "fiskekake",
+          "title": "pasta2",
           "ingredients": [
             {
-              "name": "fisk",
+              "name": "pasta",
               "amount": 200.0,
               "unit": "g"
+            }
+          ],
+          "category": "Appetizer"
+        }
+      ]
+    }
+  },
+  {
+    "username": "mads1",
+    "password": "bortevekk",
+    "cookBook": {
+      "recipes": [
+        {
+          "title": "krem",
+          "ingredients": [
+            {
+              "name": "egg",
+              "amount": 1.0,
+              "unit": "dl"
             }
           ],
           "category": "Dessert"
         }
       ]
+    }
+  },
+  {
+    "username": "mads123",
+    "password": "bofe",
+    "cookBook": {
+      "recipes": []
     }
   }
 ]
