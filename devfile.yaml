@@ -1,8 +1,8 @@
 schemaVersion: 2.1.0
 metadata:
-  name: Cookbook
+  name: cookbook
 components:
-  - name: Cookbook
+  - name: cookbook
     container:
       image: adrianstoica/it1901:latest
       memoryLimit: 3Gi
