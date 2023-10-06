@@ -3,6 +3,7 @@ package ui;
 import java.net.URL;
 import java.util.ResourceBundle;
 import core.User;
+import core.UserDataFilehandling;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,7 +47,7 @@ public class UserController {
     @FXML
     void login(){
       try {
-        startApp(User.getUser(usernameField.getText(), passwordField.getText()));
+        startApp(UserDataFilehandling.getUser(usernameField.getText(), passwordField.getText()));
         
       } catch (Exception e) {
         displayErrorMessage(e);
@@ -56,7 +57,7 @@ public class UserController {
     @FXML
     void signup(){
       try {
-        startApp(User.Signup(usernameField.getText(), passwordField.getText()));
+        startApp(UserDataFilehandling.Signup(usernameField.getText(), passwordField.getText()));
       } catch (Exception e) {
         displayErrorMessage(e);
       }

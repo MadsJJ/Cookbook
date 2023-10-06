@@ -23,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import core.UserDataFilehandling;
 
 
 
@@ -174,6 +175,7 @@ public class CookBookController {
         deleteIngredientTextField.setText("");
         unitComboBox.setItems(FXCollections.observableArrayList(Ingredient.validUnits));
         categoryCombobox.setItems(FXCollections.observableArrayList(Recipe.validCategories)); 
+        
         };
       
       
@@ -200,7 +202,7 @@ public class CookBookController {
     void removeRecipe(ActionEvent event) {
     try {
       user.getCookBook().removeRecipe(deleteRecipeTextfield.getText());
-      user.updateFile(user);
+      UserDataFilehandling.updateFile(user);
       updateRecipeListView();
       
     } catch (Exception e) {
@@ -278,7 +280,7 @@ public class CookBookController {
       user.getCookBook().addRecipe(recipe);
       updateRecipeListView();
       addRecipePage();
-      user.updateFile(user); 
+      UserDataFilehandling.updateFile(user); 
     }
     catch (Exception e){
       displayErrorMessage(e);
