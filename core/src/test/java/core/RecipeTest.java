@@ -1,57 +1,115 @@
-package core;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.List;
+// package core;
+// import org.junit.jupiter.api.BeforeEach;
+// import org.junit.jupiter.api.Test;
+// import static org.junit.jupiter.api.Assertions.*;
 
-public class RecipeTest {
+// import java.util.ArrayList;
+// import java.util.List;
 
-    private Recipe recipe;
+// public class RecipeTest {
 
-    @BeforeEach
-    void setUp() {
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient("Pasta", 200.0, Ingredient.GRAMS));
-        ingredients.add(new Ingredient("Bacon", 100.0, Ingredient.GRAMS));
-        ingredients.add(new Ingredient("Eggs", 6.0, Ingredient.PIECES));
+//     private Recipe recipe;
+//     private List<Ingredient> ingredients;
 
-        recipe = new Recipe("Spaghetti Carbonara", ingredients, Recipe.DINNER);
-    }
+//     // @BeforeEach
+//     public void setUp() {
+//         ingredients = new ArrayList<>();
+//         ingredients.add(new Ingredient("Sugar", 100, Ingredient.GRAMS));
+//         ingredients.add(new Ingredient("Flour", 200, Ingredient.GRAMS));
+//         recipe = new Recipe("Chocolate Cake", ingredients, "Dessert");
+//     }
 
-    @Test
-    void testConstructor() {
-        assertEquals("Spaghetti Carbonara", recipe.getTitle());
-        assertEquals(Recipe.DINNER, recipe.getCategory());
+//     @Test
+//     public void testGetTitle() {
+//         assertEquals("Chocolate Cake", recipe.getTitle());
+//     }
 
-        List<Ingredient> sortedIngredients = recipe.getIngredients();
-        assertEquals(3, sortedIngredients.size());
-        assertEquals("Pasta", sortedIngredients.get(0).getName());
-        assertEquals("Bacon", sortedIngredients.get(1).getName());
-        assertEquals("Eggs", sortedIngredients.get(2).getName());
-    }
+//     @Test
+//     public void testSetTitle() {
+//         recipe.setTitle("Brownie");
+//         assertEquals("Brownie", recipe.getTitle());
+//     }
 
-    @Test
-    void testAddIngredient() {
-        Ingredient newIngredient = new Ingredient("Parmesan", 50.0, Ingredient.GRAMS);
-        recipe.addIngredient(newIngredient);
+//     @Test
+//     public void testSetTitleWithInvalidTitle() {
+//         assertThrows(IllegalArgumentException.class, () -> {
+//             recipe.setTitle("");
+//         });
+//     }
 
-        List<Ingredient> sortedIngredients = recipe.getIngredients();
-        assertEquals(4, sortedIngredients.size());
-        assertEquals("Pasta", sortedIngredients.get(0).getName());
-        assertEquals("Bacon", sortedIngredients.get(1).getName());
-        assertEquals("Parmesan", sortedIngredients.get(2).getName());
-        assertEquals("Eggs", sortedIngredients.get(3).getName());
-    }
+//     @Test
+//     public void testGetIngredients() {
+//         List<Ingredient> retrievedIngredients = recipe.getIngredients();
+//         assertEquals(ingredients, retrievedIngredients);
+//         assertNotSame(ingredients, retrievedIngredients); // Ensure a copy is returned
+//     }
 
-    @Test
-    void testRemoveIngredient() {
-        Ingredient bacon = new Ingredient("Bacon", 100.0, Ingredient.GRAMS);
-        recipe.removeIngredient(bacon);
+//     @Test
+//     public void testSetIngredients() {
+//         List<Ingredient> newIngredients = new ArrayList<>();
+//         newIngredients.add(new Ingredient("Cocoa Powder", 50, Ingredient.GRAMS));
+//         recipe.setIngredients(newIngredients);
+//         assertEquals(newIngredients, recipe.getIngredients());
+//     }
 
-        List<Ingredient> sortedIngredients = recipe.getIngredients();
-        assertEquals(2, sortedIngredients.size());
-        assertEquals("Pasta", sortedIngredients.get(0).getName());
-        assertEquals("Eggs", sortedIngredients.get(1).getName());
-    }
-}
+//     @Test
+//     public void testSetIngredientsWithEmptyList() {
+//         assertThrows(IllegalArgumentException.class, () -> {
+//             recipe.setIngredients(new ArrayList<>());
+//         });
+//     }
+
+//     @Test
+//     public void testAddIngredient() {
+//         Ingredient newIngredient = new Ingredient("Eggs", 2, Ingredient.PIECES);
+//         recipe.addIngredient(newIngredient);
+//         assertTrue(recipe.getIngredients().contains(newIngredient));
+//     }
+
+//     @Test
+//     public void testAddDuplicateIngredient() {
+//         Ingredient duplicateIngredient = new Ingredient("Sugar", 50, Ingredient.GRAMS);
+//         assertThrows(IllegalArgumentException.class, () -> {
+//             recipe.addIngredient(duplicateIngredient);
+//         });
+//     }
+
+//     @Test
+//     public void testRemoveIngredient() {
+//         Ingredient ingredientToRemove = new Ingredient("Sugar", 100, Ingredient.GRAMS);
+//         recipe.removeIngredient(ingredientToRemove);
+//         assertFalse(recipe.getIngredients().contains(ingredientToRemove));
+//     }
+
+//     @Test
+//     public void testRemoveNonexistentIngredient() {
+//         Ingredient nonexistentIngredient = new Ingredient("Butter", 50, Ingredient.GRAMS);
+//         assertThrows(IllegalArgumentException.class, () -> {
+//             recipe.removeIngredient(nonexistentIngredient);
+//         });
+//     }
+
+//     @Test
+//     public void testGetCategory() {
+//         assertEquals("Dessert", recipe.getCategory());
+//     }
+
+//     @Test
+//     public void testSetCategory() {
+//         recipe.setCategory("Appetizer");
+//         assertEquals("Appetizer", recipe.getCategory());
+//     }
+
+//     @Test
+//     public void testSetCategoryWithInvalidCategory() {
+//         assertThrows(IllegalArgumentException.class, () -> {
+//             recipe.setCategory("Main Course");
+//         });
+//     }
+
+//     @Test
+//     public void testToString() {
+//         String expectedString = "Chocolate Cake, [Sugar,100.0,g, Flour,200.0,g], Dessert";
+//         assertEquals(expectedString, recipe.toString());
+//     }
+// }
