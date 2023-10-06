@@ -57,7 +57,7 @@ public class UserController {
     @FXML
     void signup(){
       try {
-        startApp(UserDataFilehandling.Signup(usernameField.getText(), passwordField.getText()));
+        startApp(UserDataFilehandling.signup(usernameField.getText(), passwordField.getText()));
       } catch (Exception e) {
         displayErrorMessage(e);
       }

@@ -3,6 +3,8 @@ package core;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +12,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class UserDataFilehandling {
-  
+
   public static final String UserFile = "ui/src/main/resources/ui/UserData.json";
   
 
   public static List<User> findUsers() {
     List<User> users = new ArrayList<>();
-    try (FileReader reader = new FileReader(UserFile)) {
+    try (FileReader reader = new FileReader(UserFile, StandardCharsets.UTF_8)) { // Specify UTF-8 encoding
       Gson gson = new Gson();
       User[] userArray = gson.fromJson(reader, User[].class);
       if (userArray != null) {
@@ -42,13 +44,13 @@ public static void validateNoExistingUser(String username) {
   }
 }
 
- public static User Signup(String Username, String password) {
+ public static User signup(String Username, String password) {
     validateNoExistingUser(Username);
     CookBook book = new CookBook(new ArrayList<Recipe>());
     User user = new User(Username, password, book);
     List<User> users = findUsers();
     users.add(user);
-    try (FileWriter writer = new FileWriter(UserFile)) {
+    try (FileWriter writer = new FileWriter(UserFile, StandardCharsets.UTF_8)) { // Specify UTF-8 encoding
       Gson gson = new GsonBuilder().setPrettyPrinting().create();
       gson.toJson(users, writer); // Serialize and write the updated user list
     } catch (IOException e) {
@@ -61,7 +63,7 @@ public static void validateNoExistingUser(String username) {
     List<User> users = findUsers();
     User userToUpdate = users.stream().filter(a->a!=null).filter(a->a.getUsername().equals(user.getUsername())).findAny().get();
     userToUpdate.setCookBook(user.getCookBook());
-    try (FileWriter writer = new FileWriter(UserFile)) {
+       try (FileWriter writer = new FileWriter(UserFile, StandardCharsets.UTF_8)) { // Specify UTF-8 encoding
       Gson gson = new GsonBuilder().setPrettyPrinting().create();
       gson.toJson(users, writer); // Serialize and write the updated user list
     } catch (IOException e) {

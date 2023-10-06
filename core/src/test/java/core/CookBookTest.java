@@ -1,72 +1,105 @@
 // package core;
-
-// import static org.junit.jupiter.api.Assertions.*;
 // import org.junit.jupiter.api.BeforeEach;
 // import org.junit.jupiter.api.Test;
+// import static org.junit.jupiter.api.Assertions.*;
+
 // import java.util.ArrayList;
 // import java.util.List;
 
 // public class CookBookTest {
 
 //     private CookBook cookBook;
+//     private Recipe recipe1;
+//     private Recipe recipe2;
 
 //     @BeforeEach
-//     void setUp() {
+//     public void setUp() {
 //         List<Recipe> recipes = new ArrayList<>();
-//         recipes.add(new Recipe("Recipe 1", new ArrayList<>(), Recipe.APPETIZER));
-//         recipes.add(new Recipe("Recipe 2", new ArrayList<>(), Recipe.DINNER));
-
+//         recipe1 = new Recipe("Spaghetti", new ArrayList<>(), "Dinner");
+//         recipe2 = new Recipe("Chocolate Cake", new ArrayList<>(), "Dessert");
+//         recipes.add(recipe1);
 //         cookBook = new CookBook(recipes);
 //     }
 
 //     @Test
-//     void testGetRecipes() {
-//         List<Recipe> retrievedRecipes = cookBook.getRecipes();
-//         assertEquals(2, retrievedRecipes.size());
-//     }
-
-//     @Test
-//     void testSetRecipes() {
-//         List<Recipe> newRecipes = new ArrayList<>();
-//         newRecipes.add(new Recipe("New Recipe 1", new ArrayList<>(), Recipe.DESSERT));
-//         newRecipes.add(new Recipe("New Recipe 2", new ArrayList<>(), Recipe.APPETIZER));
-
-//         cookBook.setRecipes(newRecipes);
-
-//         List<Recipe> retrievedRecipes = cookBook.getRecipes();
-//         assertEquals(2, retrievedRecipes.size());
-//         assertEquals("New Recipe 1", retrievedRecipes.get(0).getTitle());
-//         assertEquals("New Recipe 2", retrievedRecipes.get(1).getTitle());
-//     }
-
-//     @Test
-//     void testAddRecipe() {
-//         Recipe newRecipe = new Recipe("New Recipe", new ArrayList<>(), Recipe.DINNER);
-
-//         cookBook.addRecipe(newRecipe);
-
-//         List<Recipe> retrievedRecipes = cookBook.getRecipes();
-//         assertEquals(3, retrievedRecipes.size());
-//         assertTrue(retrievedRecipes.contains(newRecipe));
-//     }
-
-//     @Test
-//     void testRemoveRecipe() {
-//         Recipe recipeToRemove = cookBook.getRecipes().get(0);
-
-//         cookBook.removeRecipe(recipeToRemove);
-
+//     public void testGetRecipes() {
 //         List<Recipe> retrievedRecipes = cookBook.getRecipes();
 //         assertEquals(1, retrievedRecipes.size());
-//         assertFalse(retrievedRecipes.contains(recipeToRemove));
+//         assertEquals(recipe1, retrievedRecipes.get(0));
+//         assertNotSame(recipes, retrievedRecipes); // Ensure a copy is returned
 //     }
 
 //     @Test
-//     void testRemoveRecipeNotInCookbook() {
-//         Recipe recipeNotInCookbook = new Recipe("Not in Cookbook", new ArrayList<>(), Recipe.APPETIZER);
+//     public void testSetRecipes() {
+//         List<Recipe> newRecipes = new ArrayList<>();
+//         newRecipes.add(recipe2);
+//         cookBook.setRecipes(newRecipes);
+//         assertEquals(newRecipes, cookBook.getRecipes());
+//     }
 
+//     @Test
+//     public void testSetRecipesWithEmptyList() {
 //         assertThrows(IllegalArgumentException.class, () -> {
-//             cookBook.removeRecipe(recipeNotInCookbook);
+//             cookBook.setRecipes(new ArrayList<>());
 //         });
+//     }
+
+//     @Test
+//     public void testAddRecipe() {
+//         cookBook.addRecipe(recipe2);
+//         assertTrue(cookBook.getRecipes().contains(recipe2));
+//     }
+
+//     @Test
+//     public void testAddDuplicateRecipe() {
+//         assertThrows(IllegalArgumentException.class, () -> {
+//             cookBook.addRecipe(recipe1);
+//         });
+//     }
+
+//     @Test
+//     public void testRemoveRecipe() {
+//         cookBook.removeRecipe(recipe1);
+//         assertFalse(cookBook.getRecipes().contains(recipe1));
+//     }
+
+//     @Test
+//     public void testRemoveNonexistentRecipe() {
+//         Recipe nonexistentRecipe = new Recipe("Pizza", new ArrayList<>(), "Dinner");
+//         assertThrows(IllegalArgumentException.class, () -> {
+//             cookBook.removeRecipe(nonexistentRecipe);
+//         });
+//     }
+
+//     @Test
+//     public void testRemoveRecipeByTitle() {
+//         cookBook.removeRecipe("Spaghetti");
+//         assertFalse(cookBook.getRecipes().contains(recipe1));
+//     }
+
+//     @Test
+//     public void testGetRandomRecipe() {
+//         Recipe randomRecipe = cookBook.getRandomRecipe("Dessert");
+//         assertNotNull(randomRecipe);
+//         assertTrue(randomRecipe.getCategory().equals("Dessert"));
+//     }
+
+//     @Test
+//     public void testGetRecipesByCategory() {
+//         // List<Recipe> dessertRecipes = cookBook.getRecipesByCategory("Dessert");
+//         assertEquals(0, dessertRecipes.size());
+//     }
+
+//     @Test
+//     public void testGetRecipesByInvalidCategory() {
+//         assertThrows(IllegalArgumentException.class, () -> {
+//             cookBook.getRecipesByCategory("Breakfast");
+//         });
+//     }
+
+//     @Test
+//     public void testToString() {
+//         String expectedString = "CookBook [recipes=[Spaghetti, [], Dinner]]";
+//         assertEquals(expectedString, cookBook.toString());
 //     }
 // }
