@@ -4,16 +4,20 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class UserDataFilehandling {
 
   public static final String UserFile = "ui/src/main/resources/ui/UserData.json";
+  
+
+  // public static final File file = new File(url.getPath());
+
+
+
   
 
   public static List<User> findUsers() {
