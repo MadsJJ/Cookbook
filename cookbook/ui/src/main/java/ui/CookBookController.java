@@ -139,15 +139,17 @@ public class CookBookController {
 
   
     private User user;
+    private UserDataFilehandling fileHandler;
 
     
     
-    public void initialize(User user){
+    public void initialize(User user,UserDataFilehandling fileHandler){
       this.user=user;
       randomRecipePane.setVisible(false);
       addNewRecipePane.setVisible(false);
       popupLabel.setVisible(false);
       headerText.setText(user.getUsername() + "´s cookbook.");
+      this.fileHandler=fileHandler;
       updateRecipeListView();
       // popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
       //   @Override
@@ -202,7 +204,7 @@ public class CookBookController {
     void removeRecipe(ActionEvent event) {
     try {
       user.getCookBook().removeRecipe(deleteRecipeTextfield.getText());
-      UserDataFilehandling.updateFile(user);
+      fileHandler.updateFile(user);
       updateRecipeListView();
       
     } catch (Exception e) {
@@ -280,7 +282,7 @@ public class CookBookController {
       user.getCookBook().addRecipe(recipe);
       updateRecipeListView();
       addRecipePage();
-      UserDataFilehandling.updateFile(user); 
+      fileHandler.updateFile(user); 
     }
     catch (Exception e){
       displayErrorMessage(e);
@@ -310,6 +312,8 @@ public class CookBookController {
               Parent root = loader.load();
               Scene scene = new Scene(root);
               Stage stage = (Stage) logOutButton.getScene().getWindow();
+              UserController controller =loader.getController();
+              controller.setFileHandler(fileHandler);
               stage.setScene(scene);
               stage.show();
               
