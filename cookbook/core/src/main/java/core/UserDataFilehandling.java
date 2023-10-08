@@ -1,9 +1,12 @@
 package core;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
@@ -11,16 +14,45 @@ import com.google.gson.GsonBuilder;
 
 public class UserDataFilehandling {
 
-  public static final String UserFile = "ui/src/main/resources/ui/UserData.json";
+
+
+  // public final String UserFile = "cookbook/ui/src/main/resources/ui/UserData.json";
+  public final String UserFile;
   
 
   // public static final File file = new File(url.getPath());
 
 
 
+
   
 
-  public static List<User> findUsers() {
+  public UserDataFilehandling(String UserFile) {
+      
+    System.out.println(UserFile);
+    System.out.println(System.getProperty("user.dir"));
+    String userDir = System.getProperty("user.dir");
+    System.out.println(userDir);
+    if(!userDir.contains("cookbook/ui")){
+      userDir=userDir+"/cookbook/ui";
+    }
+    System.out.println(Paths.get(userDir, UserFile).toString());
+    this.UserFile=Paths.get(userDir, UserFile).toString();
+
+    
+
+    System.out.println(Paths.get(System.getProperty("user.dir"), UserFile).toString());
+
+    // this.UserFile=Paths.get(System.getProperty("user.dir"), UserFile).toString();
+
+    
+
+    
+  }
+
+  
+
+  public List<User> findUsers() {
     List<User> users = new ArrayList<>();
     try (FileReader reader = new FileReader(UserFile, StandardCharsets.UTF_8)) { // Specify UTF-8 encoding
       Gson gson = new Gson();
@@ -36,19 +68,19 @@ public class UserDataFilehandling {
     return users;
   }
 
-  public static User getUser(String username, String password) {
-    return UserDataFilehandling.findUsers().stream().filter(a -> a != null)
+  public User getUser(String username, String password) {
+    return findUsers().stream().filter(a -> a != null)
     .filter(a -> a.getUsername().equals(username) && a.getPassword().equals(password))
     .findFirst().orElseThrow(() -> new IllegalArgumentException("Incorrect password or username"));
 }
 
-public static void validateNoExistingUser(String username) {
-  if(UserDataFilehandling.findUsers().stream().filter(a -> a != null).anyMatch(a -> a.getUsername().equals(username))){
+public void validateNoExistingUser(String username) {
+  if(findUsers().stream().filter(a -> a != null).anyMatch(a -> a.getUsername().equals(username))){
     throw new IllegalArgumentException("Username already exists");
   }
 }
 
- public static User signup(String Username, String password) {
+ public User signup(String Username, String password) {
     validateNoExistingUser(Username);
     CookBook book = new CookBook(new ArrayList<Recipe>());
     User user = new User(Username, password, book);
@@ -63,7 +95,7 @@ public static void validateNoExistingUser(String username) {
     return user;
   }
 
-  public static void updateFile(User user){
+  public void updateFile(User user){
     List<User> users = findUsers();
     User userToUpdate = users.stream().filter(a->a!=null).filter(a->a.getUsername().equals(user.getUsername())).findAny().get();
     userToUpdate.setCookBook(user.getCookBook());

@@ -4,7 +4,7 @@
     <artifactId>modules-ui</artifactId>
 
     <parent>
-        <groupId>gr2308</groupId>
+        <groupId>com.gr2308.cookbook</groupId>
         <artifactId>modules-template</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>..</relativePath>
@@ -13,7 +13,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>gr2308</groupId>
+            <groupId>com.gr2308.cookbook</groupId>
             <artifactId>modules-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

@@ -62,5 +62,12 @@
         }
       ]
     }
+  },
+  {
+    "username": "vortex",
+    "password": "vortex",
+    "cookBook": {
+      "recipes": []
+    }
   }
 ]

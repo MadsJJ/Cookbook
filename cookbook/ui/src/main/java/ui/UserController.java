@@ -43,11 +43,24 @@ public class UserController {
     @FXML
     private Label popupLabel;
  
+    private UserDataFilehandling fileHandler;
+
+    public void setFileHandler(UserDataFilehandling fileHandler){
+      this.fileHandler=fileHandler;
+    }
+
     
+    
+    public UserDataFilehandling getFileHandler() {
+      return fileHandler;
+    }
+
+
+
     @FXML
     void login(){
       try {
-        startApp(UserDataFilehandling.getUser(usernameField.getText(), passwordField.getText()));
+        startApp(fileHandler.getUser(usernameField.getText(), passwordField.getText()));
         
       } catch (Exception e) {
         displayErrorMessage(e);
@@ -57,7 +70,7 @@ public class UserController {
     @FXML
     void signup(){
       try {
-        startApp(UserDataFilehandling.signup(usernameField.getText(), passwordField.getText()));
+        startApp(fileHandler.signup(usernameField.getText(), passwordField.getText()));
       } catch (Exception e) {
         displayErrorMessage(e);
       }
@@ -85,7 +98,7 @@ public class UserController {
             stage.show();
 
             CookBookController CookBookController = loader.getController();
-            CookBookController.initialize(user);
+            CookBookController.initialize(user,fileHandler);
     
             
           } catch (Exception a) {
