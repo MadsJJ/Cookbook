@@ -29,19 +29,19 @@ public class UserDataFilehandling {
 
   public UserDataFilehandling(String UserFile) {
       
-    System.out.println(UserFile);
-    System.out.println(System.getProperty("user.dir"));
+    // System.out.println(UserFile);
+    // System.out.println(System.getProperty("user.dir"));
     String userDir = System.getProperty("user.dir");
-    System.out.println(userDir);
+    // System.out.println(userDir);
     if(!userDir.contains("cookbook/ui")){
       userDir=userDir+"/cookbook/ui";
     }
-    System.out.println(Paths.get(userDir, UserFile).toString());
+    // System.out.println(Paths.get(userDir, UserFile).toString());
     this.UserFile=Paths.get(userDir, UserFile).toString();
 
     
 
-    System.out.println(Paths.get(System.getProperty("user.dir"), UserFile).toString());
+    // System.out.println(Paths.get(System.getProperty("user.dir"), UserFile).toString());
 
     // this.UserFile=Paths.get(System.getProperty("user.dir"), UserFile).toString();
 

@@ -108,6 +108,9 @@ public class UserController {
 
           
     }
+    public String getErrorMessage(){
+      return popupLabel.getText();
+    }
 
     @FXML
     void displayErrorMessage(Exception e){

@@ -1,8 +1,8 @@
 schemaVersion: 2.1.0
 metadata:
-  name: todolist
+  name: cookbook
 components:
-  - name: todolist
+  - name: cookbook
     container:
       image: adrianstoica/it1901:latest
       memoryLimit: 3Gi
@@ -34,7 +34,7 @@ components:
 commands:
   - id: changedir
     exec:
-      component: todolist
-      commandLine: cd todolist
+      component: cookbook
+      commandLine: cd cookbook
       label: change directory
 

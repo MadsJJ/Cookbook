@@ -11,11 +11,7 @@ import org.testfx.framework.junit5.Start;
 import core.UserDataFilehandling;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class UserControllerTest extends ApplicationTest {
@@ -34,46 +30,74 @@ public class UserControllerTest extends ApplicationTest {
             // this.controller=controller;
             controller.setFileHandler(new UserDataFilehandling("src/test/java/ui/resources/ui/UserDataTest.json"));
             this.controller=controller;
-            System.out.println(controller.getFileHandler().findUsers());
+            // System.out.println(controller.getFileHandler().findUsers());
             controller.setStage(primaryStage);
             primaryStage.show();
     }
- 
+//  test for login
     @Test
-    void testLoginButton() throws IOException {
-        clickOn("#usernameField").write("mads1111");
-        clickOn("#passwordField").write("borte");
+    void LoginWithWrongUsernameAndPassword() throws IOException {
+        clickOn("#usernameField").write("username1");
+        clickOn("#passwordField").write("password1");
         clickOn("#loginButton");
-        // assertNotNull(controller.getFileHandler().findUsers());
-        // assertNull(controller.getFileHandler().findUsers());
-        // System.out.println(controller.getFileHandler().findUsers());
-        
-
-        
-        
-        
-        
-        // verifyThat("#usernameField", hasText("")); // Verify that the username field is cleared after login
-        // clickOn("#loginButton");
-        // verifyThat("#passwordField", hasText("")); // Verify that the password field is cleared after login
-        // Start a new stage to verify that the user is redirected to the next screen
-        // assertThrows(IllegalArgumentException.class, () -> {
-        //   clickOn("#loginButton"););}
-        
-        // try {
-            
-        // } catch (Exception e) {
-        //     // TODO: handle exception
-        // }
-      
-        // Assertions.assertEquals("some message", thrown.getMessage());
+        assertEquals("Incorrect password or username",controller.getErrorMessage());
+    }
+      @Test
+    void LoginWithWrongUsername() throws IOException {
+        clickOn("#usernameField").write("username1");
+        clickOn("#passwordField").write("password");
+        clickOn("#loginButton");
+        assertEquals("Incorrect password or username",controller.getErrorMessage());
     }
 
-    // @Test
-    // void testSignupButton() {
-    //     clickOn("#usernameField").write("newUser");
-    //     clickOn("#passwordField").write("newPassword123");
-    //     clickOn("#signupButton");
-    //     // Add assertions to verify that the user is signed up and redirected to the next screen
-    // }
+    @Test
+    void LoginWithWrongPassword() throws IOException {
+        clickOn("#usernameField").write("username");
+        clickOn("#passwordField").write("password1");
+        clickOn("#loginButton");
+        assertEquals("Incorrect password or username",controller.getErrorMessage());
+    }
+    // tests for signup
+
+
+
+    @Test
+    void signupWithExistingUsername() {
+        clickOn("#usernameField").write("username");
+        clickOn("#passwordField").write("password");
+        clickOn("#signupButton");
+        assertEquals("Username already exists",controller.getErrorMessage());
+    }
+     @Test
+    void testSignupInvalidUsername() {
+        clickOn("#usernameField").write("username@");
+        clickOn("#passwordField").write("password");
+        clickOn("#signupButton");
+        assertEquals("Username and password must be: \n - letters and numbers \n - between 3 and 16 characters",controller.getErrorMessage());
+    }
+
+    @Test
+    void testSignupInvalidPassword() {
+        clickOn("#usernameField").write("username1");
+        clickOn("#passwordField").write("password@");
+        clickOn("#signupButton");
+        assertEquals("Username and password must be: \n - letters and numbers \n - between 3 and 16 characters",controller.getErrorMessage());
+    }
+
+    @Test
+    void testSignupInvalidLengthShort() {
+        clickOn("#usernameField").write("us");
+        clickOn("#passwordField").write("password");
+        clickOn("#signupButton");
+        assertEquals("Username and password must be: \n - letters and numbers \n - between 3 and 16 characters",controller.getErrorMessage());
+    }
+
+    @Test
+    void testSignupInvalidLengthLong() {
+        clickOn("#usernameField").write("usernameusernameusernameusername");
+        clickOn("#passwordField").write("password");
+        clickOn("#signupButton");
+        assertEquals("Username and password must be: \n - letters and numbers \n - between 3 and 16 characters",controller.getErrorMessage());
+    }
+
 }
