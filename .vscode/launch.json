@@ -29,7 +29,7 @@
             "type": "java",
             "name": "MainApp",
             "request": "launch",
-            "mainClass": "cookbook.ui/ui.MainApp",
+            "mainClass": "user.ui/ui.MainApp",
             "projectName": "modules-ui"
         },
         {

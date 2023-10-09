@@ -1,7 +1,6 @@
 package ui;
 
 import java.io.IOException;
-
 import core.UserDataFilehandling;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +17,6 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Cookbook");
         try {
-            // AnchorPane root = FXMLLoader.load(getClass().getResource("User.fxml"));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("User.fxml"));
             Parent root = loader.load();
             primaryStage.setScene(new Scene(root));

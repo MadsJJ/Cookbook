@@ -1,11 +1,10 @@
 package core;
 
-import java.io.File;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,38 +15,18 @@ public class UserDataFilehandling {
 
 
 
-  // public final String UserFile = "cookbook/ui/src/main/resources/ui/UserData.json";
-  public final String UserFile;
-  
-
-  // public static final File file = new File(url.getPath());
-
-
-
-
+  private String UserFile;
   
 
   public UserDataFilehandling(String UserFile) {
-      
-    // System.out.println(UserFile);
-    // System.out.println(System.getProperty("user.dir"));
     String userDir = System.getProperty("user.dir");
-    // System.out.println(userDir);
-    if(!userDir.contains("cookbook/ui")){
+    if(userDir.endsWith("gr2308")){
       userDir=userDir+"/cookbook/ui";
     }
-    // System.out.println(Paths.get(userDir, UserFile).toString());
+  
+  
     this.UserFile=Paths.get(userDir, UserFile).toString();
 
-    
-
-    // System.out.println(Paths.get(System.getProperty("user.dir"), UserFile).toString());
-
-    // this.UserFile=Paths.get(System.getProperty("user.dir"), UserFile).toString();
-
-    
-
-    
   }
 
   
