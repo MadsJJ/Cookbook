@@ -49,14 +49,7 @@ public class UserController {
       this.fileHandler=fileHandler;
     }
 
-    
-    
-    public UserDataFilehandling getFileHandler() {
-      return fileHandler;
-    }
-
-
-
+  
     @FXML
     void login(){
       try {
