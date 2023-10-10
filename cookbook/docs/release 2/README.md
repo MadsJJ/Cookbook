@@ -11,7 +11,7 @@
  - Log out
 
 ## Architecture Diagram
-
+![Architecture Diagram](UIDesign/diagram.png)
 
  ## Screenshots
 
