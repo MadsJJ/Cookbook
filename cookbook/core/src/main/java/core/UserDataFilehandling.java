@@ -23,9 +23,13 @@ public class UserDataFilehandling {
     if(userDir.endsWith("gr2308")){
       userDir=userDir+"/cookbook/ui";
     }
+    else if(userDir.endsWith("core")){
+      userDir=userDir.substring(0, userDir.length()-4);
+      userDir=userDir+"ui";
+    }
   
   
-    this.UserFile=Paths.get(userDir, UserFile).toString();
+    this.UserFile=userDir+UserFile;
 
   }
 
