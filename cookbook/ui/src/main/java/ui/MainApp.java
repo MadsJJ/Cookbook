@@ -23,7 +23,7 @@ public class MainApp extends Application {
             UserController controller = loader.getController();
             controller.setFileHandler(new UserDataFilehandling("src/main/resources/ui/UserData.json"));
             controller.setStage(primaryStage);
-            System.out.println(controller.getFileHandler().findUsers());
+            // System.out.println(controller.getFileHandler().findUsers());
             primaryStage.show();
             
         } catch (IOException e) {

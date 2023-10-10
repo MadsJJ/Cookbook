@@ -1,21 +1,9 @@
 [
-    {
-      "username": "username",
-      "password": "password",
-      "cookBook": {
-        "recipes": [
-          {
-            "title": "Eggs",
-            "ingredients": [
-              {
-                "name": "egg",
-                "amount": 2.0,
-                "unit": "pieces"
-              }
-            ],
-            "category": "Appetizer"
-          }
-        ]
-      }
+  {
+    "username": "username",
+    "password": "password",
+    "cookBook": {
+      "recipes": []
     }
-  ]
+  }
+]
