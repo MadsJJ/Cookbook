@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,8 +29,7 @@ public class UserDataFilehandlingTest {
               
             try (FileWriter writer = new FileWriter(userDir+"src/test/java/ui/resources/ui/UserDataTest.json", StandardCharsets.UTF_8)) { // Specify UTF-8 encoding
             writer.write("");
-            CookBook book = new CookBook(new ArrayList<Recipe>());
-            this.user= new User("username", "password", book);
+            this.user= new User("username", "password", new CookBook(new ArrayList<Recipe>()));
             filehandler.signup("username", "password");
             writer.close();
 
@@ -77,11 +75,7 @@ public class UserDataFilehandlingTest {
   public void testUpdateFile(){
   
     assertEquals(0,user.getCookBook().getRecipes().size());
-
-    Ingredient ingTest = new Ingredient("ingTest", 20, "g");
-    List<Ingredient> recipeList = Arrays.asList(ingTest);
-    Recipe recipe = new Recipe("recipeTest", recipeList, "Dinner");
-    user.getCookBook().addRecipe(recipe);
+    user.getCookBook().addRecipe(new Recipe("recipeTest", Arrays.asList(new Ingredient("ingTest", 20, "g")), "Dinner"));
     filehandler.updateFile(user);
     assertEquals(1,filehandler.getUser(user.getUsername(), user.getPassword()).getCookBook().getRecipes().size());
 

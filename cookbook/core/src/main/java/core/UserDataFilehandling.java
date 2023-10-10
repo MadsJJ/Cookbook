@@ -64,8 +64,7 @@ public void validateNoExistingUser(String username) {
 
  public User signup(String Username, String password) {
     validateNoExistingUser(Username);
-    CookBook book = new CookBook(new ArrayList<Recipe>());
-    User user = new User(Username, password, book);
+    User user = new User(Username, password, new CookBook(new ArrayList<Recipe>()));
     List<User> users = findUsers();
     users.add(user);
     try (FileWriter writer = new FileWriter(UserFile, StandardCharsets.UTF_8)) { // Specify UTF-8 encoding

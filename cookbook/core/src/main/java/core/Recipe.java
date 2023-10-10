@@ -23,7 +23,7 @@ public class Recipe {
 
 
 
-  private static List<Ingredient> sortIngredients(List<Ingredient> ingredients) {
+  public static List<Ingredient> sortIngredients(List<Ingredient> ingredients) {
     List<Ingredient> sortedIngredients = ingredients.stream()
         .sorted(Comparator.comparing(Ingredient::getAmount).reversed()
                           .thenComparing(Ingredient::getName))
@@ -45,24 +45,26 @@ public class Recipe {
 
 
   public List<Ingredient> getIngredients() {
-      return new ArrayList<>(ingredients);
+      return new ArrayList<Ingredient>(ingredients);
   }
 
 
   public void setIngredients(List<Ingredient> ingredients) {
-        if(ingredients.isEmpty() || ingredients.size() == 0) throw new IllegalArgumentException("No ingredients");
+        if(ingredients==null || ingredients.size() == 0) throw new IllegalArgumentException("No ingredients");
       this.ingredients = Recipe.sortIngredients(ingredients);
     }
     
   public void addIngredient(Ingredient ingredient){
-    if(ingredients.stream().filter(a->a!=null).anyMatch(a->a.getName().equals(ingredient.getName()))) throw new IllegalArgumentException("ingredient already in recipe");
+    if(ingredient==null) throw new IllegalArgumentException("Cant remove null");
+    if(ingredients.stream().anyMatch(a->a.getName().equals(ingredient.getName()))) throw new IllegalArgumentException("ingredient already in recipe");
     ingredients.add(ingredient);
     this.ingredients=sortIngredients(ingredients);
 
   } 
 
   public void removeIngredient(Ingredient ingredient){
-    if(!ingredients.stream().filter(a->a!=null).anyMatch(a->a.getName().equals(ingredient.getName()))) throw new IllegalArgumentException("ingredient not in recipe");
+    if(ingredient==null) throw new IllegalArgumentException("Cant remove null");
+    if(!ingredients.stream().anyMatch(a->a.getName().equals(ingredient.getName()))) throw new IllegalArgumentException("ingredient not in recipe");
     ingredients.remove(ingredient);
     this.ingredients=sortIngredients(ingredients);    
   }
@@ -74,13 +76,11 @@ public class Recipe {
 
 
   public void setCategory(String category) {
-     if(!validCategories.contains(category)) throw new IllegalArgumentException("Invalid category! Legal categories are Appetizer, Dinner and Dessert:");
+     if(category==null||!validCategories.contains(category)) throw new IllegalArgumentException("Invalid category! Legal categories are Appetizer, Dinner and Dessert:");
      this.category=category;
   }
 
-
   
-
   @Override
   public String toString() {
     return title +", "+ ingredients + ", " + category;
