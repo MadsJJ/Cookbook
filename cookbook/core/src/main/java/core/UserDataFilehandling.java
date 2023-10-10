@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
@@ -23,9 +22,13 @@ public class UserDataFilehandling {
     if(userDir.endsWith("gr2308")){
       userDir=userDir+"/cookbook/ui";
     }
+    else if(userDir.endsWith("core")){
+      userDir=userDir.substring(0, userDir.length()-4);
+      userDir=userDir+"ui";
+    }
   
   
-    this.UserFile=Paths.get(userDir, UserFile).toString();
+    this.UserFile=userDir+UserFile;
 
   }
 
