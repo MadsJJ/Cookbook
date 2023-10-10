@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 
 public class UserControllerTest extends ApplicationTest {
     private UserController controller;
+    private UserDataFilehandling fileHandler;
 
 
   @Start
@@ -28,7 +29,9 @@ public class UserControllerTest extends ApplicationTest {
             primaryStage.setScene(new Scene(root));
             UserController controller = loader.getController();
             // this.controller=controller;
-            controller.setFileHandler(new UserDataFilehandling("/src/test/java/ui/resources/ui/UserDataTest.json"));
+            UserDataFilehandling filehandler = new UserDataFilehandling("/src/test/java/ui/resources/ui/UserDataTest.json");
+            controller.setFileHandler(filehandler);
+            this.fileHandler=filehandler;
             this.controller=controller;
             // System.out.println(controller.getFileHandler().findUsers());
             controller.setStage(primaryStage);
