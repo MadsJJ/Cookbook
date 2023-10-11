@@ -1,6 +1,8 @@
 package ui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import core.Ingredient;
 import core.Recipe;
@@ -151,19 +153,12 @@ public class CookBookController {
       headerText.setText(user.getUsername() + "´s cookbook.");
       this.fileHandler=fileHandler;
       updateRecipeListView();
-      // popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-      //   @Override
-      //   public void handle(MouseEvent mouseEvent){
-      //     if (popupLabel.isVisible()) popupLabel.setVisible(false);
-      //   }
-        
-      // });
     }
+
     @FXML
     void randomRecipePage() {
         randomRecipePane.setVisible(true);
         mainPagePane.setVisible(false);
-        
     }
 
     @FXML
@@ -303,6 +298,14 @@ public class CookBookController {
       });
       popupLabel.setText(e.getMessage());
       popupLabel.setVisible(true);
+    }
+
+    public List<Recipe> getRecipeListView(){
+      return new ArrayList<Recipe>(recipeListView.getItems());
+    }
+
+    public List<Ingredient> getIngredientListView(){
+      return new ArrayList<Ingredient>(ingredientListView.getItems());
     }
 
     @FXML

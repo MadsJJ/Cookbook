@@ -42,7 +42,7 @@ public class UserControllerTest extends ApplicationTest {
                   userDir=userDir+"/cookbook/ui";
               }
               
-            try (FileWriter writer = new FileWriter(Paths.get(userDir, "src/test/java/ui/resources/ui/UserDataTest.json").toString(), StandardCharsets.UTF_8)) { // Specify UTF-8 encoding
+            try (FileWriter writer = new FileWriter(Paths.get(userDir, "/src/test/java/ui/resources/ui/UserDataTest.json").toString(), StandardCharsets.UTF_8)) { // Specify UTF-8 encoding
             writer.write("");
             fileHandler.signup("username", "password");
             writer.close();
