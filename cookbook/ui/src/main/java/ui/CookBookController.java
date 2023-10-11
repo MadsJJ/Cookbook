@@ -243,7 +243,7 @@ public class CookBookController {
     void addIngredient() {
     
       try{
-      Ingredient ing = new Ingredient(addIngredientNameTextField.getText(), Double.parseDouble(amountTextField.getText()), unitComboBox.getSelectionModel().getSelectedItem());
+      Ingredient ing = new Ingredient(addIngredientNameTextField.getText(),amountTextField.getText(), unitComboBox.getSelectionModel().getSelectedItem());
       if (ingredientListView.getItems().stream().filter(a->a!=null).anyMatch(a->a.getName().equals(ing.getName()))) throw new IllegalArgumentException("Ingredient with name already exists");
       ingredientListView.getItems().add(ing);
       addIngredientNameTextField.setText("");

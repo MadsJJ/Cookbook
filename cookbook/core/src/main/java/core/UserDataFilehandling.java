@@ -51,21 +51,20 @@ public class UserDataFilehandling {
   }
 
   public User getUser(String username, String password) {
-    return findUsers().stream().filter(a -> a != null)
+    return findUsers().stream()
     .filter(a -> a.getUsername().equals(username) && a.getPassword().equals(password))
     .findFirst().orElseThrow(() -> new IllegalArgumentException("Incorrect password or username"));
 }
 
 public void validateNoExistingUser(String username) {
-  if(findUsers().stream().filter(a -> a != null).anyMatch(a -> a.getUsername().equals(username))){
+  if(findUsers().stream().anyMatch(a -> a.getUsername().equals(username))){
     throw new IllegalArgumentException("Username already exists");
   }
 }
 
  public User signup(String Username, String password) {
     validateNoExistingUser(Username);
-    CookBook book = new CookBook(new ArrayList<Recipe>());
-    User user = new User(Username, password, book);
+    User user = new User(Username, password, new CookBook(new ArrayList<Recipe>()));
     List<User> users = findUsers();
     users.add(user);
     try (FileWriter writer = new FileWriter(UserFile, StandardCharsets.UTF_8)) { // Specify UTF-8 encoding
@@ -79,7 +78,7 @@ public void validateNoExistingUser(String username) {
 
   public void updateFile(User user){
     List<User> users = findUsers();
-    User userToUpdate = users.stream().filter(a->a!=null).filter(a->a.getUsername().equals(user.getUsername())).findAny().get();
+    User userToUpdate = users.stream().filter(a->a.getUsername().equals(user.getUsername())).findAny().get();
     userToUpdate.setCookBook(user.getCookBook());
        try (FileWriter writer = new FileWriter(UserFile, StandardCharsets.UTF_8)) { // Specify UTF-8 encoding
       Gson gson = new GsonBuilder().setPrettyPrinting().create();

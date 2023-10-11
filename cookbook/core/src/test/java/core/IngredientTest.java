@@ -9,7 +9,18 @@ public class IngredientTest {
 
     @BeforeEach
     public void setUp() {
-        ingredient = new Ingredient("Sugar", 100, Ingredient.GRAMS);
+        ingredient = new Ingredient("Sugar", 100, "g");
+    }
+
+    @Test
+    public void testContructorStringAmount(){
+        Ingredient stringIngredient = new Ingredient("Milk", "10", "dl");
+        assertEquals(10, stringIngredient.getAmount());
+    }
+
+    @Test
+    public void testContructorStringAmountError(){
+        assertThrows(IllegalArgumentException.class,()->new Ingredient("milk", "number", "g"));
     }
 
     @Test
@@ -23,10 +34,19 @@ public class IngredientTest {
         assertEquals("Flour", ingredient.getName());
     }
 
+
+
     @Test
     public void testSetNameWithInvalidName() {
         assertThrows(IllegalArgumentException.class, () -> {
             ingredient.setName("");
+        });
+    }
+
+    @Test
+    public void testSetNameWithNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            ingredient.setName(null);
         });
     }
 
@@ -50,13 +70,13 @@ public class IngredientTest {
 
     @Test
     public void testGetUnit() {
-        assertEquals(Ingredient.GRAMS, ingredient.getUnit());
+        assertEquals("g", ingredient.getUnit());
     }
 
     @Test
     public void testSetUnit() {
-        ingredient.setUnit(Ingredient.DL);
-        assertEquals(Ingredient.DL, ingredient.getUnit());
+        ingredient.setUnit("dl");
+        assertEquals("dl", ingredient.getUnit());
     }
 
     @Test
@@ -67,7 +87,14 @@ public class IngredientTest {
     }
 
     @Test
+    public void testSetUnitWithNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            ingredient.setUnit(null);
+        });
+    }
+
+    @Test
     public void testToString() {
-        assertEquals("Sugar,100.0,g", ingredient.toString());
+        assertEquals("Sugar, 100.0, g", ingredient.toString());
     }
 }

@@ -8,6 +8,7 @@ public class CookBook {
   private List<Recipe> recipes;
 
   public CookBook(List<Recipe> recipes) {
+    if(recipes==null) throw new IllegalArgumentException("recipes cant be null");
     this.recipes = recipes;
   }
 
@@ -22,18 +23,15 @@ public class CookBook {
 
   public void addRecipe(Recipe recipe){
     if(recipe==null) throw new IllegalArgumentException("Recipe to add can't be null");
-    if(recipes.stream().filter(a->a!=null).anyMatch(a->a.getTitle().equals(recipe.getTitle()))) throw new IllegalArgumentException("Recipe already exists in cookbook");
+    if(recipes.stream().anyMatch(a->a.getTitle().equals(recipe.getTitle()))) throw new IllegalArgumentException("Recipe already exists in cookbook");
     recipes.add(recipe);
 
   }
 
-  public void removeRecipe(Recipe recipe){
-    if(!recipes.contains(recipe)) throw new IllegalArgumentException("Recipe not in cookbook");
-    recipes.remove(recipe);
-  }
   
   public void removeRecipe(String recipeName){
-    recipes.remove(recipes.stream().filter(a->a!=null).filter(a->a.getTitle().equals(recipeName)).findFirst().orElseThrow(() -> new IllegalArgumentException("Recipe not in cookbook")));
+    if(recipeName==null||recipeName=="") throw new IllegalArgumentException("Enter recipe name to remove from Cookbook");
+    recipes.remove(recipes.stream().filter(a->a.getTitle().equals(recipeName)).findFirst().orElseThrow(() -> new IllegalArgumentException("Recipe not in cookbook")));
   }
 
   public Recipe getRandomRecipe(String category){
@@ -41,7 +39,7 @@ public class CookBook {
   }
 
   public List<Recipe> getRecipesByCategory(String category){
-    if(!Recipe.validCategories.contains(category)) throw new IllegalArgumentException("Not a valid category");
+    if(category==null||!Recipe.validCategories.contains(category)) throw new IllegalArgumentException("Not a valid category");
     List<Recipe> recipeList =  recipes.stream().filter(a->a.getCategory().equals(category)).toList();
     if(recipeList.size()==0) throw new IllegalArgumentException("No recipes in this category");
     return recipeList;

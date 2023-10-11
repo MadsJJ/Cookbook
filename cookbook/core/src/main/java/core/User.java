@@ -11,18 +11,16 @@ public class User {
   public User(String username, String password, CookBook cookBook) {
     setUsername(username);
     setPassword(password);
-    this.cookBook = cookBook;
+    setCookBook(cookBook);
   }
 
   public void setPassword(String password) {
-    if (!signupValidation(password))
-      throw new IllegalArgumentException(outputSignup);
+    signupValidation(password);
     this.password = password;
   }
 
   public void setUsername(String username) {
-    if (!signupValidation(username))
-      throw new IllegalArgumentException(outputSignup);
+    signupValidation(username);
     this.username = username;
   }
 
@@ -35,9 +33,9 @@ public class User {
   }
 
 
-  public static boolean signupValidation(String string) {
-    return string.matches("^[a-zA-Z0-9]+$")&&string.length()>2&&string.length()<16;
-
+  public static void signupValidation(String string) {
+    if(string==null) throw new IllegalArgumentException(outputSignup);
+    if(!(string.matches("^[a-zA-Z0-9]+$")&&string.length()>2&&string.length()<16)) throw new IllegalArgumentException(outputSignup);
   }
 
   public CookBook getCookBook() {
@@ -45,6 +43,7 @@ public class User {
   }
 
   public void setCookBook(CookBook cookBook) {
+    if(cookBook==null) throw new IllegalArgumentException("Cookbook cant be null");
     this.cookBook = cookBook;
   }
 
