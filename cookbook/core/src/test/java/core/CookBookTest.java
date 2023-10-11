@@ -85,61 +85,64 @@ public class CookBookTest {
         assertThrows(IllegalArgumentException.class,()->cookBook.removeRecipe(""));
     }
 
+    @Test
+    public void testRemoveRecipieNotInCookBook(){
+        assertThrows(IllegalArgumentException.class,()->cookBook.removeRecipe("Recipe3"));
+    }
+
+     @Test
+    public void testRemoveRecipieSizeCheck(){
+        cookBook.removeRecipe("Recipe1");
+        assertEquals(1,cookBook.getRecipes().size());
+    }
+
+    @Test
+    public void testGetRandomRecipeInvalidCategory(){
+        assertThrows(IllegalArgumentException.class,()->cookBook.getRandomRecipe("Breakfast"));
+    }
+
+    @Test
+    public void testGetRandomRecipeNull(){
+        assertThrows(IllegalArgumentException.class,()->cookBook.getRandomRecipe(null));
+    }
+
+    @Test
+    public void testGetRandomNoRecipeInCategory(){
+        assertThrows(IllegalArgumentException.class,()->cookBook.getRandomRecipe("Dessert"));
+    }
+
+    @Test
+    public void testGetRandomRecipeSuccess(){
+                assertEquals(recipeList.get(0),cookBook.getRandomRecipe("Appetizer"));
+    }
+
+    @Test
+    public void testGetRandomRecipesInvalidCategory(){
+        assertThrows(IllegalArgumentException.class,()->cookBook.getRecipesByCategory("Breakfast"));
+    }
+
+    @Test
+    public void testGetRandomRecipesNull(){
+        assertThrows(IllegalArgumentException.class,()->cookBook.getRecipesByCategory(null));
+    }
+
+    @Test
+    public void testGetRandomNoRecipesInCategory(){
+        assertThrows(IllegalArgumentException.class,()->cookBook.getRecipesByCategory("Dessert"));
+    }
+
+    @Test
+    public void testGetRandomRecipesSuccess(){
+                assertEquals(recipeList.get(0),cookBook.getRecipesByCategory("Appetizer").get(0));
+    }
 
 
+    @Test
+    public void testToString(){
+        String expected = "CookBook [recipes=[Recipe1, [Ingredient1, 10.0, g], Appetizer, Recipe2, [Ingredient2, 20.0, g], Dinner]]";
+        assertEquals(expected,cookBook.toString());
+    }
+    
 
-
-//     @Test
-//     public void testAddRecipeWithIngredients() {
-//         // Create a new recipe with ingredients
-//         List<Ingredient> ingredients = new ArrayList<>();
-//         ingredients.add(new Ingredient("Ingredient1", 100.0, "g"));
-//         Recipe newRecipe = new Recipe("NewRecipe", ingredients, "Appetizer");
-        
-//         cookBook.addRecipe(newRecipe);
-//         List<Recipe> recipes = cookBook.getRecipes();
-        
-//         assertEquals(4, recipes.size());
-//         assertTrue(recipes.contains(newRecipe));
-//     }
-
-//     @Test(expected = IllegalArgumentException.class)
-//     public void testAddRecipeWithNoIngredients() {
-//         // Attempt to add a recipe with no ingredients
-//         Recipe newRecipe = new Recipe("NewRecipe", new ArrayList<>(), "Appetizer");
-//         cookBook.addRecipe(newRecipe);
-//     }
-
-//     @Test
-//     public void testSetRecipesWithIngredients() {
-//         List<Recipe> newRecipes = new ArrayList<>();
-//         // Create new recipes with ingredients
-//         List<Ingredient> ingredients1 = new ArrayList<>();
-//         ingredients1.add(new Ingredient("Ingredient1", 100.0, "g"));
-//         newRecipes.add(new Recipe("NewRecipe1", ingredients1, "Appetizer"));
-
-//         List<Ingredient> ingredients2 = new ArrayList<>();
-//         ingredients2.add(new Ingredient("Ingredient2", 200.0, "g"));
-//         newRecipes.add(new Recipe("NewRecipe2", ingredients2, "Dinner"));
-
-//         cookBook.setRecipes(newRecipes);
-//         List<Recipe> recipes = cookBook.getRecipes();
-        
-//         assertEquals(2, recipes.size());
-//         assertEquals("NewRecipe1", recipes.get(0).getTitle());
-//         assertEquals("NewRecipe2", recipes.get(1).getTitle());
-//     }
-
-//     @Test(expected = IllegalArgumentException.class)
-//     public void testSetRecipesWithNoIngredients() {
-//         List<Recipe> newRecipes = new ArrayList<>();
-//         // Attempt to set recipes with no ingredients
-//         newRecipes.add(new Recipe("NewRecipe1", new ArrayList<>(), "Appetizer"));
-//         newRecipes.add(new Recipe("NewRecipe2", new ArrayList<>(), "Dinner"));
-        
-//         cookBook.setRecipes(newRecipes);
-//     }
-
-//     // Other test methods remain the same...
 }
 

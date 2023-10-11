@@ -39,7 +39,7 @@ public class CookBook {
   }
 
   public List<Recipe> getRecipesByCategory(String category){
-    if(!Recipe.validCategories.contains(category)) throw new IllegalArgumentException("Not a valid category");
+    if(category==null||!Recipe.validCategories.contains(category)) throw new IllegalArgumentException("Not a valid category");
     List<Recipe> recipeList =  recipes.stream().filter(a->a.getCategory().equals(category)).toList();
     if(recipeList.size()==0) throw new IllegalArgumentException("No recipes in this category");
     return recipeList;
