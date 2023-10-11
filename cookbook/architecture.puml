@@ -5,13 +5,11 @@ component core {
 }
 
 component ui {
-	package cookbook.ui
-    package cookbook.ui.resource
+    package cookbook.ui.resources
 
 }
-cookbook.ui ..> cookbook.ui.resource
-cookbook.ui.resource ..> jackson
-cookbook.ui ..> cookbook.core
+cookbook.core ..> jackson
+cookbook.ui.resources ..> cookbook.core
 
 
 component javafx {
