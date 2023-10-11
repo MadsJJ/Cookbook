@@ -1,0 +1,28 @@
+@startuml
+
+component core {
+	package cookbook.core
+}
+
+component ui {
+	package cookbook.ui
+    package cookbook.ui.resource
+
+}
+cookbook.ui ..> cookbook.ui.resource
+cookbook.ui.resource ..> jackson
+cookbook.ui ..> cookbook.core
+
+
+component javafx {
+	component fxml {
+	}
+}
+
+ui ..> javafx
+ui ..> fxml
+
+component jackson {
+}
+
+@enduml
