@@ -69,13 +69,16 @@ Username or Password incorrect
 **Adding Recipe**  
 Adding Recipe without filling in the title
 ![AddRecipeWithoutTitle](UIErrorMessages/AddRecipeWithoutTitle.png)
-Adding Recipe without setting the category  
+Adding Recipe without setting the category
+![MissingCategory](UIErrorMessages/MissingCategory.png) 
 Adding Recipe without filling in any ingredients
+![MissingIng](UIErrorMessages/MissingIngredients.png)
 
 **Adding Ingredient**  
 Adding ingredient without setting the unit
 ![Add Ingredient without unit](UIErrorMessages/AddIngWithoutUnit.png)
-Adding ingredient without setting amount  
+Adding ingredient without setting amount
+![MissingAmount](UIErrorMessages/MissingAmount.png)
 Adding ingredient without writing the name of the ingredient.
 ![AddIngWithoutName](UIErrorMessages/AddIngWithoutName.png)  
 **Removing**  

@@ -1,4 +1,4 @@
-@startuml
+@startuml Architecture Diagram
 
 component core {
 	package cookbook.core
