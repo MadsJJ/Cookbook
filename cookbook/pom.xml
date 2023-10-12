@@ -13,6 +13,28 @@
         <skipTests>false</skipTests>
     </properties>
 
+    <reporting>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>3.3.0</version>
+          <configuration>
+            <configLocation>google_checks.xml</configLocation>
+            <failOnViolation>false</failOnViolation>
+            <enableFilesSummary>false</enableFilesSummary>
+        </configuration>
+          <reportSets>
+            <reportSet>
+              <reports>
+                <report>checkstyle</report>
+              </reports>
+            </reportSet>
+          </reportSets>
+        </plugin>
+      </plugins>
+    </reporting>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -51,6 +73,23 @@
     <build>
         <pluginManagement>
             <plugins>
+
+                <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.13</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>10.12.4</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <configLocation>google_checks.xml</configLocation>
+                    <failOnViolation>false</failOnViolation>
+                </configuration>
+            </plugin>
           
             
                 <plugin>
@@ -81,7 +120,7 @@
                     <executions>
                         <execution>
                         <id>spotbugs-check</id>
-                        <phase>sverify</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
