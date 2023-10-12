@@ -9,8 +9,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -149,12 +147,11 @@ public class CookBookController {
   private UserDataFilehandling fileHandler;
 
   /**
-   * Initialize the controller with a user and file handler.
-   * also sets the header text to the username
-   * and hides the random recipe and add recipe panes.
+   * Initialize the controller with a user and file handler. also sets the header text to the
+   * username and hides the random recipe and add recipe panes.
    *
-   * @param user          The user object.
-   * @param fileHandler   The file handler for user data.
+   * @param user The user object.
+   * @param fileHandler The file handler for user data.
    */
   public void initialize(User user, UserDataFilehandling fileHandler) {
     this.user = user;
@@ -167,8 +164,8 @@ public class CookBookController {
   }
 
   /**
-    * Switches to the random recipe page, hiding the main page.
-    */
+   * Switches to the random recipe page, hiding the main page.
+   */
   @FXML
   void randomRecipePage() {
     randomRecipePane.setVisible(true);
@@ -176,8 +173,8 @@ public class CookBookController {
   }
 
   /**
-    * Switches to the add recipe page, hiding the main page and clearing input fields.
-    */
+   * Switches to the add recipe page, hiding the main page and clearing input fields.
+   */
   @FXML
   void addRecipePage() {
     addNewRecipePane.setVisible(true);
@@ -193,10 +190,10 @@ public class CookBookController {
 
 
   /**
-    * Handles the cancellation of the add recipe or random recipe page and returns to the main page.
-    *
-    * @param event The ActionEvent that triggered this method.
-    */
+   * Handles the cancellation of the add recipe or random recipe page and returns to the main page.
+   *
+   * @param event The ActionEvent that triggered this method.
+   */
   @FXML
   void handleCancel(ActionEvent event) {
     addNewRecipePane.setVisible(false);
@@ -205,8 +202,8 @@ public class CookBookController {
   }
 
   /**
-    * Updates the recipe list view with the user's recipes.
-    */
+   * Updates the recipe list view with the user's recipes.
+   */
   @FXML
   void updateRecipeListView() {
     try {
@@ -215,13 +212,14 @@ public class CookBookController {
 
     } catch (Exception e) {
       displayErrorMessage(e);
+    }
   }
 
   /**
-    * Removes a recipe from the user's cookbook and updates the recipe list view.
-    *
-    * @param event The ActionEvent that triggered this method.
-    */
+   * Removes a recipe from the user's cookbook and updates the recipe list view.
+   *
+   * @param event The ActionEvent that triggered this method.
+   */
   @FXML
   void removeRecipe(ActionEvent event) {
     try {
@@ -233,12 +231,12 @@ public class CookBookController {
     }
     deleteRecipeTextfield.setText("");
   }
-  
+
   /**
-    * Retrieves and displays recipes from the user's cookbook based on a selected category.
-    *
-    * @param event The ActionEvent that triggered this method.
-    */
+   * Retrieves and displays recipes from the user's cookbook based on a selected category.
+   *
+   * @param event The ActionEvent that triggered this method.
+   */
   @FXML
   void getRecipesByCategory(ActionEvent event) {
     try {
@@ -252,10 +250,10 @@ public class CookBookController {
   }
 
   /**
-    * Retrieves and displays a random recipe from the user's cookbook based on a selected category.
-    *
-    * @param event The ActionEvent that triggered this method.
-    */
+   * Retrieves and displays a random recipe from the user's cookbook based on a selected category.
+   *
+   * @param event The ActionEvent that triggered this method.
+   */
   @FXML
   void getRandomRecipeByCategory(ActionEvent event) {
     try {
@@ -269,8 +267,8 @@ public class CookBookController {
   }
 
   /**
-    * Adds an ingredient to the list of ingredients for a new recipe.
-    */
+   * Adds an ingredient to the list of ingredients for a new recipe.
+   */
   @FXML
   void addIngredient() {
 
@@ -291,8 +289,8 @@ public class CookBookController {
   }
 
   /**
-    * Removes an ingredient from the list of ingredients for a new recipe.
-    */
+   * Removes an ingredient from the list of ingredients for a new recipe.
+   */
   @FXML
   void removeIngredient() {
     try {
@@ -310,10 +308,10 @@ public class CookBookController {
   }
 
   /**
-    * Adds a new recipe to the user's cookbook and updates the recipe list view.
-    *
-    * @param event The ActionEvent that triggered this method.
-    */
+   * Adds a new recipe to the user's cookbook and updates the recipe list view.
+   *
+   * @param event The ActionEvent that triggered this method.
+   */
   @FXML
   void addRecipe(ActionEvent event) {
     try {
@@ -330,10 +328,10 @@ public class CookBookController {
   }
 
   /**
-    * Displays an error message as a popup label.
-    *
-    * @param e The exception that contains the error message.
-    */
+   * Displays an error message as a popup label.
+   *
+   * @param e The exception that contains the error message.
+   */
   @FXML
   void displayErrorMessage(Exception e) {
     // if(popupLabel.getScene().getWindow().getEventHandler()==null) "implement later"
@@ -343,32 +341,32 @@ public class CookBookController {
           public void handle(MouseEvent mouseEvent) {
             if (popupLabel.isVisible()) {
               popupLabel.setVisible(false);
-                  }
+            }
           }
         });
     popupLabel.setText(e.getMessage());
     popupLabel.setVisible(true);
   }
 
-    public List<Recipe> getRecipeListView(){
-      return new ArrayList<Recipe>(recipeListView.getItems());
-    }
+  public List<Recipe> getRecipeListView() {
+    return new ArrayList<Recipe>(recipeListView.getItems());
+  }
 
-    public List<Ingredient> getIngredientListView(){
-      return new ArrayList<Ingredient>(ingredientListView.getItems());
-    }
+  public List<Ingredient> getIngredientListView() {
+    return new ArrayList<Ingredient>(ingredientListView.getItems());
+  }
 
-    public String getErrorMessage(){
-      return popupLabel.getText();
-    }
+  public String getErrorMessage() {
+    return popupLabel.getText();
+  }
 
-    public String getRandomRecipeText(){
-      return randomRecipeTextArea.getText();
-    }
-              
+  public String getRandomRecipeText() {
+    return randomRecipeTextArea.getText();
+  }
+
   /**
-    * Logs the user out and returns to the user login page.
-    */
+   * Logs the user out and returns to the user login page.
+   */
   @FXML
   void logout() {
     try {
