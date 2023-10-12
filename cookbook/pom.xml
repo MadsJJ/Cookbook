@@ -120,7 +120,7 @@
                     <executions>
                         <execution>
                         <id>spotbugs-check</id>
-                        <phase>sverify</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>

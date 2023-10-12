@@ -68,7 +68,7 @@ public class CookBook {
    *         in the cookbook
    */
   public void removeRecipe(String recipeName) {
-    if (recipeName == null || recipeName == "") {
+    if (recipeName == null || recipeName.equals("")) {
       throw new IllegalArgumentException("Enter recipe name to remove from Cookbook");
     }
     recipes.remove(recipes.stream().filter(a -> a.getTitle().equals(recipeName)).findFirst()
