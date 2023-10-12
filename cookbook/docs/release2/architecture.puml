@@ -1,0 +1,26 @@
+@startuml Architecture Diagram
+
+component core {
+	package cookbook.core
+}
+
+component ui {
+    package cookbook.ui.resources
+
+}
+cookbook.core ..> jackson
+cookbook.ui.resources ..> cookbook.core
+
+
+component javafx {
+	component fxml {
+	}
+}
+
+ui ..> javafx
+ui ..> fxml
+
+component jackson {
+}
+
+@enduml
