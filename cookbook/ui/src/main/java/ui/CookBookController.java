@@ -1,9 +1,14 @@
 package ui;
 
+
 import core.Ingredient;
 import core.Recipe;
 import core.User;
 import core.UserDataFilehandling;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -59,7 +64,7 @@ public class CookBookController {
   private Button cancelNewRecipeButton;
 
   @FXML
-  private Button cancelRandomRecepieButton;
+  private Button cancelRandomRecipeButton;
 
   @FXML
   private Button randomRecipeButton;
@@ -68,7 +73,7 @@ public class CookBookController {
   private Button removeRecipeButton;
 
   @FXML
-  private Button addRecepieButton;
+  private Button addRecipeButton;
 
   @FXML
   private ComboBox<String> categoryCombobox;
@@ -159,14 +164,6 @@ public class CookBookController {
     headerText.setText(user.getUsername() + "´s cookbook.");
     this.fileHandler = fileHandler;
     updateRecipeListView();
-    // popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED, new
-    // EventHandler<MouseEvent>() {
-    // @Override
-    // public void handle(MouseEvent mouseEvent){
-    // if (popupLabel.isVisible()) popupLabel.setVisible(false);
-    // }
-
-    // });
   }
 
   /**
@@ -176,7 +173,6 @@ public class CookBookController {
   void randomRecipePage() {
     randomRecipePane.setVisible(true);
     mainPagePane.setVisible(false);
-
   }
 
   /**
@@ -219,7 +215,6 @@ public class CookBookController {
 
     } catch (Exception e) {
       displayErrorMessage(e);
-    }
   }
 
   /**
@@ -233,12 +228,12 @@ public class CookBookController {
       user.getCookBook().removeRecipe(deleteRecipeTextfield.getText());
       fileHandler.updateFile(user);
       updateRecipeListView();
-
     } catch (Exception e) {
       displayErrorMessage(e);
     }
+    deleteRecipeTextfield.setText("");
   }
-
+  
   /**
     * Retrieves and displays recipes from the user's cookbook based on a selected category.
     *
@@ -314,7 +309,6 @@ public class CookBookController {
     }
   }
 
-
   /**
     * Adds a new recipe to the user's cookbook and updates the recipe list view.
     *
@@ -349,13 +343,29 @@ public class CookBookController {
           public void handle(MouseEvent mouseEvent) {
             if (popupLabel.isVisible()) {
               popupLabel.setVisible(false);
-            }
+                  }
           }
         });
     popupLabel.setText(e.getMessage());
     popupLabel.setVisible(true);
   }
 
+    public List<Recipe> getRecipeListView(){
+      return new ArrayList<Recipe>(recipeListView.getItems());
+    }
+
+    public List<Ingredient> getIngredientListView(){
+      return new ArrayList<Ingredient>(ingredientListView.getItems());
+    }
+
+    public String getErrorMessage(){
+      return popupLabel.getText();
+    }
+
+    public String getRandomRecipeText(){
+      return randomRecipeTextArea.getText();
+    }
+              
   /**
     * Logs the user out and returns to the user login page.
     */
