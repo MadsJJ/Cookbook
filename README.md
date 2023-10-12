@@ -18,7 +18,7 @@ What each folder contains
 
 ### core
 
-See [core](link)  
+See [core](cookbook/core/src/main/java/core)  
 ***main***  
 Contains the classes for the main functionality of the application. This folder contains four classes;
 
