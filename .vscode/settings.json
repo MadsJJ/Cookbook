@@ -15,5 +15,10 @@
     ],
     "java.test.defaultConfig": "modules-template testing",
     "java.compile.nullAnalysis.mode": "automatic",
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.checkstyle.configuration": "${workspaceFolder}\\cookbook\\google_checks.xml",
+    "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+    "java.format.settings.profile": "GoogleStyle",
+    "java.checkstyle.version": "10.12.4",
+
 }
