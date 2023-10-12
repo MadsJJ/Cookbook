@@ -1,6 +1,6 @@
 # Cookbook
 
-[Open in Eclipse Che](https://che.stud.ntnu.no/dashboard/#/load-factory?policies.create=perclick&url=https%3A%2F%2Fgitlab.stud.idi.ntnu.no%2Fit1901%2Fgroups-2023%2Fgr2308%2Fgr2308)
+[Open in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308?new)
 
 ## Description
 This is a cookbook app created for your personal use. You can use it to store and look at your favorite recipes at your convenience. If you are not sure about what meal to cook, you can get recipe suggestions based on what type of meal you want.
