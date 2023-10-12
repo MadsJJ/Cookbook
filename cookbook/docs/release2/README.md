@@ -47,8 +47,16 @@ Changed the font and added a box to type in which recipe you want to delete
 Changed the unit-chooser to a dropdown-box instead of a text box. 
 ![CookBookAddDesign](UIDesign/CookBookAdd2.PNG)
 **Random Recipe**
+Layout
 ![CookBookRandomDesign](UIDesign/CookBookRandom2.PNG)
+Get random recipe from a category
+![RandomAppetizer](UIDesign/RandomAppetizer.png)
+**View Recipes**
+View all Recipes
+![ViewAll](UIDesign/ViewAll.png)
 
+From one category
+![ViewAppetizer](UIDesign/ViewAppetizer.png)
 
  ### Pop-up error messages
 
@@ -61,19 +69,28 @@ Username or Password incorrect
 **Adding Recipe**  
 Adding Recipe without filling in the title
 ![AddRecipeWithoutTitle](UIErrorMessages/AddRecipeWithoutTitle.png)
-Adding Recipe without setting the category
-Adding Recipe without filling in any ingrediens
-
+Adding Recipe without setting the category  
+Adding Recipe without filling in any ingredients
 
 **Adding Ingredient**  
 Adding ingredient without setting the unit
 ![Add Ingredient without unit](UIErrorMessages/AddIngWithoutUnit.png)
-Adding ingredient without setting amount
-Adding ingredient without writing the name of the ingredient.  
+Adding ingredient without setting amount  
+Adding ingredient without writing the name of the ingredient.
+![AddIngWithoutName](UIErrorMessages/AddIngWithoutName.png)  
 **Removing**  
-Removing a recipe that does not exist  
+Removing a recipe that does not exist.  
+![RemoveRecipeNotInList](UIErrorMessages/RemoveNotExistingRecipe.png)  
 Removing an ingredient that is not in the list
+![RemoveIngNotInList](UIErrorMessages/RemoveIngNotInList.png)
 
+**Random Recipes**
+No Random Recipe of this category  
+![NoRandomDessert](UIErrorMessages/NoRandomDessert.png)
+
+**View Recipes**
+No Recipe of this category
+![NoRecipeOfThisCategory](UIErrorMessages/ViewNoDessert.png)
 ## Work habits and workflow
 We have been focusing on the following while working on release 2.  
 
