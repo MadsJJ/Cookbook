@@ -11,7 +11,26 @@
  - Log out
 
 ## Architecture Diagram
+The PlantUML diagram is representing the architecture of the application.
+
+The diagram can be previewed i Visual Studio Code if you install the extantion PlantUML. 
+The official website: https://www.plantuml.com/plantuml
+
+You also need to install Graphviz. Go to https://graphviz.org/download/ for instructions on how to download on your computer. 
+
+[architecture.puml](link)
 ![Architecture Diagram](UIDesign/diagram.png)
+
+For description of what the packages contains, view 
+[readme.md](link).
+### The interactions between the packages
+[Core](link) may interact with the external librarie as Jackson, for data processing with JSON. 
+
+[Ui](link) relies on the javafx component for creating the graphical interface. It will also interact with core, to fetch and display data from the logic.
+
+The javafx component is essential when creating the graphical UI. It will load UI resources from the [ui](link) package.
+
+This architecture separates the core logic, user interface, and data handling components. It allows flexible development, and makes it easier to update or replace specific parts of the system without affecting the entire Cookbook application.
 
  ## Screenshots
 
