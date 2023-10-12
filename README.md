@@ -1,7 +1,7 @@
 # Cookbook
 
 ## Description
-This is a cookbook app created for your personal use. You can use it to store and look at your favorite recipes at your convenience. If you are not sure about what meal to cook, you can get recipe suggestions based on what type of meal you want and your currently available ingredients. 
+This is a cookbook app created for your personal use. You can use it to store and look at your favorite recipes at your convenience. If you are not sure about what meal to cook, you can get recipe suggestions based on what type of meal you want.
 
 ## Application fundementals
 The project uses maven to build and to run
@@ -47,23 +47,24 @@ See [docs](cookbook/docs)
 
 [release1](cookbook/docs/release1)  - contains UIDesign and UIPrototypes for release 1, UserStories and a README.md that contains the application functionality. 
 
-[release2](cookbook/docs/release2) - contains the demands for this release, updated UIDesign and a descriptive README.md-file for this release.
+[release2](cookbook/docs/release2) - contains updated UIDesign, error messages, architecture diagramand a descriptive README.md-file for this release.
 
 ### ui
 
 ***main***  
-Contains the classes for the user interface, see:
-
+Contains the classes for the user interface, see:  
+[module-info.java](cookbook/ui/src/main/java/module-info.java) - Makes Cookbook app run from VSCode.  
 [ui](cookbook/ui/src/main/java/ui) - Contains the Controller-classes, and the App-classes  
 [resources](cookbook/ui/src/main/resources) - Contains the .fxml-files, the .txt file with users name and password and the .json file for the users and their respective recipes. 
 
 ***test***  
-Contains the Controller-tests
+Contains the Controller-tests and setup for the tests to run. 
 
 ## Code quality
 
-***jacoco*** - collects and presents the test-coverage grade for each module. Located in `/target/site/index.html` in each module.
-***spotbugs*** - checks for bugs and vulnerabilities. 
+[***jacoco***](https://www.jacoco.org/) - collects and presents the test-coverage grade for each module. Located in `/target/site/index.html` in each module.  
+[***spotbugs***](https://spotbugs.github.io/)- checks for bugs and vulnerabilities.  
+[***checkstyle***](https://checkstyle.sourceforge.io/)-  Superficial checks on code layout and formatting issues to enforce a coding standard
 
 
 ## Implicit Saving
