@@ -59,7 +59,7 @@ public class CookBookController {
     private Button cancelNewRecipeButton;
 
     @FXML
-    private Button cancelRandomRecepieButton;
+    private Button cancelRandomRecipeButton;
 
     @FXML
     private Button randomRecipeButton;
@@ -68,7 +68,7 @@ public class CookBookController {
     private Button removeRecipeButton;
 
     @FXML
-    private Button addRecepieButton;
+    private Button addRecpieButton;
 
    @FXML
     private ComboBox<String> categoryCombobox;
@@ -202,9 +202,11 @@ public class CookBookController {
       fileHandler.updateFile(user);
       updateRecipeListView();
       
+      
     } catch (Exception e) {
       displayErrorMessage(e);
     }
+    deleteRecipeTextfield.setText("");
     }
 
     
@@ -306,6 +308,14 @@ public class CookBookController {
 
     public List<Ingredient> getIngredientListView(){
       return new ArrayList<Ingredient>(ingredientListView.getItems());
+    }
+
+    public String getErrorMessage(){
+      return popupLabel.getText();
+    }
+
+    public String getRandomRecipeText(){
+      return randomRecipeTextArea.getText();
     }
 
     @FXML

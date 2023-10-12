@@ -1,6 +1,7 @@
 package ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import core.UserDataFilehandling;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class CookBookControllerTest extends ApplicationTest {
@@ -79,16 +81,133 @@ public class CookBookControllerTest extends ApplicationTest {
     }
   }
 
-  // test for login
-  // @Test
-  // void logOut() throws IOException {
-  // clickOn("#logOutButton");
-  // }
+  @Test
+  void logOut() throws IOException {
+    clickOn("#logOutButton");
+  }
 
   @Test
   void TestRecipieListView() {
     assertEquals(user.getCookBook().getRecipes(), controller.getRecipeListView());
+    clickOn("#dinnerButton");
+    assertEquals(user.getCookBook().getRecipesByCategory("Dinner"), controller.getRecipeListView());
+    clickOn("#appetizerButton");
+    assertEquals(user.getCookBook().getRecipesByCategory("Appetizer"), controller.getRecipeListView());
+    clickOn("#dessertButton");
+    assertEquals("No recipes in this category", controller.getErrorMessage());
+    clickOn("#allRecipesButton");
+    assertEquals(user.getCookBook().getRecipes(), controller.getRecipeListView());
+  }
+
+  @Test
+  void TestGetRandomRecipe() {
+    clickOn("#randomRecipeButton");
+    assertEquals("", controller.getRandomRecipeText());
+    clickOn("#randomAppetizerButton");
+    assertEquals(user.getCookBook().getRandomRecipe("Appetizer").toString(), controller.getRandomRecipeText());
+    clickOn("#randomDessertButton");
+    assertEquals("",controller.getRandomRecipeText());
+    assertEquals("No recipes in this category",controller.getErrorMessage());
+    clickOn("#randomDinnerButton");
+    assertTrue(user.getCookBook().getRecipesByCategory("Dinner").toString().contains(controller.getRandomRecipeText()));
+  }
+
+  @Test
+  void TestRemoveRecipe(){
+    clickOn("#removeRecipeButton");
+    assertEquals("Enter recipe name to remove from Cookbook",controller.getErrorMessage());
+    clickOn("#deleteRecipeTextfield").write("NotInCookBook");
+    clickOn("#removeRecipeButton");
+    assertEquals("Recipe not in cookbook",controller.getErrorMessage());
+    clickOn("#deleteRecipeTextfield").write("");
+    clickOn("#removeRecipeButton");
+    assertEquals("Enter recipe name to remove from Cookbook",controller.getErrorMessage());
+    clickOn("#deleteRecipeTextfield").write("Test Appetizer");
+    clickOn("#removeRecipeButton");
+    assertEquals(2, user.getCookBook().getRecipes().size());
+    assertEquals(2, controller.getRecipeListView().size());
+  }
+
+  @Test
+  void TestAddRecipeInitCheck(){
+    clickOn("#addRecipeButton");
+    clickOn("#addIngredientButton");
+    assertEquals("Ingredient needs a name",controller.getErrorMessage() );
+    clickOn("#removeIngredientButton");
+    assertEquals("Ingredient not in list", controller.getErrorMessage());
+    clickOn("#addNewRecipeButton");
+    assertEquals("Not a valid title", controller.getErrorMessage());
+  }
+
+  @Test
+  void TestAddIngredient(){
+    clickOn("#addRecipeButton");
+    clickOn("#addIngredientNameTextField").write("NewIngredient");
+    clickOn("#addIngredientButton");
+    assertEquals("Amount for ingredient has to be in double format  i.e. 0.0",controller.getErrorMessage());
+    clickOn("#amountTextField").write("abc");
+    clickOn("#amountTextField").
+    
+    clickOn("#addIngredientButton");
+    assertEquals("Amount for ingredient has to be in double format  i.e. 0.0",controller.getErrorMessage());
+
+    clickOn("#amountTextField").write('\b');
+    clickOn("#amountTextField").write('\b');
+    clickOn("#amountTextField").write('\b');
+    clickOn("#amountTextField").write("-10");
+    clickOn("#addIngredientButton");
+    assertEquals("Value must be larger than 0",controller.getErrorMessage());
+    clickOn("#amountTextField").write('\b');
+    clickOn("#amountTextField").write('\b');
+    clickOn("#amountTextField").write('\b');
+    clickOn("#amountTextField").write("10");
+    clickOn("#addIngredientButton");
+    assertEquals("Not a valid unit of measurement! Legal ones are g, dl and pieces",controller.getErrorMessage());
+    clickOn("#unitComboBox").write('\u2193').write('\n');
+    clickOn("#addIngredientButton");
+    assertEquals("[NewIngredient, 10.0, g]", controller.getIngredientListView().toString());
+    clickOn("#deleteIngredientTextField").write("NewIngredient");
+    clickOn("#removeIngredientButton");
+    assertEquals(0, controller.getIngredientListView().size());
 
   }
 
-}
+    @Test
+    void TestAddRecipe(){
+    clickOn("#addRecipeButton");
+    clickOn("#addIngredientNameTextField").write("NewIngredient");
+    clickOn("#amountTextField").write("10");
+    clickOn("#unitComboBox").write('\u2193').write('\n');
+    clickOn("#addIngredientButton");
+    assertEquals("[NewIngredient, 10.0, g]", controller.getIngredientListView().toString());
+    clickOn("#addIngredientNameTextField").write("NewIngredient");
+    clickOn("#amountTextField").write("20");
+    clickOn("#unitComboBox").write('\u2193').write('\n');
+    clickOn("#addIngredientButton");
+    assertEquals("Ingredient with name already exists", controller.getErrorMessage());
+    clickOn("#addIngredientNameTextField").write("2");
+    clickOn("#addIngredientButton");
+    assertEquals(2,controller.getIngredientListView().size());
+    clickOn("#addNewRecipeButton");
+    assertEquals("Not a valid title",controller.getErrorMessage());
+    clickOn("#titleTextField").write("Test Dinner");
+    clickOn("#addNewRecipeButton");
+    assertEquals("Invalid category! Legal categories are Appetizer, Dinner and Dessert:",controller.getErrorMessage());
+    clickOn("#categoryCombobox").write('\u2193').write('\u2193').write('\n');
+    clickOn("#addNewRecipeButton");
+    assertEquals("Recipe already exists in cookbook",controller.getErrorMessage());
+    clickOn("#titleTextField").write("3");
+    clickOn("#addNewRecipeButton");
+    assertEquals("[Test Dinner, [Ingredient 2, 200.0, g, Ingredient 1, 100.0, g, Ingredient 3, 50.0, dl], Dinner, Test Dinner2, [Ingredient 2, 200.0, g, Ingredient 1, 100.0, g, Ingredient 3, 50.0, dl], Dinner, Test Appetizer, [Ingredient 2, 200.0, g, Ingredient 1, 100.0, g, Ingredient 3, 50.0, dl], Appetizer, Test Dinner3, [NewI2ngredient, 20.0, g, NewIngredient, 10.0, g], Appetizer]",user.getCookBook().getRecipes().toString());
+
+  
+    
+    }
+
+    
+    
+
+    
+    
+  }
+
