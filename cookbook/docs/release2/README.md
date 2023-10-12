@@ -13,7 +13,7 @@
 ## Architecture Diagram
 The PlantUML diagram is representing the architecture of the application.
 
-The diagram can be previewed i Visual Studio Code if you install the extantion PlantUML. 
+The diagram can be previewed in Visual Studio Code if you install the extension PlantUML. 
 The official website: https://www.plantuml.com/plantuml
 
 You also need to install Graphviz. Go to https://graphviz.org/download/ for instructions on how to download on your computer. 
@@ -21,10 +21,10 @@ You also need to install Graphviz. Go to https://graphviz.org/download/ for inst
 **architecture.puml**
 ![Architecture Diagram](UIDesign/diagram.png)
 
-For description of what the packages contains, view 
+For descriptions of what each of the packages contain, view 
 [README.md](README.md).
 ### The interactions between the packages
-[core](cookbook/core/src/main/java/core) may interact with the external librarie as Jackson, for data processing with JSON. 
+[core](cookbook/core/src/main/java/core) interacts with the external library Jackson, for data processing with JSON. 
 
 [ui](cookbook/ui) relies on the javafx component for creating the graphical interface. It will also interact with core, to fetch and display data from the logic.
 
@@ -35,7 +35,7 @@ This architecture separates the core logic, user interface, and data handling co
  ## Screenshots
 
  ### General Functionality  
-We have not changed much on the interface. See comments before each picture for possible changes
+We have not changed much on the interface. See comments before each picture for possible changes.
 
 **Login**  
 Moved the boxes further down to make room for potenial error message
@@ -43,15 +43,15 @@ Moved the boxes further down to make room for potenial error message
 **CookBook**  
 Changed the font and added a box to type in which recipe you want to delete
 ![CookBookDesign](UIDesign/CookBookMain2.PNG)
-**Add Recipe**  
-Changed the unit-chooser to a dropdown-box instead of a text box. 
+**Add Recipe**    
+Changed the unit-chooser to a dropdown-box instead of a text box
 ![CookBookAddDesign](UIDesign/CookBookAdd2.PNG)
-**Random Recipe**
+**Random Recipe**  
 Layout
 ![CookBookRandomDesign](UIDesign/CookBookRandom2.PNG)
 Get random recipe from a category
 ![RandomAppetizer](UIDesign/RandomAppetizer.png)
-**View Recipes**
+**View Recipes**  
 View all Recipes
 ![ViewAll](UIDesign/ViewAll.png)
 
@@ -60,7 +60,7 @@ From one category
 
  ### Pop-up error messages
 
- **Login**  
+ **Login**    
  Username or password not meeting criterias
 ![UsernameOrPasswordTooShort](UIErrorMessages/UsernameOrPassqordTooShort.png)  
 Username or Password incorrect
