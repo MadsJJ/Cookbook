@@ -22,18 +22,19 @@ See [core](link)
 ***main***  
 Contains the classes for the main functionality of the application. This folder contains four classes;
 
-[CookBook.java](https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308/-/blob/master/core/src/main/java/core/CookBook.java?ref_type=heads)  
-[Ingredient.java](https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308/-/blob/master/core/src/main/java/core/Ingredient.java?ref_type=heads)  
-[Recipe.Java](https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308/-/blob/master/core/src/main/java/core/Recipe.java?ref_type=heads)  
-[User.java](https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308/-/blob/master/core/src/main/java/core/User.java?ref_type=heads)  
+[CookBook.java](cookbook/core/src/main/java/core/CookBook.java)  
+[Ingredient.java](cookbook/core/src/main/java/core/Ingredient.java)  
+[Recipe.Java](cookbook/core/src/main/java/core/Recipe.java)  
+[User.java](cookbook/core/src/main/java/core/User.java)   
+[UserDataFilehandling](cookbook/core/src/main/java/core/UserDataFilehandling.java) 
 
 ***test***  
 Contains the respective tests for the core-classes
 
-[CookBookTest.java](https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308/-/blob/master/core/src/test/java/core/CookBookTest.java?ref_type=heads)  
-[IngredientTest.java](https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308/-/blob/master/core/src/test/java/core/IngredientTest.java?ref_type=heads)  
-[RecipeTest.java](https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308/-/blob/master/core/src/test/java/core/RecipeTest.java?ref_type=heads)  
-[UserTest.java](https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308/-/blob/master/core/src/test/java/core/UserTest.java?ref_type=heads)  
+[CookBookTest.java](cookbook/core/src/test/java/core/CookBookTest.java)  
+[IngredientTest.java](cookbook/core/src/test/java/core/IngredientTest.java)  
+[RecipeTest.java](cookbook/core/src/test/java/core/RecipeTest.java)  
+[UserTest.java](cookbook/core/src/test/java/core/UserTest.java)  
 
 
 
@@ -42,19 +43,19 @@ Contains the documentation for each release. This starts as a plan, but after ea
 
 Each release contains screenshots of the updated UIDesign and a README.md with additional information about the application functionality. 
 
-See [docs](link)
+See [docs](cookbook/docs)
 
-[release1]()  - contains UIDesign and UIPrototypes for release 1, UserStories and a README.md that contains the application functionality. 
+[release1](cookbook/docs/release1)  - contains UIDesign and UIPrototypes for release 1, UserStories and a README.md that contains the application functionality. 
 
-[release2]() - contains the demands for this release, updated UIDesign and a descriptive README.md-file for this release.
+[release2](cookbook/docs/release2) - contains the demands for this release, updated UIDesign and a descriptive README.md-file for this release.
 
 ### ui
 
 ***main***  
 Contains the classes for the user interface, see:
 
-[ui](https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308/-/tree/master/ui/src/main/java/ui?ref_type=heads) - Contains the Controller-classes, and the App-classes  
-[resources](https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308/-/tree/master/ui/src/main/resources/ui?ref_type=heads) - Contains the .fxml-files, the .txt file with users name and password and the .json file for the users and their respective recipes. 
+[ui](cookbook/ui/src/main/java/ui) - Contains the Controller-classes, and the App-classes  
+[resources](cookbook/ui/src/main/resources) - Contains the .fxml-files, the .txt file with users name and password and the .json file for the users and their respective recipes. 
 
 ***test***  
 Contains the Controller-tests
@@ -65,6 +66,8 @@ Contains the Controller-tests
 ***spotbugs*** - checks for bugs and vulnerabilities. 
 
 
+## Implicit Saving
 
+Our app, Cookbook uses *implicit saving* to make the user experience as seamless and enjoyable as the users favourite recipe. As soon as you’ve registered as a user, all the recipes you add will automatically be saved together in your personal cookbook. Whenever you log into Cookbook, your recipes will be right there - instantly. No need to look through files and folders. 
 
 
