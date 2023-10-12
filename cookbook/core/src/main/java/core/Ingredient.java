@@ -20,7 +20,8 @@ public class Ingredient {
     try {
       setAmount(Double.parseDouble(amount));
     } catch (Exception e) {
-      throw new IllegalArgumentException("Amount for ingredient has to be in double format  i.e. 0.0");
+      if(e.getMessage().equals("Value must be larger than 0")) throw new IllegalArgumentException("Value must be larger than 0"); 
+      else{throw new IllegalArgumentException("Amount for ingredient has to be in double format  i.e. 0.0");}
     }
     setUnit(unit);
   }
@@ -66,5 +67,6 @@ public class Ingredient {
   public String toString() {
     return name + ", " + amount + ", " + unit;
   }
+
 
 }

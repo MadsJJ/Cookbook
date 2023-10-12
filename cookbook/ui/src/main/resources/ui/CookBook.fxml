@@ -15,9 +15,9 @@
    <children>
       <Pane fx:id="mainPagePane" layoutX="304.0" layoutY="81.0" prefHeight="292.0" prefWidth="246.0">
          <children>
-            <Button fx:id="addRecepieButton" layoutX="19.0" layoutY="170.0" mnemonicParsing="false" onAction="#addRecipePage" text="Add recipe" />
+            <Button fx:id="addRecipeButton" layoutX="19.0" layoutY="170.0" mnemonicParsing="false" onAction="#addRecipePage" text="Add recipe" />
             <TextField fx:id="deleteRecipeTextfield" layoutX="18.0" layoutY="229.0" prefHeight="26.0" prefWidth="99.0" promptText="Recipe" />
-            <Text fx:id="deleteRecipeText" layoutX="20.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete a recepie:" />
+            <Text fx:id="deleteRecipeText" layoutX="20.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete a recipe:" />
             <Button fx:id="randomRecipeButton" layoutX="19.0" layoutY="113.0" mnemonicParsing="false" onAction="#randomRecipePage" text="Random recipe" />
             <Button fx:id="removeRecipeButton" layoutX="107.0" layoutY="229.0" mnemonicParsing="false" onAction="#removeRecipe" text="Remove recipe" />
          </children></Pane>
@@ -27,7 +27,7 @@
          </font></Text>
       <Button fx:id="logOutButton" layoutX="494.0" layoutY="23.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
       <ListView fx:id="recipeListView" layoutX="29.0" layoutY="195.0" prefHeight="175.0" prefWidth="200.0" />
-      <Button fx:id="allRecipiesButton" layoutX="49.0" layoutY="132.0" mnemonicParsing="false" onAction="#updateRecipeListView" prefHeight="25.0" prefWidth="161.0" text="View All Recipies" />
+      <Button fx:id="allRecipesButton" layoutX="49.0" layoutY="132.0" mnemonicParsing="false" onAction="#updateRecipeListView" prefHeight="25.0" prefWidth="161.0" text="View All Recipes" />
       <Button fx:id="appetizerButton" layoutX="29.0" layoutY="160.0" mnemonicParsing="false" onAction="#getRecipesByCategory" text="Appetizer" />
       <Button fx:id="dinnerButton" layoutX="107.0" layoutY="160.0" mnemonicParsing="false" onAction="#getRecipesByCategory" text="Dinner" />
       <Button fx:id="dessertButton" layoutX="169.0" layoutY="160.0" mnemonicParsing="false" onAction="#getRecipesByCategory" text="Dessert" />
@@ -57,7 +57,7 @@
             <Button fx:id="randomDinnerButton" layoutX="79.0" layoutY="48.0" mnemonicParsing="false" onAction="#getRandomRecipeByCategory" text="Dinner" />
             <Button fx:id="randomDessertButton" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" onAction="#getRandomRecipeByCategory" text="Dessert" />
             <TextArea fx:id="randomRecipeTextArea" layoutY="74.0" prefHeight="124.0" prefWidth="200.0" />
-            <Button fx:id="cancelRandomRecepieButton" layoutX="195.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+            <Button fx:id="cancelRandomRecipeButton" layoutX="195.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
             <Button fx:id="randomAppetizerButton" layoutX="8.0" layoutY="48.0" mnemonicParsing="false" onAction="#getRandomRecipeByCategory" text="Appetizer" />
          </children>
       </Pane>
