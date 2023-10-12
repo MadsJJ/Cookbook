@@ -92,9 +92,10 @@ No Random Recipe of this category
 No Recipe of this category
 ![NoRecipeOfThisCategory](UIErrorMessages/ViewNoDessert.png)
 ## Work habits and workflow
-We have been focusing on the following while working on release 2.  
+We have been focusing on the following aspects while working on release 2.  
 
 1. **Pair Programming:** We are using pair programming approach. Where two developers collaborate on the same computer. The name of the co-author is written in the commit message. Pair programming makes it easier to share knowledge, and helps us identify and address issues more efficiently.
-2. **GitLab Issues:** We use of GitLab issues to identify and track our work. Each task or feature begins as an issue.
+2. **GitLab Issues:** We use GitLab issues to identify and track our work. Each task or feature begins as an issue.
 3. **Branch-Based Development:** To manage and isolate all coding tasks, we use branches. Each task or feature is developed on its own branch. This allows us to work on multiple aspects of the project simultaneously without interfering with each other's code.
 4. **Active Group Discussions:** We engage in group discussions whenever we encounter challenges during the development process. This makes it faster to solve the problem, and the knowledge is shared among the whole team.
+5. **Milestones** We use milestones to track the issues we have for release 2. This helps to organize the work and the project´s progress. 
