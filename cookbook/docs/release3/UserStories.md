@@ -1,6 +1,14 @@
+# User Stories
+
+We wanted to expand the functionality of the Cookbook application. In releace 3 the users will be able filter the recepies by the ingredients that they already have in the fridge. The following user story will map out core functionality and necessities. Based on the user story, we also made UI design prototypes which can be found here:
+
+> - [Search by ingredients](UIPrototypes/searchByIngredientsPrototype.jpg)
+> - [Updated main page](UIPrototypes/updatedMainPagePrototype.jpg)
+
+
 ## User Story 2
 
-As a private person I am unsure of what to make for dinner. I have a list of ingredients available in my kitchen and I wish to know what recipes I can make out of those ingredients. 
+As a private person I am unsure of what to make for dinner. To save money, and avoid having to throw away food, I want to use some of the ingredients that i already have at home. I wish to know what recipes I can make out of those ingredients.
 
 ### Important to see:
 
