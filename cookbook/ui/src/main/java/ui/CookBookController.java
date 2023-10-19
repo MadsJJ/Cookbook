@@ -142,6 +142,9 @@ public class CookBookController {
   @FXML
   private Pane mainPagePane;
 
+  @FXML
+  private Pane ingredientPane;
+
 
   private User user;
   private UserDataFilehandling fileHandler;
@@ -157,9 +160,19 @@ public class CookBookController {
     this.user = user;
     randomRecipePane.setVisible(false);
     addNewRecipePane.setVisible(false);
+    ingredientPane.setVisible(false);
     popupLabel.setVisible(false);
     headerText.setText(user.getUsername() + "´s cookbook.");
     this.fileHandler = fileHandler;
+    popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+            if (popupLabel.isVisible()) {
+              popupLabel.setVisible(false);
+            }
+          }
+        });
     updateRecipeListView();
   }
 
@@ -178,6 +191,7 @@ public class CookBookController {
   @FXML
   void addRecipePage() {
     addNewRecipePane.setVisible(true);
+    ingredientPane.setVisible(true);
     mainPagePane.setVisible(false);
     ingredientListView.getItems().clear();
     titleTextField.setText("");
@@ -188,6 +202,9 @@ public class CookBookController {
     categoryCombobox.setItems(FXCollections.observableArrayList(Recipe.validCategories));
   }
 
+  @FXML
+  void searchByIngredientsPage(){}
+
 
   /**
    * Handles the cancellation of the add recipe or random recipe page and returns to the main page.
@@ -197,6 +214,7 @@ public class CookBookController {
   @FXML
   void handleCancel(ActionEvent event) {
     addNewRecipePane.setVisible(false);
+    ingredientPane.setVisible(false);
     randomRecipePane.setVisible(false);
     mainPagePane.setVisible(true);
   }
@@ -334,16 +352,6 @@ public class CookBookController {
    */
   @FXML
   void displayErrorMessage(Exception e) {
-    // if(popupLabel.getScene().getWindow().getEventHandler()==null) "implement later"
-    popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
-        new EventHandler<MouseEvent>() {
-          @Override
-          public void handle(MouseEvent mouseEvent) {
-            if (popupLabel.isVisible()) {
-              popupLabel.setVisible(false);
-            }
-          }
-        });
     popupLabel.setText(e.getMessage());
     popupLabel.setVisible(true);
   }
