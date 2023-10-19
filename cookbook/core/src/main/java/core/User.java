@@ -1,8 +1,13 @@
 package core;
 
+import javax.persistence.Entity;
+
+
+
 /**
  * Represents a user of the cookbook application.
  */
+@Entity
 public class User {
   private String username;
   private String password;
