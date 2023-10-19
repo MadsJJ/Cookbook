@@ -2,6 +2,7 @@ package core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a cookbook containing a list of recipes.
@@ -106,7 +107,10 @@ public class CookBook {
     }
     return recipeList;
   }
-
+  
+  public List<Recipe> getCookBookByIngredientSearch(List<Ingredient> ingredients){
+    return recipes.stream().filter(a->a.recipeContainsIngredients(ingredients)).collect(Collectors.toList());
+  }
   /**
    * Returns a string representation of the cookbook.
    *

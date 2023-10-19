@@ -144,6 +144,16 @@ public class Recipe {
     this.category = category;
   }
 
+  public boolean recipeContainsIngredients(List<Ingredient> ingredientsToSearch){
+    if(ingredientsToSearch==null||ingredientsToSearch.size()==0) return true;
+    if(ingredientsToSearch.stream().anyMatch(a->!ingredients.stream().map(b->b.getName()).collect(Collectors.toList()).contains(a.getName()))) return false;
+    List<Ingredient> filteredIngredients=ingredients.stream().filter(a->ingredientsToSearch.stream().map(b->b.getName()).
+    collect(Collectors.toList()).contains(a.getName())).collect(Collectors.toList());
+    return ingredientsToSearch.stream().allMatch(a->
+     filteredIngredients.stream().filter(b->b.getName().equals(a.getName())).findAny().get().getAmount()<=a.getAmount());
+  }
+
+
   /**
    * Returns a string representation of the recipe.
    *

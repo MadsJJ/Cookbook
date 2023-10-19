@@ -1,6 +1,7 @@
 package ui;
 
 
+import core.CookBook;
 import core.Ingredient;
 import core.Recipe;
 import core.User;
@@ -145,6 +146,9 @@ public class CookBookController {
   @FXML
   private Pane ingredientPane;
 
+  @FXML
+  private Pane searchByIngredientsPane;
+
 
   private User user;
   private UserDataFilehandling fileHandler;
@@ -161,8 +165,9 @@ public class CookBookController {
     randomRecipePane.setVisible(false);
     addNewRecipePane.setVisible(false);
     ingredientPane.setVisible(false);
+    searchByIngredientsPane.setVisible(false);
     popupLabel.setVisible(false);
-    headerText.setText(user.getUsername() + "´s cookbook.");
+    headerText.setText(user.getUsername() + "'s cookbook.");
     this.fileHandler = fileHandler;
     popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
         new EventHandler<MouseEvent>() {
@@ -203,8 +208,30 @@ public class CookBookController {
   }
 
   @FXML
-  void searchByIngredientsPage(){}
+  void searchByIngredientsPage(){
+    searchByIngredientsPane.setVisible(true);
+    ingredientPane.setVisible(true);
+    mainPagePane.setVisible(false);
+    ingredientListView.getItems().clear();
+    titleTextField.setText("");
+    amountTextField.setText("");
+    addIngredientNameTextField.setText("");
+    deleteIngredientTextField.setText("");
+    unitComboBox.setItems(FXCollections.observableArrayList(Ingredient.validUnits));
+    user.setCookBook(new CookBook(new ArrayList<Recipe>()));
+    updateRecipeListView();
+  }
 
+
+@FXML
+void searchByIngredients(){
+  recipeListView.getItems().clear();
+  user.setCookBook(new CookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook().getCookBookByIngredientSearch((List<Ingredient>)getIngredientListView())));
+  // user.getCookBook().setCookBookByIngredientSearch((List<Ingredient>)getIngredientListView());
+  // user.getCookBook().setCookBookByIngredientSearch(new ArrayList<>(ingredientListView.getItems()));
+  updateRecipeListView();
+
+}
 
   /**
    * Handles the cancellation of the add recipe or random recipe page and returns to the main page.
@@ -215,8 +242,12 @@ public class CookBookController {
   void handleCancel(ActionEvent event) {
     addNewRecipePane.setVisible(false);
     ingredientPane.setVisible(false);
+    searchByIngredientsPane.setVisible(false);
     randomRecipePane.setVisible(false);
     mainPagePane.setVisible(true);
+    user.setCookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook());
+    updateRecipeListView();
+
   }
 
   /**
