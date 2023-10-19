@@ -19,8 +19,9 @@ As a private person I am unsure of what to make for dinner. To save money, and a
 
 ### Important Functionality:
 
-- The application needs an input field for the available ingredients that supports the input of multiple recipes at a time.
-- From the given ingredients a list of all recipes containing those ingredients needs to be made visible.
+- The application needs an input field to add an ingredient to a list of all the ingredients that the recepies should be filtered by.
+- The user needes to be able to add amount and unit for each ingredient that should be added to the list. 
+- From the given list of ingredients a list of all recipes containing those ingredients needs to be made visible.
 - The list implemented needs the same functionality as the list containing all recipes so that the design is consistent.
 - The application needs to be able to add and remove ingredients that the user wants to filter the recepies by.
-- The filtering of the recepies will be done by a method in Coocbook class.
+- The filtering of the recepies will be done by a method in the Recipe class.
