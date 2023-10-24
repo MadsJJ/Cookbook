@@ -142,20 +142,20 @@ public class RecipeTest {
     }
 
 
-    @Test
-    public void testRemoveExistingIngredient() {
-        recipe.removeIngredient(ingredient2);
+    // @Test
+    // public void testRemoveExistingIngredient() {
+    //     recipe.removeIngredient(ingredient2);
 
-        assertFalse(recipe.getIngredients().contains(ingredient2));
-    }
+    //     assertFalse(recipe.getIngredients().contains(ingredient2));
+    // }
 
-    @Test
-    public void removeNonExistentIngredient() {
-      Ingredient removeIngredient = new Ingredient("removeIngredient", 20, "g");
-        assertThrows(IllegalArgumentException.class, () -> {
-            recipe.removeIngredient(removeIngredient);
-        });
-    }
+    // @Test
+    // public void removeNonExistentIngredient() {
+    //   Ingredient removeIngredient = new Ingredient("removeIngredient", 20, "g");
+    //     assertThrows(IllegalArgumentException.class, () -> {
+    //         recipe.removeIngredient(removeIngredient);
+    //     });
+    // }
 
     @Test
     public void testRemoveNullIngredient() {

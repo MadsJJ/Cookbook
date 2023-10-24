@@ -8,6 +8,7 @@ import core.User;
 import core.UserDataFilehandling;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -152,6 +153,7 @@ public class CookBookController {
 
   private User user;
   private UserDataFilehandling fileHandler;
+  private Recipe tmpRecipe;
 
   /**
    * Initialize the controller with a user and file handler. also sets the header text to the
@@ -179,6 +181,8 @@ public class CookBookController {
           }
         });
     updateRecipeListView();
+    tmpRecipe= new Recipe("tmpRecipe", Arrays.asList(new Ingredient("tmpIng", 20, "g")), "Dinner");
+    tmpRecipe.removeAllIngredients();
   }
 
   /**
@@ -191,11 +195,9 @@ public class CookBookController {
   }
 
   /**
-   * Switches to the add recipe page, hiding the main page and clearing input fields.
+   * Initializes the ingredientPane.
    */
-  @FXML
-  void addRecipePage() {
-    addNewRecipePane.setVisible(true);
+  private void initIngredientView(){
     ingredientPane.setVisible(true);
     mainPagePane.setVisible(false);
     ingredientListView.getItems().clear();
@@ -204,32 +206,34 @@ public class CookBookController {
     addIngredientNameTextField.setText("");
     deleteIngredientTextField.setText("");
     unitComboBox.setItems(FXCollections.observableArrayList(Ingredient.validUnits));
+  }
+
+  /**
+   * Switches to the add recipe page, hiding the main page and clearing input fields.
+   */
+  @FXML
+  void addRecipePage() {
+    addNewRecipePane.setVisible(true);
+    initIngredientView();
     categoryCombobox.setItems(FXCollections.observableArrayList(Recipe.validCategories));
   }
 
   @FXML
   void searchByIngredientsPage(){
     searchByIngredientsPane.setVisible(true);
-    ingredientPane.setVisible(true);
-    mainPagePane.setVisible(false);
-    ingredientListView.getItems().clear();
-    titleTextField.setText("");
-    amountTextField.setText("");
-    addIngredientNameTextField.setText("");
-    deleteIngredientTextField.setText("");
-    unitComboBox.setItems(FXCollections.observableArrayList(Ingredient.validUnits));
-    user.setCookBook(new CookBook(new ArrayList<Recipe>()));
-    updateRecipeListView();
+    initIngredientView();
   }
 
 
 @FXML
 void searchByIngredients(){
-  recipeListView.getItems().clear();
-  user.setCookBook(new CookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook().getCookBookByIngredientSearch((List<Ingredient>)getIngredientListView())));
-  // user.getCookBook().setCookBookByIngredientSearch((List<Ingredient>)getIngredientListView());
-  // user.getCookBook().setCookBookByIngredientSearch(new ArrayList<>(ingredientListView.getItems()));
-  updateRecipeListView();
+  try {
+    user.setCookBook(new CookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).
+    getCookBook().getCookBookByIngredientSearch(tmpRecipe.getIngredients())));
+    updateRecipeListView();
+  } catch (Exception e) {
+    displayErrorMessage(e);
+  }
 
 }
 
@@ -247,6 +251,7 @@ void searchByIngredients(){
     mainPagePane.setVisible(true);
     user.setCookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook());
     updateRecipeListView();
+    tmpRecipe.removeAllIngredients();
 
   }
 
@@ -256,8 +261,7 @@ void searchByIngredients(){
   @FXML
   void updateRecipeListView() {
     try {
-      recipeListView.getItems().clear();
-      recipeListView.getItems().addAll(user.getCookBook().getRecipes());
+      recipeListView.getItems().setAll(user.getCookBook().getRecipes());
 
     } catch (Exception e) {
       displayErrorMessage(e);
@@ -289,9 +293,8 @@ void searchByIngredients(){
   @FXML
   void getRecipesByCategory(ActionEvent event) {
     try {
-      recipeListView.getItems().clear();
       recipeListView.getItems()
-          .addAll(user.getCookBook().getRecipesByCategory(((Button) event.getSource()).getText()));
+          .setAll(user.getCookBook().getRecipesByCategory(((Button) event.getSource()).getText()));
 
     } catch (Exception e) {
       displayErrorMessage(e);
@@ -322,13 +325,9 @@ void searchByIngredients(){
   void addIngredient() {
 
     try {
-      Ingredient ing = new Ingredient(addIngredientNameTextField.getText(),
-          amountTextField.getText(), unitComboBox.getSelectionModel().getSelectedItem());
-      if (ingredientListView.getItems().stream().filter(a -> a != null)
-          .anyMatch(a -> a.getName().equals(ing.getName()))) {
-        throw new IllegalArgumentException("Ingredient with name already exists");
-      }
-      ingredientListView.getItems().add(ing);
+          tmpRecipe.addIngredient(new Ingredient(addIngredientNameTextField.getText(),
+          amountTextField.getText(), unitComboBox.getSelectionModel().getSelectedItem()));
+         ingredientListView.getItems().setAll(tmpRecipe.getIngredients());
       addIngredientNameTextField.setText("");
       amountTextField.setText("");
     } catch (Exception e) {
@@ -343,11 +342,8 @@ void searchByIngredients(){
   @FXML
   void removeIngredient() {
     try {
-
-      Ingredient ingredientToRemove = ingredientListView.getItems().stream()
-          .filter(a -> a.getName().equals(deleteIngredientTextField.getText())).findFirst()
-          .orElseThrow(() -> new IllegalArgumentException("Ingredient not in list"));
-      ingredientListView.getItems().remove(ingredientToRemove);
+      tmpRecipe.removeIngredient(deleteIngredientTextField.getText());
+      ingredientListView.getItems().setAll(tmpRecipe.getIngredients());
       deleteIngredientTextField.setText("");
 
 
@@ -364,13 +360,14 @@ void searchByIngredients(){
   @FXML
   void addRecipe(ActionEvent event) {
     try {
-
-      Recipe recipe = new Recipe(titleTextField.getText(), ingredientListView.getItems(),
+  
+      Recipe recipe = new Recipe(titleTextField.getText(), tmpRecipe.getIngredients(),
           categoryCombobox.getSelectionModel().getSelectedItem());
       user.getCookBook().addRecipe(recipe);
       updateRecipeListView();
       addRecipePage();
       fileHandler.updateFile(user);
+      tmpRecipe.removeAllIngredients();
     } catch (Exception e) {
       displayErrorMessage(e);
     }
@@ -381,7 +378,6 @@ void searchByIngredients(){
    *
    * @param e The exception that contains the error message.
    */
-  @FXML
   void displayErrorMessage(Exception e) {
     popupLabel.setText(e.getMessage());
     popupLabel.setVisible(true);
@@ -415,7 +411,7 @@ void searchByIngredients(){
       Stage stage = (Stage) logOutButton.getScene().getWindow();
       UserController controller = loader.getController();
       controller.setFileHandler(fileHandler);
-      stage.setScene(scene);
+      stage.setScene(scene); 
       stage.show();
 
     } catch (Exception a) {

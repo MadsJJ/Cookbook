@@ -108,8 +108,16 @@ public class CookBook {
     return recipeList;
   }
   
+   /**
+   * iterater through recipies and checks if they contain the input
+   *
+   * @return a list of recipes that contains the input ingredients in the correct amount
+   */
   public List<Recipe> getCookBookByIngredientSearch(List<Ingredient> ingredients){
-    return recipes.stream().filter(a->a.recipeContainsIngredients(ingredients)).collect(Collectors.toList());
+    List<Recipe> newRecipes= recipes.stream().filter(a->a.recipeContainsIngredients(ingredients)).collect(Collectors.toList());
+    if(newRecipes.size()==0) throw new IllegalArgumentException("No recipe can be made with current ingredients");
+    return newRecipes;
+
   }
   /**
    * Returns a string representation of the cookbook.
@@ -120,4 +128,5 @@ public class CookBook {
   public String toString() {
     return "CookBook [recipes=" + recipes + "]";
   }
+  
 }
