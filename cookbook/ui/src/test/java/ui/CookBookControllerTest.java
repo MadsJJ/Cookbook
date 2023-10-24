@@ -12,11 +12,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
-import core.CookBook;
-import core.Ingredient;
-import core.Recipe;
-import core.User;
-import core.UserDataFilehandling;
+
+import cookbook.core.CookBook;
+import cookbook.core.Ingredient;
+import cookbook.core.Recipe;
+import cookbook.core.User;
+import cookbook.core.UserDataFilehandling;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

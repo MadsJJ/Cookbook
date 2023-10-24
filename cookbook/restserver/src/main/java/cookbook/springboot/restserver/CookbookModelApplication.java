@@ -1,18 +1,18 @@
-package todolist.springboot.restserver;
+package cookbook.springboot.restserver;
 
 import com.fasterxml.jackson.databind.Module;
 import java.util.EnumSet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import todolist.json.TodoPersistence;
-import todolist.json.TodoPersistence.TodoModelParts;
+import cookbook.json.TodoPersistence;
+import cookbook.json.TodoPersistence.TodoModelParts;
 
 /**
  * The Spring application.
  */
 @SpringBootApplication
-public class TodoModelApplication {
+public class CookbookApplication {
 
   @Bean
   public Module objectMapperModule() {

@@ -1,4 +1,4 @@
-package core;
+package cookbook.core;
 
 
 import com.google.gson.Gson;

@@ -1,5 +1,7 @@
 module user.core {
-    exports core;
+    requires transitive com.fasterxml.jackson.databind;
+    exports cookbook.core;
+    exports cookbook.json;
     requires com.google.gson;
-    opens core;
+    opens cookbook.core;
 }

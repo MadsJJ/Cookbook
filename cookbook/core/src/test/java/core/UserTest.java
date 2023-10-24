@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import cookbook.core.CookBook;
+import cookbook.core.Recipe;
+import cookbook.core.User;
+
 public class UserTest {
   private User user;
     

@@ -1,6 +1,9 @@
 package core;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import cookbook.core.Ingredient;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class IngredientTest {

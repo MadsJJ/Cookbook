@@ -1,9 +1,10 @@
 package ui;
 
-import core.User;
-import core.UserDataFilehandling;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import cookbook.core.User;
+import cookbook.core.UserDataFilehandling;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

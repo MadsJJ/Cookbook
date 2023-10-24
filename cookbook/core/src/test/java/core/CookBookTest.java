@@ -2,6 +2,11 @@ package core;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import cookbook.core.CookBook;
+import cookbook.core.Ingredient;
+import cookbook.core.Recipe;
+
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
