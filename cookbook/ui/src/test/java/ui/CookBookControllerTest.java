@@ -20,7 +20,6 @@ import core.UserDataFilehandling;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class CookBookControllerTest extends ApplicationTest {
@@ -139,7 +138,7 @@ public class CookBookControllerTest extends ApplicationTest {
     clickOn("#addIngredientButton");
     assertEquals("Ingredient needs a name", controller.getErrorMessage());
     clickOn("#removeIngredientButton");
-    assertEquals("Ingredient not in list", controller.getErrorMessage());
+    assertEquals("Cant remove null", controller.getErrorMessage());
     clickOn("#addNewRecipeButton");
     assertEquals("Not a valid title", controller.getErrorMessage());
   }
@@ -192,7 +191,7 @@ public class CookBookControllerTest extends ApplicationTest {
     clickOn("#amountTextField").write("20");
     clickOn("#unitComboBox").write('\u2193').write('\n');
     clickOn("#addIngredientButton");
-    assertEquals("Ingredient with name already exists", controller.getErrorMessage());
+    assertEquals("Ingredient already in recipe", controller.getErrorMessage());
     clickOn("#addIngredientNameTextField").write("2");
     clickOn("#addIngredientButton");
     assertEquals(2, controller.getIngredientListView().size());

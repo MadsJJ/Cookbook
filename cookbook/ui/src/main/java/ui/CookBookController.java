@@ -1,12 +1,14 @@
 package ui;
 
 
+import core.CookBook;
 import core.Ingredient;
 import core.Recipe;
 import core.User;
 import core.UserDataFilehandling;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -142,9 +144,16 @@ public class CookBookController {
   @FXML
   private Pane mainPagePane;
 
+  @FXML
+  private Pane ingredientPane;
+
+  @FXML
+  private Pane searchByIngredientsPane;
+
 
   private User user;
   private UserDataFilehandling fileHandler;
+  private Recipe tmpRecipe;
 
   /**
    * Initialize the controller with a user and file handler. also sets the header text to the
@@ -157,10 +166,23 @@ public class CookBookController {
     this.user = user;
     randomRecipePane.setVisible(false);
     addNewRecipePane.setVisible(false);
+    ingredientPane.setVisible(false);
+    searchByIngredientsPane.setVisible(false);
     popupLabel.setVisible(false);
-    headerText.setText(user.getUsername() + "´s cookbook.");
+    headerText.setText(user.getUsername() + "'s cookbook.");
     this.fileHandler = fileHandler;
+    popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+            if (popupLabel.isVisible()) {
+              popupLabel.setVisible(false);
+            }
+          }
+        });
     updateRecipeListView();
+    tmpRecipe = new Recipe("tmpRecipe", Arrays.asList(new Ingredient("tmpIng", 20, "g")), "Dinner");
+    tmpRecipe.removeAllIngredients();
   }
 
   /**
@@ -173,11 +195,10 @@ public class CookBookController {
   }
 
   /**
-   * Switches to the add recipe page, hiding the main page and clearing input fields.
+   * Initializes the ingredientPane.
    */
-  @FXML
-  void addRecipePage() {
-    addNewRecipePane.setVisible(true);
+  private void initIngredientView() {
+    ingredientPane.setVisible(true);
     mainPagePane.setVisible(false);
     ingredientListView.getItems().clear();
     titleTextField.setText("");
@@ -185,9 +206,43 @@ public class CookBookController {
     addIngredientNameTextField.setText("");
     deleteIngredientTextField.setText("");
     unitComboBox.setItems(FXCollections.observableArrayList(Ingredient.validUnits));
+  }
+
+  /**
+   * Switches to the add recipe page, hiding the main page and clearing input fields.
+   */
+  @FXML
+  void addRecipePage() {
+    addNewRecipePane.setVisible(true);
+    initIngredientView();
     categoryCombobox.setItems(FXCollections.observableArrayList(Recipe.validCategories));
   }
 
+  /**
+   * Switches to the searchByIngredients page, hiding the main page.
+   */
+  @FXML
+  void searchByIngredientsPage() {
+    searchByIngredientsPane.setVisible(true);
+    initIngredientView();
+  }
+
+  /**
+   * Displays a list of recipes that contains the ingredients we search for.
+   */
+  @FXML
+  void searchByIngredients() {
+    try {
+      user.setCookBook(new CookBook(fileHandler.getUser(user.getUsername(), user.getPassword())
+          .getCookBook().getCookBookByIngredientSearch(tmpRecipe.getIngredients())));
+    } catch (Exception e) {
+      displayErrorMessage(e);
+      user.setCookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook());
+
+    }
+    updateRecipeListView();
+
+  }
 
   /**
    * Handles the cancellation of the add recipe or random recipe page and returns to the main page.
@@ -197,8 +252,14 @@ public class CookBookController {
   @FXML
   void handleCancel(ActionEvent event) {
     addNewRecipePane.setVisible(false);
+    ingredientPane.setVisible(false);
+    searchByIngredientsPane.setVisible(false);
     randomRecipePane.setVisible(false);
     mainPagePane.setVisible(true);
+    user.setCookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook());
+    updateRecipeListView();
+    tmpRecipe.removeAllIngredients();
+
   }
 
   /**
@@ -207,8 +268,7 @@ public class CookBookController {
   @FXML
   void updateRecipeListView() {
     try {
-      recipeListView.getItems().clear();
-      recipeListView.getItems().addAll(user.getCookBook().getRecipes());
+      recipeListView.getItems().setAll(user.getCookBook().getRecipes());
 
     } catch (Exception e) {
       displayErrorMessage(e);
@@ -240,9 +300,8 @@ public class CookBookController {
   @FXML
   void getRecipesByCategory(ActionEvent event) {
     try {
-      recipeListView.getItems().clear();
       recipeListView.getItems()
-          .addAll(user.getCookBook().getRecipesByCategory(((Button) event.getSource()).getText()));
+          .setAll(user.getCookBook().getRecipesByCategory(((Button) event.getSource()).getText()));
 
     } catch (Exception e) {
       displayErrorMessage(e);
@@ -273,13 +332,9 @@ public class CookBookController {
   void addIngredient() {
 
     try {
-      Ingredient ing = new Ingredient(addIngredientNameTextField.getText(),
-          amountTextField.getText(), unitComboBox.getSelectionModel().getSelectedItem());
-      if (ingredientListView.getItems().stream().filter(a -> a != null)
-          .anyMatch(a -> a.getName().equals(ing.getName()))) {
-        throw new IllegalArgumentException("Ingredient with name already exists");
-      }
-      ingredientListView.getItems().add(ing);
+      tmpRecipe.addIngredient(new Ingredient(addIngredientNameTextField.getText(),
+          amountTextField.getText(), unitComboBox.getSelectionModel().getSelectedItem()));
+      ingredientListView.getItems().setAll(tmpRecipe.getIngredients());
       addIngredientNameTextField.setText("");
       amountTextField.setText("");
     } catch (Exception e) {
@@ -294,11 +349,8 @@ public class CookBookController {
   @FXML
   void removeIngredient() {
     try {
-
-      Ingredient ingredientToRemove = ingredientListView.getItems().stream()
-          .filter(a -> a.getName().equals(deleteIngredientTextField.getText())).findFirst()
-          .orElseThrow(() -> new IllegalArgumentException("Ingredient not in list"));
-      ingredientListView.getItems().remove(ingredientToRemove);
+      tmpRecipe.removeIngredient(deleteIngredientTextField.getText());
+      ingredientListView.getItems().setAll(tmpRecipe.getIngredients());
       deleteIngredientTextField.setText("");
 
 
@@ -316,12 +368,13 @@ public class CookBookController {
   void addRecipe(ActionEvent event) {
     try {
 
-      Recipe recipe = new Recipe(titleTextField.getText(), ingredientListView.getItems(),
+      Recipe recipe = new Recipe(titleTextField.getText(), tmpRecipe.getIngredients(),
           categoryCombobox.getSelectionModel().getSelectedItem());
       user.getCookBook().addRecipe(recipe);
       updateRecipeListView();
       addRecipePage();
       fileHandler.updateFile(user);
+      tmpRecipe.removeAllIngredients();
     } catch (Exception e) {
       displayErrorMessage(e);
     }
@@ -332,18 +385,7 @@ public class CookBookController {
    *
    * @param e The exception that contains the error message.
    */
-  @FXML
   void displayErrorMessage(Exception e) {
-    // if(popupLabel.getScene().getWindow().getEventHandler()==null) "implement later"
-    popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
-        new EventHandler<MouseEvent>() {
-          @Override
-          public void handle(MouseEvent mouseEvent) {
-            if (popupLabel.isVisible()) {
-              popupLabel.setVisible(false);
-            }
-          }
-        });
     popupLabel.setText(e.getMessage());
     popupLabel.setVisible(true);
   }
