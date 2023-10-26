@@ -4,9 +4,11 @@ import java.util.EnumSet;
 import java.util.Set;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import cookbook.core.CookBook;
 import cookbook.core.Ingredient;
 import cookbook.core.Recipe;
 import cookbook.core.User;
+import cookbook.json.CookbookPersistence.CookbookModelParts;
 
 public class CookbookModule extends SimpleModule{
 
@@ -15,7 +17,7 @@ public class CookbookModule extends SimpleModule{
   /**
    * Initializes this SalaryCheckerModule with appropriate serializers and deserializers.
    */
-  public CookbookModule(Set<CookbookModuleParts> parts) {
+  public CookbookModule(Set<CookbookModelParts> parts) {
     super(NAME, Version.unknownVersion());
     addSerializer(User.class, new UserSerializer());
     //Lurer på om vi kanskje ikke trenger disse? Siden alt nås fra user eller cookbook?
@@ -31,7 +33,7 @@ public class CookbookModule extends SimpleModule{
   }
 
   public CookbookModule() {
-    this(EnumSet.allOf(Cookbook.class));
+    this(EnumSet.allOf(CookbookModelParts.class));
   }
 
   
