@@ -181,7 +181,7 @@ public class CookBookController {
           }
         });
     updateRecipeListView();
-    tmpRecipe= new Recipe("tmpRecipe", Arrays.asList(new Ingredient("tmpIng", 20, "g")), "Dinner");
+    tmpRecipe = new Recipe("tmpRecipe", Arrays.asList(new Ingredient("tmpIng", 20, "g")), "Dinner");
     tmpRecipe.removeAllIngredients();
   }
 
@@ -197,7 +197,7 @@ public class CookBookController {
   /**
    * Initializes the ingredientPane.
    */
-  private void initIngredientView(){
+  private void initIngredientView() {
     ingredientPane.setVisible(true);
     mainPagePane.setVisible(false);
     ingredientListView.getItems().clear();
@@ -218,26 +218,31 @@ public class CookBookController {
     categoryCombobox.setItems(FXCollections.observableArrayList(Recipe.validCategories));
   }
 
+  /**
+   * Switches to the searchByIngredients page, hiding the main page.
+   */
   @FXML
-  void searchByIngredientsPage(){
+  void searchByIngredientsPage() {
     searchByIngredientsPane.setVisible(true);
     initIngredientView();
   }
 
+  /**
+   * Displays a list of recipes that contains the ingredients we search for.
+   */
+  @FXML
+  void searchByIngredients() {
+    try {
+      user.setCookBook(new CookBook(fileHandler.getUser(user.getUsername(), user.getPassword())
+          .getCookBook().getCookBookByIngredientSearch(tmpRecipe.getIngredients())));
+    } catch (Exception e) {
+      displayErrorMessage(e);
+      user.setCookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook());
 
-@FXML
-void searchByIngredients(){
-  try {
-    user.setCookBook(new CookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).
-    getCookBook().getCookBookByIngredientSearch(tmpRecipe.getIngredients())));
-  } catch (Exception e) {
-    displayErrorMessage(e);
-    user.setCookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook());
-    
+    }
+    updateRecipeListView();
+
   }
-  updateRecipeListView();
-
-}
 
   /**
    * Handles the cancellation of the add recipe or random recipe page and returns to the main page.
@@ -327,9 +332,9 @@ void searchByIngredients(){
   void addIngredient() {
 
     try {
-          tmpRecipe.addIngredient(new Ingredient(addIngredientNameTextField.getText(),
+      tmpRecipe.addIngredient(new Ingredient(addIngredientNameTextField.getText(),
           amountTextField.getText(), unitComboBox.getSelectionModel().getSelectedItem()));
-         ingredientListView.getItems().setAll(tmpRecipe.getIngredients());
+      ingredientListView.getItems().setAll(tmpRecipe.getIngredients());
       addIngredientNameTextField.setText("");
       amountTextField.setText("");
     } catch (Exception e) {
@@ -362,7 +367,7 @@ void searchByIngredients(){
   @FXML
   void addRecipe(ActionEvent event) {
     try {
-  
+
       Recipe recipe = new Recipe(titleTextField.getText(), tmpRecipe.getIngredients(),
           categoryCombobox.getSelectionModel().getSelectedItem());
       user.getCookBook().addRecipe(recipe);
@@ -413,7 +418,7 @@ void searchByIngredients(){
       Stage stage = (Stage) logOutButton.getScene().getWindow();
       UserController controller = loader.getController();
       controller.setFileHandler(fileHandler);
-      stage.setScene(scene); 
+      stage.setScene(scene);
       stage.show();
 
     } catch (Exception a) {
