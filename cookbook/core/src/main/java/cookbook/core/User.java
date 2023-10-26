@@ -1,5 +1,7 @@
 package cookbook.core;
 
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Represents a user of the cookbook application.
@@ -7,9 +9,11 @@ package cookbook.core;
 public class User {
   private String username;
   private String password;
+
   public static final String outputSignup = "Username and password must be: \n "
       + "- letters and numbers \n "
       + "- between 3 and 16 characters";
+  protected Collection<UserObserver> userObs = new ArrayList<>();
   private CookBook cookBook;
 
   /**
@@ -33,6 +37,9 @@ public class User {
   public void setPassword(String password) {
     signupValidation(password);
     this.password = password;
+    for (UserObserver userObserver : userObs) {
+      userObserver.userInfoChanged(this);
+    }
   }
 
   /**
@@ -43,6 +50,9 @@ public class User {
   public void setUsername(String username) {
     signupValidation(username);
     this.username = username;
+    for (UserObserver userObserver : userObs) {
+      userObserver.userInfoChanged(this);
+    }
   }
 
   /**
@@ -98,6 +108,40 @@ public class User {
       throw new IllegalArgumentException("Cookbook cant be null");
     }
     this.cookBook = cookBook;
+    for (UserObserver userObserver : userObs) {
+      userObserver.userInfoChanged(this);
+    }
+  }
+
+  /**
+   * Method to add a new observer of this class.
+   *
+   * @param userObserver the observer
+   */
+  public void addObserver(UserObserver userObserver) {
+    if (userObserver != null) {
+      userObs.add(userObserver);
+    }
+  }
+
+  /**
+   * Removes a observer of this class.
+   *
+   * @param userObserver the observer to remove
+   */
+  public void removeObserver(UserObserver userObserver) {
+    if (userObserver != null) {
+      userObs.remove(userObserver);
+    }
+  }
+
+  /**
+   * Access method for userObs.
+   *
+   * @return the userObs
+   */
+  public Collection<UserObserver> getUserObs() {
+    return new ArrayList<>(userObs);
   }
 
   /**
