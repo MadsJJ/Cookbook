@@ -1,4 +1,4 @@
-module cookbook.springboot.rest {
+module user.springboot.rest {
     requires com.fasterxml.jackson.databind;
 
     requires spring.web;
@@ -7,7 +7,7 @@ module cookbook.springboot.rest {
     requires spring.context;
     requires spring.boot.autoconfigure;
 
-    requires cookbook.core;
+    requires user.core;
 
     opens cookbook.springboot.restserver to spring.beans, spring.context, spring.web;
 }

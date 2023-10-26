@@ -1,12 +1,15 @@
 package cookbook.springboot.restserver;
 
 import com.fasterxml.jackson.databind.Module;
+
+import cookbook.json.CookbookPersistence;
+import cookbook.json.CookbookPersistence.CookbookModelParts;
+
 import java.util.EnumSet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import cookbook.json.TodoPersistence;
-import cookbook.json.TodoPersistence.TodoModelParts;
+
 
 /**
  * The Spring application.
@@ -16,10 +19,10 @@ public class CookbookApplication {
 
   @Bean
   public Module objectMapperModule() {
-    return TodoPersistence.createJacksonModule(EnumSet.of(TodoModelParts.LISTS));
+    return CookbookPersistence.createJacksonModule(EnumSet.of(CookbookModelParts.RECIPE));
   }
 
   public static void main(String[] args) {
-    SpringApplication.run(TodoModelApplication.class, args);
+    SpringApplication.run(CookbookApplication.class, args);
   }
 }
