@@ -267,12 +267,7 @@ public class CookBookController {
    */
   @FXML
   void updateRecipeListView() {
-    try {
-      recipeListView.getItems().setAll(user.getCookBook().getRecipes());
-
-    } catch (Exception e) {
-      displayErrorMessage(e);
-    }
+    recipeListView.getItems().setAll(user.getCookBook().getRecipes());
   }
 
   /**

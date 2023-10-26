@@ -16,7 +16,7 @@
       <Pane fx:id="searchByIngredientsPane" layoutX="319.0" layoutY="104.0" prefHeight="269.0" prefWidth="246.0">
          <children>
             <Button fx:id="cancelSearchByIngredients" layoutX="176.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
-            <Button fx:id="SearchByIngredientsButton" layoutX="166.0" layoutY="224.0" mnemonicParsing="false" onAction="#searchByIngredients" text="Search" />
+            <Button fx:id="SearchButton" layoutX="166.0" layoutY="224.0" mnemonicParsing="false" onAction="#searchByIngredients" text="Search" />
             <Text layoutX="13.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add the ingredients you have in your fridge:" wrappingWidth="264.814453125" />
          </children>
       </Pane>

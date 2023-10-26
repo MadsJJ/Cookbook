@@ -46,9 +46,7 @@ public class CookBookControllerTest extends ApplicationTest {
 
       try (FileWriter writer = new FileWriter(
           Paths.get(userDir, "/src/test/java/ui/resources/ui/UserDataTest.json").toString(),
-          StandardCharsets.UTF_8)) { // Specify
-                                     // UTF-8
-                                     // encoding
+          StandardCharsets.UTF_8)) { 
         writer.write("");
         writer.close();
         fileHandler.signup("CookBookTest", "password");
@@ -56,6 +54,7 @@ public class CookBookControllerTest extends ApplicationTest {
         Ingredient ingredient1 = new Ingredient("Ingredient 1", 100.0, "g");
         Ingredient ingredient2 = new Ingredient("Ingredient 2", 200.0, "g");
         Ingredient ingredient3 = new Ingredient("Ingredient 3", 50.0, "dl");
+        Ingredient ingredient4 = new Ingredient("Ingredient 4", 50.0, "dl");
 
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(ingredient1);
@@ -65,12 +64,16 @@ public class CookBookControllerTest extends ApplicationTest {
         Recipe recipe1 = new Recipe("Test Dinner", ingredients, "Dinner");
         Recipe recipe2 = new Recipe("Test Dinner2", ingredients, "Dinner");
         Recipe recipe3 = new Recipe("Test Appetizer", ingredients, "Appetizer");
+
+        ingredients.add(ingredient4);
+        Recipe recipe4 = new Recipe("Test Dinner3", ingredients, "Dinner");
         CookBook cookBook = new CookBook(new ArrayList<Recipe>());
         cookBook.addRecipe(recipe1);
         cookBook.addRecipe(recipe2);
         cookBook.addRecipe(recipe3);
+        cookBook.addRecipe(recipe4);
         this.user.setCookBook(cookBook);
-
+        fileHandler.updateFile(user);
         controller.initialize(user, fileHandler);
       } catch (Exception a) {
         a.printStackTrace();
@@ -128,8 +131,8 @@ public class CookBookControllerTest extends ApplicationTest {
     assertEquals("Enter recipe name to remove from Cookbook", controller.getErrorMessage());
     clickOn("#deleteRecipeTextfield").write("Test Appetizer");
     clickOn("#removeRecipeButton");
-    assertEquals(2, user.getCookBook().getRecipes().size());
-    assertEquals(2, controller.getRecipeListView().size());
+    assertEquals(3, user.getCookBook().getRecipes().size());
+    assertEquals(3, controller.getRecipeListView().size());
   }
 
   @Test
@@ -204,10 +207,49 @@ public class CookBookControllerTest extends ApplicationTest {
     clickOn("#categoryCombobox").write('\u2193').write('\u2193').write('\n');
     clickOn("#addNewRecipeButton");
     assertEquals("Recipe already exists in cookbook", controller.getErrorMessage());
-    clickOn("#titleTextField").write("3");
+    clickOn("#titleTextField").write("4");
     clickOn("#addNewRecipeButton");
     assertEquals(user.getCookBook().getRecipes().size(),controller.getRecipeListView().size()); 
   
+
+  }
+
+  @Test
+  void TestSearchByIngredients(){
+    List<Recipe> initialRecipes = controller.getRecipeListView();
+    clickOn("#SearchByIngredientsButton");
+    clickOn("#SearchButton");
+    List<Recipe> filteredRecipes = controller.getRecipeListView();
+    assertEquals(initialRecipes.size(),filteredRecipes.size());
+    clickOn("#addIngredientNameTextField").write("Ingredient 4");
+    clickOn("#amountTextField").write("100");
+    clickOn("#unitComboBox").write('\u2193').write('\n');
+    clickOn("#addIngredientButton");
+    clickOn("#SearchButton");
+    filteredRecipes = controller.getRecipeListView();
+    assertEquals(1,filteredRecipes.size());
+    clickOn("#addIngredientNameTextField").write("Ingredient 5");
+    clickOn("#amountTextField").write("100");
+    clickOn("#addIngredientButton");
+    clickOn("#SearchButton");
+    filteredRecipes = controller.getRecipeListView();
+    assertEquals(initialRecipes.size(),filteredRecipes.size());
+  }
+
+  @Test
+  void TestCancelButton(){
+    List<Recipe> initialRecipes = controller.getRecipeListView();
+    clickOn("#SearchByIngredientsButton");
+    clickOn("#addIngredientNameTextField").write("Ingredient 4");
+    clickOn("#amountTextField").write("100");
+    clickOn("#unitComboBox").write('\u2193').write('\n');
+    clickOn("#addIngredientButton");
+    clickOn("#SearchButton");
+    List<Recipe> filteredRecipes = controller.getRecipeListView();
+    assertEquals(1,filteredRecipes.size());
+    clickOn("#cancelSearchByIngredients");
+    assertEquals(initialRecipes.size(),controller.getRecipeListView().size());
+
 
   }
 
