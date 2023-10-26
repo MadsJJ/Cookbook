@@ -1,4 +1,17 @@
 package cookbook.json;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import cookbook.json.internal.CookbookModule;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.EnumSet;
+import java.util.Set;
 
 public class CookbookPersistence {
 
@@ -9,35 +22,35 @@ public class CookbookPersistence {
   /**
    * Used to indicate what parts of a TodoModel to serialize.
    */
-  public enum TodoModelParts {
-    SETTINGS, LISTS, LIST_CONTENTS
+  public enum CookbookModelParts {
+    INGREDIENT, RECIPE, USER, COOKBOOK
   }
 
   private ObjectMapper mapper;
 
-  public TodoPersistence() {
+  public CookbookPersistence() {
     mapper = createObjectMapper();
   }
 
-  public static SimpleModule createJacksonModule(Set<TodoModelParts> parts) {
-    return new TodoModule(parts);
+  public static SimpleModule createJacksonModule(Set<CookbookModelParts> parts) {
+    return new CookbookModule();
   }
 
-  public static ObjectMapper createObjectMapper(Set<TodoModelParts> parts) {
+  public static ObjectMapper createObjectMapper(Set<CookbookModelParts> parts) {
     return new ObjectMapper()
       .registerModule(createJacksonModule(parts));
   }
 
   public static ObjectMapper createObjectMapper() {
-    return createObjectMapper(EnumSet.allOf(TodoModelParts.class));
+    return createObjectMapper(EnumSet.allOf(CookbookModelParts.class));
   }
 
-  public TodoModel readTodoModel(Reader reader) throws IOException {
-    return mapper.readValue(reader, TodoModel.class);
+  public Cookbook readTodoModel(Reader reader) throws IOException {
+    return mapper.readValue(reader, Cookbook.class);
   }
 
-  public void writeTodoModel(TodoModel todoModel, Writer writer) throws IOException {
-    mapper.writerWithDefaultPrettyPrinter().writeValue(writer, todoModel);
+  public void writeTodoModel(CookbookModel cookbookModel, Writer writer) throws IOException {
+    mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookbookModel);
   }
 
   private Path saveFilePath = null;
