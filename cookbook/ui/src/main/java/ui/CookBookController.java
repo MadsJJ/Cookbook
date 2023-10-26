@@ -230,10 +230,12 @@ void searchByIngredients(){
   try {
     user.setCookBook(new CookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).
     getCookBook().getCookBookByIngredientSearch(tmpRecipe.getIngredients())));
-    updateRecipeListView();
   } catch (Exception e) {
     displayErrorMessage(e);
+    user.setCookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook());
+    
   }
+  updateRecipeListView();
 
 }
 
