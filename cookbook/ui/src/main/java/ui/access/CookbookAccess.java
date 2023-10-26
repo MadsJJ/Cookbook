@@ -64,13 +64,6 @@ public interface CookbookAccess {
    public void deleteAccounts();
 
    /**
-   * Removes one User object currently used by
-   * Cookbook.
-   */
-   public void deleteUser();
-
-
-   /**
    * 
    */ 
    public void uploadFile(File file) throws IOException, InterruptedException, URISyntaxException;  
