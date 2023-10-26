@@ -1,4 +1,5 @@
 package core;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,14 +14,19 @@ public class IngredientTest {
     }
 
     @Test
-    public void testContructorStringAmount(){
+    public void testContructorStringAmount() {
         Ingredient stringIngredient = new Ingredient("Milk", "10", "dl");
         assertEquals(10, stringIngredient.getAmount());
     }
 
     @Test
-    public void testContructorStringAmountError(){
-        assertThrows(IllegalArgumentException.class,()->new Ingredient("milk", "number", "g"));
+    public void testContructorStringAmountError() {
+        assertThrows(IllegalArgumentException.class, () -> new Ingredient("milk", "number", "g"));
+    }
+
+    @Test
+    public void testContructorStringNegativeNumber() {
+        assertThrows(IllegalArgumentException.class, () -> new Ingredient("milk", "-5", "g"));
     }
 
     @Test

@@ -18,7 +18,7 @@ public class RecipeTest {
         ingredient1 = new Ingredient("Ingredient 1", 100.0, "g");
         ingredient2 = new Ingredient("Ingredient 2", 200.0, "g");
         ingredient3 = new Ingredient("Ingredient 3", 50.0, "dl");
-        
+
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(ingredient1);
         ingredients.add(ingredient2);
@@ -36,18 +36,19 @@ public class RecipeTest {
     @Test
     public void testSetTitleLengthEmptyString() {
         {
-        assertThrows(IllegalArgumentException.class, () -> {
-            recipe.setTitle("");
-        });
+            assertThrows(IllegalArgumentException.class, () -> {
+                recipe.setTitle("");
+            });
+        }
     }
-    }
+
     @Test
     public void testSetTitleLengthNull() {
         {
-        assertThrows(IllegalArgumentException.class, () -> {
-            recipe.setTitle(null);
-        });
-    }
+            assertThrows(IllegalArgumentException.class, () -> {
+                recipe.setTitle(null);
+            });
+        }
     }
 
     @Test
@@ -59,19 +60,19 @@ public class RecipeTest {
     @Test
     public void testInvalidCategoryError() {
         {
-        assertThrows(IllegalArgumentException.class, () -> {
-            recipe.setCategory("Breakfast");
-        });
-    }
+            assertThrows(IllegalArgumentException.class, () -> {
+                recipe.setCategory("Breakfast");
+            });
+        }
     }
 
     @Test
     public void testInvalidCategoryNull() {
         {
-        assertThrows(IllegalArgumentException.class, () -> {
-            recipe.setCategory(null);
-        });
-    }
+            assertThrows(IllegalArgumentException.class, () -> {
+                recipe.setCategory(null);
+            });
+        }
     }
 
 
@@ -96,7 +97,7 @@ public class RecipeTest {
         assertNotEquals(newIngredients, recipe.getIngredients());
     }
 
-      @Test
+    @Test
     public void testSetEmptyIngredients() {
         assertThrows(IllegalArgumentException.class, () -> {
             recipe.setIngredients(new ArrayList<>());
@@ -151,7 +152,7 @@ public class RecipeTest {
 
     @Test
     public void removeNonExistentIngredient() {
-      Ingredient removeIngredient = new Ingredient("removeIngredient", 20, "g");
+        Ingredient removeIngredient = new Ingredient("removeIngredient", 20, "g");
         assertThrows(IllegalArgumentException.class, () -> {
             recipe.removeIngredient(removeIngredient.getName());
         });
@@ -165,6 +166,13 @@ public class RecipeTest {
     }
 
     @Test
+    public void testRemoveEmptyIngredient() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            recipe.removeIngredient("");
+        });
+    }
+
+    @Test
     public void testGetIngredientsReturnsCopy() {
         Integer listSize = recipe.getIngredients().size();
         recipe.getIngredients().remove(0);
@@ -173,12 +181,33 @@ public class RecipeTest {
     }
 
 
-  
 
     @Test
     public void testToString() {
-        String expected = "Test Recipe, [Ingredient 2, 200.0, g, Ingredient 1, 100.0, g, Ingredient 3, 50.0, dl], Dinner";
+        String expected =
+                "Test Recipe, [Ingredient 2, 200.0, g, Ingredient 1, 100.0, g, Ingredient 3, 50.0, dl], Dinner";
         assertEquals(expected, recipe.toString());
     }
+
+    @Test
+    public void testRemoveAllIngredients() {
+        recipe.removeAllIngredients();
+
+        assertEquals(0, recipe.getIngredients().size());
+    }
+
+    @Test
+    public void testRecipeContainsIngredientsNull() {
+        assertTrue(recipe.recipeContainsIngredients(null));
+    }
+
+
+    @Test
+    public void testRecipeContainsIngredientsEmptyList() {
+        assertTrue(recipe.recipeContainsIngredients(new ArrayList<Ingredient>()));
+    }
+
+
+    
 
 }
