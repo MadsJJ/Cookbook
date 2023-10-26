@@ -1,6 +1,8 @@
 package cookbook.json;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+
+import cookbook.core.CookBook;
 import cookbook.json.internal.CookbookModule;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -22,7 +24,7 @@ public class CookbookPersistence {
   /**
    * Used to indicate what parts of a TodoModel to serialize.
    */
-  public enum CookbookModelParts {
+  public enum CookbookParts {
     INGREDIENT, RECIPE, USER, COOKBOOK
   }
 
@@ -32,25 +34,25 @@ public class CookbookPersistence {
     mapper = createObjectMapper();
   }
 
-  public static SimpleModule createJacksonModule(Set<CookbookModelParts> parts) {
+  public static SimpleModule createJacksonModule(Set<CookbookParts> parts) {
     return new CookbookModule();
   }
 
-  public static ObjectMapper createObjectMapper(Set<CookbookModelParts> parts) {
+  public static ObjectMapper createObjectMapper(Set<CookbookParts> parts) {
     return new ObjectMapper()
       .registerModule(createJacksonModule(parts));
   }
 
   public static ObjectMapper createObjectMapper() {
-    return createObjectMapper(EnumSet.allOf(CookbookModelParts.class));
+    return createObjectMapper(EnumSet.allOf(CookbookParts.class));
   }
 
-  public Cookbook readTodoModel(Reader reader) throws IOException {
-    return mapper.readValue(reader, Cookbook.class);
+  public CookBook readTodoModel(Reader reader) throws IOException {
+    return mapper.readValue(reader, CookBook.class);
   }
 
-  public void writeTodoModel(CookbookModel cookbookModel, Writer writer) throws IOException {
-    mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookbookModel);
+  public void writeTodoModel(CookBook cookbook, Writer writer) throws IOException {
+    mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookbook);
   }
 
   private Path saveFilePath = null;
@@ -68,7 +70,7 @@ public class CookbookPersistence {
    *
    * @return the loaded TodoModel
    */
-  public TodoModel loadTodoModel() throws IOException, IllegalStateException {
+  public CookBook loadTodoModel() throws IOException, IllegalStateException {
     if (saveFilePath == null) {
       throw new IllegalStateException("Save file path is not set, yet");
     }
@@ -82,7 +84,7 @@ public class CookbookPersistence {
    *
    * @param todoModel the TodoModel to save
    */
-  public void saveTodoModel(TodoModel todoModel) throws IOException, IllegalStateException {
+  public void saveTodoModel(CookBook todoModel) throws IOException, IllegalStateException {
     if (saveFilePath == null) {
       throw new IllegalStateException("Save file path is not set, yet");
     }
