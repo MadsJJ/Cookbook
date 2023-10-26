@@ -22,19 +22,15 @@ public class UserControllerTest extends ApplicationTest {
   @Start
   public void start(Stage primaryStage) throws IOException {
     primaryStage.setTitle("Cookbook");
-
-    // AnchorPane root = FXMLLoader.load(getClass().getResource("User.fxml"));
     FXMLLoader loader = new FXMLLoader(getClass().getResource("User.fxml"));
     Parent root = loader.load();
     primaryStage.setScene(new Scene(root));
     UserController controller = loader.getController();
-    // this.controller=controller;
     UserDataFilehandling filehandler =
         new UserDataFilehandling("/src/test/java/ui/resources/ui/UserDataTest.json");
     controller.setFileHandler(filehandler);
     this.fileHandler = filehandler;
     this.controller = controller;
-    // System.out.println(controller.getFileHandler().findUsers());
     controller.setStage(primaryStage);
     primaryStage.show();
 
