@@ -16,7 +16,7 @@ public class CookbookModule extends SimpleModule{
    */
   public CookbookModule(Set<CookbookParts> parts) {
     super(NAME, Version.unknownVersion());
-    addSerializer(User.class, new UserSerializer());
+    //addSerializer(User.class, new UserSerializer());
     
     addDeserializer(User.class, new UserDeserializer());    
   }
