@@ -13,7 +13,7 @@ public class RemoteCookbookAccess implements CookbookAccess {
   private final URI baseUri;
   private ObjectMapper objectMapper;
   private UserAccounts accounts;
-  //private User user = new User();
+  private User user = new User();
 
   /**
    * This constructor initialize the objectmapper used for serializing, 
@@ -21,12 +21,27 @@ public class RemoteCookbookAccess implements CookbookAccess {
    *
    * @param baseUri URL used for HTTP requests.
    */
-  public RemoteUserAccess(final URI baseUri) {
+  public RemoteCookbookAccess(final URI baseUri) {
     this.baseUri = baseUri;
     this.objectMapper = UserPersistence.createObjectMapper();
-    this.accounts = readAccounts();
+    this.accounts = readUserAccounts();
   }
 
+  /**
+   * Creates a URI by resolving the input string against the uri for 
+   * fetching from the server.
+   *
+   * @param uri the path.
+   * @return the URI on the server with the given path.
+   */
+  public URI resolveUriAccounts(String uri) {
+    return baseUri.resolve(uri);
+  }
+
+  /**
+   * Sends a GET-request to fetch a Accounts object from the
+   * server.
+   */
   @Override
   public UserAccounts readUserAccounts() throws IOException {
     // TODO Auto-generated method stub
