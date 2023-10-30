@@ -5,80 +5,82 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cookbook.core.CookBook;
+import cookbook.core.Recipe;
+import cookbook.core.User;
 import cookbook.json.CookbookPersistence;
 
-
 /**
- * Configures the todo service,
- * including autowired objects.
- */
-
+* Configures the cookbook service,
+* including autowired objects.
+*/
 @Service
 public class CookbookService {
 
-  private CookBook cookbook;
-  private CookbookPersistence cookbookPersistence;
+    private User user;
+    private static final CookbookPersistence COOKBOOKPERSISTENCE = new CookbookPersistence();
 
-  /**
-   * Initializes the service with a specific TodoModel.
-   *
-   * @param todoModel the TodoModel
-   */
-  //public CookbookService(CookBook cookbook) {
-  //  this.cookbook = cookbook;
-  //  this.cookbookPersistence = new CookbookPersistence();
-  //  cookbookPersistence.setSaveFile("springbootserver-cookbook.json");
-  //}
+    public CookbookService(User user) {
+        this.user = user; // Inject the User bean through constructor injection
+        COOKBOOKPERSISTENCE.setSaveFile("springbootserver-cookbook.json");
+    }
 
-  //public CookbookService() {
-  //  this(createDefaultCookbook());
-  //}
-
-  public CookBook getCookbook() {
-    return cookbook;
-  }
-
-  public void setCookbook(CookBook cookbook) {
-    this.cookbook = cookbook;
-  }
-
-  //private static CookBook createDefaultCookbook() {
-  //  CookbookPersistence cookbookPersistence = new CookbookPersistence();
-  //  URL url = CookbookService.class.getResource("default-cookbook.json");
-  //  if (url != null) {
-  //    try (Reader reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8)) {
-  //      return cookbookPersistence.readCookbook(reader);
-  //    } catch (IOException e) {
-  //      System.out.println("Couldn't read default-cookbook.json, so rigging cookbook manually ("
-  //          + e + ")");
-  //    }
-  //  }
-
-    //CookBook cookbook = new CookBook(null);
-    //return null;
-  //}
+    @Autowired
+    public CookbookService() {
+      this(createDefaultUser());
+    }
   
-    //Todo todo = new Todo();
-    //TodoList todoList1 = new TodoList("todo1");
-    //todoList1.addTodoItem(new TodoItem());
-    //todo.addTodoList(todoList1);
-    //todo.addTodoList(new TodoList("todo2"));
-    //return todo;
-  //}
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    private static User createDefaultUser() {
+    CookbookPersistence cookbookPersistence = new CookbookPersistence();
+    URL url = CookbookService.class.getResource("default-user.json");
+    if (url != null) {
+      try (Reader reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8)) {
+        return cookbookPersistence.readUser(reader);
+      } catch (IOException e) {
+        System.out.println("Couldn't read default-cookbook.json, so making user manually ("
+            + e + ")");
+      }
+   }
+    User user = manuallyCreateUser();
+    return user;
+    } 
 
   /**
-   * Saves the Todo to disk.
+   * Method that creates two test users.
+   */
+  private static User manuallyCreateUser() {
+    User user = new User("username", "password", new CookBook(new ArrayList<Recipe>()));        
+    return user;
+  }
+
+  /**
+   * Saves the User to disk.
    * Should be called after each update.
    */
-  //public void autoSaveCookbook() {
-  //  if (cookbookPersistence != null) {
-  //    try {
-  //      cookbookPersistence.saveCookbook(this.cookbook);
-  //    } catch (IllegalStateException | IOException e) {
-  //      System.err.println("Couldn't auto-save Todo: " + e);
-  //    }
-  //  }
-  //}
+  public void autoSaveUser() {
+      if (COOKBOOKPERSISTENCE != null) {
+          try {
+              COOKBOOKPERSISTENCE.saveUser(this.user);
+          } catch (IllegalStateException | IOException e) {
+              System.err.println("Couldn't auto-save User: " + e);
+          }
+      }
+  }
 }
+
+
+
+
+

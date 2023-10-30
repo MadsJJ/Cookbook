@@ -6,18 +6,18 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CookbookApplication",
+            "request": "launch",
+            "mainClass": "user.springboot.rest/cookbook.springboot.restserver.CookbookApplication",
+            "projectName": "springboot.restserver"
+        },
+        {
+            "type": "java",
             "name": "User",
             "request": "launch",
             "mainClass": "cookbook.core/core.User",
             "projectName": "modules-core"
         },
-        // {
-        //     "type": "java",
-        //     "name": "CookBookApp",
-        //     "request": "launch",
-        //     "mainClass": "cookbook.ui/ui.CookBookApp",
-        //     "projectName": "modules-ui"
-        // },
         {
             "type": "java",
             "name": "App",

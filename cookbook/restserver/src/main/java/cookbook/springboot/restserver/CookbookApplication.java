@@ -3,8 +3,6 @@ package cookbook.springboot.restserver;
 import com.fasterxml.jackson.databind.Module;
 
 import cookbook.json.CookbookPersistence;
-import cookbook.json.CookbookPersistence.CookbookParts;
-import java.util.EnumSet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +14,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class CookbookApplication {
 
-  @Bean
-  public Module objectMapperModule() {
-    return CookbookPersistence.createJacksonModule(EnumSet.of(CookbookParts.RECIPE));
-  }
+  
 
   public static void main(String[] args) {
     SpringApplication.run(CookbookApplication.class, args);
