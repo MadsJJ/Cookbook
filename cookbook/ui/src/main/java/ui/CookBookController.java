@@ -28,6 +28,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ui.access.CookbookAccess;
 
 
 /**
@@ -145,7 +146,7 @@ public class CookBookController {
 
 
   private User user;
-  private UserDataFilehandling fileHandler;
+  private CookbookAccess accessType;
 
   /**
    * Initialize the controller with a user and file handler. also sets the header text to the
@@ -154,13 +155,13 @@ public class CookBookController {
    * @param user The user object.
    * @param fileHandler The file handler for user data.
    */
-  public void initialize(User user, UserDataFilehandling fileHandler) {
+  public void initialize(User user, CookbookAccess accessType) {
     this.user = user;
     randomRecipePane.setVisible(false);
     addNewRecipePane.setVisible(false);
     popupLabel.setVisible(false);
     headerText.setText(user.getUsername() + "´s cookbook.");
-    this.fileHandler = fileHandler;
+    this.accessType=accessType;
     updateRecipeListView();
   }
 
@@ -225,7 +226,7 @@ public class CookBookController {
   void removeRecipe(ActionEvent event) {
     try {
       user.getCookBook().removeRecipe(deleteRecipeTextfield.getText());
-      fileHandler.updateFile(user);
+      accessType.updateUserAttributes(user);
       updateRecipeListView();
     } catch (Exception e) {
       displayErrorMessage(e);
@@ -322,7 +323,7 @@ public class CookBookController {
       user.getCookBook().addRecipe(recipe);
       updateRecipeListView();
       addRecipePage();
-      fileHandler.updateFile(user);
+      accessType.updateUserAttributes(user);
     } catch (Exception e) {
       displayErrorMessage(e);
     }
@@ -376,7 +377,7 @@ public class CookBookController {
       Scene scene = new Scene(root);
       Stage stage = (Stage) logOutButton.getScene().getWindow();
       UserController controller = loader.getController();
-      controller.setFileHandler(fileHandler);
+      controller.setAccessType(accessType);
       stage.setScene(scene);
       stage.show();
 

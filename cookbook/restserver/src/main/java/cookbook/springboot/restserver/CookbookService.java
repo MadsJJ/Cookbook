@@ -7,7 +7,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import org.springframework.stereotype.Service;
 import cookbook.core.CookBook;
-import cookbook.json.CookbookPersistence;
+
 
 
 /**
@@ -19,7 +19,7 @@ import cookbook.json.CookbookPersistence;
 public class CookbookService {
 
   private CookBook cookbook;
-  private CookbookPersistence cookbookPersistence;
+  // private CookbookPersistence cookbookPersistence;
 
   /**
    * Initializes the service with a specific TodoModel.
