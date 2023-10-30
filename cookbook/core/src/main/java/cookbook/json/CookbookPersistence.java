@@ -2,7 +2,7 @@ package cookbook.json;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import cookbook.core.CookBook;
+import cookbook.core.User;
 import cookbook.json.internal.CookbookModule;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,8 +12,6 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.EnumSet;
-import java.util.Set;
 
 public class CookbookPersistence {
 
@@ -21,12 +19,6 @@ public class CookbookPersistence {
  * Wrapper class for JSON serialization,
  * to avoid direct compile dependencies on Jackson for other modules.
  */
-  /**
-   * Used to indicate what parts of a TodoModel to serialize.
-   */
-  public enum CookbookParts {
-    INGREDIENT, RECIPE, USER, COOKBOOK
-  }
 
   private ObjectMapper mapper;
 
@@ -34,25 +26,21 @@ public class CookbookPersistence {
     mapper = createObjectMapper();
   }
 
-  public static SimpleModule createJacksonModule(Set<CookbookParts> parts) {
+  public static SimpleModule createJacksonModule() {
     return new CookbookModule();
   }
 
-  public static ObjectMapper createObjectMapper(Set<CookbookParts> parts) {
-    return new ObjectMapper()
-      .registerModule(createJacksonModule(parts));
-  }
-
   public static ObjectMapper createObjectMapper() {
-    return createObjectMapper(EnumSet.allOf(CookbookParts.class));
+    return new ObjectMapper()
+      .registerModule(createJacksonModule());
   }
 
-  public CookBook readTodoModel(Reader reader) throws IOException {
-    return mapper.readValue(reader, CookBook.class);
+  public User readUser(Reader reader) throws IOException {
+    return mapper.readValue(reader, User.class);
   }
 
-  public void writeTodoModel(CookBook cookbook, Writer writer) throws IOException {
-    mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookbook);
+  public void writeUser(User user, Writer writer) throws IOException {
+    mapper.writerWithDefaultPrettyPrinter().writeValue(writer, user);
   }
 
   private Path saveFilePath = null;
@@ -66,30 +54,30 @@ public class CookbookPersistence {
   }
 
   /**
-   * Loads a TodoModel from the saved file (saveFilePath) in the user.home folder.
+   * Loads a User from the saved file (saveFilePath) in the user.home folder.
    *
-   * @return the loaded TodoModel
+   * @return the loaded User
    */
-  public CookBook loadTodoModel() throws IOException, IllegalStateException {
+  public User loadUser() throws IOException, IllegalStateException {
     if (saveFilePath == null) {
       throw new IllegalStateException("Save file path is not set, yet");
     }
     try (Reader reader = new FileReader(saveFilePath.toFile(), StandardCharsets.UTF_8)) {
-      return readTodoModel(reader);
+      return readUser(reader);
     }
   }
 
   /**
-   * Saves a TodoModel to the saveFilePath in the user.home folder.
+   * Saves a User to the saveFilePath in the user.home folder.
    *
-   * @param todoModel the TodoModel to save
+   * @param user the User to save
    */
-  public void saveTodoModel(CookBook todoModel) throws IOException, IllegalStateException {
+  public void saveUser(User user) throws IOException, IllegalStateException {
     if (saveFilePath == null) {
       throw new IllegalStateException("Save file path is not set, yet");
     }
     try (Writer writer = new FileWriter(saveFilePath.toFile(), StandardCharsets.UTF_8)) {
-      writeTodoModel(todoModel, writer);
+      writeUser(user, writer);
     }
   }
 }
