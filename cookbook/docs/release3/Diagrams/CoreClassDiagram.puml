@@ -1,0 +1,86 @@
+@startuml
+
+package core {
+    class CookBook {
+        - List<Recipe> recipes
+        + CookBook(List<Recipe> recipes)
+        + getRecipes(): List<Recipe>
+        + setRecipes(List<Recipe> recipes)
+        + addRecipe(Recipe recipe)
+        + removeRecipe(String recipeName)
+        + getRandomRecipe(String category): Recipe
+        + getRecipesByCategory(String category): List<Recipe>
+        + getCookBookByIngredientSearch(List<Ingredient> ingredients): List<Recipe>
+        + toString(): String
+    }
+
+    class Ingredient {
+        - String name
+        - double amount
+        - String unit
+        + Ingredient(String name, double amount, String unit)
+        + Ingredient(String name, String amount, String unit)
+        + getName(): String
+        + setName(String name)
+        + getAmount(): double
+        + setAmount(double amount)
+        + getUnit(): String
+        + setUnit(String unit)
+        + toString(): String
+    }
+
+    class Recipe {
+        - String title
+        - List<Ingredient> ingredients
+        - String category
+        + Recipe(String title, List<Ingredient> ingredients, String category)
+        + static sortIngredients(List<Ingredient> ingredients): List<Ingredient>
+        + getTitle(): String
+        + setTitle(String title)
+        + getIngredients(): List<Ingredient>
+        + setIngredients(List<Ingredient> ingredients)
+        + addIngredient(Ingredient ingredient)
+        + removeIngredient(String ingredient)
+        + removeAllIngredients()
+        + getCategory(): String
+        + setCategory(String category)
+        + recipeContainsIngredients(List<Ingredient> ingredientsToSearch): boolean
+        + toString(): String
+    }
+
+    class User {
+        - String username
+        - String password
+        - CookBook cookBook
+        + User(String username, String password, CookBook cookBook)
+        + setPassword(String password)
+        + setUsername(String username)
+        + getUsername(): String
+        + getPassword(): String
+        + static signupValidation(String string)
+        + getCookBook(): CookBook
+        + setCookBook(CookBook cookBook)
+        + toString(): String
+    }
+    
+
+    class UserDataFilehandling {
+        - String userFile
+        + UserDataFilehandling(String userFile)
+        + findUsers(): List<User>
+        + getUser(String username, String password): User
+        + validateNoExistingUser(String username)
+        + signup(String username, String password): User
+        + updateFile(User user)
+    }
+
+    CookBook "1" <-- "0..*" Recipe
+    Recipe "*" <-- "0..*" Ingredient
+    User "1" <-- "1" CookBook
+    UserDataFilehandling "1" <-- "0..*" User
+}
+
+@enduml
+
+
+
