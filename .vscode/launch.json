@@ -12,6 +12,12 @@
             "projectName": "springboot.restserver"
         },
         {
+            "name": "RemoteApp",
+            "request": "launch",
+            "mainClass": "user.ui/ui.RemoteApp",
+            "projectName": "modules-ui"
+        },
+        {
             "type": "java",
             "name": "User",
             "request": "launch",
