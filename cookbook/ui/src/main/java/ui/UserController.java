@@ -1,9 +1,12 @@
 package ui;
 
-import core.User;
-import core.UserDataFilehandling;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import cookbook.core.User;
+import cookbook.core.UserDataFilehandling;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +19,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ui.access.CookbookAccess;
+import ui.access.LocalCookbookAccess;
+import ui.access.RemoteCookbookAccess;
+
 
 /**
  * This class is responsible for handling user interactions with the login and signup screens.
@@ -46,15 +53,20 @@ public class UserController {
   @FXML
   private Label popupLabel;
 
+  @FXML 
+  String endpointUri;
+
+  @FXML
+  String localFilePath;
+
+  private CookbookAccess accessType;
+
   private UserDataFilehandling fileHandler;
 
-  /**
-   * Initializes the filehandler for user data.
-   *
-   * @param fileHandler the filehandler for user data
-   */
-  public void setFileHandler(UserDataFilehandling fileHandler) {
-    this.fileHandler = fileHandler;
+  
+
+  public void setAccessType(CookbookAccess accessType) {
+    this.accessType = accessType;
   }
 
   /**
@@ -64,6 +76,7 @@ public class UserController {
   @FXML
   void login() {
     try {
+      setAccess();
       startApp(fileHandler.getUser(usernameField.getText(), passwordField.getText()));
 
     } catch (Exception e) {
@@ -78,10 +91,32 @@ public class UserController {
   @FXML
   void signup() {
     try {
-      startApp(fileHandler.signup(usernameField.getText(), passwordField.getText()));
+      setAccess();
+      startApp(accessType.registerNewUser(usernameField.getText(), passwordField.getText()));
     } catch (Exception e) {
       displayErrorMessage(e);
     }
+  }
+
+  void setAccess() {
+    CookbookAccess accessType = null;
+    if (endpointUri != null) {
+      RemoteCookbookAccess remoteAccess;
+      try {
+        System.out.println("Using remote endpoint @ " + endpointUri);
+        remoteAccess = new RemoteCookbookAccess(new URI(endpointUri));
+        accessType = remoteAccess;
+      } catch (URISyntaxException e) {
+        System.err.println(e);
+      }
+    }
+    if (accessType == null) {
+      this.fileHandler = new UserDataFilehandling(localFilePath);
+      LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
+      accessType = localAccess;
+    }
+
+    this.accessType=accessType;
   }
 
   /**
@@ -116,9 +151,10 @@ public class UserController {
       Stage stage = (Stage) loginButton.getScene().getWindow();
       stage.setScene(scene);
       stage.show();
-
+    
       CookBookController cookBookController = loader.getController();
-      cookBookController.initialize(user, fileHandler);
+      cookBookController.initialize(user, accessType);
+
 
 
     } catch (Exception a) {

@@ -4,10 +4,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ui.access.CookbookAccess;
+import ui.access.LocalCookbookAccess;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
-import core.UserDataFilehandling;
+
+import cookbook.core.UserDataFilehandling;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,7 +34,7 @@ public class UserControllerTest extends ApplicationTest {
             UserController controller = loader.getController();
             // this.controller=controller;
             UserDataFilehandling filehandler = new UserDataFilehandling("/src/test/java/ui/resources/ui/UserDataTest.json");
-            controller.setFileHandler(filehandler);
+            controller.setAccessType(new LocalCookbookAccess(filehandler));
             this.fileHandler=filehandler;
             this.controller=controller;
             // System.out.println(controller.getFileHandler().findUsers());

@@ -3,6 +3,10 @@ package core;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import cookbook.core.Ingredient;
+import cookbook.core.Recipe;
+
 import java.util.ArrayList;
 import java.util.List;
 

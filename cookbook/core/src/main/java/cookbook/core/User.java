@@ -1,16 +1,15 @@
-package core;
+package cookbook.core;
 
-import javax.persistence.Entity;
-
-
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Represents a user of the cookbook application.
  */
-@Entity
 public class User {
   private String username;
   private String password;
+
   public static final String outputSignup = "Username and password must be: \n "
       + "- letters and numbers \n "
       + "- between 3 and 16 characters";
@@ -104,6 +103,7 @@ public class User {
     this.cookBook = cookBook;
   }
 
+ 
   /**
    * Returns a string representation of the User object.
    *

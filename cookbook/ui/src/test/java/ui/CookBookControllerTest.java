@@ -12,16 +12,17 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
-import core.CookBook;
-import core.Ingredient;
-import core.Recipe;
-import core.User;
-import core.UserDataFilehandling;
+
+import cookbook.core.CookBook;
+import cookbook.core.Ingredient;
+import cookbook.core.Recipe;
+import cookbook.core.User;
+import cookbook.core.UserDataFilehandling;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import ui.access.LocalCookbookAccess;
 
 public class CookBookControllerTest extends ApplicationTest {
 
@@ -69,8 +70,8 @@ public class CookBookControllerTest extends ApplicationTest {
         cookBook.addRecipe(recipe2);
         cookBook.addRecipe(recipe3);
         this.user.setCookBook(cookBook);
-
-        controller.initialize(user, fileHandler);
+        
+        controller.initialize(user, new LocalCookbookAccess(fileHandler));
       } catch (Exception a) {
         a.printStackTrace();
       }
