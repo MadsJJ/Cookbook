@@ -6,6 +6,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CookbookApplication",
+            "request": "launch",
+            "mainClass": "user.springboot.rest/cookbook.springboot.restserver.CookbookApplication",
+            "projectName": "springboot.restserver"
+        },
+        {
             "name": "RemoteApp",
             "request": "launch",
             "mainClass": "user.ui/ui.RemoteApp",

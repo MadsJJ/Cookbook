@@ -18,51 +18,51 @@
 // import org.springframework.test.web.servlet.MvcResult;
 // import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 // import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-// import todolist.core.AbstractTodoList;
-// import todolist.core.TodoModel;
-// import todolist.json.TodoPersistence;
+// //import todolist.core.AbstractTodoList;
+// //import todolist.core.TodoModel;
+// //import todolist.json.TodoPersistence;
 
-// @AutoConfigureMockMvc
-// @ContextConfiguration(classes = { TodoModelController.class, TodoModelService.class, TodoModelApplication.class })
-// @WebMvcTest
-// public class TodoModelApplicationTest {
+// // @AutoConfigureMockMvc
+// // @ContextConfiguration(classes = { TodoModelController.class, TodoModelService.class, TodoModelApplication.class })
+// // @WebMvcTest
+// // public class TodoModelApplicationTest {
 
-//   @Autowired
-//   private MockMvc mockMvc;
+// //   @Autowired
+// //   private MockMvc mockMvc;
 
-//   private ObjectMapper objectMapper;
+// //   private ObjectMapper objectMapper;
 
-//   @BeforeEach
-//   public void setup() throws Exception {
-//     objectMapper = TodoPersistence.createObjectMapper();
-//   }
+// //   @BeforeEach
+// //   public void setup() throws Exception {
+// //     objectMapper = TodoPersistence.createObjectMapper();
+// //   }
 
-//   private String todoUrl(String... segments) {
-//     String url = "/" + TodoModelController.TODO_MODEL_SERVICE_PATH;
-//     for (String segment : segments) {
-//       url = url + "/" + segment;
-//     }
-//     return url;
-//   }
+// //   private String todoUrl(String... segments) {
+// //     String url = "/" + TodoModelController.TODO_MODEL_SERVICE_PATH;
+// //     for (String segment : segments) {
+// //       url = url + "/" + segment;
+// //     }
+// //     return url;
+// //   }
 
-//   @Test
-//   public void testGet_todo() throws Exception {
-//     MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(todoUrl())
-//         .accept(MediaType.APPLICATION_JSON))
-//         .andExpect(MockMvcResultMatchers.status().isOk())
-//         .andReturn();
-//     try {
-//       TodoModel todoModel = objectMapper.readValue(result.getResponse().getContentAsString(), TodoModel.class);
-//       Iterator<AbstractTodoList> it = todoModel.iterator();
-//       assertTrue(it.hasNext());
-//       AbstractTodoList todoList1 = it.next();
-//       assertTrue(it.hasNext());
-//       AbstractTodoList todoList2 = it.next();
-//       assertFalse(it.hasNext());
-//       assertEquals("todo1", todoList1.getName());
-//       assertEquals("todo2", todoList2.getName());
-//     } catch (JsonProcessingException e) {
-//       fail(e.getMessage());
-//     }
-//   }
-// }
+// //   @Test
+// //   public void testGet_todo() throws Exception {
+// //     MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(todoUrl())
+// //         .accept(MediaType.APPLICATION_JSON))
+// //         .andExpect(MockMvcResultMatchers.status().isOk())
+// //         .andReturn();
+// //     try {
+// //       TodoModel todoModel = objectMapper.readValue(result.getResponse().getContentAsString(), TodoModel.class);
+// //       Iterator<AbstractTodoList> it = todoModel.iterator();
+// //       assertTrue(it.hasNext());
+// //       AbstractTodoList todoList1 = it.next();
+// //       assertTrue(it.hasNext());
+// //       AbstractTodoList todoList2 = it.next();
+// //       assertFalse(it.hasNext());
+// //       assertEquals("todo1", todoList1.getName());
+// //       assertEquals("todo2", todoList2.getName());
+// //     } catch (JsonProcessingException e) {
+// //       fail(e.getMessage());
+// //     }
+// //   }
+// // }
