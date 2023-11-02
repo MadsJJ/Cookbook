@@ -1,8 +1,10 @@
 package cookbook.springboot.restserver;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import cookbook.core.CookBook;
 import cookbook.core.Recipe;
 import cookbook.core.User;
@@ -17,46 +19,51 @@ public class CookbookService {
 
     private User user;
     private UserDataFilehandling userDataFilehandler;
+    private List<User> users;
     
-    public CookbookService(User user) {
-        userDataFilehandler = new UserDataFilehandling("");
-        this.user = user; // Inject the User bean through constructor injection
-    }
-
     @Autowired
-    public CookbookService() {
-      this(createDefaultUser());
+    public CookbookService(List<User> users) {
+        userDataFilehandler = new UserDataFilehandling("\\src\\main\\resources\\ui\\springboot.json");
+        this.users = userDataFilehandler.findUsers(); // Inject the User bean through constructor injection
+        System.out.println(users);
+
     }
 
-    public User getUser() {
-        return user;
+    // @Autowired
+    // public CookbookService() {
+    //   this(createDefaultUser());
+    // }
+    
+    public List<User> getUsers() {
+        System.out.println("finding users in Service");
+        return userDataFilehandler.findUsers();
     }
+
+    public UserDataFilehandling getFileHandler(){
+      return userDataFilehandler;
+    }
+
 
     public void setUser(User user) {
         this.user = user;
-    }
+    // }
 
-    private static User createDefaultUser() {
-    UserDataFilehandling defaultUserDataFilehandler = new UserDataFilehandling("");
+    // private static List<User> createDefaultUser() {
+    // UserDataFilehandling defaultUserDataFilehandler = new UserDataFilehandling("\\src\\main\\resources\\ui\\springboot.json");
 
-    try {
-      return defaultUserDataFilehandler.getUser("default", "password");
-    } catch (Exception e) {
-      System.out.println("Couldn't read default-cookbook.json, so making user manually ("
-            + e + ")");
-    }
-    User user = manuallyCreateUser();
-    return user;
+  
+    // System.out.println(defaultUserDataFilehandler.findUsers());
+    // return defaultUserDataFilehandler.findUsers();
   } 
 
 
   /**
    * Method that creates two test users.
-   */
-  private static User manuallyCreateUser() {
-    User user = new User("username", "password", new CookBook(new ArrayList<Recipe>()));        
-    return user;
-  }
+  //  */
+  // private static User manuallyCreateUser() {
+  //   User user = new User("username", "password", new CookBook(new ArrayList<Recipe>()));        
+  //   return user;
+  // }
 
   /**
    * Saves the User to disk.

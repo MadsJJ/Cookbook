@@ -55,19 +55,24 @@ public class RemoteCookbookAccess implements CookbookAccess {
     List<User> users = new ArrayList<>();
     HttpRequest request =
         HttpRequest.newBuilder(endpointUri).header(ACCEPT_HEADER, APPLICATION_JSON).GET().build();
+        System.out.println("path is:"+endpointUri);
+        System.out.println("request is:"+request.toString());
     try {
       final HttpResponse<String> response =
           HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+          System.out.println("response is:"+response.body());
       Gson gson = new Gson();
       User[] userArray = gson.fromJson(response.body(), User[].class);
       if (userArray != null) {
         for (User user : userArray) {
           users.add(user);
+          
         }
       }
+      System.out.println("users found from response is"+ users);
       return users;
     } catch (Exception e) {
-      throw new IllegalArgumentException("Can't find user");
+      throw new IllegalArgumentException("Can't find users");
     }
   }
 
@@ -88,17 +93,30 @@ public class RemoteCookbookAccess implements CookbookAccess {
 
   @Override
   public User registerNewUser(String username, String password) {
+    System.out.println("new user registered remote");
     try {
       validateNoExistingUser(username);
       User user = new User(username, password, new CookBook(new ArrayList<Recipe>()));
-      List<User> users = readUserAccounts();
-      users.add(user);
+      // List<User> users = readUserAccounts();
+      // users.add(user);
       Gson gson = new GsonBuilder().setPrettyPrinting().create();
-      String jsonUsers = gson.toJson(users);
-      HttpRequest request = HttpRequest.newBuilder(endpointUri)
+      String jsonUser = gson.toJson(user);
+      System.out.println(jsonUser);
+      System.out.println(userUri(username));
+
+      HttpRequest request = HttpRequest.newBuilder(userUri(username))
           .header(ACCEPT_HEADER, APPLICATION_JSON).header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-          .PUT(BodyPublishers.ofString(jsonUsers)).build();
-      HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+          .PUT(BodyPublishers.ofString(jsonUser)).build();
+                  System.out.println("request is:"+request.toString());
+
+                  final HttpResponse<String> response =
+          HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+          //         HttpResponse<String> response =
+          // HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+          System.out.println(response.body());
+          // respone sender nå alle brukere, men burde sende den nye brukeren så man får nytt vindu med bare den brukeren
+          // System.out.println(HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString()));
+      // HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
       return user;
 
     } catch (IOException | InterruptedException e) {
@@ -107,6 +125,13 @@ public class RemoteCookbookAccess implements CookbookAccess {
 
 
 
+  }
+  private String uriParam(String s) {
+    return URLEncoder.encode(s, StandardCharsets.UTF_8);
+  }
+
+  private URI userUri(String name) {
+    return endpointUri.resolve("/cookbook/"+uriParam(name));
   }
 
 
@@ -147,9 +172,9 @@ public class RemoteCookbookAccess implements CookbookAccess {
       throw new IllegalArgumentException("Couldn't update file");
     }
    
+   
+
     
-
-
   }
 
 

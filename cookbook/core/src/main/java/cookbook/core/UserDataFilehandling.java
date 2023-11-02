@@ -29,6 +29,9 @@ public class UserDataFilehandling {
     } else if (userDir.endsWith("core")) {
       userDir = userDir.substring(0, userDir.length() - 4);
       userDir = userDir + "ui";
+    }else if(userDir.endsWith("restserver")){
+      userDir = userDir.substring(0, userDir.length() - 10);
+      userDir = userDir + "ui";
     }
 
     this.userFile = userDir + userFile;
@@ -39,7 +42,7 @@ public class UserDataFilehandling {
    *
    * @return a list of all users in the user file
    */
-  public List<User> findUsers() {
+  public List<User> YoufindUsers() {
     List<User> users = new ArrayList<>();
     try (FileReader reader = new FileReader(userFile, StandardCharsets.UTF_8)) { // Specify UTF-8
       Gson gson = new Gson();

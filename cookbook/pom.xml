@@ -159,7 +159,7 @@
                     <executions>
                         <execution>
                         <id>spotbugs-check</id>
-                        <phase>verify</phase>
+                        <phase>vhhikerify</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>

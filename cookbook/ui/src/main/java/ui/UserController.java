@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 
 import cookbook.core.User;
 import cookbook.core.UserDataFilehandling;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ui.access.CookbookAccess;
@@ -53,8 +51,8 @@ public class UserController {
   @FXML
   private Label popupLabel;
 
-  @FXML 
-  String endpointUri;
+
+  String endpointUri ="http://localhost:8080/cookbook";
 
   @FXML
   String localFilePath;
@@ -76,7 +74,6 @@ public class UserController {
   @FXML
   void login() {
     try {
-      setAccess();
       startApp(fileHandler.getUser(usernameField.getText(), passwordField.getText()));
 
     } catch (Exception e) {
@@ -91,15 +88,15 @@ public class UserController {
   @FXML
   void signup() {
     try {
-      setAccess();
       startApp(accessType.registerNewUser(usernameField.getText(), passwordField.getText()));
     } catch (Exception e) {
       displayErrorMessage(e);
     }
   }
-
-  void setAccess() {
+  @FXML
+  void initialize() {
     CookbookAccess accessType = null;
+    System.out.println(endpointUri);
     if (endpointUri != null) {
       RemoteCookbookAccess remoteAccess;
       try {
@@ -111,6 +108,8 @@ public class UserController {
       }
     }
     if (accessType == null) {
+      System.out.println("hei");
+      System.out.println(localFilePath);
       this.fileHandler = new UserDataFilehandling(localFilePath);
       LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
       accessType = localAccess;
@@ -127,15 +126,15 @@ public class UserController {
    */
   public void setStage(Stage stage) {
     // Add an event handler to the Label when the application starts
-    popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
-        new EventHandler<MouseEvent>() {
-          @Override
-          public void handle(MouseEvent mouseEvent) {
-            if (popupLabel.isVisible()) {
-              popupLabel.setVisible(false);
-            }
-          }
-        });
+    // popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
+    //     new EventHandler<MouseEvent>() {
+    //       @Override
+    //       public void handle(MouseEvent mouseEvent) {
+    //         if (popupLabel.isVisible()) {
+    //           popupLabel.setVisible(false);
+    //         }
+    //       }
+    //     });
   }
 
   /**

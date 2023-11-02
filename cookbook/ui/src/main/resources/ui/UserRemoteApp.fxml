@@ -3,9 +3,9 @@
 <?import java.lang.String?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="cookbook.ui.UserController">
-    <fx:define>
+<VBox xmlns:fx="http://javafx.com/fxml/1">
+    <!-- <fx:define>
         <String fx:id="endpointUri" fx:value="http://localhost:8080/cookbook/"/>
-    </fx:define>
+    </fx:define> -->
     <fx:include fx:id="userView" source="User.fxml"/>
 </VBox>
