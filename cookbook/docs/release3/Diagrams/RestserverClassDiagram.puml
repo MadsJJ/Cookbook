@@ -1,0 +1,51 @@
+@startuml RestserverClassDiagram
+
+package restserver {
+    class CookbookApplication {
+        + main()
+    }
+
+    class CookbookController {
+        + COOKBOOK_SERVICE_PATH : String 
+        - CookbookService cookbookService
+        + getUsers() : List<User>
+        + setUser()
+        - autoSaveUser()
+
+    }
+
+    class CookbookService {
+        - User User
+        - UserDataFilehandling userDataFilehandler
+        - List<User> users
+        + CookbookService(List>User> users)
+        + getUsers() : List<User>
+        + getFilehandler() : UserDataFilehandling 
+        + setUser(User user)
+        + autoSaveUser()
+    }
+}
+
+package cookbook.restserver{
+     class CookbookController {
+    }
+
+    class CookbookService {
+    }
+
+
+}
+
+package cookbook.core{
+    class UserDataFilehandling{
+    }
+        cookbook.restserver.CookbookController  o-- "cookbookService" cookbook.restserver.CookbookService
+        cookbook.restserver.CookbookService  o-- "Users" UserDataFilehandling
+
+
+}
+
+@enduml
+
+
+
