@@ -1,0 +1,14 @@
+@startuml name
+
+ package ui{
+    class CookbookController{
+
+    }
+    class UserController{
+
+    }
+}
+
+package 
+
+@enduml
