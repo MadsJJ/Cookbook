@@ -111,10 +111,6 @@
                     </argLine>
                 </configuration>
 	        </plugin>
-
-
-        
-
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -124,6 +120,14 @@
                 <configuration>
                     <!-- syntax: module-name/full-app-class-name -->
                     <mainClass>user.ui/ui.MainApp</mainClass>
+                    <!-- rest of options are for jlink -->
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <stripDebug>true</stripDebug>
+                    <noManPages>true</noManPages>
+                    <launcher>cookbookfx</launcher>
+                    <jlinkImageName>cookbookfx</jlinkImageName>
+                    <jlinkZipName>cookbookfx</jlinkZipName>
                 </configuration>
             </plugin>
         </plugins>
