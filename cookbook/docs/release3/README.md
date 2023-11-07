@@ -2,16 +2,15 @@
 
 ## Introduction 
 
-For the third release we will present the final product of our Cookbook. The focus for this release has been to set up a REST API and to add some new functionality. The maiority of our time has been used on implementing the REST API. None of the group members had any prior knowledge to this, so it did take some time to implement. 
-
+For the third release we will present the final product of our Cookbook. The focus for this release has been to set up a REST API and to add some new functionality. The majority of our time has been used on implementing the REST API. None of the group members had any prior knowledge to this, so it did take some time to implement. 
 ### New functionality
 The user is now also able to get recipes from the cookbook based on the ingredients they already have at home. See [UserStories.md](/cookbook/docs/release3/UserStories.md) for description. 
 
 ### RestAPI 
-For descripion of REST API read [README for REST API]
+For detailed description of REST API go to [README for REST API](/cookbook/docs/release3/README_RESTAPI.md)
 
 ## Diagrams 
-Overview and explanation of the diagrams -> [README for diagrams](/cookbook/docs/release3/Diagrams/README.md)
+For an overview and explanation of the diagrams go to [README for diagrams](/cookbook/docs/release3/Diagrams/README.md)
 
 ## Work habits and workflow
 
@@ -24,7 +23,8 @@ See [README from release 2](/cookbook/docs/release2/README.md) for elaboration.
 During this final release we have focused on making a branch for every issue, and naming it with the number og the issue.
 
 ## Quality assurance of code
-
+We have continued to use **Jacoco**, **Spotbugs** and **Checkstyle** for quality assurance of the code. SKRIV OM DE SISTE RESULTATENE HER.  
+For release 3 the group has been reading each others code. This is to ensure that to check if any methodes can be written more efficient and understaning.  
 ## Reflection and retrospective discussion following the final release
 
 After this final release we will discuss what went well, and what issues we faced along the way. 
@@ -42,12 +42,11 @@ Our group has developed good workflow and work habits throughout this project. W
 
 By adhering to these work habits and following our structured workflow, we've achieved a harmonious and productive work environment. This approach allows us to maintain focus, collaboration, and motivation, ultimately contributing to our success as a team.
 
-### Documantation
+### Documentation
 We have written documentation for every release. Each release contains a README.md file. The README files contains a description of changes, and what we have done during that release. We have also written userstories for the functionalities, and added pictures of prototypes. We could also have added a the description of any problems or things that did not go well in the README.md files. 
 
-### Quality assurance
-We continued using **Jacoco**, **Spotbugs** and **Chechstyle**.....(Skrive med her)    
-We also got better at reading through each others code during the final release. This should have been done from the beginning to ensure better code quality. 
-
+### Quality assurance   
+The group got better at reading through each others code during the final release. This should have been done from the beginning to ensure better code quality.
+We are happy with the help we got from using **Jacoco**, **Spotbugs** and **Chechstyle**. This is something we actively used from the beginning.   
 ## Conclusion
-This project has made us gain a great deal of experiance, developed our team-managment and new personal skills.   
+The project has made all group members gain a lot of experiance, developed our team-managment and new personal skills.   
