@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ui.access.CookbookAccess;
 import ui.access.LocalCookbookAccess;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;

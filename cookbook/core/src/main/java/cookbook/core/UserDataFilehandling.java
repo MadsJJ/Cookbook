@@ -42,7 +42,7 @@ public class UserDataFilehandling {
    *
    * @return a list of all users in the user file
    */
-  public List<User> YoufindUsers() {
+  public List<User> findUsers() {
     List<User> users = new ArrayList<>();
     try (FileReader reader = new FileReader(userFile, StandardCharsets.UTF_8)) { // Specify UTF-8
       Gson gson = new Gson();

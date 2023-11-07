@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import cookbook.core.Ingredient;
 import cookbook.core.Recipe;
 import cookbook.core.User;
-import cookbook.core.UserDataFilehandling;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

@@ -1,7 +1,6 @@
 package ui.access;
 
-import java.io.IOException;
-import java.util.List;
+
 import cookbook.core.User;
 
 
@@ -10,14 +9,6 @@ import cookbook.core.User;
  * Makes it easier to support transparent use of a REST API.
  */
 public interface CookbookAccess {
-
-  /**
-   * Gets all the users that use the Cookbook-application.
-   *
-   * @return all the users
-   * @throws IOException if not found
-   */
-  public List<User> readUserAccounts() throws IOException;
 
   /**
    * Get a specific user by username.

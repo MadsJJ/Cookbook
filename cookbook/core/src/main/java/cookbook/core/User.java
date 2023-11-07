@@ -1,8 +1,5 @@
 package cookbook.core;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 /**
  * Represents a user of the cookbook application.
  */

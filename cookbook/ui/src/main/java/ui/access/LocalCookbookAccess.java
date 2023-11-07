@@ -1,8 +1,7 @@
 package ui.access;
 
 
-import java.io.IOException;
-import java.util.List;
+
 import cookbook.core.User;
 import cookbook.core.UserDataFilehandling;
 
@@ -18,11 +17,6 @@ public class LocalCookbookAccess implements CookbookAccess{
     fileHandler = new UserDataFilehandling("/src/main/resources/ui/UserData.json");
    
     }
-
-  @Override
-  public List<User> readUserAccounts() throws IOException {
-    return fileHandler.findUsers();
-  }
   
   @Override
   public User readUser(String username, String password) {
@@ -38,8 +32,4 @@ public class LocalCookbookAccess implements CookbookAccess{
   public void updateUserAttributes(User user) {
     fileHandler.updateFile(user);
   }
-
-
- 
-  
 }

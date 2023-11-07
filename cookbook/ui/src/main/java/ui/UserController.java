@@ -52,7 +52,7 @@ public class UserController {
   private Label popupLabel;
 
 
-  String endpointUri ="http://localhost:8080/cookbook";
+  String endpointUri ="http://localhost:8080/cookbook/";
 
   @FXML
   String localFilePath;
@@ -74,8 +74,7 @@ public class UserController {
   @FXML
   void login() {
     try {
-      startApp(fileHandler.getUser(usernameField.getText(), passwordField.getText()));
-
+      startApp(accessType.readUser(usernameField.getText(), passwordField.getText()));
     } catch (Exception e) {
       displayErrorMessage(e);
     }

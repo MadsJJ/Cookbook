@@ -2,11 +2,8 @@ package cookbook.springboot.restserver;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,106 +17,47 @@ import cookbook.core.User;
 @RestController
 @RequestMapping(CookbookController.COOKBOOK_SERVICE_PATH)
 public class CookbookController {
-
-  public static final String COOKBOOK_SERVICE_PATH = "cookbook";
-
+  
+  public static final String COOKBOOK_SERVICE_PATH = "/cookbook/";
+  
+ 
   @Autowired
   private CookbookService cookbookService;
 
-  
+
   @GetMapping
-  public List<User> getUsers() {
-    System.out.println("getting users in controsller");
+  public List<User> displayUsers() {
+    System.out.println("getting users in controller");
     return cookbookService.getUsers();
   }
- 
-
-  @PutMapping(path = "/{name}")
-  public void setUser(@PathVariable("name") String name, @RequestBody User user) {
-      // You can now use the 'user' object obtained from the request body
-      // cookbookService.getFileHandler().getUser(name, name);
-      System.out.println("putmapping");
-      cookbookService.setUser(user);
-      cookbookService.autoSaveUser();
-  }
-
-  @GetMapping(path ="/{name}")
-  public User getUser(@PathVariable("name") String name, @RequestBody User user) {
-    System.out.println("getting users in controsller");
-    cookbookService.setUser(user);
-    return user;
-  }
-
-
-
-  private void autoSaveUser() {
-   cookbookService.autoSaveUser();
-  }
-
-  private void checkUser(User user, String username) {
-   if (user == null) {
-     throw new IllegalArgumentException("No user named \"" + username + "\"");
-   }
-  }
 
   /**
-  // * Gets the corresponding User.
-  // *
-  // * @param username the name of the User
-  // * @return the corresponding User
-  // */
-  // @GetMapping(path = "/list/{username}")
-  // public User getUser(@PathVariable("username") String username) {
-  //  User user = getUser().getUser(username);
-  //  checkUser(user, username);
-  //  return user;
-  // }
-
-  /**
-   * Replaces or adds a User.
+   * Posts the login requests entered from client.
    *
-   * @param username the name of the User
-   * @param User the User to add
-   * @return true if it was added, false if it replaced
+   * @param email the email
+   * @param password the password
+   * @return the user if login is correct
    */
-  //@PutMapping(path = "/list/{username}")
-  //public boolean putUser(@PathVariable("username") String username,
-  //    @RequestBody AbstractUser user) {
-  //  boolean added = getUser().putUser(username) == null;
-  //  autoSaveUser();
-  //  return added;
-  //}
 
-  /**
-   * Renames the User.
-   *
-   * @param username the name of the User
-   * @param newUsername the new name
-   */
-  //@PostMapping(path = "/list/{username}/rename")
-  //public boolean renameCookbook(@PathVariable("username") String username,
-  //    @RequestParam("newUsername") String newUsername) {
-  //  AbstractUser cookbook = getUser().getUser(username);
-  //  checkUser(user, username);
-  //  if (getUser().getUser(newUsername) != null) {
-  //    throw new IllegalArgumentException("A User named \"" + newUsername + "\" already exists");
-  //  }
-  //  user.setName(newUsername);
-  //  autoSaveUser();
-  //  return true;
-  //}
+  //localhost:8080/cookbook/login?username={username}&password={password}
+  @PostMapping(path = "login")
+  public User loginUser(@RequestParam("username") String username, 
+      @RequestParam("password") String password) {
+        return cookbookService.getExistingUser(username, password);
+    }
 
-  /**
-   * Removes the Cookbook.
-   *
-  //  * @param name the name of the Cookbook
-  //  */
-  // @DeleteMapping(path = "/list/{username}")
-  // public boolean removeUser(@PathVariable("username") String username) {
-  //  AbstractUser User = getUser().getUser(username);
-  //  checkUser(User, username);
-  //  getUser().removeUser(User);
-  //  autoSaveUser();
-  //  return true;
-  // }
+  //localhost:8080/cookbook/register?username={username}&password={password}
+  @PostMapping(path = "register")
+  public User registerUser(@RequestParam("username") String username, 
+      @RequestParam("password") String password) {
+          cookbookService.checkIfUsernameTaken(username);
+          return cookbookService.signup(username, password);
+    }
+
+  //localhost:8080/cookbook/update?username={username}
+  @PostMapping(path = "update")
+  public void updateUser(@RequestBody User user) {
+      cookbookService.autoSaveUser(user);
+    }
+
 }
