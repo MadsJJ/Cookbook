@@ -21,23 +21,25 @@ What each folder contains
 ### core
 
 See [core](cookbook/core/src/main/java/core)  
-***main***  
-Contains the classes for the main functionality of the application. This folder contains four classes;
 
+***main***  
+Contains the classes for the main functionality of the application, its core. This part consists of four classes;   
 [CookBook.java](cookbook/core/src/main/java/core/CookBook.java)  
 [Ingredient.java](cookbook/core/src/main/java/core/Ingredient.java)  
-[Recipe.Java](cookbook/core/src/main/java/core/Recipe.java)  
+[Recipe.java](cookbook/core/src/main/java/core/Recipe.java)  
 [User.java](cookbook/core/src/main/java/core/User.java)   
-[UserDataFilehandling](cookbook/core/src/main/java/core/UserDataFilehandling.java) 
+ Additionally it contains all the user handling and a class to handle filehandling and serialization/deserialization;
+[UserDataFilehandling.java](cookbook/core/src/main/java/core/UserDataFilehandling.java) 
+
 
 ***test***  
-Contains the respective tests for the core-classes
+Contains the respective tests for the core-classes + UserDataFilehandling
 
 [CookBookTest.java](cookbook/core/src/test/java/core/CookBookTest.java)  
 [IngredientTest.java](cookbook/core/src/test/java/core/IngredientTest.java)  
 [RecipeTest.java](cookbook/core/src/test/java/core/RecipeTest.java)  
 [UserTest.java](cookbook/core/src/test/java/core/UserTest.java)  
-
+[UserDataFilehandlingTest.java](cookbook/core/src/test/java/core/UserDataFilehandlingTest.java)
 
 
 ### docs
@@ -50,6 +52,8 @@ See [docs](cookbook/docs)
 [release1](cookbook/docs/release1)  - contains UIDesign and UIPrototypes for release 1, UserStories and a README.md that contains the application functionality. 
 
 [release2](cookbook/docs/release2) - contains updated UIDesign, error messages, architecture diagramand a descriptive README.md-file for this release.
+
+[release3](cookbook/docs/release3) - contains diagrams, updated UIPrototypes, updated userstories and a README.md for this release.
 
 ### ui
 
