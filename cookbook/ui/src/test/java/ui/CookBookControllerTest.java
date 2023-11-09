@@ -12,15 +12,17 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
-import core.CookBook;
-import core.Ingredient;
-import core.Recipe;
-import core.User;
-import core.UserDataFilehandling;
+
+import cookbook.core.CookBook;
+import cookbook.core.Ingredient;
+import cookbook.core.Recipe;
+import cookbook.core.User;
+import cookbook.core.UserDataFilehandling;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ui.access.LocalCookbookAccess;
 
 public class CookBookControllerTest extends ApplicationTest {
 
@@ -49,8 +51,8 @@ public class CookBookControllerTest extends ApplicationTest {
           StandardCharsets.UTF_8)) { 
         writer.write("");
         writer.close();
-        fileHandler.signup("CookBookTest", "password");
-        this.user = fileHandler.getUser("CookBookTest", "password");
+        fileHandler.signup("username", "password");
+        this.user = fileHandler.getUser("username", "password");
         Ingredient ingredient1 = new Ingredient("Ingredient 1", 100.0, "g");
         Ingredient ingredient2 = new Ingredient("Ingredient 2", 200.0, "g");
         Ingredient ingredient3 = new Ingredient("Ingredient 3", 50.0, "dl");
@@ -74,7 +76,7 @@ public class CookBookControllerTest extends ApplicationTest {
         cookBook.addRecipe(recipe4);
         this.user.setCookBook(cookBook);
         fileHandler.updateFile(user);
-        controller.initialize(user, fileHandler);
+        controller.initialize(user, new LocalCookbookAccess(fileHandler));
       } catch (Exception a) {
         a.printStackTrace();
       }

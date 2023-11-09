@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.UserController">
+    <fx:define>
+        <String fx:id="localFilePath" fx:value="/src/main/resources/ui/UserData.json"/>
+        <!-- <String fx:id="sampleTodoModelResource" fx:value="sample-todomodel.json"/> -->
+    </fx:define>
+    <fx:include fx:id="userView" source="User.fxml"/>
+</VBox>

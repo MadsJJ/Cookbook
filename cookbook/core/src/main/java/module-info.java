@@ -1,5 +1,5 @@
 module user.core {
-    exports core;
+    exports cookbook.core;
     requires com.google.gson;
-    opens core;
+    opens cookbook.core;
 }

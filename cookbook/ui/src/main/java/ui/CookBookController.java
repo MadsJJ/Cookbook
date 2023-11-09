@@ -1,16 +1,14 @@
 package ui;
 
-
-import core.CookBook;
-import core.Ingredient;
-import core.Recipe;
-import core.User;
-import core.UserDataFilehandling;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import cookbook.core.CookBook;
+import cookbook.core.Ingredient;
+import cookbook.core.Recipe;
+import cookbook.core.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ui.access.CookbookAccess;
 
 
 /**
@@ -152,7 +151,7 @@ public class CookBookController {
 
 
   private User user;
-  private UserDataFilehandling fileHandler;
+  private CookbookAccess accessType;
   private Recipe tmpRecipe;
 
   /**
@@ -162,15 +161,15 @@ public class CookBookController {
    * @param user The user object.
    * @param fileHandler The file handler for user data.
    */
-  public void initialize(User user, UserDataFilehandling fileHandler) {
+  public void initialize(User user, CookbookAccess accessType) {
     this.user = user;
     randomRecipePane.setVisible(false);
     addNewRecipePane.setVisible(false);
     ingredientPane.setVisible(false);
     searchByIngredientsPane.setVisible(false);
     popupLabel.setVisible(false);
-    headerText.setText(user.getUsername() + "'s cookbook.");
-    this.fileHandler = fileHandler;
+    headerText.setText(user.getUsername() + "´s cookbook.");
+    this.accessType=accessType;
     popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
         new EventHandler<MouseEvent>() {
           @Override
@@ -233,11 +232,11 @@ public class CookBookController {
   @FXML
   void searchByIngredients() {
     try {
-      user.setCookBook(new CookBook(fileHandler.getUser(user.getUsername(), user.getPassword())
+      user.setCookBook(new CookBook(accessType.readUser(user.getUsername(), user.getPassword())
           .getCookBook().getCookBookByIngredientSearch(tmpRecipe.getIngredients())));
     } catch (Exception e) {
       displayErrorMessage(e);
-      user.setCookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook());
+      user.setCookBook(accessType.readUser(user.getUsername(), user.getPassword()).getCookBook());
 
     }
     updateRecipeListView();
@@ -256,7 +255,7 @@ public class CookBookController {
     searchByIngredientsPane.setVisible(false);
     randomRecipePane.setVisible(false);
     mainPagePane.setVisible(true);
-    user.setCookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook());
+    user.setCookBook(accessType.readUser(user.getUsername(), user.getPassword()).getCookBook());
     updateRecipeListView();
     tmpRecipe.removeAllIngredients();
 
@@ -279,7 +278,7 @@ public class CookBookController {
   void removeRecipe(ActionEvent event) {
     try {
       user.getCookBook().removeRecipe(deleteRecipeTextfield.getText());
-      fileHandler.updateFile(user);
+      accessType.updateUserAttributes(user);
       updateRecipeListView();
     } catch (Exception e) {
       displayErrorMessage(e);
@@ -368,7 +367,7 @@ public class CookBookController {
       user.getCookBook().addRecipe(recipe);
       updateRecipeListView();
       addRecipePage();
-      fileHandler.updateFile(user);
+      accessType.updateUserAttributes(user);
       tmpRecipe.removeAllIngredients();
     } catch (Exception e) {
       displayErrorMessage(e);
@@ -412,7 +411,7 @@ public class CookBookController {
       Scene scene = new Scene(root);
       Stage stage = (Stage) logOutButton.getScene().getWindow();
       UserController controller = loader.getController();
-      controller.setFileHandler(fileHandler);
+      controller.setAccessType(accessType);
       stage.setScene(scene);
       stage.show();
 

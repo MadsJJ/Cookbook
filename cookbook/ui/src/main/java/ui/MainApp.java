@@ -1,6 +1,5 @@
 package ui;
 
-import core.UserDataFilehandling;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,14 +20,15 @@ public class MainApp extends Application {
   public void start(Stage primaryStage) throws IOException {
     primaryStage.setTitle("Cookbook");
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("User.fxml"));
-      Parent root = loader.load();
-      primaryStage.setScene(new Scene(root));
-      UserController controller = loader.getController();
-      controller.setFileHandler(
-                  new UserDataFilehandling("/src/main/resources/ui/UserData.json"));
-      controller.setStage(primaryStage);
-      primaryStage.show();
+      Parent parent = FXMLLoader.load(getClass().getResource("UserRemoteApp.fxml"));
+    primaryStage.setScene(new Scene(parent));
+    primaryStage.show();
+      // FXMLLoader loader = new FXMLLoader(getClass().getResource("UserRemoteApp.fxml"));
+      // Parent root = loader.load();
+      // primaryStage.setScene(new Scene(root));
+      // UserController controller = loader.getController();
+      // controller.setStage(primaryStage);
+      // primaryStage.show();
     } catch (IOException e) {
       e.printStackTrace();
     }
