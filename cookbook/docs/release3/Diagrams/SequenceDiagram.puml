@@ -33,7 +33,7 @@ deactivate cs
 
 alt username not available
 cs -[#Red]-> rcc: Exception
-else username available
+else username already exists 
 activate rcc
 cs -> rcc
 rcc -> cs: signup(username, password)
@@ -61,5 +61,6 @@ ui -> user
 deactivate ucc
 deactivate ui
 deactivate user
+end
 
 @enduml
