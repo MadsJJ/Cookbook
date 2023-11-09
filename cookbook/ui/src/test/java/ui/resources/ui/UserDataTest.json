@@ -1,6 +1,6 @@
 [
   {
-    "username": "CookBookTest",
+    "username": "username",
     "password": "password",
     "cookBook": {
       "recipes": []

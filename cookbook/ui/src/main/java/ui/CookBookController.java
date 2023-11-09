@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import cookbook.core.CookBook;
 import cookbook.core.Ingredient;
 import cookbook.core.Recipe;
 import cookbook.core.User;
@@ -232,11 +232,11 @@ public class CookBookController {
   @FXML
   void searchByIngredients() {
     try {
-      user.setCookBook(new CookBook(fileHandler.getUser(user.getUsername(), user.getPassword())
+      user.setCookBook(new CookBook(accessType.readUser(user.getUsername(), user.getPassword())
           .getCookBook().getCookBookByIngredientSearch(tmpRecipe.getIngredients())));
     } catch (Exception e) {
       displayErrorMessage(e);
-      user.setCookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook());
+      user.setCookBook(accessType.readUser(user.getUsername(), user.getPassword()).getCookBook());
 
     }
     updateRecipeListView();
@@ -255,7 +255,7 @@ public class CookBookController {
     searchByIngredientsPane.setVisible(false);
     randomRecipePane.setVisible(false);
     mainPagePane.setVisible(true);
-    user.setCookBook(fileHandler.getUser(user.getUsername(), user.getPassword()).getCookBook());
+    user.setCookBook(accessType.readUser(user.getUsername(), user.getPassword()).getCookBook());
     updateRecipeListView();
     tmpRecipe.removeAllIngredients();
 

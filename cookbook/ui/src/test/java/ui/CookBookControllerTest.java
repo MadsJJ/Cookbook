@@ -51,8 +51,8 @@ public class CookBookControllerTest extends ApplicationTest {
           StandardCharsets.UTF_8)) { 
         writer.write("");
         writer.close();
-        fileHandler.signup("CookBookTest", "password");
-        this.user = fileHandler.getUser("CookBookTest", "password");
+        fileHandler.signup("username", "password");
+        this.user = fileHandler.getUser("username", "password");
         Ingredient ingredient1 = new Ingredient("Ingredient 1", 100.0, "g");
         Ingredient ingredient2 = new Ingredient("Ingredient 2", 200.0, "g");
         Ingredient ingredient3 = new Ingredient("Ingredient 3", 50.0, "dl");
