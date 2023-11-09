@@ -1,0 +1,65 @@
+@startuml Sequence Diagram
+
+Actor User as user  #MediumPurple
+participant UI as ui 
+participant UserController as uc  
+participant RemoteCookbookAccess as rca 
+participant "restserver/CookbookController" as rcc  
+participant CookbookService as cs 
+participant UserDataFilehandler as udf  
+participant "springboot.json" as sbj 
+participant "ui/CookbookController" as ucc 
+
+user -> ui: Input password and username
+activate user
+activate ui
+
+ui -> uc: registerNewUser(username, password)
+activate uc
+uc -> rca: HTTP POST
+activate rca
+rca -> cs: checkIfUsernameTaken(username)
+activate cs
+cs -> udf: getUsers()
+activate udf
+udf -> sbj: findUsers()
+activate sbj
+sbj --> udf: List<User>
+deactivate sbj
+udf --> cs: List<User>
+deactivate udf
+cs --> rcc: User
+deactivate cs
+
+alt username not available
+cs -[#Red]-> rcc: Exception
+else username available
+activate rcc
+cs -> rcc
+rcc -> cs: signup(username, password)
+activate cs
+cs -> udf: signup(username, password)
+activate udf
+udf -> sbj: signup()
+activate sbj
+sbj --> udf: User
+deactivate sbj
+udf --> cs: User
+deactivate udf
+cs --> rcc: User
+deactivate cs
+rcc --> rca: User
+deactivate rcc
+rca --> uc: User
+deactivate rca
+uc -> uc: startApp(User)
+deactivate uc
+uc -> ucc: initialize(User, Accesstype)
+activate ucc
+ucc -> ui
+ui -> user
+deactivate ucc
+deactivate ui
+deactivate user
+
+@enduml
