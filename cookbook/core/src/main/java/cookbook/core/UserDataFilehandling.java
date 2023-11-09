@@ -24,11 +24,14 @@ public class UserDataFilehandling {
    */
   public UserDataFilehandling(String userFile) {
     String userDir = System.getProperty("user.dir");
+    // Used for local access 
     if (userDir.endsWith("gr2308")) {
       userDir = userDir + "/cookbook/ui";
+      // Used for testing in core module
     } else if (userDir.endsWith("core")) {
       userDir = userDir.substring(0, userDir.length() - 4);
       userDir = userDir + "ui";
+      // used for springboot in CookBookService
     }else if(userDir.endsWith("restserver")){
       userDir = userDir.substring(0, userDir.length() - 10);
       userDir = userDir + "ui";
