@@ -1,4 +1,4 @@
-package core;
+package cookbook.core;
 
 
 import com.google.gson.Gson;
@@ -28,6 +28,9 @@ public class UserDataFilehandling {
       userDir = userDir + "/cookbook/ui";
     } else if (userDir.endsWith("core")) {
       userDir = userDir.substring(0, userDir.length() - 4);
+      userDir = userDir + "ui";
+    }else if(userDir.endsWith("restserver")){
+      userDir = userDir.substring(0, userDir.length() - 10);
       userDir = userDir + "ui";
     }
 

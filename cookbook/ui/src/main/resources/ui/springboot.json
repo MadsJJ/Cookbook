@@ -1,0 +1,149 @@
+[
+  {
+    "username": "mads",
+    "password": "borte",
+    "cookBook": {
+      "recipes": [
+        {
+          "title": "Eggs",
+          "ingredients": [
+            {
+              "name": "egg",
+              "amount": 2.0,
+              "unit": "pieces"
+            }
+          ],
+          "category": "Appetizer"
+        },
+        {
+          "title": "pannekaker",
+          "ingredients": [
+            {
+              "name": "flour",
+              "amount": 23.0,
+              "unit": "g"
+            }
+          ],
+          "category": "Appetizer"
+        }
+      ]
+    }
+  },
+  {
+    "username": "user",
+    "password": "123",
+    "cookBook": {
+      "recipes": [
+        {
+          "title": "Fishballs",
+          "ingredients": [
+            {
+              "name": "White fish",
+              "amount": 500.0,
+              "unit": "g"
+            },
+            {
+              "name": "Butter",
+              "amount": 50.0,
+              "unit": "g"
+            },
+            {
+              "name": "Flour",
+              "amount": 20.0,
+              "unit": "g"
+            },
+            {
+              "name": "Pepper",
+              "amount": 2.0,
+              "unit": "g"
+            }
+          ],
+          "category": "Dinner"
+        },
+        {
+          "title": "French fries",
+          "ingredients": [
+            {
+              "name": "Potatoes",
+              "amount": 5.0,
+              "unit": "pieces"
+            },
+            {
+              "name": "Salt",
+              "amount": 5.0,
+              "unit": "g"
+            },
+            {
+              "name": "Oil",
+              "amount": 2.0,
+              "unit": "dl"
+            }
+          ],
+          "category": "Appetizer"
+        },
+        {
+          "title": "Veggies and dip",
+          "ingredients": [
+            {
+              "name": "Sour cream",
+              "amount": 300.0,
+              "unit": "g"
+            },
+            {
+              "name": "Hummus",
+              "amount": 200.0,
+              "unit": "g"
+            },
+            {
+              "name": "Bell pepper",
+              "amount": 2.0,
+              "unit": "pieces"
+            },
+            {
+              "name": "Carrots",
+              "amount": 2.0,
+              "unit": "pieces"
+            },
+            {
+              "name": "Cucumber",
+              "amount": 1.0,
+              "unit": "pieces"
+            }
+          ],
+          "category": "Appetizer"
+        },
+        {
+          "title": "Pesto pasta",
+          "ingredients": [
+            {
+              "name": "Mushrooms",
+              "amount": 250.0,
+              "unit": "g"
+            },
+            {
+              "name": "Pasta",
+              "amount": 200.0,
+              "unit": "g"
+            },
+            {
+              "name": "Grana",
+              "amount": 20.0,
+              "unit": "g"
+            },
+            {
+              "name": "Pesto",
+              "amount": 2.0,
+              "unit": "dl"
+            },
+            {
+              "name": "Pastawater",
+              "amount": 1.0,
+              "unit": "dl"
+            }
+          ],
+          "category": "Dinner"
+        }
+      ]
+    }
+  }
+]

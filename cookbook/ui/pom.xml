@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>modules-ui</artifactId>
 
@@ -11,14 +11,14 @@
     </parent>
 
     <dependencies>
-
+        <!-- Dependencies for your project -->
         <dependency>
             <groupId>com.gr2308.cookbook</groupId>
             <artifactId>modules-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <!-- javafx -->
+        <!-- JavaFX dependencies -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -30,7 +30,7 @@
             <version>17.0.8</version>
         </dependency>
 
-        <!-- junit testing with jupiter -->
+        <!-- JUnit testing with Jupiter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -44,18 +44,18 @@
             <artifactId>junit-jupiter-params</artifactId>
         </dependency>
 
-        <!-- test javafx with TextFX -->
-		<dependency>
-			<groupId>org.testfx</groupId>
-			<artifactId>testfx-core</artifactId>
-			<version>4.0.16-alpha</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testfx</groupId>
-			<artifactId>testfx-junit5</artifactId>
-			<version>4.0.16-alpha</version>
-			<scope>test</scope>
+        <!-- Test JavaFX with TestFX -->
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-core</artifactId>
+            <version>4.0.16-alpha</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-junit5</artifactId>
+            <version>4.0.16-alpha</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -63,66 +63,68 @@
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-        <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.10</version> <!-- Replace with the latest version -->
-            <configuration>
-                <propertyName>jaCoCoArgLine</propertyName>
+            <!-- JaCoCo code coverage plugin -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.10</version> <!-- Replace with the latest version -->
+                <configuration>
+                    <propertyName>jaCoCoArgLine</propertyName>
                 </configuration>
-            <executions>
-                <execution>
-                    <id>prepare-agent</id>
-                    <goals>
-                        <goal>prepare-agent</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>report</id>
-                    <phase>test</phase>
-                    <goals>
-                        <goal>report</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- SpotBugs code quality plugin -->
+            <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
             </plugin>
 
-    
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
-                <plugin>
+
+            <!-- Maven Surefire Plugin for running tests -->
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-        		<artifactId>maven-surefire-plugin</artifactId>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <argLine>
-                    @{jaCoCoArgLine}
-                    --add-opens user.ui/ui=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
-                    </argLine>
+                    <argLine>@{jaCoCoArgLine}</argLine>
+                    <argLine>--add-opens user.ui/ui=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</argLine>
                 </configuration>
-	        </plugin>
+            </plugin>
 
-
-        
-
+            <!-- JavaFX Maven Plugin for running JavaFX application -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
-                <!-- Default configuration for running -->
-                <!-- Usage: mvn javafx:run -->
                 <configuration>
-                    <!-- syntax: module-name/full-app-class-name -->
                     <mainClass>user.ui/ui.MainApp</mainClass>
                 </configuration>
             </plugin>

@@ -4,10 +4,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ui.access.LocalCookbookAccess;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
-import core.UserDataFilehandling;
+
+import cookbook.core.UserDataFilehandling;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,32 +23,33 @@ public class UserControllerTest extends ApplicationTest {
 
 
   @Start
-  public void start(Stage primaryStage) throws IOException {
-    primaryStage.setTitle("Cookbook");
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("User.fxml"));
-    Parent root = loader.load();
-    primaryStage.setScene(new Scene(root));
-    UserController controller = loader.getController();
-    UserDataFilehandling filehandler =
-        new UserDataFilehandling("/src/test/java/ui/resources/ui/UserDataTest.json");
-    controller.setFileHandler(filehandler);
-    this.fileHandler = filehandler;
-    this.controller = controller;
-    controller.setStage(primaryStage);
-    primaryStage.show();
-
-    String userDir = System.getProperty("user.dir");
-    if (userDir.endsWith("gr2308")) {
-      userDir = userDir + "/cookbook/ui";
-    }
-
-    try (FileWriter writer = new FileWriter(
-        Paths.get(userDir, "/src/test/java/ui/resources/ui/UserDataTest.json").toString(),
-        StandardCharsets.UTF_8)) { // Specify UTF-8 encoding
-      writer.write("");
-      fileHandler.signup("username", "password");
-      writer.close();
-      // Serialize and write the updated user list
+    public void start(Stage primaryStage) throws IOException {
+        primaryStage.setTitle("Cookbook");
+        
+            // AnchorPane root = FXMLLoader.load(getClass().getResource("User.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("User.fxml"));
+            Parent root = loader.load();
+            primaryStage.setScene(new Scene(root));
+            UserController controller = loader.getController();
+            // this.controller=controller;
+            UserDataFilehandling filehandler = new UserDataFilehandling("/src/test/java/ui/resources/ui/UserDataTest.json");
+            controller.setAccessType(new LocalCookbookAccess(filehandler));
+            this.fileHandler=filehandler;
+            this.controller=controller;
+            // System.out.println(controller.getFileHandler().findUsers());
+            controller.setStage(primaryStage);
+            primaryStage.show();
+            
+            String userDir = System.getProperty("user.dir");
+             if(userDir.endsWith("gr2308")){
+                  userDir=userDir+"/cookbook/ui";
+              }
+              
+            try (FileWriter writer = new FileWriter(Paths.get(userDir, "/src/test/java/ui/resources/ui/UserDataTest.json").toString(), StandardCharsets.UTF_8)) { // Specify UTF-8 encoding
+            writer.write("");
+            fileHandler.signup("username", "password");
+            writer.close();
+       // Serialize and write the updated user list
     } catch (IOException e) {
       e.printStackTrace();
     }
