@@ -199,7 +199,7 @@ public class CookBookControllerTest extends ApplicationTest {
     assertEquals("Recipe already exists in cookbook",controller.getErrorMessage());
     clickOn("#titleTextField").write("3");
     clickOn("#addNewRecipeButton");
-    assertEquals("[Test Dinner, [Ingredient 2, 200.0, g, Ingredient 1, 100.0, g, Ingredient 3, 50.0, dl], Dinner, Test Dinner2, [Ingredient 2, 200.0, g, Ingredient 1, 100.0, g, Ingredient 3, 50.0, dl], Dinner, Test Appetizer, [Ingredient 2, 200.0, g, Ingredient 1, 100.0, g, Ingredient 3, 50.0, dl], Appetizer, Test Dinner3, [NewI2ngredient, 20.0, g, NewIngredient, 10.0, g], Appetizer]",user.getCookBook().getRecipes().toString());
+    assertEquals("[Test Dinner, [Ingredient 2, 200.0, g, Ingredient 1, 100.0, g, Ingredient 3, 50.0, dl], Dinner, Test Dinner2, [Ingredient 2, 200.0, g, Ingredient 1, 100.0, g, Ingredient 3, 50.0, dl], Dinner, Test Appetizer, [Ingredient 2, 200.0, g, Ingredient 1, 100.0, g, Ingredient 3, 50.0, dl], Appetizer, Test Dinne3r, [NewI2ngredient, 20.0, g, NewIngredient, 10.0, g], Appetizer]",user.getCookBook().getRecipes().toString());
 
   
     

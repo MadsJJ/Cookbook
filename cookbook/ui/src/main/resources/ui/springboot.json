@@ -19,7 +19,7 @@
           "title": "pannekaker",
           "ingredients": [
             {
-              "name": "oaifnoei",
+              "name": "flour",
               "amount": 23.0,
               "unit": "g"
             }
@@ -27,58 +27,6 @@
           "category": "Appetizer"
         }
       ]
-    }
-  },
-  {
-    "username": "mads1",
-    "password": "bortevekk",
-    "cookBook": {
-      "recipes": [
-        {
-          "title": "krem",
-          "ingredients": [
-            {
-              "name": "egg",
-              "amount": 1.0,
-              "unit": "dl"
-            }
-          ],
-          "category": "Dessert"
-        }
-      ]
-    }
-  },
-  {
-    "username": "mads123",
-    "password": "bofe",
-    "cookBook": {
-      "recipes": []
-    }
-  },
-  {
-    "username": "thomas1",
-    "password": "thomas123",
-    "cookBook": {
-      "recipes": [
-        {
-          "title": "PASTA",
-          "ingredients": [
-            {
-              "name": "pasta",
-              "amount": 200.0,
-              "unit": "g"
-            }
-          ],
-          "category": "Dinner"
-        }
-      ]
-    }
-  },
-  {
-    "username": "vortex",
-    "password": "vortex",
-    "cookBook": {
-      "recipes": []
     }
   },
   {
@@ -196,13 +144,6 @@
           "category": "Dinner"
         }
       ]
-    }
-  },
-  {
-    "username": "jorgen",
-    "password": "borte",
-    "cookBook": {
-      "recipes": []
     }
   }
 ]
