@@ -110,15 +110,21 @@ public class Recipe {
    * @param ingredient the ingredient to remove
    * @throws IllegalArgumentException if the ingredient is null or not in the recipe
    */
-  public void removeIngredient(Ingredient ingredient) {
-    if (ingredient == null) {
+  public void removeIngredient(String ingredient) {
+    if (ingredient == null || ingredient.equals("")) {
       throw new IllegalArgumentException("Cant remove null");
     }
-    if (!ingredients.stream().anyMatch(a -> a.getName().equals(ingredient.getName()))) {
+    if (!ingredients.stream().anyMatch(a -> a.getName().equals(ingredient))) {
       throw new IllegalArgumentException("Ingredient not in recipe");
     }
-    ingredients.remove(ingredient);
-    this.ingredients = sortIngredients(ingredients);
+    Ingredient ingredientToRemove = ingredients.stream()
+        .filter(a -> a.getName().equals(ingredient)).findAny().get();
+    ingredients.remove(ingredientToRemove);
+
+  }
+
+  public void removeAllIngredients() {
+    ingredients = new ArrayList<Ingredient>();
   }
 
   /**
@@ -145,6 +151,36 @@ public class Recipe {
   }
 
   /**
+   * Sets the category of the recipe.
+   *
+   * @param ingredientsToSearch the ingredients from which to filter the search
+   * @throws IllegalArgumentException if the category is null or not a valid category
+   */
+  public boolean recipeContainsIngredients(List<Ingredient> ingredientsToSearch) {
+    if (ingredientsToSearch == null || ingredientsToSearch.size() == 0) { 
+      return true; 
+    }
+    if (ingredientsToSearch.stream().anyMatch(a -> !ingredients.stream()
+        .map(b -> b.getName().toLowerCase()).collect(Collectors.toList())
+        .contains(a.getName().toLowerCase()))) { 
+      return false;
+    }
+    // returns false if this recipe doesn't contain any of the input ingredients
+    List<Ingredient> filteredIngredients = ingredients.stream()
+        .filter(a -> ingredientsToSearch.stream().map(b -> b.getName().toLowerCase())
+        .collect(Collectors.toList()).contains(a.getName().toLowerCase()))
+        .collect(Collectors.toList());
+    // return a new list of ingredients from this recipe that are also in the input ingredient list
+
+    return ingredientsToSearch.stream().allMatch(a -> filteredIngredients.stream()
+    .filter(b -> b.getName().toLowerCase().equals(a.getName().toLowerCase()))
+    .findAny().get().getAmount() <= a.getAmount());
+    //  returns true if for every ingredient in filteredRecipes 
+    //  the amount is greater than the corresponding amount of the input ingredient list
+  }
+
+
+  /**
    * Returns a string representation of the recipe.
    *
    * @return a string representation of the recipe
@@ -153,4 +189,8 @@ public class Recipe {
   public String toString() {
     return title + ", " + ingredients + ", " + category;
   }
+  
+ 
+
+  
 }
