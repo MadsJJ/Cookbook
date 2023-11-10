@@ -7,7 +7,7 @@ For the third release we will present the final product of our Cookbook. The foc
 The user is now also able to get recipes from the cookbook based on the ingredients they already have at home. See [UserStories.md](/cookbook/docs/release3/UserStories.md) for description. 
 
 ### RestAPI 
-For detailed description of REST API go to [README for REST API](/cookbook/docs/release3/README_RESTAPI.md)
+For detailed description of REST API go to [README for REST API](cookbook/restserver/README.md)
 
 ## Diagrams 
 For an overview and explanation of the diagrams go to [README for diagrams](/cookbook/docs/release3/Diagrams/README.md)
