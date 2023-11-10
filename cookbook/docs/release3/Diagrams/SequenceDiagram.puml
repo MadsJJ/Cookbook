@@ -13,12 +13,13 @@ participant "ui/CookbookController" as ucc
 user -> ui: Input password and username
 activate user
 activate ui
-
-ui -> uc: registerNewUser(username, password)
+ui -> uc: signUp()
 activate uc
-uc -> rca: HTTP POST
+uc -> rca: registerNewUser(username, password)
 activate rca
-rca -> cs: checkIfUsernameTaken(username)
+rca -> rcc: HTTP POST
+activate rcc
+rcc -> cs: checkIfUsernameTaken(username)
 activate cs
 cs -> udf: getUsers()
 activate udf
@@ -27,10 +28,6 @@ activate sbj
 sbj --> udf: List<User>
 deactivate sbj
 udf --> cs: List<User>
-deactivate udf
-cs --> rcc: User
-deactivate cs
-
 alt username not available
 cs -[#Red]-> rcc: Exception
 else username already exists 
@@ -53,8 +50,8 @@ deactivate rcc
 rca --> uc: User
 deactivate rca
 uc -> uc: startApp(User)
-deactivate uc
 uc -> ucc: initialize(User, Accesstype)
+deactivate uc
 activate ucc
 ucc -> ui
 ui -> user
