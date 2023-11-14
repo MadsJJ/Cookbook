@@ -2,7 +2,7 @@
 
 ## Class diagram
 ### Class diagram core
-Following is a class diagram presenting all the classes in core.   
+Following is a class diagram presenting all the classes in core, and theirs attributes and methods. 
 - **UserDataFilehanding:**
 have zero or many Users. 
 - **User:**
@@ -17,6 +17,21 @@ Belongs to one or many recipes.
 
 ![CoreClassDiagram](/cookbook/docs/release3/Diagrams/CoreClassDiagram.png)
 
+### Class diagram restserver
+Following is a class diagram presenting all the classes in restserver.
+
+- **CookbookApplication:**
+- **CookbookController:**
+- **CookbookService:**  
+???
+
+![RestserverClassDiagram](/cookbook/docs/release3/Diagrams/RestserverClassDiagram.png)
+
+### Class diagram controllers
+
+This diagram is representing the structure of UserControler and CookBookController, and theirs attributes and methods.
+
+![ControllerClassDiagram](/cookbook/docs/release3/Diagrams/UIControllerClassDiagram.png)
 
 ## Sequence diagram 
 Here is a sequence diagram showcasing the timeline of the steps involved in registering a new user to our cookbook-application.
@@ -41,4 +56,10 @@ Here is a sequence diagram showcasing the timeline of the steps involved in regi
 - **Initialization:** THe system initializes, and the user can use tha application 
 
 ![SequenceDiagramRegisterNewUser](/cookbook/docs/release3/Diagrams/SequenceDiagramRegisterNewUser.png)
+
+
 ## Package diagram 
+Following is a package diagram presenting the packages and the dependencies  in this project. 
+
+![PackageDiagram](/cookbook/docs/release3/Diagrams/PackageDiagram.png)
+
