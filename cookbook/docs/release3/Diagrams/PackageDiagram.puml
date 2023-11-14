@@ -1,41 +1,37 @@
 @startuml Architecture Diagram
 
 component CORE {
-	package core
+	package core #PaleTurquoise
 }
 
 component UI {
-    package ui
-    package access
+    package ui #PaleTurquoise
+    package access #PaleTurquoise
 
 }
 
 
-component RESTSERVER {
-	component restserver {
+component RESTSERVER{
+	component restserver #PaleTurquoise {
 	}
 }
 
-component JSON {
-	component json {
-	}
-}
-
-core -[#Red]..> JSON
-UI -[#Red].> JavaFX
-UI -[#Red]..> gson
-UI -[#Red]..> core
+core -[#Red].> gson
+ui -[#Red].> JavaFX
+access -[#Red].> gson
+UI -[#Red].> core
 restserver -[#Red].> core
+restserver .[#Red].> gson
 restserver -[#Red].> SpringBoot
-json -[#Red].> gson
 
-component gson {
+
+component gson #PaleGoldenRod {
 }
 
-component JavaFX{
+component JavaFX #PaleGoldenRod{
 }
 
-component SpringBoot{
+component SpringBoot #PaleGoldenRod{
 }
 
 @enduml

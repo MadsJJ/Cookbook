@@ -17,14 +17,13 @@ Belongs to one or many recipes.
 
 ![CoreClassDiagram](/cookbook/docs/release3/Diagrams/CoreClassDiagram.png)
 
-### Class diagram restserver
-Following is a class diagram presenting all the classes in restserver.
+### Class diagram REST server
+The following class diagram represents the organization of all the classes in the REST server for the CookBook application. 
 
-- **CookbookApplication:**
-- **CookbookController:**
-- **CookbookService:**  
-???
-
+- **CookbookApplication:** Initiating the REST server. 
+- **CookbookController:** Representing the controller. **COOKBOOK_SERVICE_PATH** indicates the path for cookbook-related services.
+It also contains a instance of CookbookService and methods to interact with users, set user information, and perform auto-saving.
+- **CookbookService:**  Representing the service layer for managing user data and interactions.
 ![RestserverClassDiagram](/cookbook/docs/release3/Diagrams/RestserverClassDiagram.png)
 
 ### Class diagram controllers
@@ -59,7 +58,25 @@ Here is a sequence diagram showcasing the timeline of the steps involved in regi
 
 
 ## Package diagram 
-Following is a package diagram presenting the packages and the dependencies  in this project. 
+Following is a package diagram illustrating the high-level architecture of our packages and the dependencies in this project. 
 
-![PackageDiagram](/cookbook/docs/release3/Diagrams/PackageDiagram.png)
+### Components and Packages
+We've already described most of our packages in [README.md](README.md) so here we'll just explain which external libraries we have used. 
+
+**gson:** A library for JSON serialization and deserialization
+**JavaFX:** A Java-based framework for building UI  
+**SpringBoot:** A framework for building Java-based applications
+
+### Relationships
+UI:
+- *access* depends on gson and core
+- *ui* depends on JavaFX and core  
+
+CORE:
+- *core* depends on gson  
+
+RESTSERVER:
+- restserver depends on SpringBoot, gson and core
+
+![PackageDiagram](cookbook/docs/release3/Diagrams/PackageDiagram.png)
 
