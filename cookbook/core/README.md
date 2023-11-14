@@ -2,18 +2,18 @@
 
 ### Contains
 
-**Main classes**
-[CookBook.java](cookbook/core/src/main/java/core/CookBook.java)  
-[Ingredient.java](cookbook/core/src/main/java/core/Ingredient.java)  
-[Recipe.Java](cookbook/core/src/main/java/core/Recipe.java)  
-[User.java](cookbook/core/src/main/java/core/User.java)   
-[UserDataFilehandling](cookbook/core/src/main/java/core/UserDataFilehandling.java) 
+**Main classes**  
+[CookBook.java](src/main/java/cookbook/core/CookBook.java)  
+[Ingredient.java](src/main/java/cookbook/core/Ingredient.java)  
+[Recipe.java](src/main/java/cookbook/core/Recipe.java)  
+[User.java](src/main/java/cookbook/core/User.java)   
+[UserDataFilehandling.java](src/main/java/cookbook/core/UserDataFilehandling.java) 
 
 **Test classes**  
-[CookBookTest.java](cookbook/core/src/test/java/core/CookBookTest.java)  
-[IngredientTest.java](cookbook/core/src/test/java/core/IngredientTest.java)  
-[RecipeTest.java](cookbook/core/src/test/java/core/RecipeTest.java)  
-[UserTest.java](cookbook/core/src/test/java/core/UserTest.java)
+[CookBookTest.java](src/test/java/core/CookBookTest.java)  
+[IngredientTest.java](src/test/java/core/IngredientTest.java)  
+[RecipeTest.java](src/test/java/core/RecipeTest.java)  
+[UserTest.java](src/test/java/core/UserTest.java)
 
 ## Connections between classes 
 

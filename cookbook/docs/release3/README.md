@@ -21,11 +21,13 @@ We have continued to focus on the aspects from release 2:
 See [README from release 2](/cookbook/docs/release2/README.md) for elaboration. 
 
 **Connecting branch to an issue**:  
-During this final release we have focused on making a branch for every issue, and naming it with the number og the issue. 
+During this final release we have focused on making a branch for every issue, and naming it with the number for the issue. This is so that the branch automatically closes when we merge it back into master.
 
 ## Quality assurance of code
 We have continued to use **Jacoco**, **Spotbugs** and **Checkstyle** for quality assurance of the code. **SKRIV OM DE SISTE RESULTATENE HER.**
-For release 3 the group has been proofreading each others code. This is to check if any methodes can be written more efficient and understaning.  
+For release 3 the group has been proofreading each others code. This is to check if any methodes can be written more clearly and efficient. 
+
+
 ## Reflection and retrospective discussion following the final release
 
 After this final release we will discuss what went well, and what issues we faced along the way. 
@@ -44,10 +46,10 @@ Our group has developed good workflow and work habits throughout this project. W
 By adhering to these work habits and following our structured workflow, we've achieved a harmonious and productive work environment. This approach allows us to maintain focus, collaboration, and motivation, ultimately contributing to our success as a team.
 
 ### Documentation
-We have written documentation for every release. Each release contains a README.md file. The README files contains a description of changes, and what we have done during that release. We have also written userstories for the functionalities, and added pictures of prototypes. We could also have added a the description of any problems or things that did not go well in the README.md files. 
+We have written documentation for every release. Each release contains a README.md file. The README files contains a description of changes, and what we have done during that release. We have also written userstories for the functionalities, and added pictures of prototypes. We could also have added any problems we had or things that did not go so well in the README.md files. 
 
 ### Quality assurance   
 The group got better at reading through each others code during the final release. This should have been done from the beginning to ensure better code quality.
-We are happy with the help we got from using **Jacoco**, **Spotbugs** and **Chechstyle**. This is something we actively used from the beginning.   
+We are happy with the help we got from using **Jacoco**, **Spotbugs** and **Checkstyle**. This is something we actively used from the beginning.   
 ## Conclusion
-The project has made all group members gain a lot of experiance, developed our team-managment and new personal skills.   
+The project has made all group members gain a lot of experience, developed our team-management and new personal skills.   

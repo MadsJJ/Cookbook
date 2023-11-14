@@ -1,11 +1,19 @@
 # Cookbook
 
-[Open in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308?new)
-
 ## Description
 This is a cookbook app created for your personal use. You can use it to store and look at your favorite recipes at your convenience. If you are not sure about what meal to cook, you can get recipe suggestions based on what type of meal you want.
 
 ## Application fundementals
+
+To run in Eclipse che follow this step-by-step:
+1. Set up your eclipse che account with an access token
+2. Follow [Open in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308?new) 
+3. Run `mvn clean install` (to skip tests add `-DskipTests`) in /cookbook
+4. Run `mvn spring-boot:run` in /restserver
+5. Run `mvn javafx:run` in /ui
+6. Look in endpoint for the 6080-link and paste it into your preferred browser and add /cookbook at the end
+7. Log-in or sign up to create your very own personal cookbook!
+
 The project uses maven to build and to run
 
 Java-version: 17.0.8
@@ -25,11 +33,11 @@ See [core](cookbook/core/src/main/java/core)
 
 ***main***  
 Contains the classes for the main functionality of the application, its core   
-[CookBook.java](cookbook/core/src/main/java/core/CookBook.java)  
-[Ingredient.java](cookbook/core/src/main/java/core/Ingredient.java)  
-[Recipe.java](cookbook/core/src/main/java/core/Recipe.java)  
-[User.java](cookbook/core/src/main/java/core/User.java)   
-[UserDataFilehandling.java](cookbook/core/src/main/java/core/UserDataFilehandling.java) 
+[CookBook.java](cookbook/core/src/main/java/cookbook/core/CookBook.java)  
+[Ingredient.java](cookbook/core/src/main/java/cookbook/core/Ingredient.java)  
+[Recipe.java](cookbook/core/src/main/java/cookbook/core/Recipe.java)  
+[User.java](cookbook/core/src/main/java/cookbook/core/User.java)   
+[UserDataFilehandling.java](cookbook/core/src/main/java/cookbook/core/UserDataFilehandling.java) 
 
 
 ***test***  
@@ -40,7 +48,7 @@ Contains the respective tests for the core-classes + UserDataFilehandling
 [UserTest.java](cookbook/core/src/test/java/core/UserTest.java)  
 [UserDataFilehandlingTest.java](cookbook/core/src/test/java/core/UserDataFilehandlingTest.java)
 
-Read more about the core module [here](link) 
+Read more about the core module in [README for core module](cookbook/core/README.md) 
 
 ### docs
 See [docs](cookbook/docs)  
@@ -58,17 +66,17 @@ Each release contains screenshots of the updated UIDesign and a README.md with a
 
 ***main***  
 Contains the classes for the Restserver    
-[CookbookApplication.java](link) 
-[CookbookController.java](link) 
-[CookbookService.java](link) 
-[GsonConfiguration.java](link)  
+[CookbookApplication.java](cookbook/restserver/src/main/java/cookbook/springboot/restserver/CookbookApplication.java)   
+[CookbookController.java](cookbook/restserver/src/main/java/cookbook/springboot/restserver/CookbookController.java)   
+[CookbookService.java](cookbook/restserver/src/main/java/cookbook/springboot/restserver/CookbookService.java)   
+[GsonConfiguration.java](cookbook/restserver/src/main/java/cookbook/springboot/restserver/GsonConfiguration.java)  
 
 ***test***  
 Tests the Restserver  
-[BOOM](link)
+[CookbookModelApplicationTest.java](cookbook/restserver/src/test/java/cookbook/springboot/restserver/CookbookModelApplicationTest.java)
 
 
-Read more about restserver module [here](link) 
+Read more about restserver module in [README for REST API](cookbook/restserver/README.md) 
 
 
 ### ui
@@ -80,12 +88,12 @@ Contains the classes for the user interface
 [resources](cookbook/ui/src/main/resources)
 
 ***test***  
-Contains the Controller-tests and setup for the tests to run. 
+Contains the Controller-tests and setup for the tests to run.   
 [CookbookControllerTest.java](cookbook/ui/src/test/java/ui/CookBookControllerTest.java)  
 [MainAppTest.java](cookbook/ui/src/test/java/ui/MainAppTest.java)  
 [UserControllerTest](cookbook/ui/src/test/java/ui/UserControllerTest.java)  
 
-Read more about the ui module [here](link) 
+Read more about the ui module in [README for ui module](cookbook/ui/README.md) 
 
 ## Code quality
 

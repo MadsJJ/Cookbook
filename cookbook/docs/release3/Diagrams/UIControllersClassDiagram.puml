@@ -1,6 +1,6 @@
 @startuml UIControllersClassDiagram
 
- package ui{
+ package ui {
     class CookbookController{
         - ResourceBundle resources
         - URL location

@@ -1,7 +1,7 @@
 @startuml Sequence Diagram
 
 Actor User as user  #MediumPurple
-participant UI as ui 
+participant UI as ui
 participant UserController as uc  
 participant RemoteCookbookAccess as rca 
 participant "restserver/CookbookController" as rcc  
@@ -11,34 +11,34 @@ participant "springboot.json" as sbj
 participant "ui/CookbookController" as ucc 
 
 user -> ui: Input password and username
-activate user
-activate ui
+activate user #LightBlue
+activate ui #LightBlue
 ui -> uc: signUp()
-activate uc
+activate uc #LightBlue
 uc -> rca: registerNewUser(username, password)
-activate rca
+activate rca #LightBlue
 rca -> rcc: HTTP POST
-activate rcc
+activate rcc #LightBlue
 rcc -> cs: checkIfUsernameTaken(username)
-activate cs
+activate cs #LightBlue
 cs -> udf: getUsers()
-activate udf
+activate udf #LightBlue
 udf -> sbj: findUsers()
-activate sbj
+activate sbj #LightBlue
 sbj --> udf: List<User>
 deactivate sbj
 udf --> cs: List<User>
 alt username not available
 cs -[#Red]-> rcc: Exception
 else username already exists 
-activate rcc
+activate rcc #LightBlue
 cs -> rcc
 rcc -> cs: signup(username, password)
-activate cs
+activate cs #LightBlue
 cs -> udf: signup(username, password)
-activate udf
+activate udf #LightBlue
 udf -> sbj: signup()
-activate sbj
+activate sbj #LightBlue
 sbj --> udf: User
 deactivate sbj
 udf --> cs: User
@@ -52,7 +52,7 @@ deactivate rca
 uc -> uc: startApp(User)
 uc -> ucc: initialize(User, Accesstype)
 deactivate uc
-activate ucc
+activate ucc #LightBlue
 ucc -> ui
 ui -> user
 deactivate ucc
