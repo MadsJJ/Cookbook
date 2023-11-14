@@ -1,0 +1,41 @@
+@startuml Architecture Diagram
+
+component CORE {
+	package core
+}
+
+component UI {
+    package ui
+    package access
+
+}
+
+
+component RESTSERVER {
+	component restserver {
+	}
+}
+
+component JSON {
+	component json {
+	}
+}
+
+core -[#Red]..> JSON
+UI -[#Red].> JavaFX
+UI -[#Red]..> gson
+UI -[#Red]..> core
+restserver -[#Red].> core
+restserver -[#Red].> SpringBoot
+json -[#Red].> gson
+
+component gson {
+}
+
+component JavaFX{
+}
+
+component SpringBoot{
+}
+
+@enduml
