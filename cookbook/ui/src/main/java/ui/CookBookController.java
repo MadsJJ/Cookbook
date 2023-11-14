@@ -296,9 +296,9 @@ public class CookBookController {
     try {
       recipeListView.getItems()
           .setAll(user.getCookBook().getRecipesByCategory(((Button) event.getSource()).getText()));
-
     } catch (Exception e) {
       displayErrorMessage(e);
+      recipeListView.getItems().clear();
     }
   }
 
