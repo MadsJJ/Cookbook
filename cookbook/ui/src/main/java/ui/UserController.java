@@ -52,7 +52,7 @@ public class UserController {
   private Label popupLabel;
 
 
-  String endpointUri ="http://localhost:8080/cookbook/";
+  String endpointUri ="http://localhost:8080/cookbook";
 
   @FXML
   String localFilePath;

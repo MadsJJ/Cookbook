@@ -1,5 +1,6 @@
 package ui.access;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -36,96 +37,116 @@ public class RemoteCookbookAccess implements CookbookAccess {
    * @return the URI on the server with the given path.
    */
   public URI resolveUriAccounts(String uri) {
-    return endpointUri.resolve(uri);
+    return endpointUri.resolve("/"+uri);
   }
   
    /**
    * Sends a POST-request to activate a new user login.
    */
   @Override
-  public User readUser(String username, String password) {
-    String postMappingPath = "login?";
-    String key1 = "username=";
-    String value1 = username + "&";
-    String key2 = "password=";
-    String value2 = password;
-    
+public User readUser(String username, String password) {
+    String postMappingPath = "cookbook/login";
+  
     try {
-      HttpRequest httpRequest = HttpRequest
-            .newBuilder(resolveUriAccounts(postMappingPath + key1 + value1 + key2 + value2))
-            .header("Accept", "application/json")
-            .POST(BodyPublishers.ofString(username + "|" + password))
+        // Create a JSON payload for the request body
+        String requestBody = "{\"username\": \"" + username + "\", \"password\": \"" + password + "\"}";
+
+        HttpRequest httpRequest = HttpRequest
+            .newBuilder(resolveUriAccounts(postMappingPath))
+            .header("Content-Type", APPLICATION_JSON)
+            .header("Accept", APPLICATION_JSON)
+            .POST(BodyPublishers.ofString(requestBody))
             .build();
- 
-      final HttpResponse<String> httpResponse =
-          HttpClient.newBuilder()
-                    .build()
-                    .send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-         return new Gson().fromJson(httpResponse.body(), User.class);
+        final HttpResponse<String> httpResponse =
+            HttpClient.newBuilder()
+                .build()
+                .send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-    } catch (Exception e) {
-      throw new IllegalArgumentException("Incorrect password or username");
+        if (httpResponse.statusCode() == 200) {
+            User user = new Gson().fromJson(httpResponse.body(), User.class);
+            return user;
+        } else if (httpResponse.statusCode() == 409) {
+            // Incorrect password or username
+            throw new IllegalArgumentException("Incorrect password or username");
+        } else {
+            // Handle other HTTP status codes
+            throw new RuntimeException("Unexpected response: " + httpResponse.statusCode());
+        }
+    } catch (IOException | InterruptedException e) {
+        throw new RuntimeException("Error during user login", e);
     }
+}
 
-  }
 
   @Override
   public User registerNewUser(String username, String password) {
-    String postMappingPath = "register?";
-    String key1 = "username=";
-    String value1 = username + "&";
-    String key2 = "password=";
-    String value2 = password;
-    
-    try {
+      String postMappingPath = "cookbook/register";
+  
+      // Create a JSON payload for the request body
+      String requestBody = "{\"username\": \"" + username + "\", \"password\": \"" + password + "\"}";
+      
       HttpRequest httpRequest = HttpRequest
-            .newBuilder(resolveUriAccounts(postMappingPath + key1 + value1 + key2 + value2))
-            .header("Accept", "application/json")
-            .POST(BodyPublishers.ofString(username + "|" + password))
-            .build();
- 
-      final HttpResponse<String> httpResponse =
-          HttpClient.newBuilder()
-                    .build()
-                    .send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-         User user = new Gson().fromJson(httpResponse.body(), User.class);
-         System.out.println(user);
-         System.out.println(httpResponse.body());
-         return user;
-    } catch (Exception e) {
-      throw new IllegalArgumentException("Username already exists");
-    }
+      .newBuilder(resolveUriAccounts(postMappingPath))
+      .header("Content-Type", APPLICATION_JSON)
+      .header("Accept", APPLICATION_JSON)
+      .POST(BodyPublishers.ofString(requestBody))
+      .build();
+      System.out.println("endpoinst is "+resolveUriAccounts(postMappingPath));
+      try {
+      final HttpResponse<String> httpResponse = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
+  
+          if (httpResponse.statusCode() == 200) {
+              // Registration successful
+              User user = new Gson().fromJson(httpResponse.body(), User.class);
+              return user;
+          } else if (httpResponse.statusCode() == 409) {
+              // Handle username conflict
+              throw new IllegalArgumentException("Username already exists");
+          } else if (httpResponse.statusCode() == 400) {
+              // Handle username conflict
+              throw new IllegalArgumentException(User.outputSignup);
+          } else {
+              // Handle other HTTP status codes
+              throw new RuntimeException("Unexpected response: " + httpResponse.statusCode());
+          }
+      } catch (IOException | InterruptedException e) {
+          throw new RuntimeException("Failed to register user", e);
+      }
   }
+  
 
-  @Override
-  public void updateUserAttributes(User user) {
-    String postMappingPath = "update?";
-    String key = "username=";
-    String username = user.getUsername();
+
+@Override
+public void updateUserAttributes(User user) {
+    String postMappingPath = "cookbook/update";
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     String jsonUser = gson.toJson(user);
 
-      try {
-       HttpRequest request = HttpRequest.newBuilder(resolveUriAccounts(postMappingPath+key+username))
-            .header(ACCEPT_HEADER, APPLICATION_JSON)
-            .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-            .POST(BodyPublishers.ofString(jsonUser))
-            .build();
+    // try {
+        HttpRequest request = HttpRequest.newBuilder(resolveUriAccounts(postMappingPath))
+                .header(ACCEPT_HEADER, APPLICATION_JSON)
+                .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
+                .POST(BodyPublishers.ofString(jsonUser))
+                .build();
 
-            System.out.println(BodyPublishers.ofString(username));
-            System.out.println(request.toString());
- 
-      final HttpResponse<String> httpResponse =
-          HttpClient.newBuilder()
+        HttpResponse<String> httpResponse;
+        try {
+            httpResponse = HttpClient.newBuilder()
                     .build()
                     .send(request, HttpResponse.BodyHandlers.ofString());
+                    
+                    
+                    if (httpResponse.statusCode() != 200) {
+                        // Handle other HTTP status codes
+                        throw new RuntimeException("Failed to update user attributes. HTTP Status: " + httpResponse.statusCode());
+                    }
+                } catch (IOException | InterruptedException e) {
+                            throw new RuntimeException("Failed to update user attributes", e);
 
-                    System.out.println(httpResponse.body());
-    } catch (Exception e) {
-      throw new IllegalArgumentException("Failed to update file");
-    }
-  }
+                }
+   
+}
+
    
 }

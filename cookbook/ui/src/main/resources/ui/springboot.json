@@ -145,5 +145,12 @@
         }
       ]
     }
+  },
+  {
+    "username": "mads1",
+    "password": "borte",
+    "cookBook": {
+      "recipes": []
+    }
   }
 ]

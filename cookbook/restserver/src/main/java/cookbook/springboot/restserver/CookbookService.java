@@ -26,17 +26,19 @@ public class CookbookService {
       return userDataFilehandler;
     }
 
-  public User getExistingUser(String username,String password){
-    return getUsers().stream()
-    .filter(a -> a.getUsername().equals(username) && a.getPassword().equals(password))
-    .findFirst()
-    .orElseThrow(() -> new IllegalArgumentException("Incorrect password or username"));
-  }
-  
-  public void checkIfUsernameTaken(String username){
-    if (getUsers().stream().anyMatch(a -> a.getUsername().equals(username))) {
-        throw new IllegalArgumentException("Username already exists");
+    public void setFileHandler(String path){
+      this.userDataFilehandler=new UserDataFilehandling(path);
     }
+
+    public User getExistingUser(String username, String password) {
+      return getUsers().stream()
+        .filter(a -> a.getUsername().equals(username) && a.getPassword().equals(password))
+        .findFirst()
+        .orElse(null); // Return null if the user is not found
+    }
+  
+  public boolean checkIfUsernameTaken(String username){
+    return getUsers().stream().anyMatch(a -> a.getUsername().equals(username));
   }
 
   public User signup(String username, String password) {

@@ -16,7 +16,9 @@ import cookbook.core.User;
 import ui.access.RemoteCookbookAccess;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RemoteCookbookAccessTest {
@@ -33,26 +35,48 @@ public class RemoteCookbookAccessTest {
         wireMockServer.start();
         WireMock.configureFor("localhost", wireMockConfig.portNumber());
 
-        URI endpointUri = new URI("http://localhost:8080/cookbook/");
+        URI endpointUri = new URI("http://localhost:8080/cookbook");
         remoteCookbookAccess = new RemoteCookbookAccess(endpointUri);
     }
 
     @Test
-    public void testReadUser() {
-        stubFor(get(urlEqualTo("/cookbook/login?username=mads&password=borte"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "application/json")
-                        .withBody("{\"username\":\"mads\",\"password\":\"borte\"}")
-                )
-        );
-        // Test set to throw rather than verify post request because server will throw because it can't find the user because WireMock doesn't have access to you json-file. When an exception is thrown from the server-side WireMock can't verify that a post request has been sent.
-        assertThrows(IllegalArgumentException.class, () -> remoteCookbookAccess.readUser("mads", "borte"));
-    }
+public void testReadUserLoginSuccess() {
+    stubFor(post(urlEqualTo("/cookbook/login"))
+            .willReturn(aResponse()
+                    .withStatus(200)
+                    .withHeader("Content-Type", "application/json")
+                    .withBody("{\"username\":\"test\",\"password\":\"test\",\"cookBook\":{\"recipes\":[]}}")
+            )
+    );
+
+    User user = assertDoesNotThrow(() -> remoteCookbookAccess.readUser("test", "test"));
+
+    assertEquals("test", user.getUsername());
+    assertEquals("test", user.getPassword());
+    assertNotNull(user.getCookBook());
+    assertEquals(0, user.getCookBook().getRecipes().size());
+
+    verify(postRequestedFor(urlEqualTo("/cookbook/login")));
+}
+
+   @Test
+public void testReadUserCrash() {
+    stubFor(post(urlEqualTo("/cookbook/login"))
+            .willReturn(aResponse()
+                    .withStatus(418)
+                    .withHeader("Content-Type", "application/json")
+            )
+    );
+
+    assertThrows(RuntimeException.class, ()->remoteCookbookAccess.readUser("test", "test"));
+
+   verify(postRequestedFor(urlEqualTo("/cookbook/login")));
+}
+
 
     @Test
-    public void testRegisterNewUser() {
-        stubFor(post(urlEqualTo("/cookbook/register?username=test&password=pass"))
+    public void testRegisterNewUserSuccess() {
+        stubFor(post(urlEqualTo("/cookbook/register"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
@@ -65,15 +89,56 @@ public class RemoteCookbookAccessTest {
         assertEquals("test", user.getUsername());
         assertEquals("pass", user.getPassword());
 
-        verify(postRequestedFor(urlEqualTo("/cookbook/register?username=test&password=pass")));
+        verify(postRequestedFor(urlEqualTo("/cookbook/register")));
+    }
+
+    @Test
+    public void testRegisterNewUserExistingUsername() {
+        stubFor(post(urlEqualTo("/cookbook/register"))
+                .willReturn(aResponse()
+                        .withStatus(409)
+                        .withHeader("Content-Type", "application/json")
+                )
+        );
         
+        assertThrows(IllegalArgumentException.class, ()->remoteCookbookAccess.registerNewUser("test", "test"), "Username already exists");
+
+        verify(postRequestedFor(urlEqualTo("/cookbook/register")));
+    }
+
+    @Test
+    public void testRegisterNewUserInvalidFormat() {
+        stubFor(post(urlEqualTo("/cookbook/register"))
+                .willReturn(aResponse()
+                        .withStatus(400)
+                        .withHeader("Content-Type", "application/json")
+                )
+        );
+        
+        assertThrows(IllegalArgumentException.class, ()->remoteCookbookAccess.registerNewUser("test", "test"), User.outputSignup);
+
+        verify(postRequestedFor(urlEqualTo("/cookbook/register")));
+    }
+
+     @Test
+    public void testRegisterNewUserUnexpected() {
+        stubFor(post(urlEqualTo("/cookbook/register"))
+                .willReturn(aResponse()
+                        .withStatus(418)
+                        .withHeader("Content-Type", "application/json")
+                )
+        );
+        
+        assertThrows(RuntimeException.class, ()->remoteCookbookAccess.registerNewUser("test", "test"));
+
+        verify(postRequestedFor(urlEqualTo("/cookbook/register")));
     }
 
     @Test
     public void testUpdateUserAttributes() {
         User user = new User("test", "pass", new CookBook(new ArrayList<>()));
 
-        stubFor(post(urlEqualTo("/cookbook/update?username=test"))
+        stubFor(post(urlEqualTo("/cookbook/update"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
@@ -82,7 +147,23 @@ public class RemoteCookbookAccessTest {
 
         remoteCookbookAccess.updateUserAttributes(user);
 
-        verify(postRequestedFor(urlEqualTo("/cookbook/update?username=test")));
+        verify(postRequestedFor(urlEqualTo("/cookbook/update")));
+    }
+
+    @Test
+    public void testUpdateUserAttributesError() {
+        User user = new User("test", "pass", new CookBook(new ArrayList<>()));
+
+        stubFor(post(urlEqualTo("/cookbook/update"))
+                .willReturn(aResponse()
+                        .withStatus(500)
+                        .withHeader("Content-Type", "application/json")
+                )
+        );
+
+        assertThrows(RuntimeException.class, ()->remoteCookbookAccess.updateUserAttributes(user));
+
+        verify(postRequestedFor(urlEqualTo("/cookbook/update")));
     }
 
     @AfterEach
