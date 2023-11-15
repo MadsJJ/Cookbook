@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import ui.access.CookbookAccess;
 import ui.access.LocalCookbookAccess;
 import ui.access.RemoteCookbookAccess;
+import ui.access.ServerStatusChecker;
 
 
 /**
@@ -95,27 +96,34 @@ public class UserController {
   @FXML
   void initialize() {
     CookbookAccess accessType = null;
-    System.out.println(endpointUri);
-    if (endpointUri != null) {
-      RemoteCookbookAccess remoteAccess;
-      try {
-        System.out.println("Using remote endpoint @ " + endpointUri);
-        remoteAccess = new RemoteCookbookAccess(new URI(endpointUri));
-        accessType = remoteAccess;
-      } catch (URISyntaxException e) {
-        System.err.println(e);
-      }
-    }
-    if (accessType == null) {
-      System.out.println("hei");
-      System.out.println(localFilePath);
-      this.fileHandler = new UserDataFilehandling(localFilePath);
-      LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
-      accessType = localAccess;
-    }
+    try {
+      if(ServerStatusChecker.ServerStatus()){
+        RemoteCookbookAccess remoteAccess;
+          System.out.println("Using remote endpoint @ " + endpointUri);
+          remoteAccess = new RemoteCookbookAccess(new URI(endpointUri));
+          this.accessType = remoteAccess;
 
-    this.accessType=accessType;
+        }
+        else{
+       
+          System.out.println("Using local access storage");
+          System.out.println(localFilePath);
+          this.fileHandler = new UserDataFilehandling(localFilePath);
+          LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
+          this.accessType = localAccess;
+        }
+      
+    } catch (Exception e) {
+      System.out.println("Attempted contact with server failed, using local access");
+      System.out.println(localFilePath);
+          this.fileHandler = new UserDataFilehandling(localFilePath);
+          LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
+          accessType = localAccess;
+
+        this.accessType=localAccess;
+
   }
+}
 
   /**
    * Sets the stage for the login and signup screens. Adds an event handler to the popup label to
