@@ -37,9 +37,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @AutoConfigureMockMvc
-@TestInstance(Lifecycle.PER_CLASS)
 @ContextConfiguration(classes = 
-      {CookbookController.class, CookbookService.class, CookbookApplication.class})  
+{CookbookController.class, CookbookService.class, CookbookApplication.class, GsonConfiguration.class})  
+@TestInstance(Lifecycle.PER_CLASS)
 @WebMvcTest
 class RestServerApplicationTests {
 
@@ -53,47 +53,140 @@ class RestServerApplicationTests {
   public void contextLoads() throws Exception {
     assertNotNull(cookbookService);
   }
-  
-  @BeforeAll
-  public void setup() throws IllegalStateException, IOException {
 
-    String userDir = System.getProperty("user.dir");
-      if (userDir.endsWith("restserver")) {
-      userDir = userDir.substring(0, userDir.length() - 10);
-      userDir = userDir + "ui";
-      }
-    try (FileWriter writer = new FileWriter(
-          Paths.get(userDir, "/src/test/java/ui/resources/ui/RestserverTest.json").toString(),
-          StandardCharsets.UTF_8)) { 
-        writer.write("");
-        writer.close();
-        
-      } catch (Exception a) {
-        a.printStackTrace();
-      }
+  
 
-    cookbookService = new CookbookService();
-    cookbookService.setFileHandler("/src/test/java/ui/resources/ui/RestserverTest.json");
-    final User user1 = new User("test1", "test", new CookBook(new ArrayList<>()));
-    final User user2 = new User("test2", "test", new CookBook(new ArrayList<>()));
-    final User user3 = new User("test3", "test", new CookBook(new ArrayList<>()));
-    cookbookService.signup("test1", "test");
-    cookbookService.signup("test2", "test");
-    cookbookService.signup("test3", "test");
-  
-  }
-  
-  @Test
-  public void testGetAccounts() throws Exception {
-      mockMvc.perform(MockMvcRequestBuilders.get("/cookbook")
-             .accept(MediaType.APPLICATION_JSON))
-             .andExpect(MockMvcResultMatchers.status().isOk())
-             .andReturn();
+    @Test
+    public void testGetAccounts() throws Exception {
+        Mockito.when(cookbookService.getUsers()).thenReturn(new ArrayList<>());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/cookbook")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        Mockito.verify(cookbookService, times(1)).getUsers();
     }
+
+    @Test
+public void testLoginUser() throws Exception {
+    User user = new User("test", "test", new CookBook(new ArrayList<>()));
+    
+    // Mock the behavior of cookbookService.getExistingUser()
+    Mockito.when(cookbookService.getExistingUser("test", "test")).thenReturn(user);
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    String jsonUser = gson.toJson(user);
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/cookbook/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"username\": \"test\", \"password\": \"test\"}")
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andReturn();
+
+    Mockito.verify(cookbookService, times(1)).getExistingUser("test", "test");
+}
+
+    @Test
+public void testLoginUserError() throws Exception {
+    User user = new User("test", "test", new CookBook(new ArrayList<>()));
+    
+    // Mock the behavior of cookbookService.getExistingUser()
+    Mockito.when(cookbookService.getExistingUser("test", "test")).thenReturn(null);
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    String jsonUser = gson.toJson(user);
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/cookbook/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"username\": \"test\", \"password\": \"test\"}")
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isConflict())
+            .andReturn();
+
+    Mockito.verify(cookbookService, times(1)).getExistingUser("test", "test");
+}
+
+ @Test
+public void testSignup() throws Exception {
+    User user = new User("test", "test", new CookBook(new ArrayList<>()));
+    
+    // Mock the behavior of cookbookService.getExistingUser()
+    Mockito.when(cookbookService.checkIfUsernameTaken("test")).thenReturn(false);
+    Mockito.when(cookbookService.signup("test","test")).thenReturn(user);
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    String jsonUser = gson.toJson(user);
+
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/cookbook/register")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"username\": \"test\", \"password\": \"test\"}")
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.content().json(jsonUser))
+            .andReturn();
+
+    Mockito.verify(cookbookService, times(1)).checkIfUsernameTaken("test");
+    Mockito.verify(cookbookService, times(1)).signup("test","test");
+}
+}
+
+  
+  // @BeforeAll
+  // public void setup() throws IllegalStateException, IOException {
+
+  //   String userDir = System.getProperty("user.dir");
+  //     if (userDir.endsWith("restserver")) {
+  //     userDir = userDir.substring(0, userDir.length() - 10);
+  //     userDir = userDir + "ui";
+  //     }
+  //   try (FileWriter writer = new FileWriter(
+  //         Paths.get(userDir, "/src/test/java/ui/resources/ui/RestserverTest.json").toString(),
+  //         StandardCharsets.UTF_8)) { 
+  //       writer.write("");
+  //       writer.close();
+        
+  //     } catch (Exception a) {
+  //       a.printStackTrace();
+  //     }
+
+  //   cookbookService = new CookbookService();
+  //   cookbookService.setFileHandler("/src/test/java/ui/resources/ui/RestserverTest.json");
+  //   final User user1 = new User("test1", "test", new CookBook(new ArrayList<>()));
+  //   final User user2 = new User("test2", "test", new CookBook(new ArrayList<>()));
+  //   final User user3 = new User("test3", "test", new CookBook(new ArrayList<>()));
+  //   cookbookService.signup("test1", "test");
+  //   cookbookService.signup("test2", "test");
+  //   cookbookService.signup("test3", "test");
+  
+  // }
+  
+  // @Test
+  // public void testGetAccounts() throws Exception {
+  //     mockMvc.perform(MockMvcRequestBuilders.get("/cookbook")
+  //            .accept(MediaType.APPLICATION_JSON))
+  //            .andExpect(MockMvcResultMatchers.status().isOk())
+  //            .andReturn();
+  //   }
+
+    
+    // @Test
+    // public void testGetAccounts() throws Exception {
+    //     Mockito.when(cookbookService.getUsers()).thenReturn(new ArrayList<>());
+
+    //     mockMvc.perform(MockMvcRequestBuilders.get("/cookbook")
+    //             .accept(MediaType.APPLICATION_JSON))
+    //             .andExpect(MockMvcResultMatchers.status().isOk())
+    //             .andReturn();
+
+    //     Mockito.verify(cookbookService, times(1)).getUsers();
+    // }
     
 // @Test
 //   public void testLoginUser() throws Exception {
-//     User user = new User("testUser", "testPassword", new CookBook(new ArrayList<>()));
+//     User user = new User("test1", "test", new CookBook(new ArrayList<>()));
     
 //     // Mock the behavior of cookbookService.getExistingUser()
 //     // This assumes you have a method similar to getExistingUser in your CookbookService
@@ -229,4 +322,4 @@ class RestServerApplicationTests {
 
 
 
-}
+// }

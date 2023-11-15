@@ -44,10 +44,10 @@ public ResponseEntity<User> loginUser(@RequestBody Map<String, String> requestBo
     String username = requestBody.get("username");
     String password = requestBody.get("password");
 
-    if (cookbookService.getExistingUser(username, password) == null) {
+    User loggedInUser = cookbookService.getExistingUser(username, password);
+    if (loggedInUser == null) {
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     } else {
-        User loggedInUser = cookbookService.getExistingUser(username, password);
         return new ResponseEntity<>(loggedInUser, HttpStatus.OK);
     }
 }
