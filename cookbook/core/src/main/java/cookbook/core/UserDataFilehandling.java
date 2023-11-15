@@ -32,7 +32,7 @@ public class UserDataFilehandling {
       userDir = userDir.substring(0, userDir.length() - 4);
       userDir = userDir + "ui";
       // used for springboot in CookBookService
-    }else if(userDir.endsWith("restserver")){
+    } else if (userDir.endsWith("restserver")) {
       userDir = userDir.substring(0, userDir.length() - 10);
       userDir = userDir + "ui";
     }

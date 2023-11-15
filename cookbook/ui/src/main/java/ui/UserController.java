@@ -1,12 +1,11 @@
 package ui;
 
+import cookbook.core.User;
+import cookbook.core.UserDataFilehandling;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import cookbook.core.User;
-import cookbook.core.UserDataFilehandling;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -52,7 +51,7 @@ public class UserController {
   private Label popupLabel;
 
 
-  String endpointUri ="http://localhost:8080/cookbook";
+  String endpointUri = "http://localhost:8080/cookbook";
 
   @FXML
   String localFilePath;
@@ -92,10 +91,10 @@ public class UserController {
       displayErrorMessage(e);
     }
   }
+
   @FXML
   void initialize() {
     CookbookAccess accessType = null;
-    System.out.println(endpointUri);
     if (endpointUri != null) {
       RemoteCookbookAccess remoteAccess;
       try {
@@ -114,7 +113,7 @@ public class UserController {
       accessType = localAccess;
     }
 
-    this.accessType=accessType;
+    this.accessType = accessType;
   }
 
   /**

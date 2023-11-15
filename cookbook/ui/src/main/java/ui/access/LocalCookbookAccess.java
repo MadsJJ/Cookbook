@@ -13,8 +13,7 @@ public class LocalCookbookAccess implements CookbookAccess{
    * Loads useraccounts from json-file.
    */
   public LocalCookbookAccess(UserDataFilehandling fileHandler) {
-    this.fileHandler=fileHandler;
-    fileHandler = new UserDataFilehandling("/src/main/resources/ui/UserData.json");
+    this.fileHandler = fileHandler;
    
     }
   
