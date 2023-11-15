@@ -5,24 +5,31 @@ This is a cookbook app created for your personal use. You can use it to store an
 
 ## Application fundementals
 
-To run in Eclipse che follow this step-by-step:
-1. Set up your eclipse che account with an access token
-2. Follow [Open in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308?new) 
-3. Run `mvn clean install` (to skip tests add `-DskipTests`) in /cookbook
-4. Run `mvn spring-boot:run` in /restserver
-5. Run `mvn javafx:run` in /ui
-6. Look in endpoint for the 6080-link and paste it into your preferred browser and add /cookbook at the end
-7. Log-in or sign up to create your very own personal cookbook!
-
-The project uses maven to build and to run
+The project uses maven to build and to run. Below is 3 different step-by-step-guides to use Cookbook
 
 Java-version: 17.0.8
 Maven-version: 3.9.2 
 
-To run the application run  `mvn install` from the root (cookbook-folder). This will build the project and run all tests. Afterwards run  `cd ui` to get to the ui-folder, followed by  `mvn javafx:run` to run the program. 
+To run in **Eclipse che** follow this step-by-step:
+1. Set up your eclipse che account with an access token
+2. Follow [Open in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308?new) 
+3. Run `mvn clean install` from the root project directory (cookbook-folder). This will build the project and run all tests (to skip tests add `-DskipTests`).
+4. Run `cd restserver && mvn spring-boot:run` to launch spring boot. (or run `cd restserver` followed by `mvn spring-boot:run`)
+5. Run  `mvn javafx:run -f ui/pom.xml` to launch the application (or run `cd ui` followed by `mvn javafx:run`)
+6. Look in endpoint for the 6080-link and paste it into your preferred browser and add /cookbook at the end
+7. Log-in or sign up to create your very own personal cookbook!
 
-to use jlink and jpackage to run cookbook as an "application"  
-run  `mvn clean compile javafx:jlink jpackage:jpackage` 
+To run the application as normal in your IDE follow this step-by-step:
+1. Run `mvn clean install` from the root project directory (cookbook-folder). This will build the project and run all tests (to skip tests add `-DskipTests`).
+2. Run  `mvn javafx:run -f ui/pom.xml` to launch the program (or run `cd ui` followed by `mvn javafx:run`)
+3. Log-in or sign up to create your very own personal cookbook!
+
+To run the application with **jlink and jpackage** follow this step-by-step:
+1. Run `mvn clean install` from the root project directory (cookbook-folder). This will build the project and run all tests (to skip tests add `-DskipTests`).
+2. Run `cd restserver && mvn spring-boot:run` to launch spring boot (or run `cd restserver` followed by `mvn spring-boot:run`)
+3. Run  `cd ui && mvn clean compile javafx:jlink jpackage:jpackage`. JLink downloads the project as a .zip-file and JPackage convertes it to an "application". To find the .zip-file look in */ui/target*
+4. Find the application and open it as you would any other application on your computer. 
+5. Log-in or sign up to create your very own personal cookbook!
 
 ## Content
 
