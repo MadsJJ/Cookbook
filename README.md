@@ -1,7 +1,7 @@
 # Cookbook
 
 ## Description
-This is a cookbook app created for your personal use. You can use it to store and look at your favorite recipes at your convenience. If you are unsure about what meal to cook, you can get a random recipe suggestions based on what type of meal you want. You can also add the ingredients you already have in your fridge, and get the recipes that contains those ingredients. 
+This is a cookbook app created for your personal use. You can use it to store and look at your favorite recipes at your convenience. If you are unsure about what meal to cook, you can get a random recipe suggestion based on what type of meal you want. You can also add the ingredients you already have in your fridge, and get the recipes that contains those ingredients. 
 
 ## Application fundementals
 
