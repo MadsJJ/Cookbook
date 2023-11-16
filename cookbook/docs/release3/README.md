@@ -29,8 +29,8 @@ See [README from release 2](/cookbook/docs/release2/README.md) for elaboration.
 During this final release we have focused on making a branch for every issue, and naming it with the number for the issue. This is so that the branch automatically closes when we merge it back into master.
 
 ## Quality assurance of code
-We have continued to use **Jacoco**, **Spotbugs** and **Checkstyle** for quality assurance of the code. **SKRIV OM DE SISTE RESULTATENE HER.**
-For release 3 the group has been proofreading each others code. This is to check if any methodes can be written more clearly and efficient. 
+We have continued to use **Jacoco**, **Spotbugs** and **Checkstyle** for quality assurance of the code.
+For release 3 the group has been proofreading each others code. This is to check if any methodes can be written more clearly and efficient. We have also tested edge cases, and checked for vulnerabilities in the application.  
 
 
 ## Reflection and retrospective discussion following the final release
