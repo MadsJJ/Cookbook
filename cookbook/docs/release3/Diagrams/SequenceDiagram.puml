@@ -17,7 +17,7 @@ ui -> uc: signUp()
 activate uc #LightBlue
 uc -> rca: registerNewUser(username, password)
 activate rca #LightBlue
-rca -> rcc: HTTP POST
+rca -> rcc: HTTP POST(username, password)
 activate rcc #LightBlue
 rcc -> cs: checkIfUsernameTaken(username)
 activate cs #LightBlue
@@ -28,25 +28,43 @@ activate sbj #LightBlue
 sbj --> udf: List<User>
 deactivate sbj
 udf --> cs: List<User>
-alt username not available
-cs -[#Red]-> rcc: Exception
-else username already exists 
-activate rcc #LightBlue
-cs -> rcc
-rcc -> cs: signup(username, password)
-activate cs #LightBlue
-cs -> udf: signup(username, password)
-activate udf #LightBlue
-udf -> sbj: signup()
-activate sbj #LightBlue
-sbj --> udf: User
-deactivate sbj
-udf --> cs: User
 deactivate udf
-cs --> rcc: User
+
+alt username taken (not available)
+cs --> rcc: true
+rcc -> rca: HTTP CONFLICT (409)
+
+else username not taken (available)
+cs --> rcc: false
 deactivate cs
-rcc --> rca: User
-deactivate rcc
+    group alt [try]
+    rcc -> cs: signup(username, password)
+    activate cs #LightBlue
+    cs -> udf: signup(username, password)
+    activate udf #LightBlue
+    udf -> sbj: signup()
+    activate sbj #LightBlue
+    sbj --> udf: User
+    deactivate sbj
+    udf --> cs: User
+    deactivate udf
+    cs --> rcc: User
+    deactivate cs
+    rcc --> rca: User, HTTP OK (200)
+    
+
+    else catch
+    rcc --> rca: HTTP BAD_REQUEST (400)
+    deactivate rcc
+    end
+
+activate rcc #LightBlue
+
+
+
+
+
+
 rca --> uc: User
 deactivate rca
 uc -> uc: startApp(User)
