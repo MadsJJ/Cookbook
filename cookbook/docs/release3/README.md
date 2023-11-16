@@ -2,13 +2,18 @@
 
 ## Introduction 
 
-For the third release we will present the final product of our Cookbook. The focus for this release has been to set up a REST API and to add some new functionality. The majority of our time has been used on implementing the REST API. None of the group members had any prior knowledge to this, so it did take some time to implement. 
+For the third release we will present the final product of our Cookbook. The focus for this release has been to set up a REST API and to add some new functionality. The majority of our time has been used on implementing the REST API. None of the group members had any prior knowledge to this, so it did take some time to implement. We also made our app shippable.
 
 **New functionality:**  
 The user is now also able to get recipes from the cookbook based on the ingredients they already have at home. See [UserStories.md](/cookbook/docs/release3/UserStories.md) for description. 
 
 **RestAPI:**  
 For detailed description of REST API go to [README for REST API](/cookbook/restserver/README.md).
+
+**Shippable Product:**  
+We used JLink and JPackage to make our application a shippable product. To do this we followed this [guide](https://dev.to/cherrychain/javafx-jlink-and-jpackage-h9) by Luca Guadagnini. Further down is a step-by-step guide for how to download and launch the application using JLink and JPackage. 
+
+
 
 ## Diagrams 
 For an overview and explanation of the diagrams go to [README for diagrams](/cookbook/docs/release3/Diagrams/README.md) in the [Diagrams](/cookbook/docs/release3/Diagrams) folder.
