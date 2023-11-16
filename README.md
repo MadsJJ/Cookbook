@@ -7,6 +7,8 @@ This is a cookbook app created for your personal use. You can use it to store an
 
 The project uses maven to build and to run. Below is 3 different step-by-step-guides to use Cookbook
 
+**NB: The springboot server can not be running while running tests.** The tests a written for local access, and if the server is open it will set the access type for the controller to be remote. 
+
 Java-version: 17.0.8
 Maven-version: 3.9.2 
 
