@@ -29,15 +29,15 @@ public class UserDataFilehandling {
 
     // Adjust userDir based on project structure
     if (userDir.endsWith("gr2308")) {
-        dirFolder = new File(dirFolder, "cookbook/ui");
+      dirFolder = new File(dirFolder, "cookbook/ui");
     } else if (userDir.endsWith("core")) {
-        dirFolder = new File(dirFolder.getParent(), "ui");
+      dirFolder = new File(dirFolder.getParent(), "ui");
     } else if (userDir.endsWith("restserver")) {
-        dirFolder = new File(dirFolder.getParent(), "ui");
+      dirFolder = new File(dirFolder.getParent(), "ui");
     }
 
     this.userFile = new File(dirFolder, userFile).getPath();
-}
+  }
 
   /**
    * Finds all users in the user file.

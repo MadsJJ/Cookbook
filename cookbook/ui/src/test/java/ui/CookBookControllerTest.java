@@ -76,6 +76,7 @@ public class CookBookControllerTest extends ApplicationTest {
         cookBook.addRecipe(recipe4);
         this.user.setCookBook(cookBook);
         fileHandler.updateFile(user);
+        controller.setFilePath("/src/test/java/ui/resources/ui/UserDataTest.json");
         controller.initialize(user, new LocalCookbookAccess(fileHandler));
       } catch (Exception a) {
         a.printStackTrace();
@@ -93,7 +94,7 @@ public class CookBookControllerTest extends ApplicationTest {
   }
 
   @Test
-  void TestRecipieListView() {
+  void TestRecipeListView() {
     assertEquals(user.getCookBook().getRecipes(), controller.getRecipeListView());
     clickOn("#dinnerButton");
     assertEquals(user.getCookBook().getRecipesByCategory("Dinner"), controller.getRecipeListView());
