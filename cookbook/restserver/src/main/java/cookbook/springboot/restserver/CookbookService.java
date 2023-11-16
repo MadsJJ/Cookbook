@@ -15,7 +15,7 @@ public class CookbookService {
     private UserDataFilehandling userDataFilehandler;
   
     public CookbookService() {
-        userDataFilehandler = new UserDataFilehandling("/src/main/resources/ui/springboot.json");
+        userDataFilehandler = new UserDataFilehandling("/src/main/resources/ui/UserData.json");
     }
 
     public List<User> getUsers() {
