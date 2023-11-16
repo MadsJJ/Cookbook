@@ -127,6 +127,5 @@ class MainApp {
  
 CookbookAccess <|.. LocalCookbookAccess
 CookbookAccess <|.. RemoteCookbookAccess
-CookbookAccess <|.. ServerStatusChecker
 
 @enduml
