@@ -1,14 +1,14 @@
 package ui;
 
+import cookbook.core.CookBook;
+import cookbook.core.Ingredient;
+import cookbook.core.Recipe;
+import cookbook.core.User;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import cookbook.core.CookBook;
-import cookbook.core.Ingredient;
-import cookbook.core.Recipe;
-import cookbook.core.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,6 +28,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ui.access.CookbookAccess;
+import ui.access.ServerStatusChecker;
 
 
 /**
@@ -153,13 +154,14 @@ public class CookBookController {
   private User user;
   private CookbookAccess accessType;
   private Recipe tmpRecipe;
+  private String filepath = "/src/main/resources/ui/UserData.json";
 
   /**
-   * Initialize the controller with a user and file handler. also sets the header text to the
+   * Initialize the controller with a user and a dataaccess object. also sets the header text to the
    * username and hides the random recipe and add recipe panes.
    *
    * @param user The user object.
-   * @param fileHandler The file handler for user data.
+   * @param accessType The accessType to handle data
    */
   public void initialize(User user, CookbookAccess accessType) {
     this.user = user;
@@ -169,19 +171,34 @@ public class CookBookController {
     searchByIngredientsPane.setVisible(false);
     popupLabel.setVisible(false);
     headerText.setText(user.getUsername() + "´s cookbook.");
-    this.accessType=accessType;
+    this.accessType = accessType;
+    updateRecipeListView();
+    tmpRecipe = new Recipe("tmpRecipe", Arrays.asList(new Ingredient("tmpIng", 20, "g")), "Dinner");
+    tmpRecipe.removeAllIngredients();
+  }
+
+  /**
+   * Adds an event handler to the popup label to
+   * hide it when clicked.
+   *
+   * @param stage the stage for the login and signup screens
+   */
+  public void addHideErrorMessageEventHandler(Stage stage) {
+    // Add an event handler to the Label when the application starts
     popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent mouseEvent) {
-            if (popupLabel.isVisible()) {
-              popupLabel.setVisible(false);
-            }
+            hideErrorMessage();
           }
         });
-    updateRecipeListView();
-    tmpRecipe = new Recipe("tmpRecipe", Arrays.asList(new Ingredient("tmpIng", 20, "g")), "Dinner");
-    tmpRecipe.removeAllIngredients();
+  }
+
+  @FXML
+  void hideErrorMessage() {
+    if (popupLabel.isVisible()) {
+      popupLabel.setVisible(false);
+    }
   }
 
   /**
@@ -232,6 +249,7 @@ public class CookBookController {
   @FXML
   void searchByIngredients() {
     try {
+      accessType = ServerStatusChecker.setAccessType(filepath);
       user.setCookBook(new CookBook(accessType.readUser(user.getUsername(), user.getPassword())
           .getCookBook().getCookBookByIngredientSearch(tmpRecipe.getIngredients())));
     } catch (Exception e) {
@@ -240,6 +258,14 @@ public class CookBookController {
 
     }
     updateRecipeListView();
+
+  }
+
+  /**
+   * Used for testing purposes.
+   */
+  public void setFilePath(String filepath) {
+    this.filepath = filepath;
 
   }
 
@@ -255,6 +281,7 @@ public class CookBookController {
     searchByIngredientsPane.setVisible(false);
     randomRecipePane.setVisible(false);
     mainPagePane.setVisible(true);
+    accessType = ServerStatusChecker.setAccessType(filepath);
     user.setCookBook(accessType.readUser(user.getUsername(), user.getPassword()).getCookBook());
     updateRecipeListView();
     tmpRecipe.removeAllIngredients();
@@ -278,6 +305,7 @@ public class CookBookController {
   void removeRecipe(ActionEvent event) {
     try {
       user.getCookBook().removeRecipe(deleteRecipeTextfield.getText());
+      accessType = ServerStatusChecker.setAccessType(filepath);
       accessType.updateUserAttributes(user);
       updateRecipeListView();
     } catch (Exception e) {
@@ -296,9 +324,9 @@ public class CookBookController {
     try {
       recipeListView.getItems()
           .setAll(user.getCookBook().getRecipesByCategory(((Button) event.getSource()).getText()));
-
     } catch (Exception e) {
       displayErrorMessage(e);
+      recipeListView.getItems().clear();
     }
   }
 
@@ -367,6 +395,7 @@ public class CookBookController {
       user.getCookBook().addRecipe(recipe);
       updateRecipeListView();
       addRecipePage();
+      accessType = ServerStatusChecker.setAccessType(filepath);
       accessType.updateUserAttributes(user);
       tmpRecipe.removeAllIngredients();
     } catch (Exception e) {
@@ -410,8 +439,6 @@ public class CookBookController {
       Parent root = loader.load();
       Scene scene = new Scene(root);
       Stage stage = (Stage) logOutButton.getScene().getWindow();
-      UserController controller = loader.getController();
-      controller.setAccessType(accessType);
       stage.setScene(scene);
       stage.show();
 

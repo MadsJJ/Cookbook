@@ -1,12 +1,9 @@
 package ui;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import cookbook.core.User;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import cookbook.core.User;
-import cookbook.core.UserDataFilehandling;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,11 +12,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ui.access.CookbookAccess;
-import ui.access.LocalCookbookAccess;
-import ui.access.RemoteCookbookAccess;
+import ui.access.ServerStatusChecker;
 
 
 /**
@@ -51,21 +48,8 @@ public class UserController {
   @FXML
   private Label popupLabel;
 
-
-  String endpointUri ="http://localhost:8080/cookbook/";
-
-  @FXML
-  String localFilePath;
-
   private CookbookAccess accessType;
-
-  private UserDataFilehandling fileHandler;
-
-  
-
-  public void setAccessType(CookbookAccess accessType) {
-    this.accessType = accessType;
-  }
+  private String filepath = "/src/main/resources/ui/UserData.json";
 
   /**
    * Attempts to log in the user with the provided username and password. If successful, starts the
@@ -74,6 +58,7 @@ public class UserController {
   @FXML
   void login() {
     try {
+      accessType = ServerStatusChecker.setAccessType(filepath);
       startApp(accessType.readUser(usernameField.getText(), passwordField.getText()));
     } catch (Exception e) {
       displayErrorMessage(e);
@@ -87,53 +72,43 @@ public class UserController {
   @FXML
   void signup() {
     try {
+      accessType = ServerStatusChecker.setAccessType(filepath);
       startApp(accessType.registerNewUser(usernameField.getText(), passwordField.getText()));
     } catch (Exception e) {
       displayErrorMessage(e);
     }
   }
-  @FXML
-  void initialize() {
-    CookbookAccess accessType = null;
-    System.out.println(endpointUri);
-    if (endpointUri != null) {
-      RemoteCookbookAccess remoteAccess;
-      try {
-        System.out.println("Using remote endpoint @ " + endpointUri);
-        remoteAccess = new RemoteCookbookAccess(new URI(endpointUri));
-        accessType = remoteAccess;
-      } catch (URISyntaxException e) {
-        System.err.println(e);
-      }
-    }
-    if (accessType == null) {
-      System.out.println("hei");
-      System.out.println(localFilePath);
-      this.fileHandler = new UserDataFilehandling(localFilePath);
-      LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
-      accessType = localAccess;
-    }
 
-    this.accessType=accessType;
+  /**
+   * Used for testing purposes.
+   */
+  public void setFilePath(String filepath) {
+    this.filepath = filepath;
+
   }
 
   /**
-   * Sets the stage for the login and signup screens. Adds an event handler to the popup label to
+   * Adds an event handler to the popup label to
    * hide it when clicked.
    *
    * @param stage the stage for the login and signup screens
    */
-  public void setStage(Stage stage) {
+  public void addHideErrorMessageEventHandler(Stage stage) {
     // Add an event handler to the Label when the application starts
-    // popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
-    //     new EventHandler<MouseEvent>() {
-    //       @Override
-    //       public void handle(MouseEvent mouseEvent) {
-    //         if (popupLabel.isVisible()) {
-    //           popupLabel.setVisible(false);
-    //         }
-    //       }
-    //     });
+    popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+            hideErrorMessage();
+          }
+        });
+  }
+
+  @FXML
+  void hideErrorMessage() {
+    if (popupLabel.isVisible()) {
+      popupLabel.setVisible(false);
+    }
   }
 
   /**
@@ -149,8 +124,9 @@ public class UserController {
       Stage stage = (Stage) loginButton.getScene().getWindow();
       stage.setScene(scene);
       stage.show();
-    
+
       CookBookController cookBookController = loader.getController();
+      cookBookController.addHideErrorMessageEventHandler(stage);
       cookBookController.initialize(user, accessType);
 
 
@@ -162,16 +138,16 @@ public class UserController {
 
   /**
    * Returns the error message displayed in the popup label.
-    *
-    */
+   *
+   */
   public String getErrorMessage() {
     return popupLabel.getText();
   }
 
   /**
-    * Displays an error message as a popup label.
-    *
-    */
+   * Displays an error message as a popup label.
+   *
+   */
   @FXML
   void displayErrorMessage(Exception e) {
     popupLabel.setText(e.getMessage());
