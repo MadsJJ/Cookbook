@@ -1,8 +1,6 @@
 package ui.access;
 
-
 import cookbook.core.User;
-
 
 /**
  * Interface that centralizes access to a Cookbook through UserAccounts.
@@ -27,9 +25,6 @@ public interface CookbookAccess {
    * Updates thes atrributes of a specific user.
    *
    * @param user the user to update
-   * 
    */
   public void updateUserAttributes(User user); 
-
-
 }

@@ -88,8 +88,7 @@ public class UserController {
   }
 
   /**
-   * Adds an event handler to the popup label to
-   * hide it when clicked.
+   * Adds an event handler to the popup label to hide it when clicked.
    *
    * @param stage the stage for the login and signup screens
    */

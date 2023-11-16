@@ -26,7 +26,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
     CookbookApplication.class, GsonConfiguration.class})
 @TestInstance(Lifecycle.PER_CLASS)
 @WebMvcTest
-class RestServerApplicationTests {
+class CookbookApplicationTest {
 
   @Autowired
   private MockMvc mockMvc;
