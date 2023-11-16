@@ -1,11 +1,12 @@
 package ui.access;
 
-
-
 import cookbook.core.User;
 import cookbook.core.UserDataFilehandling;
 
-public class LocalCookbookAccess implements CookbookAccess{
+/**
+ * Class that utilizes json file directly for data handling.
+ */
+public class LocalCookbookAccess implements CookbookAccess {
 
   private final UserDataFilehandling fileHandler;
 
@@ -14,8 +15,7 @@ public class LocalCookbookAccess implements CookbookAccess{
    */
   public LocalCookbookAccess(UserDataFilehandling fileHandler) {
     this.fileHandler = fileHandler;
-   
-    }
+  }
   
   @Override
   public User readUser(String username, String password) {
