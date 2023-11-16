@@ -15,7 +15,7 @@ Belongs to one CookBook, and has zero or many ingredients.
 Belongs to one or many recipes. 
 
 
-![CoreClassDiagram](/cookbook/docs/release3/Diagrams/CoreClassDiagram.png)
+![CoreClassDiagram](/docs/release3/Diagrams/CoreClassDiagram.png)
 
 ### Class diagram REST server
 The following class diagram represents the organization of all the classes in the REST server for the CookBook application. 
@@ -24,16 +24,16 @@ The following class diagram represents the organization of all the classes in th
 - **CookbookController:** Representing the controller. **COOKBOOK_SERVICE_PATH** indicates the path for cookbook-related services.
 It also contains a instance of CookbookService and methods to interact with users, set user information, and perform auto-saving.
 - **CookbookService:**  Representing the service layer for managing user data and interactions.
-![RestserverClassDiagram](/cookbook/docs/release3/Diagrams/RestserverClassDiagram.png)
+![RestserverClassDiagram](/docs/release3/Diagrams/RestserverClassDiagram.png)
 
 ### Class diagram controllers
 
 This diagram is representing the structure of UserControler and CookBookController, and theirs attributes and methods.
 
-![ControllerClassDiagram](/cookbook/docs/release3/Diagrams/UIControllerClassDiagram.png)
+![UIClassDiagram](/docs/release3/Diagrams/UIClassDiagram.png)
 
 ## Sequence diagram 
-Here is a simplified sequence diagram showcasing the timeline of the steps involved in registering a new user to our cookbook-application remote. For a more descriptive diagram click [here](/cookbook/docs/release3/Diagrams/DetailedSequenceDiagram.png)
+Here is a simplified sequence diagram showcasing the timeline of the steps involved in registering a new user to our cookbook-application remote. For a more descriptive diagram click [here](/docs/release3/Diagrams/DetailedSequenceDiagram.png)
 
 
 ### Components/Actors
@@ -56,7 +56,7 @@ Here is a simplified sequence diagram showcasing the timeline of the steps invol
 3. And lastly, the outcome which is illustrated in the simplified diagram: Username is available. This will return HTTP OK (200) and a User. 
 - **Initialization:** The system initializes, and the user can use the application 
 
-![SequenceDiagramRegisterNewUser](/cookbook/docs/release3/Diagrams/SequenceDiagram.png)
+![SequenceDiagramRegisterNewUser](/docs/release3/Diagrams/SimplifiedSequenceDiagram.png)
 
 
 ## Package diagram 
@@ -80,4 +80,4 @@ CORE:
 RESTSERVER:
 - restserver depends on SpringBoot, gson and core
 
-![PackageDiagram](cookbook/docs/release3/Diagrams/PackageDiagram.png)
+![PackageDiagram](/docs/release3/Diagrams/PackageDiagram.png)
