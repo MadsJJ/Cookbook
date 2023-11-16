@@ -33,7 +33,8 @@ To run the application with **jlink and jpackage** follow this step-by-step:
 
 ## Content
 
-What each folder contains. Each module also has their own readme, which is linked at the bottom of their section.
+Following is an overview of what each folder contains.  
+Each module also has their own readme file, which is linked at the bottom of their section.
 
 ### core  
 See [core](cookbook/core/src/main/java/core)  
