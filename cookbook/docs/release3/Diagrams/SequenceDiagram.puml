@@ -7,7 +7,7 @@ participant RemoteCookbookAccess as rca
 participant "restserver/CookbookController" as rcc  
 participant CookbookService as cs 
 participant UserDataFilehandler as udf  
-participant "springboot.json" as sbj 
+participant "UserData.json" as udj
 participant "ui/CookbookController" as ucc 
 
 user -> ui: Input password and username
@@ -23,10 +23,10 @@ rcc -> cs: checkIfUsernameTaken(username)
 activate cs #LightBlue
 cs -> udf: getUsers()
 activate udf #LightBlue
-udf -> sbj: findUsers()
-activate sbj #LightBlue
-sbj --> udf: List<User>
-deactivate sbj
+udf -> udj: findUsers()
+activate udj #LightBlue
+udj --> udf: List<User>
+deactivate udj
 udf --> cs: List<User>
 deactivate udf
 
@@ -42,10 +42,10 @@ deactivate cs
     activate cs #LightBlue
     cs -> udf: signup(username, password)
     activate udf #LightBlue
-    udf -> sbj: signup()
-    activate sbj #LightBlue
-    sbj --> udf: User
-    deactivate sbj
+    udf -> udj: signup()
+    activate udj #LightBlue
+    udj --> udf: User
+    deactivate udj
     udf --> cs: User
     deactivate udf
     cs --> rcc: User

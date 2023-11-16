@@ -5,12 +5,36 @@ We use panes in the cookbook scene to make it fast and easy to change the object
 
 ## Classes in UI module:
 
+## main
+
+### access
+
+The purpose of the access classes is to facilitate communication between the Cookbook application and the external server. 
+
+- [CookbookAccess.java](/cookbook/ui/src/main/java/ui/access/CookbookAccess.java) - This interface defines methods that must be implemented to access a cookbook through user accounts. Can be implemented by different classes depending on how they will interact with the data.
+- [LocalCookbookAccess.java](cookbook/ui/src/main/java/ui/access/LocalCookbookAccess.java) - Implements CookbookAccess, and handles access to a local cookbook. 
+
+- [RemoteCookbookAccess.java](cookbook/ui/src/main/java/ui/access/RemoteCookbookAccess.java) - Also implements CookbookAccess, but focuses on handling access to the cookbook through an external REST API. 
+
+- [ServerStatusChecker.java](/cookbook/ui/src/main/java/ui/ServerStatusChecker.java) - Checks if the server is running
+
 
 ### Controller classes:
-- [CookBookController.java](/cookbook/ui/src/main/java/ui/CookBookController.java)
-- [UserController.java](/cookbook/ui/src/main/java/ui/UserController.java)
-- [MainApp.java](/cookbook/ui/src/main/java/ui/MainApp.java)
+- [CookbookController.java](/cookbook/ui/src/main/java/ui/CookBookController.java) - Controller class for the cookbook applications main UI
+- [MainApp.java](/cookbook/ui/src/main/java/ui/MainApp.java) - Starts the Cookbook Application
+- [UserController.java](/cookbook/ui/src/main/java/ui/UserController.java) - Handles the users interaction with the login and signup screen.
 
-### FXML files: 
-- [User.fxml](/cookbook/ui/src/main/resources/ui/User.fxml)
-- [CookBook.fxml](/cookbook/ui/src/main/resources/ui/CookBook.fxml)
+
+### resources: 
+- [User.fxml](/cookbook/ui/src/main/resources/ui/User.fxml) - fxml-file for the login/signup screen
+- [Cookbook.fxml](/cookbook/ui/src/main/resources/ui/CookBook.fxml) - fxml-file for the Cookbook screen
+- [UserData.fxml](cookbook/ui/src/main/resources/ui/UserData.json) - .json-file for saving UserData locally
+
+## test
+
+- [CookbookControllerTest.java](cookbook/ui/src/test/java/ui/CookBookControllerTest.java) - tests the CookbookController-class
+- [MainAppTest.java](cookbook/ui/src/test/java/ui/MainAppTest.java) - tests the MainApp-class
+- [UserControllerTest.java](cookbook/ui/src/test/java/ui/UserControllerTest.java)- tests the UserController-class
+
+### resources:
+- [UserDataTest](cookbook/ui/src/test/java/ui/resources/ui/UserDataTest.json) - .json file for saving UserData from tests

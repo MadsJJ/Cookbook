@@ -23,7 +23,7 @@ import ui.access.RemoteCookbookAccess;
 
 
 /**
- * This class is responsible for handling user interactions with the login and signup screens.
+ * This class is responsible for handling user interactions with the login and signup screen.
  */
 public class UserController {
 
