@@ -27,7 +27,7 @@ To run the application as normal in your IDE follow this step-by-step:
 To run the application with **jlink and jpackage** follow this step-by-step:
 1. Run `mvn clean install` from the root project directory (cookbook-folder). This will build the project and run all tests (to skip tests add `-DskipTests`).
 2. Run `cd restserver && mvn spring-boot:run` to launch spring boot (or run `cd restserver` followed by `mvn spring-boot:run`)
-3. Run  `cd ui && mvn clean compile javafx:jlink jpackage:jpackage`. JLink downloads the project as a .zip-file and JPackage convertes it to an "application". To find the .zip-file look in */ui/target*
+3. Open a new terminal. Run  `cd ui && mvn clean compile javafx:jlink jpackage:jpackage`. JLink downloads the project as a .zip-file and JPackage convertes it to an "application". To find the .zip-file look in */ui/target*
 4. Find the application and open it as you would any other application on your computer. 
 5. Log-in or sign up to create your very own personal cookbook!
 
