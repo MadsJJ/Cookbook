@@ -1,0 +1,23 @@
+[
+  {
+    "username": "test1",
+    "password": "test",
+    "cookBook": {
+      "recipes": []
+    }
+  },
+  {
+    "username": "test2",
+    "password": "test",
+    "cookBook": {
+      "recipes": []
+    }
+  },
+  {
+    "username": "test3",
+    "password": "test",
+    "cookBook": {
+      "recipes": []
+    }
+  }
+]

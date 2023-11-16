@@ -1,12 +1,11 @@
 package ui;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import cookbook.core.User;
 import cookbook.core.UserDataFilehandling;
+import java.net.URI;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,11 +14,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ui.access.CookbookAccess;
 import ui.access.LocalCookbookAccess;
 import ui.access.RemoteCookbookAccess;
+import ui.access.ServerStatusChecker;
 
 
 /**
@@ -52,10 +53,9 @@ public class UserController {
   private Label popupLabel;
 
 
-  String endpointUri ="http://localhost:8080/cookbook/";
+  String endpointUri = "http://localhost:8080/cookbook/";
 
-  @FXML
-  String localFilePath;
+  String localFilePath = "/src/main/resources/ui/UserData.json";
 
   private CookbookAccess accessType;
 
@@ -92,30 +92,40 @@ public class UserController {
       displayErrorMessage(e);
     }
   }
+
   @FXML
   void initialize() {
-    CookbookAccess accessType = null;
-    System.out.println(endpointUri);
-    if (endpointUri != null) {
-      RemoteCookbookAccess remoteAccess;
-      try {
-        System.out.println("Using remote endpoint @ " + endpointUri);
-        remoteAccess = new RemoteCookbookAccess(new URI(endpointUri));
-        accessType = remoteAccess;
-      } catch (URISyntaxException e) {
-        System.err.println(e);
-      }
-    }
-    if (accessType == null) {
-      System.out.println("hei");
-      System.out.println(localFilePath);
-      this.fileHandler = new UserDataFilehandling(localFilePath);
-      LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
-      accessType = localAccess;
-    }
+    try {
+      if(ServerStatusChecker.serverStatus()){
+        RemoteCookbookAccess remoteAccess;
+          System.out.println("Using remote endpoint @ " + endpointUri);
+          remoteAccess = new RemoteCookbookAccess(new URI(endpointUri));
+          this.accessType = remoteAccess;
+          System.out.println(remoteAccess);
 
-    this.accessType=accessType;
+        }
+        else{
+       
+          System.out.println("Failed to establish contact with server. \n" +
+          "Using data directly from file \n" +
+          "@" +localFilePath);
+          this.fileHandler = new UserDataFilehandling(localFilePath);
+          LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
+          this.accessType = localAccess;
+        }
+      
+    } catch (Exception e) {
+          System.out.println("Error occured when attempting contact with server. \n" +
+          "Using data directly from file \n" +
+          "@" +localFilePath);
+          this.fileHandler = new UserDataFilehandling(localFilePath);
+          LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
+          accessType = localAccess;
+
+        this.accessType=localAccess;
+
   }
+}
 
   /**
    * Sets the stage for the login and signup screens. Adds an event handler to the popup label to
@@ -125,15 +135,15 @@ public class UserController {
    */
   public void setStage(Stage stage) {
     // Add an event handler to the Label when the application starts
-    // popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
-    //     new EventHandler<MouseEvent>() {
-    //       @Override
-    //       public void handle(MouseEvent mouseEvent) {
-    //         if (popupLabel.isVisible()) {
-    //           popupLabel.setVisible(false);
-    //         }
-    //       }
-    //     });
+    popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+            if (popupLabel.isVisible()) {
+              popupLabel.setVisible(false);
+            }
+          }
+        });
   }
 
   /**
