@@ -39,7 +39,7 @@ public class CookbookService {
   }
 
   /**
-   * Sets the UserDataFilehandling object with a new file path.
+   * Sets the UserDataFilehandling object with a new file path (only used for testing).
    *
    * @param path New file path
    */

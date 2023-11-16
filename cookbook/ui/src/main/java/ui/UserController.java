@@ -3,12 +3,8 @@ package ui;
 import cookbook.core.User;
 import cookbook.core.UserDataFilehandling;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import cookbook.core.User;
-import cookbook.core.UserDataFilehandling;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -100,7 +96,7 @@ public class UserController {
   @FXML
   void initialize() {
     try {
-      if(ServerStatusChecker.ServerStatus()){
+      if(ServerStatusChecker.serverStatus()){
         RemoteCookbookAccess remoteAccess;
           System.out.println("Using remote endpoint @ " + endpointUri);
           remoteAccess = new RemoteCookbookAccess(new URI(endpointUri));
