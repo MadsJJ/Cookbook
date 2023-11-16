@@ -15,7 +15,7 @@ To run in **Eclipse che** follow this step-by-step:
 2. Follow [Open in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308?new) 
 3. Run `mvn clean install` from the root project directory (cookbook-folder). This will build the project and run all tests (to skip tests add `-DskipTests`).
 4. Run `cd restserver && mvn spring-boot:run` to launch spring boot. (or run `cd restserver` followed by `mvn spring-boot:run`)
-5. Run  `mvn javafx:run -f ui/pom.xml` to launch the application (or run `cd ui` followed by `mvn javafx:run`)
+5. Open a new terminal. Run  `mvn javafx:run -f ui/pom.xml` to launch the application (or run `cd ui` followed by `mvn javafx:run`)
 6. Look in endpoint for the 6080-link and paste it into your preferred browser and add /cookbook at the end
 7. Log-in or sign up to create your very own personal cookbook!
 
