@@ -17,7 +17,7 @@ public class CookbookService {
    * Default constructor initializes the UserDataFilehandling with a default file path.
    */
   public CookbookService() {
-    userDataFilehandler = new UserDataFilehandling("/src/main/resources/ui/springboot.json");
+    userDataFilehandler = new UserDataFilehandling("/src/main/resources/ui/UserData.json");
   }
 
   /**

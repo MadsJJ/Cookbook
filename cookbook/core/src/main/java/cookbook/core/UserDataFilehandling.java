@@ -3,6 +3,7 @@ package cookbook.core;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,21 +25,19 @@ public class UserDataFilehandling {
    */
   public UserDataFilehandling(String userFile) {
     String userDir = System.getProperty("user.dir");
-    // Used for local access 
+    File dirFolder = new File(userDir);
+
+    // Adjust userDir based on project structure
     if (userDir.endsWith("gr2308")) {
-      userDir = userDir + "/cookbook/ui";
-      // Used for testing in core module
+        dirFolder = new File(dirFolder, "cookbook/ui");
     } else if (userDir.endsWith("core")) {
-      userDir = userDir.substring(0, userDir.length() - 4);
-      userDir = userDir + "ui";
-      // used for springboot in CookBookService
+        dirFolder = new File(dirFolder.getParent(), "ui");
     } else if (userDir.endsWith("restserver")) {
-      userDir = userDir.substring(0, userDir.length() - 10);
-      userDir = userDir + "ui";
+        dirFolder = new File(dirFolder.getParent(), "ui");
     }
 
-    this.userFile = userDir + userFile;
-  }
+    this.userFile = new File(dirFolder, userFile).getPath();
+}
 
   /**
    * Finds all users in the user file.
