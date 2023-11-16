@@ -33,7 +33,7 @@ This diagram is representing the structure of UserControler and CookBookControll
 ![ControllerClassDiagram](/cookbook/docs/release3/Diagrams/UIControllerClassDiagram.png)
 
 ## Sequence diagram 
-Here is a sequence diagram showcasing the timeline of the steps involved in registering a new user to our cookbook-application.
+Here is a simplified sequence diagram showcasing the timeline of the steps involved in registering a new user to our cookbook-application remote. For a more descriptive diagram click [here](/cookbook/docs/release3/Diagrams/DetailedSequenceDiagram.png)
 
 
 ### Components/Actors
@@ -44,17 +44,19 @@ Here is a sequence diagram showcasing the timeline of the steps involved in regi
 - **CookbookController (restserver/):** Handles HTTP requests and delegates operations to CookbookService
 - **CookbookService:** Contains the logic for the user-related operations. 
 - **UserDataFilehandler:** Serializes/Deserializes strings and manages local user data files
-- **springboot.json:** Represents the JSON file used for data storage
+- **UserData.json:** Represents the JSON file used for data storage
 - **CookbookController (ui/):** Represents the controller on the ui-side, manages the UI components.
 
 ### Steps 
-- **User input:** the user inputs username and password
-- **User registration:** The UI sends a registration request to the UserController
-- **Username Availability Check:** UserController checks with RemoteCookbookAccess and CookbookService to see if the username is available
-- **User creation:** If the username is available, UserController triggers sign up through CookbookService
-- **Initialization:** THe system initializes, and the user can use tha application 
+- **User input:** the user inputs their username and password
+- **User registration:** The UI initializes signUp() in UserController, who afterwards checks if the servers are running to decide if it should use Remote or Local CookbookAccess. In this scenario it returns Remote. Afterwards UserController asks RemoteCookbookAccess to registerNewUser()
+- **Username Availability Check:** RemoteCookbookAccess sends a HTTP POST REQUEST to `/localhost/8080/cookbook`. This starts a chain illustrated in the diagram, which ends in UserData.json. Then the answer will be sent back through the same classes. Here there is three possible outcomes:
+1. Username is already taken, HTTP CONFLICT (409) is returned. And the user will get a pop-up message that they need to choose a different username.
+2. The username is invalid, too short, long etc, HTTP BAD_REQUEST (400) is returned and the user gets notified.
+3. And lastly, the outcome which is illustrated in the simplified diagram: Username is available. This will return HTTP OK (200) and a User. 
+- **Initialization:** The system initializes, and the user can use the application 
 
-![SequenceDiagramRegisterNewUser](/cookbook/docs/release3/Diagrams/SequenceDiagramRegisterNewUser.png)
+![SequenceDiagramRegisterNewUser](/cookbook/docs/release3/Diagrams/SequenceDiagram.png)
 
 
 ## Package diagram 
@@ -63,7 +65,7 @@ Following is a package diagram illustrating the high-level architecture of our p
 ### Components and Packages
 We've already described most of our packages in [README.md](README.md) so here we'll just explain which external libraries we have used. 
 
-**gson:** A library for JSON serialization and deserialization
+**gson:** A library for JSON serialization and deserialization  
 **JavaFX:** A Java-based framework for building UI  
 **SpringBoot:** A framework for building Java-based applications
 
@@ -79,4 +81,3 @@ RESTSERVER:
 - restserver depends on SpringBoot, gson and core
 
 ![PackageDiagram](cookbook/docs/release3/Diagrams/PackageDiagram.png)
-

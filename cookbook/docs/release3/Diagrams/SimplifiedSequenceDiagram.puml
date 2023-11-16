@@ -1,9 +1,8 @@
-@startuml Sequence Diagram
+@startuml Simplified Sequence Diagram
 
 Actor User as user  #MediumPurple
 participant UI as ui
 participant UserController as uc
-participant ServerStatusChecker as ssc
 participant RemoteCookbookAccess as rca 
 participant "restserver/CookbookController" as rcc  
 participant CookbookService as cs 
@@ -16,11 +15,6 @@ activate user #LightBlue
 activate ui #LightBlue
 ui -> uc: signUp()
 activate uc #LightBlue
-uc -> ssc: setAccessType(filepath)
-activate ssc #LightBlue
-ssc -> rcc: HTTP GET()
-rcc -> ssc: HTTP OK (200)
-ssc --> uc: AccessType
 uc -> rca: registerNewUser(username, password)
 activate rca #LightBlue
 rca -> rcc: HTTP POST(username, password)
@@ -35,41 +29,23 @@ udj --> udf: List<User>
 deactivate udj
 udf --> cs: List<User>
 deactivate udf
-
-alt username taken (not available)
-cs --> rcc: true
-rcc -> rca: HTTP CONFLICT (409)
-
-else username not taken (available)
 cs --> rcc: false
 deactivate cs
-    group alt [try]
-    rcc -> cs: signup(username, password)
-    activate cs #LightBlue
-    cs -> udf: signup(username, password)
-    activate udf #LightBlue
-    udf -> udj: signup()
-    activate udj #LightBlue
-    udj --> udf: User
-    deactivate udj
-    udf --> cs: User
-    deactivate udf
-    cs --> rcc: User
-    deactivate cs
-    rcc --> rca: User, HTTP OK (200)
-    
 
-    else catch
-    rcc --> rca: HTTP BAD_REQUEST (400)
-    deactivate rcc
-    end
-
-activate rcc #LightBlue
-
-
-
-
-
+rcc -> cs: signup(username, password)
+activate cs #LightBlue
+cs -> udf: signup(username, password)
+activate udf #LightBlue
+udf -> udj: signup()
+activate udj #LightBlue
+udj --> udf: User
+deactivate udj
+udf --> cs: User
+deactivate udf
+cs --> rcc: User
+deactivate cs
+rcc --> rca: User, HTTP OK (200)
+deactivate rcc
 
 rca --> uc: User
 deactivate rca
@@ -82,6 +58,5 @@ ui -> user
 deactivate ucc
 deactivate ui
 deactivate user
-end
 
 @enduml

@@ -16,14 +16,14 @@ We used JLink and JPackage to make our application a shippable product. To do th
 
 
 ## Diagrams 
-For an overview and explanation of the diagrams go to [README for diagrams](/cookbook/docs/release3/Diagrams/README.md) in the [Diagrams](/cookbook/docs/release3/Diagrams) folder.
+For an overview and explanation of the diagrams go to [README](/cookbook/docs/release3/Diagrams/README.md) for diagrams in the [Diagrams](/cookbook/docs/release3/Diagrams) folder.
 
 ## Work habits and workflow
 
 **From release 2**:   
 We have continued to focus on the aspects from release 2:  
 **Pair Programming, Gitlab issues, Branch-Based Development, Active Group Discussions and Milestones**.  
-See [README from release 2](/cookbook/docs/release2/README.md) for elaboration. 
+See [README](/cookbook/docs/release2/README.md) from release 2 for elaboration. 
 
 **Connecting branch to an issue**:  
 During this final release we have focused on making a branch for every issue, and naming it with the number for the issue. This is so that the branch automatically closes when we merge it back into master.
