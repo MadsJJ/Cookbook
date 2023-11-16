@@ -1,0 +1,37 @@
+@startuml Architecture Diagram
+
+component CORE {
+	package core #PaleTurquoise
+}
+
+component UI {
+    package ui #PaleTurquoise
+    package access #PaleTurquoise
+
+}
+
+
+component RESTSERVER{
+	component restserver #PaleTurquoise {
+	}
+}
+
+core -[#Red].> gson
+ui -[#Red].> JavaFX
+access -[#Red].> gson
+UI -[#Red].> core
+restserver -[#Red].> core
+restserver .[#Red].> gson
+restserver -[#Red].> SpringBoot
+
+
+component gson #PaleGoldenRod {
+}
+
+component JavaFX #PaleGoldenRod{
+}
+
+component SpringBoot #PaleGoldenRod{
+}
+
+@enduml
