@@ -25,7 +25,7 @@ public class CookbookServiceTest {
 
   /**
    * Sets up the test environment before each test method is executed.
-   * 
+   *
    * @throws IllegalStateException if an illegal state is encountered
    * @throws IOException if an I/O error occurs
    */

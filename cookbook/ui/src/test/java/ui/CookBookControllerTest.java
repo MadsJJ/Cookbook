@@ -3,25 +3,24 @@ package ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import cookbook.core.CookBook;
+import cookbook.core.Ingredient;
+import cookbook.core.Recipe;
+import cookbook.core.User;
+import cookbook.core.UserDataFilehandling;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.framework.junit5.Start;
-
-import cookbook.core.CookBook;
-import cookbook.core.Ingredient;
-import cookbook.core.Recipe;
-import cookbook.core.User;
-import cookbook.core.UserDataFilehandling;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.framework.junit5.Start;
 import ui.access.LocalCookbookAccess;
 
 public class CookBookControllerTest extends ApplicationTest {
@@ -48,7 +47,7 @@ public class CookBookControllerTest extends ApplicationTest {
 
       try (FileWriter writer = new FileWriter(
           Paths.get(userDir, "/src/test/java/ui/resources/ui/UserDataTest.json").toString(),
-          StandardCharsets.UTF_8)) { 
+          StandardCharsets.UTF_8)) {
         writer.write("");
         writer.close();
         fileHandler.signup("username", "password");
@@ -94,7 +93,7 @@ public class CookBookControllerTest extends ApplicationTest {
   }
 
   @Test
-  void TestRecipeListView() {
+  void testRecipeListView() {
     assertEquals(user.getCookBook().getRecipes(), controller.getRecipeListView());
     clickOn("#dinnerButton");
     assertEquals(user.getCookBook().getRecipesByCategory("Dinner"), controller.getRecipeListView());
@@ -108,7 +107,7 @@ public class CookBookControllerTest extends ApplicationTest {
   }
 
   @Test
-  void TestGetRandomRecipe() {
+  void testGetRandomRecipe() {
     clickOn("#randomRecipeButton");
     assertEquals("", controller.getRandomRecipeText());
     clickOn("#randomAppetizerButton");
@@ -123,7 +122,7 @@ public class CookBookControllerTest extends ApplicationTest {
   }
 
   @Test
-  void TestRemoveRecipe() {
+  void testRemoveRecipe() {
     clickOn("#removeRecipeButton");
     assertEquals("Enter recipe name to remove from Cookbook", controller.getErrorMessage());
     clickOn("#deleteRecipeTextfield").write("NotInCookBook");
@@ -139,7 +138,7 @@ public class CookBookControllerTest extends ApplicationTest {
   }
 
   @Test
-  void TestAddRecipeInitCheck() {
+  void testAddRecipeInitCheck() {
     clickOn("#addRecipeButton");
     clickOn("#addIngredientButton");
     assertEquals("Ingredient needs a name", controller.getErrorMessage());
@@ -150,7 +149,7 @@ public class CookBookControllerTest extends ApplicationTest {
   }
 
   @Test
-  void TestAddIngredient() {
+  void testAddIngredient() {
     clickOn("#addRecipeButton");
     clickOn("#addIngredientNameTextField").write("NewIngredient");
     clickOn("#addIngredientButton");
@@ -186,7 +185,7 @@ public class CookBookControllerTest extends ApplicationTest {
   }
 
   @Test
-  void TestAddRecipe() {
+  void testAddRecipe() {
     clickOn("#addRecipeButton");
     clickOn("#addIngredientNameTextField").write("NewIngredient");
     clickOn("#amountTextField").write("10");
@@ -212,35 +211,35 @@ public class CookBookControllerTest extends ApplicationTest {
     assertEquals("Recipe already exists in cookbook", controller.getErrorMessage());
     clickOn("#titleTextField").write("4");
     clickOn("#addNewRecipeButton");
-    assertEquals(user.getCookBook().getRecipes().size(),controller.getRecipeListView().size()); 
-  
+    assertEquals(user.getCookBook().getRecipes().size(), controller.getRecipeListView().size());
+
 
   }
 
   @Test
-  void TestSearchByIngredients(){
+  void testSearchByIngredients() {
     List<Recipe> initialRecipes = controller.getRecipeListView();
     clickOn("#SearchByIngredientsButton");
     clickOn("#SearchButton");
     List<Recipe> filteredRecipes = controller.getRecipeListView();
-    assertEquals(initialRecipes.size(),filteredRecipes.size());
+    assertEquals(initialRecipes.size(), filteredRecipes.size());
     clickOn("#addIngredientNameTextField").write("Ingredient 4");
     clickOn("#amountTextField").write("100");
     clickOn("#unitComboBox").write('\u2193').write('\n');
     clickOn("#addIngredientButton");
     clickOn("#SearchButton");
     filteredRecipes = controller.getRecipeListView();
-    assertEquals(1,filteredRecipes.size());
+    assertEquals(1, filteredRecipes.size());
     clickOn("#addIngredientNameTextField").write("Ingredient 5");
     clickOn("#amountTextField").write("100");
     clickOn("#addIngredientButton");
     clickOn("#SearchButton");
     filteredRecipes = controller.getRecipeListView();
-    assertEquals(initialRecipes.size(),filteredRecipes.size());
+    assertEquals(initialRecipes.size(), filteredRecipes.size());
   }
 
   @Test
-  void TestCancelButton(){
+  void testCancelButton() {
     List<Recipe> initialRecipes = controller.getRecipeListView();
     clickOn("#SearchByIngredientsButton");
     clickOn("#addIngredientNameTextField").write("Ingredient 4");
@@ -249,9 +248,9 @@ public class CookBookControllerTest extends ApplicationTest {
     clickOn("#addIngredientButton");
     clickOn("#SearchButton");
     List<Recipe> filteredRecipes = controller.getRecipeListView();
-    assertEquals(1,filteredRecipes.size());
+    assertEquals(1, filteredRecipes.size());
     clickOn("#cancelSearchByIngredients");
-    assertEquals(initialRecipes.size(),controller.getRecipeListView().size());
+    assertEquals(initialRecipes.size(), controller.getRecipeListView().size());
 
 
   }

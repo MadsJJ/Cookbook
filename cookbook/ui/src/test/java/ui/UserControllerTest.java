@@ -1,5 +1,12 @@
 package ui;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import cookbook.core.UserDataFilehandling;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -7,14 +14,6 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
-
-import cookbook.core.UserDataFilehandling;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
 
 public class UserControllerTest extends ApplicationTest {
   private UserController controller;
@@ -59,7 +58,7 @@ public class UserControllerTest extends ApplicationTest {
 
   // test for login
   @Test
-  void LoginWithWrongUsernameAndPassword() throws IOException {
+  void loginWithWrongUsernameAndPassword() throws IOException {
     clickOn("#usernameField").write("username1");
     clickOn("#passwordField").write("password1");
     clickOn("#loginButton");
@@ -67,7 +66,7 @@ public class UserControllerTest extends ApplicationTest {
   }
 
   @Test
-  void LoginWithWrongUsername() throws IOException {
+  void loginWithWrongUsername() throws IOException {
     clickOn("#usernameField").write("username1");
     clickOn("#passwordField").write("password");
     clickOn("#loginButton");
@@ -75,7 +74,7 @@ public class UserControllerTest extends ApplicationTest {
   }
 
   @Test
-  void LoginWithWrongPassword() throws IOException {
+  void loginWithWrongPassword() throws IOException {
     clickOn("#usernameField").write("username");
     clickOn("#passwordField").write("password1");
     clickOn("#loginButton");
@@ -83,7 +82,7 @@ public class UserControllerTest extends ApplicationTest {
   }
 
   @Test
-  void LoginSuccess() throws IOException {
+  void loginSuccess() throws IOException {
     clickOn("#usernameField").write("username");
     clickOn("#passwordField").write("password");
     clickOn("#loginButton");
@@ -92,7 +91,7 @@ public class UserControllerTest extends ApplicationTest {
   // tests for signup
 
   @Test
-  void SignupSuccess() throws IOException {
+  void signupSuccess() throws IOException {
     clickOn("#usernameField").write("username1");
     clickOn("#passwordField").write("password");
     clickOn("#signupButton");

@@ -34,6 +34,7 @@ public class CookBook {
 
   /**
    * Sets the list of recipes in the cookbook to the given list of recipes.
+   * only used in tests
    *
    * @param recipes the list of recipes to set in the cookbook
    * @throws IllegalArgumentException if the list of recipes is null or empty
