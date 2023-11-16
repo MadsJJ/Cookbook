@@ -117,8 +117,9 @@ Read more about the ui module in [README for ui module](cookbook/ui/README.md)
 
 ## Code quality
 
-[***jacoco***](https://www.jacoco.org/) - collects and presents the test-coverage grade for each module. Located in `/target/site/index.html` in each module.  
-[***spotbugs***](https://spotbugs.github.io/)- checks for bugs and vulnerabilities.  
+[***jacoco***](https://www.jacoco.org/) - collects and presents the test-coverage grade for each module. Located in `/target/site/jacoco/index.html` in each module.
+[***spotbugs***](https://spotbugs.github.io/)- checks for bugs and vulnerabilities. 
+To generate the spotbugs report first run `mvn site` in the terminal from the cookbook folder. Then run `mvn spotbugs:gui` in he same folder. This will open the spotbugs report.
 [***checkstyle***](https://checkstyle.sourceforge.io/)-  Superficial checks on code layout and formatting issues to enforce a coding standard. 
 
 
