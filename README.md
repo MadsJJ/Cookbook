@@ -25,11 +25,23 @@ To run the application as normal in your IDE follow this step-by-step:
 3. Log-in or sign up to create your very own personal cookbook!
 
 To run the application with **jlink and jpackage** follow this step-by-step:
-1. Run `mvn clean install` from the root project directory (cookbook-folder). This will build the project and run all tests (to skip tests add `-DskipTests`).
-2. Run `cd restserver && mvn spring-boot:run` to launch spring boot (or run `cd restserver` followed by `mvn spring-boot:run`)
-3. Open a new terminal. Run  `cd ui && mvn clean compile javafx:jlink jpackage:jpackage`. JLink downloads the project as a .zip-file and JPackage convertes it to an "application". To find the .zip-file look in */ui/target*
-4. Find the application and open it as you would any other application on your computer. 
-5. Log-in or sign up to create your very own personal cookbook!
+
+For windows you need to first download WiX Toolset. If you use Mac or Linux you can skip ahead to step 4
+1. Open PowerShell and run the following command  
+`
+Invoke-WebRequest -Uri "https://github.com/wixtoolset/wix3/releases/download/wix3112rtm/wix311.exe" -OutFile "wix311.exe"
+`
+2. After the download is complete, run the installer by executing the following command:  
+`
+Start-Process -Wait -FilePath ".\wix311.exe"
+`   
+This will open the WiX installer. Follow the installation prompts, and make sure to note the installation directory.
+3. (Optional) While the installer usually adds WiX to the system PATH automatically, you might want to verify or add it manually. You can do this through the *System Properties > Advanced > Environment Variables* on Windows.
+4. Run `mvn clean install` from the root project directory (cookbook-folder). This will build the project and run all tests (to skip tests add `-DskipTests`).
+5. Run `cd restserver && mvn spring-boot:run` to launch spring boot (or run `cd restserver` followed by `mvn spring-boot:run`)
+6. Open a new terminal. Run  `cd ui && mvn clean compile javafx:jlink jpackage:jpackage`. JLink downloads the project as a .zip-file and JPackage convertes it to an "application". To find the .zip-file look in */ui/target*
+7. Find the application and open it as you would any other application on your computer. 
+8. Log-in or sign up to create your very own personal cookbook!
 
 ## Content
 
