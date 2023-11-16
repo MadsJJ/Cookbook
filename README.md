@@ -39,8 +39,8 @@ This will open the WiX installer. Follow the installation prompts, and make sure
 3. (Optional) While the installer usually adds WiX to the system PATH automatically, you might want to verify or add it manually. You can do this through the *System Properties > Advanced > Environment Variables* on Windows.
 4. Run `mvn clean install` from the root project directory (cookbook-folder). This will build the project and run all tests (to skip tests add `-DskipTests`).
 5. Run `cd restserver && mvn spring-boot:run` to launch spring boot (or run `cd restserver` followed by `mvn spring-boot:run`)
-6. Open a new terminal. Run  `cd ui && mvn clean compile javafx:jlink jpackage:jpackage`. JLink downloads the project as a .zip-file and JPackage convertes it to an "application". To find the .zip-file look in */ui/target*
-7. Find the application and open it as you would any other application on your computer. 
+6. Open a new terminal. Run  `cd ui && mvn clean compile javafx:jlink jpackage:jpackage`. JLink downloads the project as a .zip-file and JPackage convertes it to an "application". To download the app to onto your computer, run the .exe-file in */ui/target/dist*
+7. Open the CookbookFX app as you would do with any other application on your computer. 
 8. Log-in or sign up to create your very own personal cookbook!
 
 ## Content
