@@ -1,7 +1,7 @@
 # Cookbook
 
 ## Description
-This is a cookbook app created for your personal use. You can use it to store and look at your favorite recipes at your convenience. If you are not sure about what meal to cook, you can get recipe suggestions based on what type of meal you want.
+This is a cookbook app created for your personal use. You can use it to store and look at your favorite recipes at your convenience. If you are unsure about what meal to cook, you can get a random recipe suggestions based on what type of meal you want. You can also add the ingredients you already have in your fridge, and get the recipes that contains those ingredients. 
 
 ## Application fundementals
 
@@ -10,7 +10,7 @@ The project uses maven to build and to run. Below is 3 different step-by-step-gu
 Java-version: 17.0.8
 Maven-version: 3.9.2 
 
-To run in **Eclipse che** follow this step-by-step:
+**To run in Eclipse che follow this step-by-step:**
 1. Set up your eclipse che account with an access token
 2. Follow [Open in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2308/gr2308?new) 
 3. Run `mvn clean install` from the root project directory (cookbook-folder). This will build the project and run all tests (to skip tests add `-DskipTests`).
@@ -19,12 +19,12 @@ To run in **Eclipse che** follow this step-by-step:
 6. Look in endpoint for the 6080-link and paste it into your preferred browser and add /cookbook at the end
 7. Log-in or sign up to create your very own personal cookbook!
 
-To run the application as normal in your IDE follow this step-by-step:
+**To run the application as normal in your IDE follow this step-by-step:**
 1. Run `mvn clean install` from the root project directory (cookbook-folder). This will build the project and run all tests (to skip tests add `-DskipTests`).
 2. Run  `mvn javafx:run -f ui/pom.xml` to launch the program (or run `cd ui` followed by `mvn javafx:run`)
 3. Log-in or sign up to create your very own personal cookbook!
 
-To run the application with **jlink and jpackage** follow this step-by-step:
+**To run the application with jlink and jpackage follow this step-by-step:**
 
 For windows you need to first download WiX Toolset. If you use Mac or Linux you can skip ahead to step 4
 1. Open PowerShell and run the following command  
@@ -52,7 +52,7 @@ Each module also has their own readme file, which is linked at the bottom of the
 See [core](cookbook/core/src/main/java/core)  
 
 ***main***  
-Contains the classes for the main functionality of the application, its core   
+Contains the classes for the main functionality of the application.  
 [CookBook.java](cookbook/core/src/main/java/cookbook/core/CookBook.java)  
 [Ingredient.java](cookbook/core/src/main/java/cookbook/core/Ingredient.java)  
 [Recipe.java](cookbook/core/src/main/java/cookbook/core/Recipe.java)  
@@ -61,7 +61,7 @@ Contains the classes for the main functionality of the application, its core
 
 
 ***test***  
-Contains the respective tests for the core-classes + UserDataFilehandling  
+Contains the respective tests for the core-classes + UserDataFilehandling.  
 [CookBookTest.java](cookbook/core/src/test/java/core/CookBookTest.java)  
 [IngredientTest.java](cookbook/core/src/test/java/core/IngredientTest.java)  
 [RecipeTest.java](cookbook/core/src/test/java/core/RecipeTest.java)  
@@ -85,14 +85,14 @@ Each release contains screenshots of the updated UIDesign and a README.md with a
 ### restserver
 
 ***main***  
-Contains the classes for the Restserver    
+Contains the classes for the Restserver.    
 [CookbookApplication.java](cookbook/restserver/src/main/java/cookbook/springboot/restserver/CookbookApplication.java)   
 [CookbookController.java](cookbook/restserver/src/main/java/cookbook/springboot/restserver/CookbookController.java)   
 [CookbookService.java](cookbook/restserver/src/main/java/cookbook/springboot/restserver/CookbookService.java)   
 [GsonConfiguration.java](cookbook/restserver/src/main/java/cookbook/springboot/restserver/GsonConfiguration.java)  
 
 ***test***  
-Tests the Restserver  
+Tests the Restserver.  
 [CookbookModelApplicationTest.java](cookbook/restserver/src/test/java/cookbook/springboot/restserver/CookbookModelApplicationTest.java)
 
 
@@ -102,7 +102,7 @@ Read more about restserver module in [README for REST API](cookbook/restserver/R
 ### ui
 
 ***main***  
-Contains the classes for the user interface    
+Contains the classes for the user interface.    
 [module-info.java](cookbook/ui/src/main/java/module-info.java)  
 [ui](cookbook/ui/src/main/java/ui)   
 [resources](cookbook/ui/src/main/resources)
@@ -119,7 +119,7 @@ Read more about the ui module in [README for ui module](cookbook/ui/README.md)
 
 [***jacoco***](https://www.jacoco.org/) - collects and presents the test-coverage grade for each module. Located in `/target/site/index.html` in each module.  
 [***spotbugs***](https://spotbugs.github.io/)- checks for bugs and vulnerabilities.  
-[***checkstyle***](https://checkstyle.sourceforge.io/)-  Superficial checks on code layout and formatting issues to enforce a coding standard
+[***checkstyle***](https://checkstyle.sourceforge.io/)-  Superficial checks on code layout and formatting issues to enforce a coding standard. 
 
 
 ## Implicit Saving
