@@ -12,8 +12,8 @@
    <children>
       <TextField fx:id="usernameField" layoutX="221.0" layoutY="200.0" promptText="Username" />
       <PasswordField fx:id="passwordField" layoutX="221.0" layoutY="236.0" promptText="Password" />
-      <Button fx:id="loginButton" layoutX="221.0" layoutY="285.0" mnemonicParsing="false" onAction="#login" text="Login" wrapText="true" />
-      <Button fx:id="signupButton" layoutX="312.0" layoutY="285.0" mnemonicParsing="false" onAction="#signup" text="Sign up" />
+      <Button fx:id="loginButton" layoutX="221.0" layoutY="285.0" mnemonicParsing="false" onAction="#login" onMousePressed="#hideErrorMessage" text="Login" wrapText="true" />
+      <Button fx:id="signupButton" layoutX="312.0" layoutY="285.0" mnemonicParsing="false" onAction="#signup" onMousePressed="#hideErrorMessage" text="Sign up" />
       <Text layoutX="216.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome!">
          <font>
             <Font size="36.0" />

@@ -169,19 +169,24 @@ public class CookBookController {
     searchByIngredientsPane.setVisible(false);
     popupLabel.setVisible(false);
     headerText.setText(user.getUsername() + "´s cookbook.");
-    this.accessType=accessType;
+    this.accessType = accessType;
     popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent mouseEvent) {
-            if (popupLabel.isVisible()) {
-              popupLabel.setVisible(false);
-            }
+            hideErrorMessage();
           }
         });
     updateRecipeListView();
     tmpRecipe = new Recipe("tmpRecipe", Arrays.asList(new Ingredient("tmpIng", 20, "g")), "Dinner");
     tmpRecipe.removeAllIngredients();
+  }
+
+  @FXML
+  void hideErrorMessage() {
+    if (popupLabel.isVisible()) {
+      popupLabel.setVisible(false);
+    }
   }
 
   /**

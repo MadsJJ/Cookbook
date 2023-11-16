@@ -61,7 +61,7 @@ public class UserController {
 
   private UserDataFilehandling fileHandler;
 
-  
+
 
   public void setAccessType(CookbookAccess accessType) {
     this.accessType = accessType;
@@ -96,36 +96,33 @@ public class UserController {
   @FXML
   void initialize() {
     try {
-      if(ServerStatusChecker.serverStatus()){
+      if (ServerStatusChecker.serverStatus()) {
         RemoteCookbookAccess remoteAccess;
-          System.out.println("Using remote endpoint @ " + endpointUri);
-          remoteAccess = new RemoteCookbookAccess(new URI(endpointUri));
-          this.accessType = remoteAccess;
-          System.out.println(remoteAccess);
+        System.out.println("Using remote endpoint @ " + endpointUri);
+        remoteAccess = new RemoteCookbookAccess(new URI(endpointUri));
+        this.accessType = remoteAccess;
+        System.out.println(remoteAccess);
 
-        }
-        else{
-       
-          System.out.println("Failed to establish contact with server. \n" +
-          "Using data directly from file \n" +
-          "@" +localFilePath);
-          this.fileHandler = new UserDataFilehandling(localFilePath);
-          LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
-          this.accessType = localAccess;
-        }
-      
+      } else {
+
+        System.out.println("Failed to establish contact with server. \n"
+            + "Using data directly from file \n" + "@" + localFilePath);
+        this.fileHandler = new UserDataFilehandling(localFilePath);
+        LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
+        this.accessType = localAccess;
+      }
+
     } catch (Exception e) {
-          System.out.println("Error occured when attempting contact with server. \n" +
-          "Using data directly from file \n" +
-          "@" +localFilePath);
-          this.fileHandler = new UserDataFilehandling(localFilePath);
-          LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
-          accessType = localAccess;
+      System.out.println("Error occured when attempting contact with server. \n"
+          + "Using data directly from file \n" + "@" + localFilePath);
+      this.fileHandler = new UserDataFilehandling(localFilePath);
+      LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
+      accessType = localAccess;
 
-        this.accessType=localAccess;
+      this.accessType = localAccess;
 
+    }
   }
-}
 
   /**
    * Sets the stage for the login and signup screens. Adds an event handler to the popup label to
@@ -139,11 +136,16 @@ public class UserController {
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent mouseEvent) {
-            if (popupLabel.isVisible()) {
-              popupLabel.setVisible(false);
-            }
+            hideErrorMessage();
           }
         });
+  }
+
+  @FXML
+  void hideErrorMessage() {
+    if (popupLabel.isVisible()) {
+      popupLabel.setVisible(false);
+    }
   }
 
   /**
@@ -159,7 +161,7 @@ public class UserController {
       Stage stage = (Stage) loginButton.getScene().getWindow();
       stage.setScene(scene);
       stage.show();
-    
+
       CookBookController cookBookController = loader.getController();
       cookBookController.initialize(user, accessType);
 
@@ -172,16 +174,16 @@ public class UserController {
 
   /**
    * Returns the error message displayed in the popup label.
-    *
-    */
+   *
+   */
   public String getErrorMessage() {
     return popupLabel.getText();
   }
 
   /**
-    * Displays an error message as a popup label.
-    *
-    */
+   * Displays an error message as a popup label.
+   *
+   */
   @FXML
   void displayErrorMessage(Exception e) {
     popupLabel.setText(e.getMessage());

@@ -15,19 +15,19 @@
    <children>
       <Pane fx:id="searchByIngredientsPane" layoutX="319.0" layoutY="104.0" prefHeight="269.0" prefWidth="246.0">
          <children>
-            <Button fx:id="cancelSearchByIngredients" layoutX="176.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
-            <Button fx:id="SearchButton" layoutX="166.0" layoutY="224.0" mnemonicParsing="false" onAction="#searchByIngredients" text="Search" />
+            <Button fx:id="cancelSearchByIngredients" layoutX="176.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancel" onMousePressed="#hideErrorMessage" text="Cancel" />
+            <Button fx:id="SearchButton" layoutX="166.0" layoutY="224.0" mnemonicParsing="false" onAction="#searchByIngredients" onMousePressed="#hideErrorMessage" text="Search" />
             <Text layoutX="13.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add the ingredients you have in your fridge:" wrappingWidth="264.814453125" />
          </children>
       </Pane>
         <Pane fx:id="mainPagePane" layoutX="304.0" layoutY="81.0" prefHeight="292.0" prefWidth="246.0">
          <children>
-            <Button fx:id="addRecipeButton" layoutX="18.0" layoutY="176.0" mnemonicParsing="false" onAction="#addRecipePage" text="Add recipe" />
+            <Button fx:id="addRecipeButton" layoutX="18.0" layoutY="176.0" mnemonicParsing="false" onAction="#addRecipePage" onMousePressed="#hideErrorMessage" text="Add recipe" />
             <TextField fx:id="deleteRecipeTextfield" layoutX="18.0" layoutY="229.0" prefHeight="26.0" prefWidth="99.0" promptText="Recipe" />
             <Text fx:id="deleteRecipeText" layoutX="20.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete a recipe:" />
-            <Button fx:id="randomRecipeButton" layoutX="19.0" layoutY="136.0" mnemonicParsing="false" onAction="#randomRecipePage" text="Random recipe" />
-            <Button fx:id="removeRecipeButton" layoutX="107.0" layoutY="229.0" mnemonicParsing="false" onAction="#removeRecipe" text="Remove recipe" />
-            <Button fx:id="SearchByIngredientsButton" layoutX="20.0" layoutY="96.0" mnemonicParsing="false" onAction="#searchByIngredientsPage" prefHeight="25.0" prefWidth="137.0" text="Search by ingredients" />
+            <Button fx:id="randomRecipeButton" layoutX="19.0" layoutY="136.0" mnemonicParsing="false" onAction="#randomRecipePage" onMousePressed="#hideErrorMessage" text="Random recipe" />
+            <Button fx:id="removeRecipeButton" layoutX="107.0" layoutY="229.0" mnemonicParsing="false" onAction="#removeRecipe" onMousePressed="#hideErrorMessage" text="Remove recipe" />
+            <Button fx:id="SearchByIngredientsButton" layoutX="20.0" layoutY="96.0" mnemonicParsing="false" onAction="#searchByIngredientsPage" onMousePressed="#hideErrorMessage" prefHeight="25.0" prefWidth="137.0" text="Search by ingredients" />
          </children></Pane>
       <Text fx:id="headerText" fill="#2786eb" layoutX="36.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">
          <font>
@@ -35,31 +35,31 @@
          </font></Text>
       <Button fx:id="logOutButton" layoutX="494.0" layoutY="23.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
       <ListView fx:id="recipeListView" layoutX="29.0" layoutY="195.0" prefHeight="175.0" prefWidth="200.0" />
-      <Button fx:id="allRecipesButton" layoutX="49.0" layoutY="132.0" mnemonicParsing="false" onAction="#updateRecipeListView" prefHeight="25.0" prefWidth="161.0" text="View All Recipes" />
-      <Button fx:id="appetizerButton" layoutX="29.0" layoutY="160.0" mnemonicParsing="false" onAction="#getRecipesByCategory" text="Appetizer" />
-      <Button fx:id="dinnerButton" layoutX="107.0" layoutY="160.0" mnemonicParsing="false" onAction="#getRecipesByCategory" text="Dinner" />
-      <Button fx:id="dessertButton" layoutX="169.0" layoutY="160.0" mnemonicParsing="false" onAction="#getRecipesByCategory" text="Dessert" />
+      <Button fx:id="allRecipesButton" layoutX="49.0" layoutY="132.0" mnemonicParsing="false" onAction="#updateRecipeListView" onMousePressed="#hideErrorMessage" prefHeight="25.0" prefWidth="161.0" text="View All Recipes" />
+      <Button fx:id="appetizerButton" layoutX="29.0" layoutY="160.0" mnemonicParsing="false" onAction="#getRecipesByCategory" onMousePressed="#hideErrorMessage" text="Appetizer" />
+      <Button fx:id="dinnerButton" layoutX="107.0" layoutY="160.0" mnemonicParsing="false" onAction="#getRecipesByCategory" onMousePressed="#hideErrorMessage" text="Dinner" />
+      <Button fx:id="dessertButton" layoutX="169.0" layoutY="160.0" mnemonicParsing="false" onAction="#getRecipesByCategory" onMousePressed="#hideErrorMessage" text="Dessert" />
       <Pane fx:id="randomRecipePane" layoutX="300.0" layoutY="119.0" prefHeight="278.0" prefWidth="254.0">
          <children>
             <Text layoutX="8.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a category to get a random recipe: " wrappingWidth="122.68310546875" />
-            <Button fx:id="randomDinnerButton" layoutX="79.0" layoutY="48.0" mnemonicParsing="false" onAction="#getRandomRecipeByCategory" text="Dinner" />
-            <Button fx:id="randomDessertButton" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" onAction="#getRandomRecipeByCategory" text="Dessert" />
+            <Button fx:id="randomDinnerButton" layoutX="79.0" layoutY="48.0" mnemonicParsing="false" onAction="#getRandomRecipeByCategory" onMousePressed="#hideErrorMessage" text="Dinner" />
+            <Button fx:id="randomDessertButton" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" onAction="#getRandomRecipeByCategory" onMousePressed="#hideErrorMessage" text="Dessert" />
             <TextArea fx:id="randomRecipeTextArea" layoutY="74.0" prefHeight="124.0" prefWidth="200.0" />
-            <Button fx:id="cancelRandomRecipeButton" layoutX="195.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
-            <Button fx:id="randomAppetizerButton" layoutX="8.0" layoutY="48.0" mnemonicParsing="false" onAction="#getRandomRecipeByCategory" text="Appetizer" />
+            <Button fx:id="cancelRandomRecipeButton" layoutX="195.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleCancel" onMousePressed="#hideErrorMessage" text="Cancel" />
+            <Button fx:id="randomAppetizerButton" layoutX="8.0" layoutY="48.0" mnemonicParsing="false" onAction="#getRandomRecipeByCategory" onMousePressed="#hideErrorMessage" text="Appetizer" />
                </children>
             </Pane>
             
             <Pane fx:id="addNewRecipePane" layoutX="313.0" layoutY="130.0" prefHeight="228.0" prefWidth="233.0">
                <children>
                   <ComboBox fx:id="categoryCombobox" layoutX="22.0" layoutY="197.0" prefHeight="26.0" prefWidth="99.0" promptText="Category" />
-                  <Button fx:id="addNewRecipeButton" layoutX="117.0" layoutY="197.0" mnemonicParsing="false" onAction="#addRecipe" prefHeight="26.0" prefWidth="106.0" text="Add new recipe">
+                  <Button fx:id="addNewRecipeButton" layoutX="117.0" layoutY="197.0" mnemonicParsing="false" onAction="#addRecipe" onMousePressed="#hideErrorMessage" prefHeight="26.0" prefWidth="106.0" text="Add new recipe">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Button>
                   <TextField fx:id="titleTextField" layoutX="54.0" layoutY="36.0" prefHeight="26.0" prefWidth="137.0" promptText="Title:" />
-                  <Button fx:id="cancelNewRecipeButton" layoutX="182.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+                  <Button fx:id="cancelNewRecipeButton" layoutX="182.0" mnemonicParsing="false" onAction="#handleCancel" onMousePressed="#hideErrorMessage" text="Cancel" />
          </children>
       </Pane>
       <Label fx:id="popupLabel" contentDisplay="CENTER" layoutX="29.0" layoutY="81.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="460.0" style="-fx-background-color: white;" textAlignment="CENTER" textFill="#a42828">
@@ -72,11 +72,11 @@
             <TextField fx:id="addIngredientNameTextField" prefHeight="26.0" prefWidth="76.0" promptText="Ingr. name" />
             <TextField fx:id="amountTextField" layoutX="76.0" prefHeight="26.0" prefWidth="70.0" promptText="Amount" />
             <ComboBox fx:id="unitComboBox" layoutX="144.0" prefHeight="26.0" prefWidth="76.0" promptText="Unit" />
-            <Button fx:id="addIngredientButton" layoutX="219.0" mnemonicParsing="false" onAction="#addIngredient" prefHeight="26.0" prefWidth="51.0" text="Add" />
+            <Button fx:id="addIngredientButton" layoutX="219.0" mnemonicParsing="false" onAction="#addIngredient" onMousePressed="#hideErrorMessage" prefHeight="26.0" prefWidth="51.0" text="Add" />
             <ListView fx:id="ingredientListView" layoutX="37.0" layoutY="26.0" prefHeight="69.0" prefWidth="200.0" />
             <Text layoutX="37.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete ingredient: " wrappingWidth="106.0" />
             <TextField fx:id="deleteIngredientTextField" layoutX="36.0" layoutY="108.0" prefHeight="26.0" prefWidth="106.0" promptText="Ingr. name" />
-            <Button fx:id="removeIngredientButton" layoutX="142.0" layoutY="107.0" mnemonicParsing="false" onAction="#removeIngredient" prefHeight="26.0" prefWidth="96.0" text="Remove ingr" />
+            <Button fx:id="removeIngredientButton" layoutX="142.0" layoutY="107.0" mnemonicParsing="false" onAction="#removeIngredient" onMousePressed="#hideErrorMessage" prefHeight="26.0" prefWidth="96.0" text="Remove ingr" />
          </children>
       </Pane>
    </children>
