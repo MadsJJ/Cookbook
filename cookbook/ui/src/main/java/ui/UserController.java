@@ -1,8 +1,6 @@
 package ui;
 
 import cookbook.core.User;
-import cookbook.core.UserDataFilehandling;
-import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.EventHandler;
@@ -18,8 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ui.access.CookbookAccess;
-import ui.access.LocalCookbookAccess;
-import ui.access.RemoteCookbookAccess;
 import ui.access.ServerStatusChecker;
 
 
@@ -52,20 +48,8 @@ public class UserController {
   @FXML
   private Label popupLabel;
 
-
-  String endpointUri = "http://localhost:8080/cookbook/";
-
-  String localFilePath = "/src/main/resources/ui/UserData.json";
-
   private CookbookAccess accessType;
-
-  private UserDataFilehandling fileHandler;
-
-
-
-  public void setAccessType(CookbookAccess accessType) {
-    this.accessType = accessType;
-  }
+  private String filepath = "/src/main/resources/ui/UserData.json";
 
   /**
    * Attempts to log in the user with the provided username and password. If successful, starts the
@@ -74,6 +58,7 @@ public class UserController {
   @FXML
   void login() {
     try {
+      accessType = ServerStatusChecker.setAccessType(filepath);
       startApp(accessType.readUser(usernameField.getText(), passwordField.getText()));
     } catch (Exception e) {
       displayErrorMessage(e);
@@ -87,50 +72,28 @@ public class UserController {
   @FXML
   void signup() {
     try {
+      accessType = ServerStatusChecker.setAccessType(filepath);
       startApp(accessType.registerNewUser(usernameField.getText(), passwordField.getText()));
     } catch (Exception e) {
       displayErrorMessage(e);
     }
   }
 
-  @FXML
-  void initialize() {
-    try {
-      if (ServerStatusChecker.serverStatus()) {
-        RemoteCookbookAccess remoteAccess;
-        System.out.println("Using remote endpoint @ " + endpointUri);
-        remoteAccess = new RemoteCookbookAccess(new URI(endpointUri));
-        this.accessType = remoteAccess;
-        System.out.println(remoteAccess);
+  /**
+   * Used for testing purposes.
+   */
+  public void setFilePath(String filepath) {
+    this.filepath = filepath;
 
-      } else {
-
-        System.out.println("Failed to establish contact with server. \n"
-            + "Using data directly from file \n" + "@" + localFilePath);
-        this.fileHandler = new UserDataFilehandling(localFilePath);
-        LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
-        this.accessType = localAccess;
-      }
-
-    } catch (Exception e) {
-      System.out.println("Error occured when attempting contact with server. \n"
-          + "Using data directly from file \n" + "@" + localFilePath);
-      this.fileHandler = new UserDataFilehandling(localFilePath);
-      LocalCookbookAccess localAccess = new LocalCookbookAccess(fileHandler);
-      accessType = localAccess;
-
-      this.accessType = localAccess;
-
-    }
   }
 
   /**
-   * Sets the stage for the login and signup screens. Adds an event handler to the popup label to
+   * Adds an event handler to the popup label to
    * hide it when clicked.
    *
    * @param stage the stage for the login and signup screens
    */
-  public void setStage(Stage stage) {
+  public void addHideErrorMessageEventHandler(Stage stage) {
     // Add an event handler to the Label when the application starts
     popupLabel.getScene().getWindow().addEventHandler(MouseEvent.MOUSE_CLICKED,
         new EventHandler<MouseEvent>() {
@@ -163,6 +126,7 @@ public class UserController {
       stage.show();
 
       CookBookController cookBookController = loader.getController();
+      cookBookController.addHideErrorMessageEventHandler(stage);
       cookBookController.initialize(user, accessType);
 
 

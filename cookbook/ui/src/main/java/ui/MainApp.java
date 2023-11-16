@@ -24,7 +24,7 @@ public class MainApp extends Application {
       Parent root = loader.load();
       primaryStage.setScene(new Scene(root));
       UserController controller = loader.getController();
-      controller.setStage(primaryStage);
+      controller.addHideErrorMessageEventHandler(primaryStage);
       primaryStage.show();
     } catch (IOException e) {
       e.printStackTrace();
